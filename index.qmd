@@ -1,7 +1,5 @@
 # Bem-vindo {.unnumbered}
 
-![](capa.png){width=100% fig-align="center"}
-
 ---
 
 **Estatística para Biocientistas** é um livro interativo concebido para transformar a forma como os dados são analisados nas ciências da vida. 
