@@ -2,8 +2,12 @@ project:
   type: book
 
 book:
-  title: "Estatística para Biocientistas"
+  title: "Análise de Dados para Biocientistas"
   author: "Márcio Souza"
+  date: "2026-10-07"
+  cover-image: capa.png
+  isbn: "978-X-XXXX-XXXX-X" # Substitua pelo seu ISBN quando o obtiver
+  doi: "10.XXXX/zenodo.XXXXX" # Substitua pelo seu DOI do Zenodo
   chapters:
     - index.qmd
     - cap01_introducao.qmd

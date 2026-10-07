@@ -1,12 +1,12 @@
 [
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introdução à Bioestatística no R",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Estatística para Biocientistas",
     "section": "",
-    "text": "Aqui está o nosso primeiro código interativo. Você pode alterar os valores (como a cor ou a média) e rodar novamente direto no navegador!\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução à Bioestatística no R</span>"
+      "Preface"
     ]
   }
 ]
