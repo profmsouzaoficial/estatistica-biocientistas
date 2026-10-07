@@ -32,8 +32,6 @@ format:
         category: "General"
         mapping: "title"
         reactions-enabled: true
-  pdf:
-    documentclass: scrreprt
 
 filters:
   - webr
