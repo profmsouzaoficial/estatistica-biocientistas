@@ -10,5 +10,35 @@
   },
   "references.qmd": {
     "references.html": "12154cf1"
+  },
+  "cap01_introducao.qmd": {
+    "cap01_introducao.html": "ddaf1645"
+  },
+  "cap02_estudos.qmd": {
+    "cap02_estudos.html": "9639d860"
+  },
+  "cap03_amostragem.qmd": {
+    "cap03_amostragem.html": "73873b16"
+  },
+  "cap04_aed.qmd": {
+    "cap04_aed.html": "4635e58a"
+  },
+  "cap05_probabilidade.qmd": {
+    "cap05_probabilidade.html": "5760fc39"
+  },
+  "cap06_diagnosticos.qmd": {
+    "cap06_diagnosticos.html": "8d3a83a6"
+  },
+  "cap07_modelos.qmd": {
+    "cap07_modelos.html": "43b74ffd"
+  },
+  "cap08_hipoteses.qmd": {
+    "cap08_hipoteses.html": "675d0096"
+  },
+  "cap09_intervalos.qmd": {
+    "cap09_intervalos.html": "bd56479c"
+  },
+  "cap10_correlacao.qmd": {
+    "cap10_correlacao.html": "6a2f75b9"
   }
 }

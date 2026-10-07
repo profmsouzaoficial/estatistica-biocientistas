@@ -22,7 +22,7 @@ format:
     theme: cosmo
     comments:
       giscus:
-        repo: "seu-usuario-github/nome-do-repositorio" 
+        repo: "profmsouzaoficial/estatistica-biocientistas" 
         category: "General"
         mapping: "title"
         reactions-enabled: true

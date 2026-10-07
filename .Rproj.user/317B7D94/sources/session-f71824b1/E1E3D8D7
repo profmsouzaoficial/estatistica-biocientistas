@@ -3,7 +3,7 @@
     "path": "~/Projetos/Livro - ANÁLISE DE DADOS PARA BIOCIENTISTAS/_quarto.yml",
     "project_path": "_quarto.yml",
     "type": "yaml",
-    "hash": "1314459428",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1791378572438.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "32,8",
+        "cursorPosition": "1,12",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1791379455,
+    "lastKnownWriteTime": 1791380095,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1791379455322,
+    "last_content_update": 1791380095,
     "read_only": false,
     "read_only_alternatives": []
 }
