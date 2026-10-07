@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -128,13 +148,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap02_estudos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">cap02_estudos.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tipos de estudos na área da saúde</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap03_amostragem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">cap03_amostragem.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Amostragem nas Ciências da Saúde</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -191,10 +211,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#o-que-é-o-método-estatístico" id="toc-o-que-é-o-método-estatístico" class="nav-link active" data-scroll-target="#o-que-é-o-método-estatístico"><span class="header-section-number">1.1</span> O que é o método estatístico?</a></li>
   <li><a href="#métodos-de-recolha-de-dados" id="toc-métodos-de-recolha-de-dados" class="nav-link" data-scroll-target="#métodos-de-recolha-de-dados"><span class="header-section-number">1.2</span> Métodos de recolha de dados</a></li>
-  <li><a href="#aplicações-da-estatística" id="toc-aplicações-da-estatística" class="nav-link" data-scroll-target="#aplicações-da-estatística"><span class="header-section-number">1.3</span> Aplicações da estatística</a>
-  <ul class="collapse">
-  <li><a href="#exemplos-nas-ciências-da-saúde" id="toc-exemplos-nas-ciências-da-saúde" class="nav-link" data-scroll-target="#exemplos-nas-ciências-da-saúde"><span class="header-section-number">1.3.1</span> Exemplos nas ciências da saúde</a></li>
-  </ul></li>
+  <li><a href="#aplicações-da-estatística-nas-ciências-da-saúde" id="toc-aplicações-da-estatística-nas-ciências-da-saúde" class="nav-link" data-scroll-target="#aplicações-da-estatística-nas-ciências-da-saúde"><span class="header-section-number">1.3</span> Aplicações da estatística nas Ciências da Saúde</a></li>
   <li><a href="#tipos-de-dados-variáveis" id="toc-tipos-de-dados-variáveis" class="nav-link" data-scroll-target="#tipos-de-dados-variáveis"><span class="header-section-number">1.4</span> Tipos de dados (Variáveis)</a></li>
   </ul>
 </nav>
@@ -221,54 +238,47 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Este capítulo fornece uma introdução ao método estatístico[cite: 6]. Ele discute os conceitos básicos de estatística, incluindo o que é o método estatístico, os seus objetivos, tipos de dados, métodos de recolha de dados e aplicações[cite: 6].</p>
+<p>Este capítulo fornece uma introdução ao método estatístico. Ele discute os conceitos básicos de estatística, incluindo o que é o método estatístico, os seus objetivos, tipos de dados, métodos de recolha de dados e aplicações <span class="citation" data-cites="vieira2008">(<a href="#ref-vieira2008" role="doc-biblioref">Vieira 2008</a>)</span>. Nas biociências, compreender esses conceitos é o primeiro passo para transformar a teoria vista em laboratório e na clínica em evidências sólidas.</p>
 <section id="o-que-é-o-método-estatístico" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="o-que-é-o-método-estatístico"><span class="header-section-number">1.1</span> O que é o método estatístico?</h2>
-<p>O método estatístico é um conjunto de procedimentos para recolher, organizar, analisar e interpretar dados[cite: 7]. Ele é usado para descrever e tirar conclusões sobre uma população a partir de uma amostra[cite: 7].</p>
+<p>O método estatístico é um conjunto de procedimentos para recolher, organizar, analisar e interpretar dados <span class="citation" data-cites="pagano2004">(<a href="#ref-pagano2004" role="doc-biblioref">Pagano e Gauvreau 2004</a>)</span>. Ele é usado para descrever e tirar conclusões sobre uma população a partir de uma amostra.</p>
 <p>Os objetivos do método estatístico são:</p>
 <ul>
-<li><strong>Descrever dados:</strong> pode ser usado para descrever os dados de uma população ou amostra, usando medidas de tendência central, dispersão e forma[cite: 7].</li>
-<li><strong>Explicar dados:</strong> usado para identificar padrões e relacionamentos entre variáveis, usando métodos como regressão e análise de variância[cite: 7].</li>
-<li><strong>Prever dados:</strong> usado para prever valores futuros, através de regressão e análise de séries temporais[cite: 7].</li>
+<li><strong>Descrever dados:</strong> pode ser usado para descrever os dados de uma população ou amostra, usando medidas de tendência central, dispersão e forma <span class="citation" data-cites="triola2017">(<a href="#ref-triola2017" role="doc-biblioref">Triola 2017</a>)</span>.</li>
+<li><strong>Explicar dados:</strong> usado para identificar padrões e relacionamentos entre variáveis, como a relação entre a dose de um fármaco e a sua resposta metabólica.</li>
+<li><strong>Prever dados:</strong> usado para prever valores futuros e tendências, como o tempo estimado de cicatrização de um tecido sob determinado tratamento.</li>
 </ul>
-<p>O método estatístico permite-nos, a partir de um conjunto de símbolos que representam quantidades ou medidas, transformá-los em dados para extrair informações fundamentais para as atividades humanas[cite: 7]. <strong>Dados</strong> são um conjunto de números ou outras informações que podem ser recolhidos, organizados e analisados[cite: 7]. <strong>Informação</strong>, por sua vez, é um conjunto de dados que tem significado e pode ser usado para tomar decisões[cite: 7].</p>
-<p>Dados podem ser estruturados ou não estruturados[cite: 7]. Dados estruturados estão organizados num formato predefinido, como uma tabela ou lista[cite: 7]. Dados não estruturados não possuem um formato predefinido, como texto livre, imagens, áudio ou vídeo[cite: 7]. A ciência de dados, a partir de métodos estatísticos, cria condições de inovação e avanço do conhecimento humano[cite: 7].</p>
+<p>O método estatístico permite-nos, a partir de um conjunto de símbolos que representam quantidades ou medidas, transformá-los em dados para extrair informações fundamentais para as atividades humanas. <strong>Dados</strong> são um conjunto de números ou outras informações que podem ser recolhidos, organizados e analisados. <strong>Informação</strong>, por sua vez, é um conjunto de dados que tem significado e pode ser usado para tomar decisões clínicas ou experimentais <span class="citation" data-cites="vieira2008">(<a href="#ref-vieira2008" role="doc-biblioref">Vieira 2008</a>)</span>.</p>
+<p>Dados podem ser estruturados ou não estruturados. Dados estruturados estão organizados num formato predefinido, como uma tabela com os ângulos de flexão articular de pacientes. Dados não estruturados não possuem um formato predefinido, como imagens de radiografias ou laudos em texto livre. A ciência de dados na saúde, a partir de métodos estatísticos, cria condições de inovação e avanço do conhecimento.</p>
 </section>
 <section id="métodos-de-recolha-de-dados" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="métodos-de-recolha-de-dados"><span class="header-section-number">1.2</span> Métodos de recolha de dados</h2>
-<p>Os dados podem ser recolhidos de várias maneiras, incluindo:</p>
+<p>Os dados podem ser recolhidos de várias maneiras, conectando-se diretamente com a sua vivência prática no ciclo básico:</p>
 <ul>
-<li><strong>Observação:</strong> recolha de dados sem interferir na população[cite: 8]. Por exemplo, observação de doentes num hospital[cite: 8].</li>
-<li><strong>Experimentação:</strong> recolha de dados intervindo na população[cite: 8]. Por exemplo, um ensaio clínico para testar a eficácia de um novo medicamento[cite: 8].</li>
-<li><strong>Levantamento:</strong> recolha de dados por meio de questionários ou entrevistas[cite: 8].</li>
+<li><strong>Observação:</strong> recolha de dados sem interferir no ambiente. <em>Exemplo prático:</em> avaliar o nível de ansiedade dos pacientes na “Sala de espera do atendimento odontológico” ou analisar a marcha de um paciente na Fisioterapia.</li>
+<li><strong>Experimentação:</strong> recolha de dados intervindo na população ou amostra. <em>Exemplo prático:</em> testar a eficácia antimicrobiana de um extrato vegetal desenvolvido na “Botânica Farmacêutica” em placas de Petri durante as aulas de “Microbiologia Básica”.</li>
+<li><strong>Levantamento:</strong> recolha de dados por meio de questionários ou entrevistas. <em>Exemplo prático:</em> aplicar questionários estruturados para mapear os hábitos de higiene bucal na comunidade, uma prática essencial nos “Fundamentos básicos da epidemiologia”.</li>
 </ul>
 </section>
-<section id="aplicações-da-estatística" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="aplicações-da-estatística"><span class="header-section-number">1.3</span> Aplicações da estatística</h2>
-<p>A estatística tem uma ampla gama de aplicações:</p>
+<section id="aplicações-da-estatística-nas-ciências-da-saúde" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="aplicações-da-estatística-nas-ciências-da-saúde"><span class="header-section-number">1.3</span> Aplicações da estatística nas Ciências da Saúde</h2>
+<p>A estatística é a espinha dorsal de qualquer área clínica ou laboratorial:</p>
 <ul>
-<li><strong>Ciências da saúde:</strong> usada para recolher, analisar e interpretar dados em estudos clínicos, epidemiológicos e de saúde pública[cite: 8].</li>
-<li><strong>Ciências sociais:</strong> usada para recolher, analisar e interpretar dados em pesquisas sociais, económicas e políticas[cite: 8].</li>
-<li><strong>Ciências naturais:</strong> usada para recolher, analisar e interpretar dados em pesquisas científicas, como física, química e biologia[cite: 8].</li>
+<li><strong>Farmácia:</strong> analisar a eficácia de novos compostos sintetizados na “Química Orgânica”, modelar a curva de absorção de medicamentos e garantir o controle de qualidade.</li>
+<li><strong>Odontologia:</strong> mapear a incidência de cáries (epidemiologia), testar a resistência de novos biomateriais e validar a segurança de protocolos de “Biossegurança”.</li>
+<li><strong>Fisioterapia:</strong> mensurar estatisticamente a recuperação da amplitude de movimento após intervenções, validando quais recursos terapêuticos aceleram a reabilitação.</li>
 </ul>
-<section id="exemplos-nas-ciências-da-saúde" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="exemplos-nas-ciências-da-saúde"><span class="header-section-number">1.3.1</span> Exemplos nas ciências da saúde</h3>
-<ul>
-<li>Um estudo clínico realizado para testar a eficácia de um novo medicamento para tratar uma doença[cite: 8].</li>
-<li>Um estudo epidemiológico realizado para identificar fatores de risco para uma doença[cite: 8].</li>
-<li>Um estudo de saúde pública realizado para avaliar a eficácia de um programa de prevenção de doenças[cite: 8].</li>
-</ul>
-</section>
 </section>
 <section id="tipos-de-dados-variáveis" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="tipos-de-dados-variáveis"><span class="header-section-number">1.4</span> Tipos de dados (Variáveis)</h2>
-<p>Os dados podem ser divididos em dois tipos principais:</p>
+<p>Convencionalmente, em estatística, chamamos aos dados “variáveis” em alusão à variedade de informação inerente à medida em questão. Em vez de exemplos genéricos, veja como as variáveis aparecem na sua rotina:</p>
 <ul>
-<li><strong>Qualitativos:</strong> dados que não podem ser medidos quantitativamente[cite: 9]. Por exemplo, dados sobre o sexo, a cor dos olhos ou a preferência política[cite: 9].</li>
-<li><strong>Quantitativos:</strong> dados que podem ser medidos quantitativamente[cite: 9]. Por exemplo, dados sobre a altura, o peso ou a temperatura[cite: 9].</li>
+<li><strong>Qualitativos Nominais:</strong> dados categóricos sem ordem de grandeza. <em>Exemplos:</em> coloração de Gram das bactérias (positivo/negativo), tipo de tecido epitelial (“Histologia e embriologia”) ou o desfecho de um tratamento (sucesso/falha).</li>
+<li><strong>Qualitativos Ordinais:</strong> dados categóricos com uma hierarquia ou progressão clara. <em>Exemplos:</em> grau de dor na Escala Visual Analógica (EVA) utilizada na Fisioterapia, ou o estágio de desenvolvimento de uma lesão.</li>
+<li><strong>Quantitativos Contínuos:</strong> dados medidos em escala contínua, permitindo frações. <em>Exemplos:</em> concentração de glicose no sangue medida na “Bioquímica Estrutural”, ângulo de flexão de uma articulação ou a dose exata de um fármaco em miligramas.</li>
+<li><strong>Quantitativos Discretos:</strong> dados baseados em contagens numéricas inteiras. <em>Exemplos:</em> índice CPO-D (número de dentes cariados, perdidos e obturados), contagem de colônias bacterianas numa placa ou frequência cardíaca (batimentos por minuto na “Fisiologia Humana”).</li>
 </ul>
-<p>Convencionalmente, em estatística, também chamamos aos dados “variáveis” em alusão à variedade de informação inerente à medida em questão[cite: 9]. Logo, sexo, cor dos olhos, altura, peso, etc., são exemplos de variáveis[cite: 9].</p>
-<p>O diagrama abaixo ilustra a classificação completa das variáveis de forma dinâmica.</p>
+<p>O diagrama abaixo ilustra a classificação completa das variáveis com os nossos exemplos aplicados à saúde.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -278,14 +288,14 @@ ul.task-list li input[type="checkbox"] {
   A[VARIÁVEIS] --&gt; B("Quantitativas: Números / Medidas")
   A --&gt; C("Qualitativas: Categorias / Atributos")
 
-  B --&gt; D["Contínuas:&lt;br&gt;Altura, Salário"]
-  B --&gt; E["Discretas:&lt;br&gt;Idade, Qtd de empregados"]
+  B --&gt; D["Contínuas:&lt;br&gt;Glicemia, Ângulo de flexão"]
+  B --&gt; E["Discretas:&lt;br&gt;Índice CPO-D, Colônias de bactérias"]
 
-  C --&gt; F["Nominais:&lt;br&gt;Sem ordem"]
-  C --&gt; G["Ordinais: Com ordem&lt;br&gt;Escolaridade, Faixa Etária"]
+  C --&gt; F["Nominais:&lt;br&gt;Coloração de Gram, Tecido"]
+  C --&gt; G["Ordinais: Com ordem&lt;br&gt;Escala de dor (EVA), Estágio"]
 
-  F --&gt; H["Multinominais:&lt;br&gt;Raça/cor, Estado Civil"]
-  F --&gt; I["Binomiais:&lt;br&gt;Sexo, V/F, S/N"]
+  F --&gt; H["Multinominais:&lt;br&gt;Tipo sanguíneo, Diagnóstico"]
+  F --&gt; I["Binomiais:&lt;br&gt;Doente/Saudável, V/F"]
 
   style A fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:#ffffff
   style B fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
@@ -298,12 +308,23 @@ ul.task-list li input[type="checkbox"] {
   style I fill:#F2F4F4,stroke:#B4C4C1,color:#000000
 </pre>
 </div>
-<p></p><figcaption> Classificação das Variáveis Estatísticas</figcaption> </figure><p></p>
+<p></p><figcaption> Classificação das Variáveis Estatísticas nas Biociências</figcaption> </figure><p></p>
 </div>
 </div>
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-pagano2004" class="csl-entry" role="listitem">
+Pagano, Marcello, e Kimberlee Gauvreau. 2004. <em>Princípios de Bioestatística</em>. Cengage Learning.
+</div>
+<div id="ref-triola2017" class="csl-entry" role="listitem">
+Triola, Mario F. 2017. <em>Introdução à Estatística</em>. LTC.
+</div>
+<div id="ref-vieira2008" class="csl-entry" role="listitem">
+Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -743,8 +764,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap02_estudos.html" class="pagination-link" aria-label="cap02_estudos.html">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">cap02_estudos.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cap02_estudos.html" class="pagination-link" aria-label="Tipos de estudos na área da saúde">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tipos de estudos na área da saúde</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
