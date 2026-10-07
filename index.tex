@@ -1,0 +1,412 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  brazilian,
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Índice}
+\else
+  \newcommand\contentsname{Índice}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Lista de Figuras}
+\else
+  \newcommand\listfigurename{Lista de Figuras}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Lista de Tabelas}
+\else
+  \newcommand\listtablename{Lista de Tabelas}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figura}
+\else
+  \newcommand\figurename{Figura}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabela}
+\else
+  \newcommand\tablename{Tabela}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listagem}
+\newcommand*\listoflistings{\listof{codelisting}{Lista de Listagens}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Análise de Dados para Biocientistas},
+  pdfauthor={Márcio Souza},
+  pdflang={pt-BR},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Análise de Dados para Biocientistas}
+\author{Márcio Souza}
+\date{2026-10-07}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Índice}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\bookmarksetup{startatroot}
+
+\chapter*{Bem-vindo}\label{bem-vindo}
+\addcontentsline{toc}{chapter}{Bem-vindo}
+
+\markboth{Bem-vindo}{Bem-vindo}
+
+\begin{center}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{capa.png}
+\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Estatística para Biocientistas} é um livro interativo concebido
+para transformar a forma como os dados são analisados nas ciências da
+vida.
+
+\begin{quote}
+\emph{Investir em equipamentos caros e robustos sem entender de dados é
+como comprar um foguete para ir ao supermercado - parece impressionante,
+mas no final, você ainda está perdido sem um plano de voo! A estatística
+é a chave que dá acesso a novas rotas.}
+\end{quote}
+
+\subsection*{Ficha Técnica}\label{ficha-tuxe9cnica}
+\addcontentsline{toc}{subsection}{Ficha Técnica}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Autor:} Márcio Luís Moreira de Souza
+\item
+  \textbf{ISBN:} 978-X-XXXX-XXXX-X
+\item
+  \textbf{DOI:}
+  \href{https://doi.org/10.XXXX/zenodo.XXXXX}{10.XXXX/zenodo.XXXXX}
+\item
+  \textbf{Licença:} Este material é disponibilizado sob a licença
+  Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC
+  4.0).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Para iniciar a leitura e interagir com os códigos em tempo real, utilize
+a barra de navegação lateral e avance para o \textbf{Capítulo 1:
+Introdução ao método estatístico}.
+
+\bookmarksetup{startatroot}
+
+\chapter{Introdução ao método
+estatístico}\label{introduuxe7uxe3o-ao-muxe9todo-estatuxedstico}
+
+Este capítulo fornece uma introdução ao método estatístico{[}cite: 6{]}.
+Ele discute os conceitos básicos de estatística, incluindo o que é o
+método estatístico, os seus objetivos, tipos de dados, métodos de
+recolha de dados e aplicações{[}cite: 6{]}.
+
+\section{O que é o método
+estatístico?}\label{o-que-uxe9-o-muxe9todo-estatuxedstico}
+
+O método estatístico é um conjunto de procedimentos para recolher,
+organizar, analisar e interpretar dados{[}cite: 7{]}. Ele é usado para
+descrever e tirar conclusões sobre uma população a partir de uma
+amostra{[}cite: 7{]}.
+
+Os objetivos do método estatístico são:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Descrever dados:} pode ser usado para descrever os dados de
+  uma população ou amostra, usando medidas de tendência central,
+  dispersão e forma{[}cite: 7{]}.
+\item
+  \textbf{Explicar dados:} usado para identificar padrões e
+  relacionamentos entre variáveis, usando métodos como regressão e
+  análise de variância{[}cite: 7{]}.
+\item
+  \textbf{Prever dados:} usado para prever valores futuros, através de
+  regressão e análise de séries temporais{[}cite: 7{]}.
+\end{itemize}
+
+O método estatístico permite-nos, a partir de um conjunto de símbolos
+que representam quantidades ou medidas, transformá-los em dados para
+extrair informações fundamentais para as atividades humanas{[}cite:
+7{]}. \textbf{Dados} são um conjunto de números ou outras informações
+que podem ser recolhidos, organizados e analisados{[}cite: 7{]}.
+\textbf{Informação}, por sua vez, é um conjunto de dados que tem
+significado e pode ser usado para tomar decisões{[}cite: 7{]}.
+
+Dados podem ser estruturados ou não estruturados{[}cite: 7{]}. Dados
+estruturados estão organizados num formato predefinido, como uma tabela
+ou lista{[}cite: 7{]}. Dados não estruturados não possuem um formato
+predefinido, como texto livre, imagens, áudio ou vídeo{[}cite: 7{]}. A
+ciência de dados, a partir de métodos estatísticos, cria condições de
+inovação e avanço do conhecimento humano{[}cite: 7{]}.
+
+\section{Métodos de recolha de
+dados}\label{muxe9todos-de-recolha-de-dados}
+
+Os dados podem ser recolhidos de várias maneiras, incluindo:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Observação:} recolha de dados sem interferir na
+  população{[}cite: 8{]}. Por exemplo, observação de doentes num
+  hospital{[}cite: 8{]}.
+\item
+  \textbf{Experimentação:} recolha de dados intervindo na
+  população{[}cite: 8{]}. Por exemplo, um ensaio clínico para testar a
+  eficácia de um novo medicamento{[}cite: 8{]}.
+\item
+  \textbf{Levantamento:} recolha de dados por meio de questionários ou
+  entrevistas{[}cite: 8{]}.
+\end{itemize}
+
+\section{Aplicações da
+estatística}\label{aplicauxe7uxf5es-da-estatuxedstica}
+
+A estatística tem uma ampla gama de aplicações:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Ciências da saúde:} usada para recolher, analisar e
+  interpretar dados em estudos clínicos, epidemiológicos e de saúde
+  pública{[}cite: 8{]}.
+\item
+  \textbf{Ciências sociais:} usada para recolher, analisar e interpretar
+  dados em pesquisas sociais, económicas e políticas{[}cite: 8{]}.
+\item
+  \textbf{Ciências naturais:} usada para recolher, analisar e
+  interpretar dados em pesquisas científicas, como física, química e
+  biologia{[}cite: 8{]}.
+\end{itemize}
+
+\subsection{Exemplos nas ciências da
+saúde}\label{exemplos-nas-ciuxeancias-da-sauxfade}
+
+\begin{itemize}
+\tightlist
+\item
+  Um estudo clínico realizado para testar a eficácia de um novo
+  medicamento para tratar uma doença{[}cite: 8{]}.
+\item
+  Um estudo epidemiológico realizado para identificar fatores de risco
+  para uma doença{[}cite: 8{]}.
+\item
+  Um estudo de saúde pública realizado para avaliar a eficácia de um
+  programa de prevenção de doenças{[}cite: 8{]}.
+\end{itemize}
+
+\section{Tipos de dados (Variáveis)}\label{tipos-de-dados-variuxe1veis}
+
+Os dados podem ser divididos em dois tipos principais:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Qualitativos:} dados que não podem ser medidos
+  quantitativamente{[}cite: 9{]}. Por exemplo, dados sobre o sexo, a cor
+  dos olhos ou a preferência política{[}cite: 9{]}.
+\item
+  \textbf{Quantitativos:} dados que podem ser medidos
+  quantitativamente{[}cite: 9{]}. Por exemplo, dados sobre a altura, o
+  peso ou a temperatura{[}cite: 9{]}.
+\end{itemize}
+
+Convencionalmente, em estatística, também chamamos aos dados
+``variáveis'' em alusão à variedade de informação inerente à medida em
+questão{[}cite: 9{]}. Logo, sexo, cor dos olhos, altura, peso, etc., são
+exemplos de variáveis{[}cite: 9{]}.
+
+O diagrama abaixo ilustra a classificação completa das variáveis de
+forma dinâmica.
+
+\includegraphics[width=12.08in,height=4.98in]{cap01_introducao_files/figure-latex/mermaid-figure-1.png}
+
+Classificação das Variáveis Estatísticas
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-1}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-2}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-3}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-4}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-5}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-6}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-7}
+
+\bookmarksetup{startatroot}
+
+\chapter{}\label{section-8}
+
+
+
+
+\end{document}
