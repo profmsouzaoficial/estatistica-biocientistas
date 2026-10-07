@@ -51,27 +51,27 @@ O diagrama abaixo ilustra a classificação completa das variáveis de forma din
 ```{mermaid}
 %%| fig-cap: "Classificação das Variáveis Estatísticas"
 flowchart TD
-  A[VARIÁVEIS] --> B(Quantitativas: Números / Medidas)
-  A --> C(Qualitativas: Categorias / Atributos)
+  A[VARIÁVEIS] --> B("Quantitativas: Números / Medidas")
+  A --> C("Qualitativas: Categorias / Atributos")
 
-  B --> D[Contínuas: \nAltura, Salário]
-  B --> E[Discretas: \nIdade, Qtd de empregados]
+  B --> D["Contínuas:<br>Altura, Salário"]
+  B --> E["Discretas:<br>Idade, Qtd de empregados"]
 
-  C --> F[Nominais: Sem ordem]
-  C --> G[Ordinais: Com ordem \nEscolaridade, Faixa Etária]
+  C --> F["Nominais:<br>Sem ordem"]
+  C --> G["Ordinais: Com ordem<br>Escolaridade, Faixa Etária"]
 
-  F --> H[Multinominais: \nRaça/cor, Estado Civil]
-  F --> I[Binomiais: \nSexo, V/F, S/N]
+  F --> H["Multinominais:<br>Raça/cor, Estado Civil"]
+  F --> I["Binomiais:<br>Sexo, V/F, S/N"]
 
-  style A fill:#4b0000,stroke:#333,stroke-width:2px,color:#fff
-  style B fill:#cc0000,stroke:#333,stroke-width:2px,color:#fff
-  style C fill:#cc0000,stroke:#333,stroke-width:2px,color:#fff
-  style D fill:#ff4d4d,stroke:#333,color:#fff
-  style E fill:#ff4d4d,stroke:#333,color:#fff
-  style F fill:#ff9999,stroke:#333,color:#000
-  style G fill:#ff9999,stroke:#333,color:#000
-  style H fill:#e6e6e6,stroke:#333,color:#000
-  style I fill:#e6e6e6,stroke:#333,color:#000
+  style A fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:#ffffff
+  style B fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style C fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style D fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style E fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style F fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style G fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style H fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style I fill:#F2F4F4,stroke:#B4C4C1,color:#000000
   ```
   
   
