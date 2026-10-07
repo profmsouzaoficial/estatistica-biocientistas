@@ -9,6 +9,7 @@ book:
   date: "2026-10-07"
   isbn: "978-X-XXXX-XXXX-X" 
   doi: "10.XXXX/zenodo.XXXXX" 
+  cover-image: capa.png
   chapters:
     - index.qmd
     - cap01_introducao.qmd
