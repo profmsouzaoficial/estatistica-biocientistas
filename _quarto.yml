@@ -2,6 +2,7 @@ project:
   type: book
 
 lang: pt-BR
+bibliography: referencias.bib
 
 book:
   title: "Análise de Dados para Biocientistas"

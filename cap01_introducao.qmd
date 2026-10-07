@@ -1,67 +1,62 @@
 # Introdução ao método estatístico
 
-Este capítulo fornece uma introdução ao método estatístico[cite: 6]. Ele discute os conceitos básicos de estatística, incluindo o que é o método estatístico, os seus objetivos, tipos de dados, métodos de recolha de dados e aplicações[cite: 6].
+Este capítulo fornece uma introdução ao método estatístico. Ele discute os conceitos básicos de estatística, incluindo o que é o método estatístico, os seus objetivos, tipos de dados, métodos de recolha de dados e aplicações [@vieira2008]. Nas biociências, compreender esses conceitos é o primeiro passo para transformar a teoria vista em laboratório e na clínica em evidências sólidas.
 
 ## O que é o método estatístico?
 
-O método estatístico é um conjunto de procedimentos para recolher, organizar, analisar e interpretar dados[cite: 7]. Ele é usado para descrever e tirar conclusões sobre uma população a partir de uma amostra[cite: 7].
+O método estatístico é um conjunto de procedimentos para recolher, organizar, analisar e interpretar dados [@pagano2004]. Ele é usado para descrever e tirar conclusões sobre uma população a partir de uma amostra.
 
 Os objetivos do método estatístico são:
 
-* **Descrever dados:** pode ser usado para descrever os dados de uma população ou amostra, usando medidas de tendência central, dispersão e forma[cite: 7].
-* **Explicar dados:** usado para identificar padrões e relacionamentos entre variáveis, usando métodos como regressão e análise de variância[cite: 7].
-* **Prever dados:** usado para prever valores futuros, através de regressão e análise de séries temporais[cite: 7].
+* **Descrever dados:** pode ser usado para descrever os dados de uma população ou amostra, usando medidas de tendência central, dispersão e forma [@triola2017].
+* **Explicar dados:** usado para identificar padrões e relacionamentos entre variáveis, como a relação entre a dose de um fármaco e a sua resposta metabólica.
+* **Prever dados:** usado para prever valores futuros e tendências, como o tempo estimado de cicatrização de um tecido sob determinado tratamento.
 
-O método estatístico permite-nos, a partir de um conjunto de símbolos que representam quantidades ou medidas, transformá-los em dados para extrair informações fundamentais para as atividades humanas[cite: 7]. **Dados** são um conjunto de números ou outras informações que podem ser recolhidos, organizados e analisados[cite: 7]. **Informação**, por sua vez, é um conjunto de dados que tem significado e pode ser usado para tomar decisões[cite: 7].
+O método estatístico permite-nos, a partir de um conjunto de símbolos que representam quantidades ou medidas, transformá-los em dados para extrair informações fundamentais para as atividades humanas. **Dados** são um conjunto de números ou outras informações que podem ser recolhidos, organizados e analisados. **Informação**, por sua vez, é um conjunto de dados que tem significado e pode ser usado para tomar decisões clínicas ou experimentais [@vieira2008].
 
-Dados podem ser estruturados ou não estruturados[cite: 7]. Dados estruturados estão organizados num formato predefinido, como uma tabela ou lista[cite: 7]. Dados não estruturados não possuem um formato predefinido, como texto livre, imagens, áudio ou vídeo[cite: 7]. A ciência de dados, a partir de métodos estatísticos, cria condições de inovação e avanço do conhecimento humano[cite: 7].
+Dados podem ser estruturados ou não estruturados. Dados estruturados estão organizados num formato predefinido, como uma tabela com os ângulos de flexão articular de pacientes. Dados não estruturados não possuem um formato predefinido, como imagens de radiografias ou laudos em texto livre. A ciência de dados na saúde, a partir de métodos estatísticos, cria condições de inovação e avanço do conhecimento.
 
 ## Métodos de recolha de dados
 
-Os dados podem ser recolhidos de várias maneiras, incluindo:
+Os dados podem ser recolhidos de várias maneiras, conectando-se diretamente com a sua vivência prática no ciclo básico:
 
-* **Observação:** recolha de dados sem interferir na população[cite: 8]. Por exemplo, observação de doentes num hospital[cite: 8].
-* **Experimentação:** recolha de dados intervindo na população[cite: 8]. Por exemplo, um ensaio clínico para testar a eficácia de um novo medicamento[cite: 8].
-* **Levantamento:** recolha de dados por meio de questionários ou entrevistas[cite: 8].
+* **Observação:** recolha de dados sem interferir no ambiente. *Exemplo prático:* avaliar o nível de ansiedade dos pacientes na "Sala de espera do atendimento odontológico" ou analisar a marcha de um paciente na Fisioterapia.
+* **Experimentação:** recolha de dados intervindo na população ou amostra. *Exemplo prático:* testar a eficácia antimicrobiana de um extrato vegetal desenvolvido na "Botânica Farmacêutica" em placas de Petri durante as aulas de "Microbiologia Básica".
+* **Levantamento:** recolha de dados por meio de questionários ou entrevistas. *Exemplo prático:* aplicar questionários estruturados para mapear os hábitos de higiene bucal na comunidade, uma prática essencial nos "Fundamentos básicos da epidemiologia".
 
-## Aplicações da estatística
+## Aplicações da estatística nas Ciências da Saúde
 
-A estatística tem uma ampla gama de aplicações:
+A estatística é a espinha dorsal de qualquer área clínica ou laboratorial:
 
-* **Ciências da saúde:** usada para recolher, analisar e interpretar dados em estudos clínicos, epidemiológicos e de saúde pública[cite: 8].
-* **Ciências sociais:** usada para recolher, analisar e interpretar dados em pesquisas sociais, económicas e políticas[cite: 8].
-* **Ciências naturais:** usada para recolher, analisar e interpretar dados em pesquisas científicas, como física, química e biologia[cite: 8].
-
-### Exemplos nas ciências da saúde
-* Um estudo clínico realizado para testar a eficácia de um novo medicamento para tratar uma doença[cite: 8].
-* Um estudo epidemiológico realizado para identificar fatores de risco para uma doença[cite: 8].
-* Um estudo de saúde pública realizado para avaliar a eficácia de um programa de prevenção de doenças[cite: 8].
+* **Farmácia:** analisar a eficácia de novos compostos sintetizados na "Química Orgânica", modelar a curva de absorção de medicamentos e garantir o controle de qualidade.
+* **Odontologia:** mapear a incidência de cáries (epidemiologia), testar a resistência de novos biomateriais e validar a segurança de protocolos de "Biossegurança".
+* **Fisioterapia:** mensurar estatisticamente a recuperação da amplitude de movimento após intervenções, validando quais recursos terapêuticos aceleram a reabilitação.
 
 ## Tipos de dados (Variáveis)
 
-Os dados podem ser divididos em dois tipos principais:
+Convencionalmente, em estatística, chamamos aos dados "variáveis" em alusão à variedade de informação inerente à medida em questão. Em vez de exemplos genéricos, veja como as variáveis aparecem na sua rotina:
 
-* **Qualitativos:** dados que não podem ser medidos quantitativamente[cite: 9]. Por exemplo, dados sobre o sexo, a cor dos olhos ou a preferência política[cite: 9].
-* **Quantitativos:** dados que podem ser medidos quantitativamente[cite: 9]. Por exemplo, dados sobre a altura, o peso ou a temperatura[cite: 9].
+* **Qualitativos Nominais:** dados categóricos sem ordem de grandeza. *Exemplos:* coloração de Gram das bactérias (positivo/negativo), tipo de tecido epitelial ("Histologia e embriologia") ou o desfecho de um tratamento (sucesso/falha).
+* **Qualitativos Ordinais:** dados categóricos com uma hierarquia ou progressão clara. *Exemplos:* grau de dor na Escala Visual Analógica (EVA) utilizada na Fisioterapia, ou o estágio de desenvolvimento de uma lesão.
+* **Quantitativos Contínuos:** dados medidos em escala contínua, permitindo frações. *Exemplos:* concentração de glicose no sangue medida na "Bioquímica Estrutural", ângulo de flexão de uma articulação ou a dose exata de um fármaco em miligramas.
+* **Quantitativos Discretos:** dados baseados em contagens numéricas inteiras. *Exemplos:* índice CPO-D (número de dentes cariados, perdidos e obturados), contagem de colônias bacterianas numa placa ou frequência cardíaca (batimentos por minuto na "Fisiologia Humana").
 
-Convencionalmente, em estatística, também chamamos aos dados "variáveis" em alusão à variedade de informação inerente à medida em questão[cite: 9]. Logo, sexo, cor dos olhos, altura, peso, etc., são exemplos de variáveis[cite: 9].
-
-O diagrama abaixo ilustra a classificação completa das variáveis de forma dinâmica.
+O diagrama abaixo ilustra a classificação completa das variáveis com os nossos exemplos aplicados à saúde.
 
 ```{mermaid}
-%%| fig-cap: "Classificação das Variáveis Estatísticas"
+%%| fig-cap: "Classificação das Variáveis Estatísticas nas Biociências"
 flowchart TD
   A[VARIÁVEIS] --> B("Quantitativas: Números / Medidas")
   A --> C("Qualitativas: Categorias / Atributos")
 
-  B --> D["Contínuas:<br>Altura, Salário"]
-  B --> E["Discretas:<br>Idade, Qtd de empregados"]
+  B --> D["Contínuas:<br>Glicemia, Ângulo de flexão"]
+  B --> E["Discretas:<br>Índice CPO-D, Colônias de bactérias"]
 
-  C --> F["Nominais:<br>Sem ordem"]
-  C --> G["Ordinais: Com ordem<br>Escolaridade, Faixa Etária"]
+  C --> F["Nominais:<br>Coloração de Gram, Tecido"]
+  C --> G["Ordinais: Com ordem<br>Escala de dor (EVA), Estágio"]
 
-  F --> H["Multinominais:<br>Raça/cor, Estado Civil"]
-  F --> I["Binomiais:<br>Sexo, V/F, S/N"]
+  F --> H["Multinominais:<br>Tipo sanguíneo, Diagnóstico"]
+  F --> I["Binomiais:<br>Doente/Saudável, V/F"]
 
   style A fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:#ffffff
   style B fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
@@ -72,8 +67,4 @@ flowchart TD
   style G fill:#B4C4C1,stroke:#6A8A9F,color:#000000
   style H fill:#F2F4F4,stroke:#B4C4C1,color:#000000
   style I fill:#F2F4F4,stroke:#B4C4C1,color:#000000
-  ```
-  
-  
-  
-  
+```

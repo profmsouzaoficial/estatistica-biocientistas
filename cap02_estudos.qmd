@@ -1,0 +1,95 @@
+# Tipos de estudos na área da saúde
+
+A área da saúde é um campo de pesquisa muito amplo, que abrange uma variedade de tópicos, desde a prevenção de doenças até o tratamento de doenças crônicas. Para entender como a saúde humana funciona e como as doenças se desenvolvem, os pesquisadores usam uma variedade de métodos de estudo [@pagano2004]. 
+
+Seja para investigar a eficácia de um novo fármaco, a durabilidade de um biomaterial odontológico ou a recuperação motora de um paciente, a escolha do desenho de estudo correto é o que garante a validade da sua descoberta. O diagrama abaixo apresenta a classificação principal das metodologias de pesquisa abordadas neste capítulo.
+
+```{mermaid}
+%%| fig-cap: "Classificação dos Tipos de Estudos na Saúde"
+flowchart TD
+  A[ESTUDOS EM SAÚDE] --> B("Observacionais<br>Sem intervenção")
+  A --> C("Experimentais<br>Com intervenção")
+
+  B --> D["Descritivos<br>Relato, Prevalência"]
+  B --> E["Analíticos<br>Relação entre variáveis"]
+
+  E --> F["Ecológicos"]
+  E --> G["Caso-Controle"]
+  E --> H["Coorte"]
+
+  C --> I["Estudos de Intervenção"]
+  C --> J["Estudos de Controle"]
+
+  style A fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:#ffffff
+  style B fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style C fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style D fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style E fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style F fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style G fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style H fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style I fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style J fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+```
+
+Os tipos de estudos na área da saúde podem ser divididos em duas categorias principais: estudos observacionais e estudos experimentais [@vieira2008].
+
+## Estudos observacionais
+
+Os estudos observacionais são estudos em que os pesquisadores coletam dados sem interferir no que está sendo observado. Eles podem ser divididos em dois tipos principais:
+
+* **Estudos descritivos:** Descrevem as características de uma população ou de um grupo de pessoas. São frequentemente usados como ponto de partida para pesquisas mais aprofundadas. *Exemplos práticos:* relatar uma variação anatômica rara descoberta nas aulas de "Anatomia Sistêmica", ou descrever a prevalência de uma mutação mapeada na disciplina de "Genética Básica".
+* **Estudos analíticos:** Investigam a relação entre duas ou mais variáveis e permitem aos pesquisadores controlar estatisticamente os fatores que afetam os resultados [@triola2017]. *Exemplos práticos:* testar se há associação entre o bruxismo e disfunções temporomandibulares (Odontologia), ou estimar o efeito de uma nova formulação medicamentosa na redução da pressão arterial (Farmácia).
+
+### Outros tipos de estudos observacionais
+
+Além das definições gerais, os "Fundamentos básicos da epidemiologia" utilizam desenhos específicos para investigar a saúde da população [@pagano2004]:
+
+* **Estudos ecológicos:** Examinam a relação entre variáveis de nível populacional. Por exemplo, investigar a associação entre a fluoretação da água de um município e as taxas de cárie na comunidade.
+* **Estudos de coorte:** Seguem um grupo de indivíduos ao longo do tempo para investigar a relação entre fatores de exposição e o desenvolvimento de doenças. *Exemplo prático:* acompanhar estudantes de Odontologia e Fisioterapia ao longo de toda a graduação para analisar se a carga horária de prática clínica desenvolve lesões por esforço repetitivo (LER/DORT) no futuro.
+* **Estudos de caso-controle:** Comparam indivíduos com uma doença (casos) com indivíduos sem a doença (controles) para identificar fatores de risco no passado. *Exemplo prático:* comparar pacientes com insuficiência hepática severa com pacientes saudáveis para investigar o uso crônico e indiscriminado de um analgésico no passado.
+
+> **Estudo de caso: O Framingham Heart Study**  
+> Um exemplo clássico de um estudo de coorte de longo prazo. Iniciado em 1948, o estudo acompanhou originalmente 5.127 residentes de Framingham, Massachusetts, para investigar os fatores de risco para doenças cardíacas. O estudo continua até hoje e forneceu informações valiosas sobre os impactos da pressão arterial alta, colesterol alto e tabagismo [@triola2017].
+
+#### Prática Interativa: Estudo de Caso-Controle
+O modelo matemático para calcular o risco em um estudo de caso-controle é o mesmo, independentemente da sua área de atuação. No bloco abaixo, calculamos a Razão de Chances (*Odds Ratio*). 
+
+Imagine que os dados da exposição representam:
+* **Epidemiologia:** Exposição a focos de vetores na escola vs. Infecção por Dengue.
+* **Odontologia:** Tabagismo vs. Doença Periodontal Severa.
+* **Farmácia/Bioquímica:** Contato com reagente tóxico vs. Alteração celular.
+
+Altere os números da matriz e clique em *Run Code* para ver como o risco se altera:
+
+```{webr-r}
+# Tabela 2x2 do Estudo
+# Linha 1: Casos (Doentes) | Linha 2: Controles (Saudáveis)
+# Coluna 1: Grupo Exposto  | Coluna 2: Grupo Não Exposto
+
+dados <- matrix(c(45, 15, 
+                  20, 60), nrow = 2, byrow = TRUE)
+
+colnames(dados) <- c("Expostos", "Não Expostos")
+rownames(dados) <- c("Casos (Doentes)", "Controles (Saudáveis)")
+
+print("Tabela do Estudo de Caso-Controle:")
+print(dados)
+
+# Cálculo do Odds Ratio (OR) = (A * D) / (B * C)
+OR <- (dados[1,1] * dados[2,2]) / (dados[1,2] * dados[2,1])
+
+cat("\nOdds Ratio (OR):", round(OR, 2))
+cat("\nInterpretação: A chance de desenvolver o desfecho clínico é", round(OR, 2), "vezes maior entre os indivíduos que sofreram a exposição.")
+```
+
+### Desafios e limitações dos estudos observacionais
+
+Os estudos observacionais são ferramentas poderosas, mas têm limitações. A principal é que os pesquisadores não podem controlar todas as variáveis que afetam os resultados. Isso significa que é possível que a associação observada entre duas variáveis seja, na verdade, causada por outra variável não controlada. Outras limitações incluem o **viés de seleção**, o **viés de informação** e o **viés de confusão** [@vieira2008].
+
+## Estudos experimentais
+
+Os estudos experimentais são aqueles em que os pesquisadores manipulam uma variável para observar o efeito sobre outra. São considerados o tipo de estudo mais forte em termos de causalidade, pois permitem um controle rigoroso do ambiente e das variáveis [@pagano2004]. Podem ser divididos em:
+
+* **Estudos de intervenção:** Os pesquisadores administram um tratamento ou intervenção a um grupo de participantes e observam o efeito direto dessa ação. *Exemplos práticos:* testar a eficácia antimicrobiana de um extrato isolado na disciplina de "Botânica Farmacêutica" ou avaliar o tempo de recuperação motora com o uso de um novo equipamento de Fisioterapia.
+* **Estudos de controle:** Os pesquisadores comparam os resultados de um grupo de participantes que recebeu um tratamento com os resultados de um grupo que não o recebeu (ou recebeu o padrão/placebo). *Exemplo prático:* testar se diferentes tempos de exposição à autoclave eliminam completamente os esporos bacterianos em instrumentais comparados ao grupo controle, validando os protocolos na disciplina de "Biossegurança".
