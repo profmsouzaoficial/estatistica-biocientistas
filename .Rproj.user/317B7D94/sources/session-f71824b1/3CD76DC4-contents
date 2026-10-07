@@ -1,0 +1,9 @@
+# Introdução à Bioestatística no R
+
+Aqui está o nosso primeiro código interativo. Você pode alterar os valores (como a cor ou a média) e rodar novamente direto no navegador!
+
+```{webr-r}
+# Gere um histograma simples
+dados <- rnorm(100, mean = 50, sd = 10)
+hist(dados, col = "lightblue", main = "Histograma Interativo")
+```
