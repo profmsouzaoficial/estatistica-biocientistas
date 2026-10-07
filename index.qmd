@@ -2,7 +2,7 @@
 
 **Análise de Dados para Biocientistas** é um livro interativo concebido para transformar a forma como os dados são analisados nas ciências da vida. 
 
-> *Investir em equipamentos caros e robustos sem entender de dados é como comprar um foguete para ir ao supermercado - parece impressionante, mas no final, você ainda está perdido sem um plano de voo! A estatística é a chave que dá acesso a novas rotas.*
+> *Na ciência, muitos caminham sobre a frágil vidraça da intuição. Mas quando a complexidade biológica do mundo real estilhaça essa superfície, o pesquisador é lançado em queda livre num oceano de incertezas, cercado por ruídos e variáveis. Nesse momento, a estatística deixa de ser apenas matemática e torna-se a sua rede de segurança. Ela é a linguagem que transforma o caos das distribuições e dos p-valores em terra firme, provando que, para compreender a vida, é preciso primeiro ter coragem para quebrar a superfície.*
 
 ### Ficha Técnica
 * **Autor:** Márcio Luís Moreira de Souza
