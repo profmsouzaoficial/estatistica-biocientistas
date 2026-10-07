@@ -36,3 +36,6 @@ format:
 
 filters:
   - webr
+  
+webr:
+  show-startup-message: false
