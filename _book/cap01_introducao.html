@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>cap01_introducao – Estatística para Biocientistas</title>
+<title>1&nbsp; Introdução ao método estatístico – Análise de Dados para Biocientistas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,11 +70,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
 
-<body class="nav-sidebar floating fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -83,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap01_introducao.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">cap01_introducao.html</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap01_introducao.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução ao método estatístico</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
       <a href="./index.html" class="sidebar-logo-link">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Estatística para Biocientistas</a> 
+      <a href="./">Análise de Dados para Biocientistas</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -113,13 +116,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Bem-vindo</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap01_introducao.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">cap01_introducao.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução ao método estatístico</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -181,15 +184,127 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#o-que-é-o-método-estatístico" id="toc-o-que-é-o-método-estatístico" class="nav-link active" data-scroll-target="#o-que-é-o-método-estatístico"><span class="header-section-number">1.1</span> O que é o método estatístico?</a></li>
+  <li><a href="#métodos-de-recolha-de-dados" id="toc-métodos-de-recolha-de-dados" class="nav-link" data-scroll-target="#métodos-de-recolha-de-dados"><span class="header-section-number">1.2</span> Métodos de recolha de dados</a></li>
+  <li><a href="#aplicações-da-estatística" id="toc-aplicações-da-estatística" class="nav-link" data-scroll-target="#aplicações-da-estatística"><span class="header-section-number">1.3</span> Aplicações da estatística</a>
+  <ul class="collapse">
+  <li><a href="#exemplos-nas-ciências-da-saúde" id="toc-exemplos-nas-ciências-da-saúde" class="nav-link" data-scroll-target="#exemplos-nas-ciências-da-saúde"><span class="header-section-number">1.3.1</span> Exemplos nas ciências da saúde</a></li>
+  </ul></li>
+  <li><a href="#tipos-de-dados-variáveis" id="toc-tipos-de-dados-variáveis" class="nav-link" data-scroll-target="#tipos-de-dados-variáveis"><span class="header-section-number">1.4</span> Tipos de dados (Variáveis)</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução ao método estatístico</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
+
+<p>Este capítulo fornece uma introdução ao método estatístico[cite: 6]. Ele discute os conceitos básicos de estatística, incluindo o que é o método estatístico, os seus objetivos, tipos de dados, métodos de recolha de dados e aplicações[cite: 6].</p>
+<section id="o-que-é-o-método-estatístico" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="o-que-é-o-método-estatístico"><span class="header-section-number">1.1</span> O que é o método estatístico?</h2>
+<p>O método estatístico é um conjunto de procedimentos para recolher, organizar, analisar e interpretar dados[cite: 7]. Ele é usado para descrever e tirar conclusões sobre uma população a partir de uma amostra[cite: 7].</p>
+<p>Os objetivos do método estatístico são:</p>
+<ul>
+<li><strong>Descrever dados:</strong> pode ser usado para descrever os dados de uma população ou amostra, usando medidas de tendência central, dispersão e forma[cite: 7].</li>
+<li><strong>Explicar dados:</strong> usado para identificar padrões e relacionamentos entre variáveis, usando métodos como regressão e análise de variância[cite: 7].</li>
+<li><strong>Prever dados:</strong> usado para prever valores futuros, através de regressão e análise de séries temporais[cite: 7].</li>
+</ul>
+<p>O método estatístico permite-nos, a partir de um conjunto de símbolos que representam quantidades ou medidas, transformá-los em dados para extrair informações fundamentais para as atividades humanas[cite: 7]. <strong>Dados</strong> são um conjunto de números ou outras informações que podem ser recolhidos, organizados e analisados[cite: 7]. <strong>Informação</strong>, por sua vez, é um conjunto de dados que tem significado e pode ser usado para tomar decisões[cite: 7].</p>
+<p>Dados podem ser estruturados ou não estruturados[cite: 7]. Dados estruturados estão organizados num formato predefinido, como uma tabela ou lista[cite: 7]. Dados não estruturados não possuem um formato predefinido, como texto livre, imagens, áudio ou vídeo[cite: 7]. A ciência de dados, a partir de métodos estatísticos, cria condições de inovação e avanço do conhecimento humano[cite: 7].</p>
+</section>
+<section id="métodos-de-recolha-de-dados" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="métodos-de-recolha-de-dados"><span class="header-section-number">1.2</span> Métodos de recolha de dados</h2>
+<p>Os dados podem ser recolhidos de várias maneiras, incluindo:</p>
+<ul>
+<li><strong>Observação:</strong> recolha de dados sem interferir na população[cite: 8]. Por exemplo, observação de doentes num hospital[cite: 8].</li>
+<li><strong>Experimentação:</strong> recolha de dados intervindo na população[cite: 8]. Por exemplo, um ensaio clínico para testar a eficácia de um novo medicamento[cite: 8].</li>
+<li><strong>Levantamento:</strong> recolha de dados por meio de questionários ou entrevistas[cite: 8].</li>
+</ul>
+</section>
+<section id="aplicações-da-estatística" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="aplicações-da-estatística"><span class="header-section-number">1.3</span> Aplicações da estatística</h2>
+<p>A estatística tem uma ampla gama de aplicações:</p>
+<ul>
+<li><strong>Ciências da saúde:</strong> usada para recolher, analisar e interpretar dados em estudos clínicos, epidemiológicos e de saúde pública[cite: 8].</li>
+<li><strong>Ciências sociais:</strong> usada para recolher, analisar e interpretar dados em pesquisas sociais, económicas e políticas[cite: 8].</li>
+<li><strong>Ciências naturais:</strong> usada para recolher, analisar e interpretar dados em pesquisas científicas, como física, química e biologia[cite: 8].</li>
+</ul>
+<section id="exemplos-nas-ciências-da-saúde" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="exemplos-nas-ciências-da-saúde"><span class="header-section-number">1.3.1</span> Exemplos nas ciências da saúde</h3>
+<ul>
+<li>Um estudo clínico realizado para testar a eficácia de um novo medicamento para tratar uma doença[cite: 8].</li>
+<li>Um estudo epidemiológico realizado para identificar fatores de risco para uma doença[cite: 8].</li>
+<li>Um estudo de saúde pública realizado para avaliar a eficácia de um programa de prevenção de doenças[cite: 8].</li>
+</ul>
+</section>
+</section>
+<section id="tipos-de-dados-variáveis" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="tipos-de-dados-variáveis"><span class="header-section-number">1.4</span> Tipos de dados (Variáveis)</h2>
+<p>Os dados podem ser divididos em dois tipos principais:</p>
+<ul>
+<li><strong>Qualitativos:</strong> dados que não podem ser medidos quantitativamente[cite: 9]. Por exemplo, dados sobre o sexo, a cor dos olhos ou a preferência política[cite: 9].</li>
+<li><strong>Quantitativos:</strong> dados que podem ser medidos quantitativamente[cite: 9]. Por exemplo, dados sobre a altura, o peso ou a temperatura[cite: 9].</li>
+</ul>
+<p>Convencionalmente, em estatística, também chamamos aos dados “variáveis” em alusão à variedade de informação inerente à medida em questão[cite: 9]. Logo, sexo, cor dos olhos, altura, peso, etc., são exemplos de variáveis[cite: 9].</p>
+<p>O diagrama abaixo ilustra a classificação completa das variáveis de forma dinâmica.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  A[VARIÁVEIS] --&gt; B(Quantitativas: Números / Medidas)
+  A --&gt; C(Qualitativas: Categorias / Atributos)
+
+  B --&gt; D[Contínuas: \nAltura, Salário]
+  B --&gt; E[Discretas: \nIdade, Qtd de empregados]
+
+  C --&gt; F[Nominais: Sem ordem]
+  C --&gt; G[Ordinais: Com ordem \nEscolaridade, Faixa Etária]
+
+  F --&gt; H[Multinominais: \nRaça/cor, Estado Civil]
+  F --&gt; I[Binomiais: \nSexo, V/F, S/N]
+
+  style A fill:#4b0000,stroke:#333,stroke-width:2px,color:#fff
+  style B fill:#cc0000,stroke:#333,stroke-width:2px,color:#fff
+  style C fill:#cc0000,stroke:#333,stroke-width:2px,color:#fff
+  style D fill:#ff4d4d,stroke:#333,color:#fff
+  style E fill:#ff4d4d,stroke:#333,color:#fff
+  style F fill:#ff9999,stroke:#333,color:#000
+  style G fill:#ff9999,stroke:#333,color:#000
+  style H fill:#e6e6e6,stroke:#333,color:#000
+  style I fill:#e6e6e6,stroke:#333,color:#000
+</pre>
+</div>
+<p></p><figcaption> Classificação das Variáveis Estatísticas</figcaption> </figure><p></p>
+</div>
+</div>
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -623,8 +738,8 @@ ul.task-list li input[type="checkbox"] {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./index.html" class="pagination-link" aria-label="Bem-vindo">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bem-vindo</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
