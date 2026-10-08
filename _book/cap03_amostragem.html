@@ -2222,10 +2222,41 @@ Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
 </section>
 
 </main> <!-- /main -->
-<!-- CSS do Chat do n8n -->
+<!-- 1. Carrega a estrutura base do chat do n8n (Obrigatório para o layout) -->
 <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
 
-<!-- Script de Construção do Chat -->
+<!-- 2. Força os estilos visuais personalizados (Carrega DEPOIS do n8n para não dar conflito) -->
+<style>
+/* Troca o ícone pelo rosto do pesquisador */
+.chat-button {
+    background-image: url('avatar.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    border: 3px solid #6A8A9F !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3) !important;
+}
+
+/* Esconde o ícone de balão original */
+.chat-button svg {
+    display: none !important;
+}
+
+/* Coloca a imagem de capa no cabeçalho do chat */
+.chat-header {
+    background-image: url('capa.png') !important;
+    background-size: cover !important;
+    background-position: top center !important;
+    background-blend-mode: multiply !important;
+    background-color: #2C3E50 !important; /* Escurece levemente a capa para a letra branca ficar legível */
+}
+
+/* Garante que o chat fique sempre sobreposto a qualquer elemento do livro */
+.chat-window, .chat-button {
+    z-index: 999999 !important;
+}
+</style>
+
+<!-- 3. Script de Construção do Chat com Tema Nativo -->
 <script type="module">
 import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
@@ -2242,6 +2273,13 @@ createChat({
             getStarted: 'Iniciar conversa',
             inputPlaceholder: 'Digite sua dúvida aqui...',
             closeButtonTooltip: 'Fechar tutor'
+        }
+    },
+    /* AQUI ESTÁ O SEGREDO: Configuração nativa de tema do n8n para anular o rosa */
+    theme: {
+        color: {
+            primary: '#2C3E50', /* Ardósia da capa */
+            secondary: '#6A8A9F' /* Azul acinzentado */
         }
     }
 });
