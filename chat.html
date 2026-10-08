@@ -1,4 +1,4 @@
-<!-- Biblioteca leve para renderizar o Markdown (negritos e códigos) que a IA envia -->
+<!-- Biblioteca leve para renderizar o Markdown -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <style>
@@ -8,12 +8,14 @@
 #meu-tutor-container {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     position: fixed;
-    bottom: 25px;
+    bottom: 20px; /* Ajustado para dar espaço ao texto */
     right: 25px;
     z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o texto sob o botão */
 }
 
-/* O Botão Flutuante com o Rosto do Pesquisador */
 /* O Botão Flutuante com o Rosto do Pesquisador */
 #meu-tutor-fab {
     width: 65px;
@@ -25,40 +27,46 @@
     border: 3px solid #6A8A9F;
     cursor: pointer;
     transition: transform 0.2s ease;
-    /* Adiciona a animação de pulso (duração total de 4s) */
     animation: pulso-discreto 4s infinite;
 }
 
 #meu-tutor-fab:hover {
     transform: scale(1.08);
-    /* Para a animação quando o aluno coloca o mouse em cima */
     animation: none; 
-    /* Volta a sombra normal de botão */
     box-shadow: 0 6px 16px rgba(0,0,0,0.3); 
 }
 
-/* A Mágica da Animação (Efeito Respirar/Onda) */
 @keyframes pulso-discreto {
-    0% {
-        /* Inicia a onda no limite do botão com a cor azulada da sua capa */
-        box-shadow: 0 0 0 0 rgba(106, 138, 159, 0.7); 
-    }
-    30% {
-        /* Expande a onda 15px para fora e dissolve a cor (fica invisível) */
-        box-shadow: 0 0 0 15px rgba(106, 138, 159, 0); 
-    }
-    100% {
-        /* Fica 100% invisível no resto do tempo para garantir o descanso visual */
-        box-shadow: 0 0 0 0 rgba(106, 138, 159, 0); 
-    }
+    0%   { box-shadow: 0 0 0 0 rgba(106, 138, 159, 0.7); }
+    30%  { box-shadow: 0 0 0 15px rgba(106, 138, 159, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(106, 138, 159, 0); }
+}
+
+/* A Pílula de Texto "Dúvidas?" */
+#meu-tutor-label {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #2C3E50;
+    background-color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+}
+
+#meu-tutor-label:hover {
+    background-color: #f0f0f0;
 }
 
 /* A Janela de Chat */
 #meu-tutor-window {
-    display: none; /* Escondido por padrão */
+    display: none; 
     flex-direction: column;
     position: absolute;
-    bottom: 85px;
+    bottom: 110px; /* Subiu um pouco para não cobrir o botão e o texto */
     right: 0;
     width: 360px;
     height: 520px;
@@ -70,11 +78,11 @@
 
 /* O Cabeçalho com a Capa do Livro */
 #meu-tutor-header {
-    background-image: url('capa.png'); /* Usa a sua capa no fundo! */
+    background-image: url('capa.png'); 
     background-size: cover;
     background-position: top center;
     background-color: #2C3E50;
-    background-blend-mode: multiply; /* Escurece a capa para o texto aparecer */
+    background-blend-mode: multiply; 
     padding: 20px;
     color: #ffffff;
     text-align: left;
@@ -94,7 +102,6 @@
     background-color: #f9f9f9;
 }
 
-/* Balões de Mensagem */
 .msg-bubble {
     max-width: 85%;
     padding: 12px 16px;
@@ -103,20 +110,19 @@
 }
 
 .msg-bot {
-    background: #F2F4F4; /* Cinza claro da capa */
+    background: #F2F4F4; 
     color: #1A252F;
     align-self: flex-start;
     border-radius: 16px 16px 16px 2px;
 }
 
 .msg-user {
-    background: #6A8A9F; /* Azul acinzentado da capa */
+    background: #6A8A9F; 
     color: #ffffff;
     align-self: flex-end;
     border-radius: 16px 16px 2px 16px;
 }
 
-/* Formatação de código dentro do chat */
 .msg-bot pre { background: #11181F; color: #fff; padding: 10px; border-radius: 8px; overflow-x: auto; font-size: 12px; }
 .msg-bot code { font-family: monospace; }
 
@@ -167,7 +173,9 @@
             <button id="meu-tutor-send" onclick="enviarMensagem()">➤</button>
         </div>
     </div>
+    <!-- Botão e Texto agem juntos -->
     <div id="meu-tutor-fab" onclick="toggleJanela()"></div>
+    <div id="meu-tutor-label" onclick="toggleJanela()">Dúvidas?</div>
 </div>
 
 <!-- LÓGICA DE ENVIO PARA O N8N -->
@@ -185,20 +193,17 @@ async function enviarMensagem() {
     const textoUsuario = input.value.trim();
     if (!textoUsuario) return;
     
-    input.value = ''; // Limpa o campo
+    input.value = ''; 
     const messagesDiv = document.getElementById('meu-tutor-messages');
     
-    // Mostra a mensagem do usuário
     messagesDiv.innerHTML += `<div class="msg-bubble msg-user">${textoUsuario}</div>`;
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-    // Mostra indicador de carregamento
     const loadingId = 'load-' + Date.now();
     messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" id="${loadingId}"><em>Pensando...</em></div>`;
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
     try {
-        // Envia para o n8n
         const response = await fetch(WEBHOOK_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -206,9 +211,8 @@ async function enviarMensagem() {
         });
         
         const data = await response.json();
-        document.getElementById(loadingId).remove(); // Remove o "Pensando..."
+        document.getElementById(loadingId).remove(); 
         
-        // Renderiza a resposta com Markdown (n8n retorna geralmente 'output' ou 'resposta')
         const textoBot = data.output || data.resposta || "Erro: Resposta vazia da IA.";
         messagesDiv.innerHTML += `<div class="msg-bubble msg-bot">${marked.parse(textoBot)}</div>`;
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
