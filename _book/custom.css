@@ -1,15 +1,46 @@
-/* Força a redução da fonte do código no editor e no resultado (console) */
-.qwebr-editor,
-.qwebr-editor .cm-editor,
-.qwebr-editor .monaco-editor,
-.qwebr-console,
-.qwebr-console-area {
-    font-size: 14px !important;
+/* =========================================
+   CUSTOMIZAÇÃO DO TUTOR VIRTUAL (N8N CHAT)
+   ========================================= */
+
+/* 1. Forçar as variáveis de cor para anular o rosa genérico */
+:root {
+    --chat--color-primary: #2C3E50 !important; 
+    --chat--color-secondary: transparent !important; 
 }
 
-/* Devolve os botões para um tamanho harmônico */
-.qwebr-button-run,
-.qwebr-button-reset,
-.qwebr-button-copy {
-    font-size: 13px !important;
+/* 2. Trocar o ícone rosa pelo rosto do pesquisador (Avatar) */
+[class*="chat-trigger"],
+[class*="chat-button"], 
+[class*="chat-toggle"] {
+    background-color: transparent !important;
+    background-image: url('avatar.png') !important; /* Rosto do pesquisador */
+    background-size: cover !important;
+    background-position: center !important;
+    border: 3px solid #6A8A9F !important;
+    width: 65px !important;
+    height: 65px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3) !important;
+}
+
+/* Esconder o ícone de balão branco padrão do n8n */
+[class*="chat-trigger"] svg,
+[class*="chat-button"] svg, 
+[class*="chat-toggle"] svg {
+    display: none !important;
+}
+
+/* 3. Colocar imagem de fundo no cabeçalho azul */
+[class*="chat-header"] {
+    background-image: url('capa.png') !important; /* Pode mudar para 'cabecalho.jpg' se quiser usar outra imagem */
+    background-size: cover !important;
+    background-position: center 20% !important; /* Foca na parte superior da imagem */
+    background-color: #2C3E50 !important; 
+    /* A película abaixo escurece levemente a imagem para que o texto "Tutor Virtual" continue legível */
+    background-blend-mode: multiply !important;
+}
+
+/* Garante que o chat fique sempre à frente do texto do livro */
+.chat-window, [class*="chat-trigger"] {
+    z-index: 999999 !important;
 }
