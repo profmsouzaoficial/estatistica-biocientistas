@@ -1,46 +1,6 @@
 <!-- CSS do Chat do n8n -->
 <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 
-<style>
-/* 1. Customização da Paleta de Cores Harmônica com a Capa */
-:root {
-    --chat--color-primary: #2C3E50; /* Azul escuro/Ardósia da capa (Cabeçalho) */
-    --chat--color-primary-shade-50: #1A252F;
-    --chat--color-primary-shade-100: #11181F;
-    --chat--color-secondary: #D35400; /* Laranja do cabelo do avatar para dar um contraste chamativo e convidar ao clique */
-    --chat--color-light: #F2F4F4; /* Cinza clarinho da capa */
-}
-
-/* 2. Customização do Botão Flutuante (FAB) com o Rosto do Pesquisador */
-.chat-button {
-    background-color: var(--chat--color-primary) !important;
-    background-image: url('avatar.png') !important; /* Chama a imagem que você recortou */
-    background-size: cover !important;
-    background-position: center !important;
-    border: 3px solid #6A8A9F !important; /* Borda azul acinzentada */
-    border-radius: 50% !important;
-    width: 65px !important;
-    height: 65px !important;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3) !important;
-    transition: transform 0.2s ease !important;
-}
-
-/* Efeito ao passar o mouse */
-.chat-button:hover {
-    transform: scale(1.08) !important;
-}
-
-/* Esconde o ícone de mensagem padrão para a foto brilhar */
-.chat-button svg {
-    display: none !important;
-}
-
-/* 3. Garantir que o Chat fique acima de todos os elementos em todas as páginas */
-.chat-window, .chat-button {
-    z-index: 999999 !important;
-}
-</style>
-
 <!-- Script de Construção do Chat -->
 <script type="module">
 import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
@@ -51,7 +11,6 @@ createChat({
     initialMessages: [
         'Olá! Sou o seu tutor virtual de Bioestatística. Como posso ajudar com os códigos em R ou com a teoria das aulas de hoje?'
     ],
-    /* 4. Tradução e Customização do Cabeçalho e Textos */
     i18n: {
         en: {
             title: 'Tutor Virtual 👨‍🔬',
