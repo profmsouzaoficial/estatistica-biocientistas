@@ -1,9 +1,15 @@
-/* Reduz o tamanho da fonte do editor e console do WebR */
-.webr-editor, .webr-console {
-  font-size: 0.5em !important;
+/* Força a redução da fonte do código no editor e no resultado (console) */
+.qwebr-editor,
+.qwebr-editor .cm-editor,
+.qwebr-editor .monaco-editor,
+.qwebr-console,
+.qwebr-console-area {
+    font-size: 14px !important;
 }
 
-/* Opcional: Garante que os botões (Run Code) também fiquem proporcionais */
-.qwebr-button-run {
-  font-size: 0.5em !important;
+/* Devolve os botões para um tamanho harmônico */
+.qwebr-button-run,
+.qwebr-button-reset,
+.qwebr-button-copy {
+    font-size: 13px !important;
 }

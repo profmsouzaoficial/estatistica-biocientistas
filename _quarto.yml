@@ -23,6 +23,7 @@ book:
     - cap08_hipoteses.qmd
     - cap09_intervalos.qmd
     - cap10_correlacao.qmd
+    - referencias.qmd
 
 format:
   html:
