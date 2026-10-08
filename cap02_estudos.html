@@ -2194,21 +2194,43 @@ Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
 }
 
 /* O Botão Flutuante com o Rosto do Pesquisador */
+/* O Botão Flutuante com o Rosto do Pesquisador */
 #meu-tutor-fab {
     width: 65px;
     height: 65px;
     border-radius: 50%;
-    background-image: url('avatar.png'); /* Usa o seu arquivo direto! */
+    background-image: url('avatar.png'); 
     background-size: cover;
     background-position: center;
     border: 3px solid #6A8A9F;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
     cursor: pointer;
     transition: transform 0.2s ease;
+    /* Adiciona a animação de pulso (duração total de 4s) */
+    animation: pulso-discreto 4s infinite;
 }
 
 #meu-tutor-fab:hover {
     transform: scale(1.08);
+    /* Para a animação quando o aluno coloca o mouse em cima */
+    animation: none; 
+    /* Volta a sombra normal de botão */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3); 
+}
+
+/* A Mágica da Animação (Efeito Respirar/Onda) */
+@keyframes pulso-discreto {
+    0% {
+        /* Inicia a onda no limite do botão com a cor azulada da sua capa */
+        box-shadow: 0 0 0 0 rgba(106, 138, 159, 0.7); 
+    }
+    30% {
+        /* Expande a onda 15px para fora e dissolve a cor (fica invisível) */
+        box-shadow: 0 0 0 15px rgba(106, 138, 159, 0); 
+    }
+    100% {
+        /* Fica 100% invisível no resto do tempo para garantir o descanso visual */
+        box-shadow: 0 0 0 0 rgba(106, 138, 159, 0); 
+    }
 }
 
 /* A Janela de Chat */
