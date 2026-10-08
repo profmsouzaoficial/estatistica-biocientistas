@@ -27,6 +27,7 @@ book:
 format:
   html:
     theme: cosmo
+    css: custom.css
     comments:
       giscus:
         repo: "profmsouzaoficial/estatistica-biocientistas" 

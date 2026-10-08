@@ -1,0 +1,9 @@
+/* Reduz o tamanho da fonte do editor e console do WebR */
+.webr-editor, .webr-console {
+  font-size: 0.85em !important;
+}
+
+/* Opcional: Garante que os botões (Run Code) também fiquem proporcionais */
+.qwebr-button-run {
+  font-size: 0.85em !important;
+}
