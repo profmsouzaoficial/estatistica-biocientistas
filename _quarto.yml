@@ -28,6 +28,7 @@ format:
   html:
     theme: cosmo
     css: custom.css
+    include-after-body: chat.html
     comments:
       giscus:
         repo: "profmsouzaoficial/estatistica-biocientistas" 
