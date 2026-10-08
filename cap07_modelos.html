@@ -193,6 +193,28 @@ ul.task-list li input[type="checkbox"] {
 
 
 </main> <!-- /main -->
+<!-- CSS do Chat do n8n -->
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
+
+<!-- Script que desenha o balão no canto inferior direito -->
+<script type="module">
+import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+createChat({
+    webhookUrl: 'SUA_URL_DE_PRODUCAO_AQUI',
+    showWelcomeScreen: true,
+    initialMessages: [
+        'Olá! Sou o assistente virtual de Bioestatística. Como posso ajudar você hoje com o R ou com a teoria?'
+    ]
+});
+</script>
+
+<style>
+/* Ajuste opcional para garantir que o chat não fique em cima do botão do WebR */
+.chat-window {
+    z-index: 9999 !important;
+}
+</style>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
