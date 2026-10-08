@@ -2178,67 +2178,204 @@ Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
 </section>
 
 </main> <!-- /main -->
-<!-- 1. Carrega a estrutura base do chat do n8n (Obrigatório para o layout) -->
-<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
+<!-- Biblioteca leve para renderizar o Markdown (negritos e códigos) que a IA envia -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<!-- 2. Força os estilos visuais personalizados (Carrega DEPOIS do n8n para não dar conflito) -->
 <style>
-/* Troca o ícone pelo rosto do pesquisador */
-.chat-button {
-    background-image: url('avatar.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    border: 3px solid #6A8A9F !important;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3) !important;
+/* =========================================
+   ESTILOS DO TUTOR VIRTUAL (ISOLADOS)
+   ========================================= */
+#meu-tutor-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999999;
 }
 
-/* Esconde o ícone de balão original */
-.chat-button svg {
-    display: none !important;
+/* O Botão Flutuante com o Rosto do Pesquisador */
+#meu-tutor-fab {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-image: url('avatar.png'); /* Usa o seu arquivo direto! */
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #6A8A9F;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-/* Coloca a imagem de capa no cabeçalho do chat */
-.chat-header {
-    background-image: url('capa.png') !important;
-    background-size: cover !important;
-    background-position: top center !important;
-    background-blend-mode: multiply !important;
-    background-color: #2C3E50 !important; /* Escurece levemente a capa para a letra branca ficar legível */
+#meu-tutor-fab:hover {
+    transform: scale(1.08);
 }
 
-/* Garante que o chat fique sempre sobreposto a qualquer elemento do livro */
-.chat-window, .chat-button {
-    z-index: 999999 !important;
+/* A Janela de Chat */
+#meu-tutor-window {
+    display: none; /* Escondido por padrão */
+    flex-direction: column;
+    position: absolute;
+    bottom: 85px;
+    right: 0;
+    width: 360px;
+    height: 520px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* O Cabeçalho com a Capa do Livro */
+#meu-tutor-header {
+    background-image: url('capa.png'); /* Usa a sua capa no fundo! */
+    background-size: cover;
+    background-position: top center;
+    background-color: #2C3E50;
+    background-blend-mode: multiply; /* Escurece a capa para o texto aparecer */
+    padding: 20px;
+    color: #ffffff;
+    text-align: left;
+}
+
+#meu-tutor-header h3 { margin: 0; font-size: 18px; font-weight: bold; color: white;}
+#meu-tutor-header p { margin: 5px 0 0; font-size: 13px; opacity: 0.9; color: white;}
+
+/* Área de Mensagens */
+#meu-tutor-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #f9f9f9;
+}
+
+/* Balões de Mensagem */
+.msg-bubble {
+    max-width: 85%;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.msg-bot {
+    background: #F2F4F4; /* Cinza claro da capa */
+    color: #1A252F;
+    align-self: flex-start;
+    border-radius: 16px 16px 16px 2px;
+}
+
+.msg-user {
+    background: #6A8A9F; /* Azul acinzentado da capa */
+    color: #ffffff;
+    align-self: flex-end;
+    border-radius: 16px 16px 2px 16px;
+}
+
+/* Formatação de código dentro do chat */
+.msg-bot pre { background: #11181F; color: #fff; padding: 10px; border-radius: 8px; overflow-x: auto; font-size: 12px; }
+.msg-bot code { font-family: monospace; }
+
+/* Área de Digitação */
+#meu-tutor-input-area {
+    display: flex;
+    padding: 15px;
+    background: #ffffff;
+    border-top: 1px solid #eeeeee;
+}
+
+#meu-tutor-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #cccccc;
+    border-radius: 24px;
+    outline: none;
+    font-size: 14px;
+}
+
+#meu-tutor-send {
+    background: #2C3E50;
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
 
-<!-- 3. Script de Construção do Chat com Tema Nativo -->
-<script type="module">
-import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+<!-- ESTRUTURA HTML -->
+<div id="meu-tutor-container">
+    <div id="meu-tutor-window">
+        <div id="meu-tutor-header">
+            <h3>Tutor Virtual 👨‍🔬</h3>
+            <p>Assistência 24h para alunos de Biociências.</p>
+        </div>
+        <div id="meu-tutor-messages">
+            <div class="msg-bubble msg-bot">Olá! Sou o seu tutor virtual de Bioestatística. Como posso ajudar com os códigos em R ou com a teoria das aulas de hoje?</div>
+        </div>
+        <div id="meu-tutor-input-area">
+            <input type="text" id="meu-tutor-input" placeholder="Digite sua dúvida aqui..." onkeypress="if(event.key === 'Enter') enviarMensagem()">
+            <button id="meu-tutor-send" onclick="enviarMensagem()">➤</button>
+        </div>
+    </div>
+    <div id="meu-tutor-fab" onclick="toggleJanela()"></div>
+</div>
 
-createChat({
-    webhookUrl: 'SUA_URL_DE_PRODUCAO_AQUI',
-    showWelcomeScreen: true,
-    initialMessages: [
-        'Olá! Sou o seu tutor virtual de Bioestatística. Como posso ajudar com os códigos em R ou com a teoria das aulas de hoje?'
-    ],
-    i18n: {
-        en: {
-            title: 'Tutor Virtual 👨‍🔬',
-            subtitle: 'Assistência 24h para alunos de Biociências.',
-            getStarted: 'Iniciar conversa',
-            inputPlaceholder: 'Digite sua dúvida aqui...',
-            closeButtonTooltip: 'Fechar tutor'
-        }
-    },
-    /* AQUI ESTÁ O SEGREDO: Configuração nativa de tema do n8n para anular o rosa */
-    theme: {
-        color: {
-            primary: '#2C3E50', /* Ardósia da capa */
-            secondary: '#6A8A9F' /* Azul acinzentado */
-        }
+<!-- LÓGICA DE ENVIO PARA O N8N -->
+<script>
+// === INSIRA A SUA URL DO WEBHOOK DO N8N AQUI ===
+const WEBHOOK_URL = 'SUA_URL_DE_PRODUCAO_AQUI'; 
+
+function toggleJanela() {
+    const janela = document.getElementById('meu-tutor-window');
+    janela.style.display = janela.style.display === 'flex' ? 'none' : 'flex';
+}
+
+async function enviarMensagem() {
+    const input = document.getElementById('meu-tutor-input');
+    const textoUsuario = input.value.trim();
+    if (!textoUsuario) return;
+    
+    input.value = ''; // Limpa o campo
+    const messagesDiv = document.getElementById('meu-tutor-messages');
+    
+    // Mostra a mensagem do usuário
+    messagesDiv.innerHTML += `<div class="msg-bubble msg-user">${textoUsuario}</div>`;
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    // Mostra indicador de carregamento
+    const loadingId = 'load-' + Date.now();
+    messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" id="${loadingId}"><em>Pensando...</em></div>`;
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    try {
+        // Envia para o n8n
+        const response = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mensagem: textoUsuario })
+        });
+        
+        const data = await response.json();
+        document.getElementById(loadingId).remove(); // Remove o "Pensando..."
+        
+        // Renderiza a resposta com Markdown (n8n retorna geralmente 'output' ou 'resposta')
+        const textoBot = data.output || data.resposta || "Erro: Resposta vazia da IA.";
+        messagesDiv.innerHTML += `<div class="msg-bubble msg-bot">${marked.parse(textoBot)}</div>`;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        
+    } catch (error) {
+        document.getElementById(loadingId).remove();
+        messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" style="color: red;">Erro de conexão com o servidor. Tente novamente.</div>`;
     }
-});
+}
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
