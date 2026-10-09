@@ -93,26 +93,18 @@ div.csl-indent {
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-        // 1. OPERAÇÃO DE LIMPEZA (Antes da biblioteca sequer existir)
-        // Procura todos os blocos de código gerados pelo Quarto
+        // 1. Limpeza do Quarto
         document.querySelectorAll('.sourceCode').forEach(function(wrapper) {
-            // Se o bloco for do tipo 'quizdown'
             if (wrapper.querySelector('.quizdown') || wrapper.classList.contains('quizdown')) {
-                // Extrai apenas o texto puro da questão
                 let codeEl = wrapper.querySelector('code');
                 let textoPuro = codeEl ? codeEl.textContent : wrapper.textContent;
-
-                // Cria uma <div> imaculada, que o navegador permite usar
                 let cleanDiv = document.createElement('div');
                 cleanDiv.className = 'quizdown';
                 cleanDiv.textContent = textoPuro;
-
-                // Substitui a "prisão" do Quarto pela nossa nova Div
                 wrapper.replaceWith(cleanDiv);
             }
         });
 
-        // Cobre também o caso de o Quarto gerar <pre> soltos
         document.querySelectorAll('pre.quizdown').forEach(function(pre) {
             let cleanDiv = document.createElement('div');
             cleanDiv.className = 'quizdown';
@@ -120,26 +112,60 @@ div.csl-indent {
             pre.replaceWith(cleanDiv);
         });
 
-        // 2. CARREGAMENTO SEGURO
-        // Agora que não há mais <pre> nem <code> bloqueando, chamamos o Quizdown
+        // 2. Carrega a Biblioteca
         var script = document.createElement('script');
         script.src = "https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/quizdown.js";
         
         script.onload = function() {
-            // 3. INICIALIZAÇÃO
+            // 3. Inicializa o Quiz com cores ajustadas e chaves de tradução corretas
             quizdown.init({
-                primaryColor: "#2C3E50", /* Ardósia */
-                secondaryColor: "#6A8A9F", /* Azul acinzentado */
+                primaryColor: "#2C3E50",     // Azul escuro (Selecionado / Cabeçalho)
+                secondaryColor: "#E2E8F0",   // Azul/Cinza BEM CLARO (Fundo das alternativas) -> Garante o contraste!
                 locale: "pt",
                 translations: {
                     pt: {
-                        check: "Verificar",
-                        reset: "Reiniciar",
-                        hint: "Dica",
-                        show_solution: "Mostrar Solução"
+                        evaluate: "Verificar resposta",  // Substitui o "Evaluate"
+                        retry: "Fazer novamente",        // Substitui o "One more time"
+                        solution: "Mostrar solução",
+                        hint: "Dica"
                     }
                 }
             });
+
+            // 4. AJUSTE DE FONTE E CONTRASTE
+            setTimeout(function() {
+                document.querySelectorAll('.quizdown').forEach(function(quizEl) {
+                    if (quizEl.shadowRoot) {
+                        let style = document.createElement('style');
+                        style.textContent = `
+                            /* Normaliza o título da questão */
+                            h1, h2, h3, .title {
+                                font-size: 16px !important;
+                                font-weight: 600 !important;
+                                color: #2C3E50 !important;
+                                margin-bottom: 15px !important;
+                                line-height: 1.4 !important;
+                            }
+                            /* Tamanho do texto geral */
+                            p, label, span, div {
+                                font-size: 14px !important;
+                                line-height: 1.5 !important;
+                            }
+                            /* Garante que a letra dentro dos botões seja sempre escura para leitura */
+                            button {
+                                font-size: 14px !important;
+                                padding: 10px 14px !important;
+                                color: #1A252F !important;
+                            }
+                            /* Efeito de hover suave nos botões */
+                            button:hover {
+                                filter: brightness(0.95);
+                            }
+                        `;
+                        quizEl.shadowRoot.appendChild(style);
+                    }
+                });
+            }, 600);
         };
         
         document.head.appendChild(script);
