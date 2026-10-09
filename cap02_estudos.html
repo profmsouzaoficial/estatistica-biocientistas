@@ -2408,12 +2408,12 @@ Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
 #meu-tutor-container {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     position: fixed;
-    bottom: 20px; /* Ajustado para dar espaço ao texto */
+    bottom: 20px;
     right: 25px;
     z-index: 999999;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza o texto sob o botão */
+    align-items: center;
 }
 
 /* O Botão Flutuante com o Rosto do Pesquisador */
@@ -2466,7 +2466,7 @@ Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
     display: none; 
     flex-direction: column;
     position: absolute;
-    bottom: 110px; /* Subiu um pouco para não cobrir o botão e o texto */
+    bottom: 110px;
     right: 0;
     width: 360px;
     height: 520px;
@@ -2578,11 +2578,8 @@ Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
     <div id="meu-tutor-label" onclick="toggleJanela()">Dúvidas?</div>
 </div>
 
-<!-- LÓGICA DE ENVIO PARA O N8N -->
+<!-- LÓGICA DE ENVIO PARA O VERCEL -->
 <script>
-// === INSIRA A SUA URL DO WEBHOOK DO N8N AQUI ===
-const WEBHOOK_URL = 'https://n8n.sparklingtech.com.br/webhook/estatistica-biocientistas'; 
-
 function toggleJanela() {
     const janela = document.getElementById('meu-tutor-window');
     janela.style.display = janela.style.display === 'flex' ? 'none' : 'flex';
@@ -2604,22 +2601,24 @@ async function enviarMensagem() {
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
     try {
-        const response = await fetch(WEBHOOK_URL, {
+        // Nova conexão direta com a Serverless Function da Vercel
+        const response = await fetch('/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mensagem: textoUsuario })
+            body: JSON.stringify({ message: textoUsuario })
         });
         
         const data = await response.json();
         document.getElementById(loadingId).remove(); 
         
-        const textoBot = data.output || data.resposta || "Erro: Resposta vazia da IA.";
+        // Extrai a resposta formatada da Vercel
+        const textoBot = data.reply || "Erro: Resposta vazia da IA.";
         messagesDiv.innerHTML += `<div class="msg-bubble msg-bot">${marked.parse(textoBot)}</div>`;
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
         
     } catch (error) {
         document.getElementById(loadingId).remove();
-        messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" style="color: red;">Erro de conexão com o servidor. Tente novamente.</div>`;
+        messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" style="color: red;">Erro de rede. Verifique a ligação.</div>`;
     }
 }
 </script>
