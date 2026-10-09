@@ -70,12 +70,30 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Procurar"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/quizdown.js"></script>
+<script src="[https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/quizdown.js](https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/quizdown.js)"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        
+        // 1. PRÉ-PROCESSAMENTO: Transforma os blocos de código do Quarto em <div> normais
+        // Isso evita o erro 'attachShadow' que bloqueia o navegador
+        document.querySelectorAll('code').forEach(function(codeNode) {
+            if (codeNode.className.includes('quizdown')) {
+                let div = document.createElement('div');
+                div.className = 'quizdown'; // Classe que o quizdown procura
+                div.textContent = codeNode.textContent; // Extrai o texto puro
+                
+                // Substitui a caixa inteira do Quarto pela nossa div limpa
+                let parent = codeNode.closest('.sourceCode') || codeNode.closest('pre');
+                if (parent) {
+                    parent.replaceWith(div);
+                }
+            }
+        });
+
+        // 2. INICIALIZAÇÃO: Agora o Quizdown roda num ambiente perfeito
         quizdown.init({
-            primaryColor: "#2C3E50", /* O azul ardósia do cabeçalho da sua capa */
-            secondaryColor: "#6A8A9F", /* O azul acinzentado */
+            primaryColor: "#2C3E50", 
+            secondaryColor: "#6A8A9F", 
             locale: "pt",
             translations: {
                 pt: {
