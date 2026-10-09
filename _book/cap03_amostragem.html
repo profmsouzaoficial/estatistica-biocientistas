@@ -258,6 +258,30 @@ document.addEventListener("DOMContentLoaded", function() {
     mostrarAleatorias();
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Procura a caixa do título na barra lateral esquerda
+    let sidebarTitle = document.querySelector('.sidebar-title');
+
+    // Se encontrou o título e ainda não adicionou a foto, injeta o nosso design
+    if (sidebarTitle && !document.querySelector('.meu-perfil-sidebar')) {
+        let perfilDiv = document.createElement('div');
+        perfilDiv.className = 'meu-perfil-sidebar';
+        
+        // Estilo da "caixa" do perfil: centralizada e com uma linha divisória discreta
+        perfilDiv.style.cssText = 'text-align: center; margin-top: 25px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0;';
+        
+        // A Foto redonda e o Nome
+        perfilDiv.innerHTML = `
+            <img src="eu-lattes.jpg" alt="Márcio Souza" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #2C3E50; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div style="margin-top: 12px; font-size: 15px; font-weight: 700; color: #2C3E50; letter-spacing: 0.3px;">Márcio Souza</div>
+        `;
+        
+        // Insere a div do perfil exatamente abaixo do título do livro
+        sidebarTitle.parentNode.insertBefore(perfilDiv, sidebarTitle.nextSibling);
+    }
+});
+</script>
 <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
 <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
