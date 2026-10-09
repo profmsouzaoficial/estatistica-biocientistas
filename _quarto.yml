@@ -32,7 +32,6 @@ format:
     include-in-header: quiz.html
     include-after-body: 
       - chat.html
-      - sorteio-quiz.html
     comments:
       giscus:
         repo: "profmsouzaoficial/estatistica-biocientistas" 

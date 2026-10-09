@@ -73,6 +73,8 @@ flowchart TD
 
 *A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
 
+> Não se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo!
+
 ::: {.questao-banco}
 **Questão #CAP1-01**
 ```quizdown
