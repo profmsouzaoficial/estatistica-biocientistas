@@ -115,55 +115,71 @@ div.csl-indent {
         script.src = "https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/quizdown.js";
         
         script.onload = function() {
-            // 3. Inicializa o Quiz com cores ajustadas e chaves de tradução corretas
+            // 3. Inicializa o Quiz com o dicionário completo
             quizdown.init({
-                primaryColor: "#2C3E50",     // Azul escuro (Selecionado / Cabeçalho)
-                secondaryColor: "#E2E8F0",   // Azul/Cinza BEM CLARO (Fundo das alternativas) -> Garante o contraste!
+                primaryColor: "#2C3E50", 
+                secondaryColor: "#E2E8F0", 
                 locale: "pt",
                 translations: {
                     pt: {
-                        evaluate: "Verificar resposta",  // Substitui o "Evaluate"
-                        retry: "Fazer novamente",        // Substitui o "One more time"
+                        evaluate: "Verificar resposta",
+                        retry: "Fazer novamente",
                         solution: "Mostrar solução",
-                        hint: "Dica"
+                        hint: "Dica",
+                        results: "Seus resultados",
+                        check: "Verificar"
                     }
                 }
             });
 
-            // 4. AJUSTE DE FONTE E CONTRASTE
+            // 4. FUNÇÃO VIGILANTE (Aplica estilos e traduções em todos os ecrãs)
+            function aplicarEstilosETraducoes(shadow) {
+                // Diminui a fonte e ajusta o layout (só injeta se ainda não existir)
+                if (!shadow.querySelector('#meu-estilo-quiz')) {
+                    let style = document.createElement('style');
+                    style.id = 'meu-estilo-quiz';
+                    style.textContent = `
+                        /* Reduz os títulos */
+                        h1, h2, h3, .title { font-size: 15px !important; margin-bottom: 12px !important; line-height: 1.3 !important; }
+                        /* Reduz o texto das questões e alternativas */
+                        p, label, span, div, li { font-size: 13.5px !important; line-height: 1.4 !important; }
+                        /* Deixa os botões mais delicados */
+                        button { font-size: 13px !important; padding: 8px 12px !important; color: #1A252F !important; }
+                        button:hover { filter: brightness(0.95); }
+                    `;
+                    shadow.appendChild(style);
+                }
+
+                // Força a tradução de textos soltos que a biblioteca ignore
+                shadow.querySelectorAll('h1, h2, h3, div').forEach(el => {
+                    if (el.innerHTML.includes('Your quiz results')) {
+                        el.innerHTML = el.innerHTML.replace('Your quiz results', 'Seus resultados');
+                    }
+                });
+
+                // Troca o ícone de Check duplo (padrão) por um Check simples e limpo
+                let btnAvaliar = shadow.querySelector('button[title="Verificar resposta"], button[title="Evaluate"]');
+                if (btnAvaliar && btnAvaliar.innerHTML.includes('svg')) {
+                     // Substitui o SVG apenas se ele tiver múltiplos elementos (o original)
+                     if(btnAvaliar.querySelectorAll('path, polyline').length > 1) {
+                         btnAvaliar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                     }
+                }
+            }
+
+            // 5. Injeta o vigilante em cada quiz da página
             setTimeout(function() {
                 document.querySelectorAll('.quizdown').forEach(function(quizEl) {
                     if (quizEl.shadowRoot) {
-                        let style = document.createElement('style');
-                        style.textContent = `
-                            /* Normaliza o título da questão */
-                            h1, h2, h3, .title {
-                                font-size: 16px !important;
-                                font-weight: 600 !important;
-                                color: #2C3E50 !important;
-                                margin-bottom: 15px !important;
-                                line-height: 1.4 !important;
-                            }
-                            /* Tamanho do texto geral */
-                            p, label, span, div {
-                                font-size: 14px !important;
-                                line-height: 1.5 !important;
-                            }
-                            /* Garante que a letra dentro dos botões seja sempre escura para leitura */
-                            button {
-                                font-size: 14px !important;
-                                padding: 10px 14px !important;
-                                color: #1A252F !important;
-                            }
-                            /* Efeito de hover suave nos botões */
-                            button:hover {
-                                filter: brightness(0.95);
-                            }
-                        `;
-                        quizEl.shadowRoot.appendChild(style);
+                        let shadow = quizEl.shadowRoot;
+                        aplicarEstilosETraducoes(shadow); // Aplica na tela inicial
+                        
+                        // Observa qualquer mudança (ex: quando o aluno avança para os resultados)
+                        const observer = new MutationObserver(() => aplicarEstilosETraducoes(shadow));
+                        observer.observe(shadow, { childList: true, subtree: true });
                     }
                 });
-            }, 600);
+            }, 800);
         };
         
         document.head.appendChild(script);
