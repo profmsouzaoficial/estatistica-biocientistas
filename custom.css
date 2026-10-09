@@ -13,3 +13,14 @@
 .qwebr-button-copy {
     font-size: 13px !important;
 }
+
+/* Container das questões do banco (escondido por padrão) */
+.questao-banco {
+    display: none;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fcfcfc;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    border-left: 5px solid #6A8A9F; /* Detalhe visual elegante da capa */
+}

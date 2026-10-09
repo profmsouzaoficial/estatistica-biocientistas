@@ -90,6 +90,24 @@ div.csl-indent {
     "search-label": "Procurar"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/quizdown.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        quizdown.init({
+            primaryColor: "#2C3E50", /* O azul ardósia do cabeçalho da sua capa */
+            secondaryColor: "#6A8A9F", /* O azul acinzentado */
+            locale: "pt",
+            translations: {
+                pt: {
+                    check: "Verificar",
+                    reset: "Reiniciar",
+                    hint: "Dica",
+                    show_solution: "Mostrar Solução"
+                }
+            }
+        });
+    });
+</script>
 <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
 <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
@@ -2346,7 +2364,7 @@ Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
             <p>Assistência 24h para alunos de Biociências.</p>
         </div>
         <div id="meu-tutor-messages">
-            <div class="msg-bubble msg-bot">Olá! Sou o seu tutor virtual de Bioestatística. Como posso ajudar com os códigos em R ou com a teoria das aulas de hoje?</div>
+            <div class="msg-bubble msg-bot">Olá! Meu nome é Ginger: o seu tutor virtual de Bioestatística. Como posso ajudar com os códigos em R ou com a teoria das aulas de hoje?</div>
         </div>
         <div id="meu-tutor-input-area">
             <input type="text" id="meu-tutor-input" placeholder="Digite sua dúvida aqui..." onkeypress="if(event.key === 'Enter') enviarMensagem()">
@@ -2402,6 +2420,34 @@ async function enviarMensagem() {
         messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" style="color: red;">Erro de conexão com o servidor. Tente novamente.</div>`;
     }
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Aguarda um instante para o Quizdown renderizar o HTML primeiro
+    setTimeout(function() {
+        // Puxa todas as questões do banco
+        let questoes = Array.from(document.querySelectorAll('.questao-banco'));
+        if(questoes.length === 0) return;
+
+        // Embaralha as questões (Algoritmo de Fisher-Yates)
+        for (let i = questoes.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questoes[i], questoes[j]] = [questoes[j], questoes[i]];
+        }
+
+        // DEFINA AQUI QUANTAS QUESTÕES VÃO APARECER POR SESSÃO
+        const NUM_QUESTOES_POR_SESSAO = 3; 
+
+        // Mostra as sorteadas e apaga as outras do código fonte
+        questoes.forEach((questao, index) => {
+            if (index < NUM_QUESTOES_POR_SESSAO) {
+                questao.style.display = 'block';
+            } else {
+                questao.remove();
+            }
+        });
+    }, 400); // Delay de 400ms de segurança
+});
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
