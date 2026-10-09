@@ -29,7 +29,10 @@ format:
   html:
     theme: cosmo
     css: custom.css
-    include-after-body: chat.html
+    include-in-header: quiz.html
+    include-after-body: 
+      - chat.html
+      - sorteio-quiz.html
     comments:
       giscus:
         repo: "profmsouzaoficial/estatistica-biocientistas" 

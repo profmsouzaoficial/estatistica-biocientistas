@@ -68,3 +68,72 @@ flowchart TD
   style H fill:#F2F4F4,stroke:#B4C4C1,color:#000000
   style I fill:#F2F4F4,stroke:#B4C4C1,color:#000000
 ```
+
+## 🧠 Prática Aleatória: Introdução ao Método Estatístico
+
+*A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
+
+::: {.questao-banco}
+**Questão #CAP1-01**
+```quizdown
+# Segundo o texto, qual é a diferença fundamental entre "Dados" e "Informação" nas ciências da saúde?
+- [ ] Não há diferença, ambos representam tabelas numéricas usadas na bioestatística.
+  > **Incorreto.** Existe uma hierarquia clara entre os dois conceitos.
+- [ ] Informação são os números recolhidos brutamente, enquanto dados são os laudos em texto livre.
+  > **Incorreto.** Os conceitos estão invertidos nesta alternativa.
+- [x] Dados são um conjunto de símbolos, números ou medidas recolhidos; Informação é esse conjunto de dados com significado, usado para tomar decisões clínicas.
+  > **Correto!** O dado é a matéria-prima (ex: o número "120/80"). A informação é o significado extraído disso (ex: "O paciente está normotenso", o que guia a decisão clínica).
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-02**
+```quizdown
+# Um aluno de Odontologia regista o "Índice CPO-D" (número de dentes cariados, perdidos e obturados) dos pacientes. Como esta variável é classificada?
+- [ ] Qualitativa Ordinal.
+  > **Incorreto.** O índice CPO-D não é uma categoria ou um atributo qualitativo, é uma contagem numérica.
+- [ ] Quantitativa Contínua.
+  > **Incorreto.** Variáveis contínuas admitem frações (como o peso ou a altura). Não existe "meio dente cariado" nesta contagem.
+- [x] Quantitativa Discreta.
+  > **Correto!** Perfeito. O CPO-D baseia-se em contagens numéricas inteiras, assim como a contagem de colônias de bactérias.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-03**
+```quizdown
+# Numa aula de Fisioterapia, a marcha de um paciente é analisada visualmente durante uma caminhada na clínica, sem qualquer intervenção do avaliador. Qual foi o método de recolha de dados utilizado?
+- [ ] Experimentação.
+  > **Incorreto.** Na experimentação, o avaliador precisaria de intervir (ex: aplicar um tratamento e ver como a marcha se altera).
+- [ ] Levantamento.
+  > **Incorreto.** O levantamento é feito através de questionários ou entrevistas diretas.
+- [x] Observação.
+  > **Correto!** A recolha foi feita por observação, pois o avaliador não interferiu no ambiente ou no comportamento do paciente durante a análise.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-04**
+```quizdown
+# Como classificamos a variável "Grau de dor na Escala Visual Analógica (EVA)", frequentemente utilizada em avaliações clínicas?
+- [ ] Qualitativa Nominal.
+  > **Incorreto.** A escala de dor tem uma progressão clara (ex: dor leve, moderada, intensa), logo, não é nominal.
+- [x] Qualitativa Ordinal.
+  > **Correto!** É um dado categórico que possui uma hierarquia ou progressão clara, assim como o estágio de desenvolvimento de uma lesão.
+- [ ] Quantitativa Discreta.
+  > **Incorreto.** Embora a EVA muitas vezes use números (0 a 10), ela representa uma gradação subjetiva de uma qualidade (a dor), não uma contagem exata e matematicamente estrita.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-05**
+```quizdown
+# Qual das opções abaixo é um exemplo de recolha de dados por "Experimentação" no ciclo básico?
+- [ ] Aplicar questionários sobre higiene bucal na comunidade.
+  > **Incorreto.** A aplicação de questionários estruturados caracteriza um "Levantamento".
+- [x] Testar a eficácia antimicrobiana de um extrato vegetal em placas de Petri.
+  > **Correto!** Aqui há uma intervenção clara do investigador no ambiente/amostra para observar o resultado.
+- [ ] Avaliar o nível de ansiedade dos pacientes na sala de espera.
+  > **Incorreto.** Isto é uma "Observação", pois não há intervenção no estado do paciente.
+```
+:::

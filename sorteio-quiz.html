@@ -1,0 +1,28 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Aguarda um instante para o Quizdown renderizar o HTML primeiro
+    setTimeout(function() {
+        // Puxa todas as questões do banco
+        let questoes = Array.from(document.querySelectorAll('.questao-banco'));
+        if(questoes.length === 0) return;
+
+        // Embaralha as questões (Algoritmo de Fisher-Yates)
+        for (let i = questoes.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questoes[i], questoes[j]] = [questoes[j], questoes[i]];
+        }
+
+        // DEFINA AQUI QUANTAS QUESTÕES VÃO APARECER POR SESSÃO
+        const NUM_QUESTOES_POR_SESSAO = 3; 
+
+        // Mostra as sorteadas e apaga as outras do código fonte
+        questoes.forEach((questao, index) => {
+            if (index < NUM_QUESTOES_POR_SESSAO) {
+                questao.style.display = 'block';
+            } else {
+                questao.remove();
+            }
+        });
+    }, 400); // Delay de 400ms de segurança
+});
+</script>
