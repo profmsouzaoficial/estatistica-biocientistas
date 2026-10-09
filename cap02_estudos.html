@@ -92,21 +92,34 @@ div.csl-indent {
 }</script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Procura todas as gavetas de questões na página
-    document.querySelectorAll('.questao-banco').forEach((gaveta, indexQuestao) => {
+    let bancoQuestoes = Array.from(document.querySelectorAll('.questao-banco'));
+    if (bancoQuestoes.length === 0) return;
+
+    // 1. CRIA O PAINEL DE CONTROLE (Seletor e Sorteio)
+    let painel = document.createElement('div');
+    painel.style.cssText = "display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; align-items: center; background: #f8fafc; padding: 15px 20px; border-radius: 8px; border: 1px solid #e2e8f0;";
+    
+    let selectHtml = `<select id="seletor-questao" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; font-size: 14px; color: #1e293b; outline: none; cursor: pointer; flex-grow: 1; max-width: 350px;">
+        <option value="">🎯 Modo Sorteio (3 questões aleatórias)</option>`;
+
+    // 2. PROCESSA AS QUESTÕES E ALIMENTA O MENU
+    bancoQuestoes.forEach((gaveta, indexQuestao) => {
+        // Pega o ID da questão (o texto que você colocou em negrito antes do quiz)
+        let tagStrong = gaveta.querySelector('strong');
+        let idQuestao = tagStrong ? tagStrong.textContent.trim() : `Questão ${indexQuestao + 1}`;
         
-        // Pega no bloco de código do Quarto
+        selectHtml += `<option value="${indexQuestao}">📌 Ir para: ${idQuestao}</option>`;
+
+        // Lógica de formatação do Quiz (Transparente e limpo)
         let codeBlock = gaveta.querySelector('code, .quizdown');
         if (!codeBlock) return;
 
         let texto = codeBlock.textContent;
         let linhas = texto.split('\n');
-
         let titulo = '';
         let alternativas = [];
         let altAtual = null;
 
-        // "Lê" o markdown
         linhas.forEach(linha => {
             linha = linha.trim();
             if (linha.startsWith('# ')) {
@@ -122,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // Monta o visual transparente (Sem a borda e sem o fundo da Div interna)
         let htmlQuiz = `
             <div class="meu-quiz-custom" style="font-family: inherit; margin-top: 10px;">
                 <h3 style="font-size: 16px; font-weight: 600; color: #2C3E50; margin-top: 0; margin-bottom: 20px; line-height: 1.4;">${titulo}</h3>
@@ -134,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <input type="radio" name="quiz_${indexQuestao}" value="${i}" style="margin-top: 3px; cursor: pointer; width: 16px; height: 16px; accent-color: #6A8A9F;">
                                 <span style="font-size: 14px; color: #1e293b; line-height: 1.5;">${alt.texto}</span>
                             </div>
-                            
                             <div class="feedback-box" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed #cbd5e1; font-size: 13.5px;">
                                 ${alt.feedback}
                             </div>
@@ -144,7 +155,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
                     <span class="mensagem-status" style="font-size: 13px; font-weight: 600; display: none;"></span>
-                    
                     <button class="btn-verificar" style="background: #2C3E50; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: 0.2s; margin-left: auto;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         Verificar Resposta
@@ -153,13 +163,12 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
 
-        // Substitui a tag original do Quarto pela nossa div
         let containerAntigo = gaveta.querySelector('.sourceCode') || gaveta.querySelector('pre') || codeBlock;
         let divNova = document.createElement('div');
         divNova.innerHTML = htmlQuiz;
         containerAntigo.replaceWith(divNova);
 
-        // Lógica de Interação
+        // Eventos de clique (Highlight e Verificar)
         let btn = divNova.querySelector('.btn-verificar');
         let labels = divNova.querySelectorAll('.opcao-label');
         let radios = divNova.querySelectorAll('input[type="radio"]');
@@ -167,10 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         radios.forEach(radio => {
             radio.addEventListener('change', (e) => {
-                labels.forEach(l => {
-                    l.style.borderColor = '#cbd5e1';
-                    l.style.background = '#f8fafc';
-                });
+                labels.forEach(l => { l.style.borderColor = '#cbd5e1'; l.style.background = '#f8fafc'; });
                 let labelSelecionada = e.target.closest('label');
                 labelSelecionada.style.borderColor = '#6A8A9F';
                 labelSelecionada.style.background = '#f1f5f9';
@@ -179,14 +185,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         btn.addEventListener('click', () => {
             let selecionado = divNova.querySelector('input[type="radio"]:checked');
-            
             if (!selecionado) {
                 msgStatus.textContent = 'Selecione uma alternativa primeiro!';
                 msgStatus.style.color = '#ef4444';
                 msgStatus.style.display = 'block';
                 return;
             }
-
             let idx = parseInt(selecionado.value);
             let alt = alternativas[idx];
             let label = selecionado.closest('label');
@@ -198,21 +202,60 @@ document.addEventListener("DOMContentLoaded", function() {
                 l.style.opacity = '0.6';
                 l.style.borderColor = '#cbd5e1';
             });
-
             label.style.opacity = '1';
             feedbackBox.style.display = 'block';
 
             if (alt.isCorreta) {
-                label.style.borderColor = '#22c55e';
-                label.style.background = '#f0fdf4';
-                feedbackBox.style.color = '#166534';
+                label.style.borderColor = '#22c55e'; label.style.background = '#f0fdf4'; feedbackBox.style.color = '#166534';
             } else {
-                label.style.borderColor = '#ef4444';
-                label.style.background = '#fef2f2';
-                feedbackBox.style.color = '#991b1b';
+                label.style.borderColor = '#ef4444'; label.style.background = '#fef2f2'; feedbackBox.style.color = '#991b1b';
             }
         });
     });
+
+    selectHtml += `</select>`;
+    painel.innerHTML = `
+        <span style="font-size: 14px; font-weight: 600; color: #2C3E50;">Painel de Exercícios:</span>
+        ${selectHtml}
+        <button id="btn-sortear" style="background: #6A8A9F; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: 0.2s;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+            Sortear Novas
+        </button>
+    `;
+
+    bancoQuestoes[0].parentNode.insertBefore(painel, bancoQuestoes[0]);
+
+    // 3. INTELIGÊNCIA DE EXIBIÇÃO (Sorteio vs Escolha Específica)
+    let seletor = document.getElementById('seletor-questao');
+    let btnSortear = document.getElementById('btn-sortear');
+
+    btnSortear.addEventListener('mouseover', () => btnSortear.style.filter = 'brightness(0.9)');
+    btnSortear.addEventListener('mouseout', () => btnSortear.style.filter = 'brightness(1)');
+
+    function mostrarAleatorias() {
+        bancoQuestoes.forEach(q => q.style.display = 'none');
+        let embaralhado = [...bancoQuestoes].sort(() => 0.5 - Math.random());
+        embaralhado.slice(0, 3).forEach(q => q.style.display = 'block');
+        seletor.value = ""; 
+    }
+
+    function mostrarEspecifica(index) {
+        bancoQuestoes.forEach(q => q.style.display = 'none');
+        bancoQuestoes[index].style.display = 'block';
+    }
+
+    seletor.addEventListener('change', (e) => {
+        if (e.target.value === "") {
+            mostrarAleatorias();
+        } else {
+            mostrarEspecifica(e.target.value);
+        }
+    });
+
+    btnSortear.addEventListener('click', mostrarAleatorias);
+
+    // Começa sempre no modo Sorteio
+    mostrarAleatorias();
 });
 </script>
 <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
@@ -2527,34 +2570,6 @@ async function enviarMensagem() {
         messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" style="color: red;">Erro de conexão com o servidor. Tente novamente.</div>`;
     }
 }
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Aguarda um instante para o Quizdown renderizar o HTML primeiro
-    setTimeout(function() {
-        // Puxa todas as questões do banco
-        let questoes = Array.from(document.querySelectorAll('.questao-banco'));
-        if(questoes.length === 0) return;
-
-        // Embaralha as questões (Algoritmo de Fisher-Yates)
-        for (let i = questoes.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [questoes[i], questoes[j]] = [questoes[j], questoes[i]];
-        }
-
-        // DEFINA AQUI QUANTAS QUESTÕES VÃO APARECER POR SESSÃO
-        const NUM_QUESTOES_POR_SESSAO = 3; 
-
-        // Mostra as sorteadas e apaga as outras do código fonte
-        questoes.forEach((questao, index) => {
-            if (index < NUM_QUESTOES_POR_SESSAO) {
-                questao.style.display = 'block';
-            } else {
-                questao.remove();
-            }
-        });
-    }, 400); // Delay de 400ms de segurança
-});
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
