@@ -72,32 +72,44 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        
-        // 1. Carrega a biblioteca Quizdown dinamicamente (Protege o link contra o Quarto)
+
+        // 1. OPERAÇÃO DE LIMPEZA (Antes da biblioteca sequer existir)
+        // Procura todos os blocos de código gerados pelo Quarto
+        document.querySelectorAll('.sourceCode').forEach(function(wrapper) {
+            // Se o bloco for do tipo 'quizdown'
+            if (wrapper.querySelector('.quizdown') || wrapper.classList.contains('quizdown')) {
+                // Extrai apenas o texto puro da questão
+                let codeEl = wrapper.querySelector('code');
+                let textoPuro = codeEl ? codeEl.textContent : wrapper.textContent;
+
+                // Cria uma <div> imaculada, que o navegador permite usar
+                let cleanDiv = document.createElement('div');
+                cleanDiv.className = 'quizdown';
+                cleanDiv.textContent = textoPuro;
+
+                // Substitui a "prisão" do Quarto pela nossa nova Div
+                wrapper.replaceWith(cleanDiv);
+            }
+        });
+
+        // Cobre também o caso de o Quarto gerar <pre> soltos
+        document.querySelectorAll('pre.quizdown').forEach(function(pre) {
+            let cleanDiv = document.createElement('div');
+            cleanDiv.className = 'quizdown';
+            cleanDiv.textContent = pre.textContent;
+            pre.replaceWith(cleanDiv);
+        });
+
+        // 2. CARREGAMENTO SEGURO
+        // Agora que não há mais <pre> nem <code> bloqueando, chamamos o Quizdown
         var script = document.createElement('script');
         script.src = "https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/quizdown.js";
         
-        // 2. Só executa a formatação DEPOIS que a biblioteca terminar de carregar
         script.onload = function() {
-            
-            // Pré-processamento: Transforma os blocos de código do Quarto em <div> normais
-            document.querySelectorAll('code').forEach(function(codeNode) {
-                if (codeNode.className.includes('quizdown')) {
-                    let div = document.createElement('div');
-                    div.className = 'quizdown'; 
-                    div.textContent = codeNode.textContent; 
-                    
-                    let parent = codeNode.closest('.sourceCode') || codeNode.closest('pre');
-                    if (parent) {
-                        parent.replaceWith(div);
-                    }
-                }
-            });
-
-            // Inicialização do Quizdown com as cores da sua capa
+            // 3. INICIALIZAÇÃO
             quizdown.init({
-                primaryColor: "#2C3E50", 
-                secondaryColor: "#6A8A9F", 
+                primaryColor: "#2C3E50", /* Ardósia */
+                secondaryColor: "#6A8A9F", /* Azul acinzentado */
                 locale: "pt",
                 translations: {
                     pt: {
@@ -110,7 +122,6 @@ ul.task-list li input[type="checkbox"] {
             });
         };
         
-        // Injeta o script na página
         document.head.appendChild(script);
     });
 </script>
