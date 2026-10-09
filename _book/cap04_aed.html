@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>cap04_aed – Análise de Dados para Biocientistas</title>
+<title>4&nbsp; Análise Exploratória de Dados – Análise de Dados para Biocientistas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -240,49 +275,44 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Procura o título nativo do livro na barra lateral
     let sidebarTitle = document.querySelector('.sidebar-title');
 
     if (sidebarTitle && !document.querySelector('.meu-perfil-sidebar')) {
         
-        // --- 1. BLOCO SUPERIOR: FOTO E ÍCONES (Antes do título) ---
         let perfilDiv = document.createElement('div');
         perfilDiv.className = 'meu-perfil-sidebar';
-        perfilDiv.style.cssText = 'text-align: center; margin-bottom: 20px; padding-top: 10px;';
+        perfilDiv.style.cssText = 'text-align: left; margin-bottom: 20px; padding-top: 10px;';
         
         perfilDiv.innerHTML = `
-            <!-- Foto Quadrada -->
             <img src="eu-lattes.jpg" alt="Perfil" style="width: 130px; height: 130px; border-radius: 8px; object-fit: cover; border: 2px solid #2C3E50; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             
-            <!-- Painel de Redes Sociais -->
-            <div style="margin-top: 15px; display: flex; justify-content: center; gap: 12px;">
-                <!-- Lattes -->
-                <a href="#" target="_blank" title="Currículo Lattes" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#2C3E50'" onmouseout="this.style.color='#64748b'">
-                    <i class="bi bi-file-earmark-person-fill"></i>
+            <!-- Painel de Redes Sociais com Alinhamento Flex Centralizado -->
+            <div style="margin-top: 15px; display: flex; justify-content: left; align-items: center; gap: 14px; height: 24px;">
+                <!-- Lattes (Capelo Acadêmico) -->
+                <a href="#" target="_blank" title="Currículo Lattes" style="color: #64748b; font-size: 21px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#2C3E50'" onmouseout="this.style.color='#64748b'">
+                    <i class="bi bi-mortarboard-fill"></i>
                 </a>
                 <!-- LinkedIn -->
-                <a href="#" target="_blank" title="LinkedIn" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='#64748b'">
+                <a href="#" target="_blank" title="LinkedIn" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-linkedin"></i>
                 </a>
                 <!-- GitHub -->
-                <a href="#" target="_blank" title="GitHub" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#171515'" onmouseout="this.style.color='#64748b'">
+                <a href="#" target="_blank" title="GitHub" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#171515'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-github"></i>
                 </a>
                 <!-- YouTube -->
-                <a href="#" target="_blank" title="YouTube" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#FF0000'" onmouseout="this.style.color='#64748b'">
+                <a href="#" target="_blank" title="YouTube" style="color: #64748b; font-size: 21px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#FF0000'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-youtube"></i>
                 </a>
                 <!-- Instagram -->
-                <a href="#" target="_blank" title="Instagram" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='#64748b'">
+                <a href="#" target="_blank" title="Instagram" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-instagram"></i>
                 </a>
             </div>
         `;
         
-        // Insere a foto e ícones ANTES do título
         sidebarTitle.parentNode.insertBefore(perfilDiv, sidebarTitle);
 
-        // --- 2. BLOCO INFERIOR: ISBN e DOI (Depois do título) ---
         let infoDiv = document.createElement('div');
         infoDiv.style.cssText = 'margin-top: 5px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; font-size: 12px; color: #64748b; line-height: 1.6; text-align: left;';
         
@@ -291,7 +321,6 @@ document.addEventListener("DOMContentLoaded", function() {
             <div style="font-family: monospace; font-size: 11px; margin-top: 2px;"><strong>DOI:</strong> <a href="#" style="color: #6A8A9F; text-decoration: none; transition: 0.2s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">10.XXXX/zenodo.XXXXX</a></div>
         `;
         
-        // Insere as credenciais DEPOIS do título
         sidebarTitle.parentNode.insertBefore(infoDiv, sidebarTitle.nextSibling);
     }
 });
@@ -301,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <link rel="stylesheet" href="custom.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -310,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap04_aed.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">cap04_aed.html</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap04_aed.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise Exploratória de Dados</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -364,7 +393,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap04_aed.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">cap04_aed.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise Exploratória de Dados</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -414,241 +443,225 @@ document.addEventListener("DOMContentLoaded", function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
-
-
-
-
-
-
-
-</main> <!-- /main -->
-<!-- Biblioteca leve para renderizar o Markdown -->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<style>
-/* =========================================
-   ESTILOS DO TUTOR VIRTUAL (ISOLADOS)
-   ========================================= */
-#meu-tutor-container {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    position: fixed;
-    bottom: 20px; /* Ajustado para dar espaço ao texto */
-    right: 25px;
-    z-index: 999999;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza o texto sob o botão */
-}
-
-/* O Botão Flutuante com o Rosto do Pesquisador */
-#meu-tutor-fab {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    background-image: url('avatar.png'); 
-    background-size: cover;
-    background-position: center;
-    border: 3px solid #6A8A9F;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    animation: pulso-discreto 4s infinite;
-}
-
-#meu-tutor-fab:hover {
-    transform: scale(1.08);
-    animation: none; 
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3); 
-}
-
-@keyframes pulso-discreto {
-    0%   { box-shadow: 0 0 0 0 rgba(106, 138, 159, 0.7); }
-    30%  { box-shadow: 0 0 0 15px rgba(106, 138, 159, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(106, 138, 159, 0); }
-}
-
-/* A Pílula de Texto "Dúvidas?" */
-#meu-tutor-label {
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #2C3E50;
-    background-color: #ffffff;
-    padding: 4px 12px;
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    cursor: pointer;
-    border: 1px solid #e0e0e0;
-    transition: background-color 0.2s ease;
-}
-
-#meu-tutor-label:hover {
-    background-color: #f0f0f0;
-}
-
-/* A Janela de Chat */
-#meu-tutor-window {
-    display: none; 
-    flex-direction: column;
-    position: absolute;
-    bottom: 110px; /* Subiu um pouco para não cobrir o botão e o texto */
-    right: 0;
-    width: 360px;
-    height: 520px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    overflow: hidden;
-}
-
-/* O Cabeçalho com a Capa do Livro */
-#meu-tutor-header {
-    background-image: url('capa.png'); 
-    background-size: cover;
-    background-position: top center;
-    background-color: #2C3E50;
-    background-blend-mode: multiply; 
-    padding: 20px;
-    color: #ffffff;
-    text-align: left;
-}
-
-#meu-tutor-header h3 { margin: 0; font-size: 18px; font-weight: bold; color: white;}
-#meu-tutor-header p { margin: 5px 0 0; font-size: 13px; opacity: 0.9; color: white;}
-
-/* Área de Mensagens */
-#meu-tutor-messages {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background-color: #f9f9f9;
-}
-
-.msg-bubble {
-    max-width: 85%;
-    padding: 12px 16px;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.msg-bot {
-    background: #F2F4F4; 
-    color: #1A252F;
-    align-self: flex-start;
-    border-radius: 16px 16px 16px 2px;
-}
-
-.msg-user {
-    background: #6A8A9F; 
-    color: #ffffff;
-    align-self: flex-end;
-    border-radius: 16px 16px 2px 16px;
-}
-
-.msg-bot pre { background: #11181F; color: #fff; padding: 10px; border-radius: 8px; overflow-x: auto; font-size: 12px; }
-.msg-bot code { font-family: monospace; }
-
-/* Área de Digitação */
-#meu-tutor-input-area {
-    display: flex;
-    padding: 15px;
-    background: #ffffff;
-    border-top: 1px solid #eeeeee;
-}
-
-#meu-tutor-input {
-    flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #cccccc;
-    border-radius: 24px;
-    outline: none;
-    font-size: 14px;
-}
-
-#meu-tutor-send {
-    background: #2C3E50;
-    color: white;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin-left: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-</style>
-
-<!-- ESTRUTURA HTML -->
-<div id="meu-tutor-container">
-    <div id="meu-tutor-window">
-        <div id="meu-tutor-header">
-            <h3>Tutor Virtual 👨‍🔬</h3>
-            <p>Assistência 24h para alunos de Biociências.</p>
-        </div>
-        <div id="meu-tutor-messages">
-            <div class="msg-bubble msg-bot">Olá! Meu nome é Ginger: o seu tutor virtual de Bioestatística. Como posso ajudar com os códigos em R ou com a teoria das aulas de hoje?</div>
-        </div>
-        <div id="meu-tutor-input-area">
-            <input type="text" id="meu-tutor-input" placeholder="Digite sua dúvida aqui..." onkeypress="if(event.key === 'Enter') enviarMensagem()">
-            <button id="meu-tutor-send" onclick="enviarMensagem()">➤</button>
-        </div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#o-que-é-aed-e-qual-a-sua-importância" id="toc-o-que-é-aed-e-qual-a-sua-importância" class="nav-link active" data-scroll-target="#o-que-é-aed-e-qual-a-sua-importância"><span class="header-section-number">4.1</span> 4.1. O que é AED e qual a sua importância?</a></li>
+  <li><a href="#tipos-de-dados-e-medidas-descritivas" id="toc-tipos-de-dados-e-medidas-descritivas" class="nav-link" data-scroll-target="#tipos-de-dados-e-medidas-descritivas"><span class="header-section-number">4.2</span> 4.2. Tipos de Dados e Medidas Descritivas</a></li>
+  <li><a href="#gráficos-como-aliados-na-exploração" id="toc-gráficos-como-aliados-na-exploração" class="nav-link" data-scroll-target="#gráficos-como-aliados-na-exploração"><span class="header-section-number">4.3</span> 4.3. Gráficos como Aliados na Exploração</a></li>
+  <li><a href="#prática-teste-os-seus-conhecimentos" id="toc-prática-teste-os-seus-conhecimentos" class="nav-link" data-scroll-target="#prática-teste-os-seus-conhecimentos"><span class="header-section-number">4.4</span> 4.4 🧠 Prática: Teste os seus Conhecimentos</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">4.5</span> Referências</a></li>
+  </ul>
+</nav>
     </div>
-    <!-- Botão e Texto agem juntos -->
-    <div id="meu-tutor-fab" onclick="toggleJanela()"></div>
-    <div id="meu-tutor-label" onclick="toggleJanela()">Dúvidas?</div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise Exploratória de Dados</span></h1>
 </div>
 
-<!-- LÓGICA DE ENVIO PARA O N8N -->
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Imagine que você está diante de um baú misterioso, trancado por enigmas e segredos. Dentro dele, um universo de informações à espera para ser descoberto. A chave para abrir este baú e revelar seus tesouros é a <strong>Análise Exploratória de Dados (AED)</strong>.</p>
+<p>A AED é como um mapa que o guia por este universo, ajudando a:</p>
+<ul>
+<li><strong>Explorar e compreender</strong> os dados, desvendando suas características e segredos;</li>
+<li><strong>Identificar padrões</strong>, como tendências e relações entre as informações, que podem levar a insights valiosos;</li>
+<li><strong>Encontrar outliers e anomalias</strong>, que podem indicar erros ou eventos incomuns;</li>
+<li><strong>Formular hipóteses</strong> sobre os dados, que podem ser testadas posteriormente com métodos estatísticos mais formais.</li>
+</ul>
+<p>Neste capítulo, embarcaremos numa jornada pela AED, desvendando os seus principais conceitos e preparando os seus dados para a análise com o uso do R.</p>
+<hr>
+<section id="o-que-é-aed-e-qual-a-sua-importância" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="o-que-é-aed-e-qual-a-sua-importância"><span class="header-section-number">4.1</span> 4.1. O que é AED e qual a sua importância?</h2>
+<p>A AED é um conjunto de técnicas que visa explorar e entender um conjunto de dados de forma iterativa e visual. É um processo informal e flexível que permite ao analista “mergulhar” nos dados e descobrir padrões e relações que poderiam passar despercebidos em análises mais formais.</p>
+<p>A importância da AED reside nos seus benefícios práticos: 1. <strong>Conhecimento profundo dos dados:</strong> Essencial para entender a estrutura e a distribuição antes da modelagem matemática. 2. <strong>Identificação de problemas:</strong> Revela <em>outliers</em> biológicos (ex: uma frequência cardíaca registrada como 800 bpm devido a erro de digitação). 3. <strong>Tomada de decisões:</strong> Fornece a base de evidências para escolher o teste de hipótese correto (paramétrico vs.&nbsp;não-paramétrico).</p>
+</section>
+<section id="tipos-de-dados-e-medidas-descritivas" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="tipos-de-dados-e-medidas-descritivas"><span class="header-section-number">4.2</span> 4.2. Tipos de Dados e Medidas Descritivas</h2>
+<p>O primeiro passo na AED é compreender a natureza dos dados que temos em mãos. Como vimos no Capítulo 1, eles dividem-se em qualitativos (atributos) e quantitativos (medidas). Para resumir essas informações, recorremos às <strong>Medidas Descritivas</strong>:</p>
+<ul>
+<li><strong>Média e Mediana:</strong> Representam o centro dos dados. A mediana é especialmente resistente a <em>outliers</em>.</li>
+<li><strong>Amplitude, Variância e Desvio Padrão:</strong> Indicam a dispersão. O desvio padrão é o mais utilizado por retornar a dispersão para a mesma unidade de medida da variável original.</li>
+<li><strong>Quartis:</strong> Dividem os dados em quatro partes iguais (25%, 50%, 75%).</li>
+<li><strong>Assimetria e Curtose:</strong> Avaliam o formato da curva de distribuição em relação à Normalidade.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>O poder do pacote <code>gtsummary</code> no R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Na prática biocientífica, gerar tabelas descritivas completas para publicação pode demorar horas. Usando o pacote <code>gtsummary</code>, podemos cruzar variáveis de um ensaio clínico com uma única linha de código.</p>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de geração de Tabela 1 descritiva</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dados_clinicos <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(idade, tratamento, resposta_tumoral) <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> tratamento) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="gráficos-como-aliados-na-exploração" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="gráficos-como-aliados-na-exploração"><span class="header-section-number">4.3</span> 4.3. Gráficos como Aliados na Exploração</h2>
+<p>A visualização de dados transforma números brutos em intuição visual. A escolha do gráfico correto depende inteiramente do tipo de dado:</p>
+<ul>
+<li><strong>Histograma:</strong> Ideal para a distribuição de dados quantitativos contínuos (ex: níveis de hemoglobina).</li>
+<li><strong>Boxplot:</strong> Excelente para resumir medidas descritivas (mediana, quartis e outliers) e comparar distribuições entre grupos.</li>
+<li><strong>Diagrama de Dispersão:</strong> Mostra a correlação entre duas variáveis quantitativas contínuas.</li>
+</ul>
+<p>Abaixo, simulamos a criação de um Boxplot com o pacote <code>ggplot2</code>, o padrão ouro para visualização de dados em R:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Sepal.Length, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">outlier.color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribuição do Comprimento da Sépala por Espécie"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Espécie"</span>, <span class="at">y =</span> <span class="st">"Comprimento (cm)"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="prática-teste-os-seus-conhecimentos" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="prática-teste-os-seus-conhecimentos"><span class="header-section-number">4.4</span> 4.4 🧠 Prática: Teste os seus Conhecimentos</h2>
+<div class="questao-banco">
+<p><strong>Questão #CAP4-01</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Em uma análise exploratória de dados de glicemia de pacientes, o pesquisador optou por utilizar uma medida de dispersão que apresenta o resultado na mesma unidade de medida da variável original (mg/dL). Qual medida foi escolhida?</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Variância.</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; A variância eleva a unidade original ao quadrado (mg/dL)², o que dificulta a interpretação clínica direta.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> Desvio Padrão.</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Correto!** O desvio padrão é a raiz quadrada da variância, retornando o valor de dispersão exatamente para a unidade de medida original dos dados, facilitando a interpretação prática.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Curtose.</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; A curtose avalia o achatamento da curva de distribuição, não sendo uma medida direta de dispersão de valores.</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="referências" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="referências"><span class="header-section-number">4.5</span> Referências</h2>
+<ul>
+<li>SOUZA, Márcio Luís Moreira de. <em>Estatística para Biocientistas</em>. Governador Valadares, 2026.</li>
+<li>WICKHAM, Hadley; GROLEMUND, Garrett. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. O’Reilly Media, 2017.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Deixe o seu feedback!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span style="color: #2C3E50;">Não se esqueça de curtir e comentar ao final desse capítulo.</span><br> <span style="color: #166534; font-weight: bold;">Isso é muito importante para melhorar o livro interativo!</span></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<!-- Botão Flutuante do Chat -->
+<div id="tutor-btn" style="position: fixed; bottom: 20px; right: 20px; background-color: #2C3E50; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 9999; transition: 0.3s;" onclick="toggleChat()">
+    <i class="bi bi-chat-dots-fill" style="font-size: 24px;"></i>
+</div>
+
+<!-- Janela do Chat -->
+<div id="tutor-window" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; background-color: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 9999; flex-direction: column; overflow: hidden;">
+    
+    <!-- Cabeçalho -->
+    <div style="background-color: #2C3E50; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+        <span>🤖 Tutor BioEstatística</span>
+        <i class="bi bi-x-lg" style="cursor: pointer;" onclick="toggleChat()"></i>
+    </div>
+    
+    <!-- Área de Mensagens -->
+    <div id="chat-messages" style="flex: 1; padding: 15px; overflow-y: auto; background-color: #f8fafc; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+        <div style="background-color: #e2e8f0; color: #1e293b; padding: 10px; border-radius: 8px; align-self: flex-start; max-width: 85%;">
+            Olá! Sou o seu tutor de Bioestatística. Em que conceito ou código de R o posso ajudar hoje?
+        </div>
+    </div>
+    
+    <!-- Input de Texto -->
+    <div style="padding: 10px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px; background-color: white;">
+        <input type="text" id="chat-input" placeholder="Escreva a sua dúvida..." style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none;" onkeypress="if(event.key === 'Enter') sendMessage()">
+        <button onclick="sendMessage()" style="background-color: #2C3E50; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">
+            <i class="bi bi-send-fill"></i>
+        </button>
+    </div>
+</div>
+
 <script>
-// === INSIRA A SUA URL DO WEBHOOK DO N8N AQUI ===
-const WEBHOOK_URL = 'https://n8n.sparklingtech.com.br/webhook/estatistica-biocientistas'; 
-
-function toggleJanela() {
-    const janela = document.getElementById('meu-tutor-window');
-    janela.style.display = janela.style.display === 'flex' ? 'none' : 'flex';
-}
-
-async function enviarMensagem() {
-    const input = document.getElementById('meu-tutor-input');
-    const textoUsuario = input.value.trim();
-    if (!textoUsuario) return;
-    
-    input.value = ''; 
-    const messagesDiv = document.getElementById('meu-tutor-messages');
-    
-    messagesDiv.innerHTML += `<div class="msg-bubble msg-user">${textoUsuario}</div>`;
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-    const loadingId = 'load-' + Date.now();
-    messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" id="${loadingId}"><em>Pensando...</em></div>`;
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-    try {
-        const response = await fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mensagem: textoUsuario })
-        });
-        
-        const data = await response.json();
-        document.getElementById(loadingId).remove(); 
-        
-        const textoBot = data.output || data.resposta || "Erro: Resposta vazia da IA.";
-        messagesDiv.innerHTML += `<div class="msg-bubble msg-bot">${marked.parse(textoBot)}</div>`;
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        
-    } catch (error) {
-        document.getElementById(loadingId).remove();
-        messagesDiv.innerHTML += `<div class="msg-bubble msg-bot" style="color: red;">Erro de conexão com o servidor. Tente novamente.</div>`;
+    function toggleChat() {
+        const chat = document.getElementById('tutor-window');
+        chat.style.display = chat.style.display === 'none' ? 'flex' : 'none';
     }
-}
+
+    async function sendMessage() {
+        const input = document.getElementById('chat-input');
+        const message = input.value.trim();
+        if (!message) return;
+
+        const chatBox = document.getElementById('chat-messages');
+        
+        // Adiciona a mensagem do Aluno
+        chatBox.innerHTML += `<div style="background-color: #6A8A9F; color: white; padding: 10px; border-radius: 8px; align-self: flex-end; max-width: 85%;">${message}</div>`;
+        input.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Adiciona o aviso de "A pensar..."
+        const loadingId = 'loading-' + Date.now();
+        chatBox.innerHTML += `<div id="${loadingId}" style="color: #64748b; font-size: 12px; align-self: flex-start;">O tutor está a pensar...</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+            // A CHAMADA PARA A NOSSA API VERCEL
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            });
+            
+            const data = await response.json();
+            document.getElementById(loadingId).remove();
+
+            if (data.reply) {
+                // Formata quebras de linha básicas para HTML
+                const formatReply = data.reply.replace(/\n/g, '<br>');
+                chatBox.innerHTML += `<div style="background-color: #e2e8f0; color: #1e293b; padding: 10px; border-radius: 8px; align-self: flex-start; max-width: 85%; line-height: 1.4;">${formatReply}</div>`;
+            } else {
+                chatBox.innerHTML += `<div style="color: red; font-size: 12px; align-self: flex-start;">Erro de comunicação.</div>`;
+            }
+        } catch (error) {
+            document.getElementById(loadingId).remove();
+            chatBox.innerHTML += `<div style="color: red; font-size: 12px; align-self: flex-start;">Erro de rede. Verifique a ligação.</div>`;
+        }
+        
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
