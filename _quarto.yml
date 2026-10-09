@@ -29,7 +29,9 @@ format:
   html:
     theme: cosmo
     css: custom.css
-    include-in-header: quiz.html
+    include-in-header: 
+      - quiz.html
+      - perfil.html
     include-after-body: 
       - chat.html
     comments:
