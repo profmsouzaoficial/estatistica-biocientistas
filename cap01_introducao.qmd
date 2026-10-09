@@ -45,6 +45,7 @@ O diagrama abaixo ilustra a classificação completa das variáveis com os nosso
 
 ```{mermaid}
 %%| fig-cap: "Classificação das Variáveis Estatísticas nas Biociências"
+%%{init: {"themeVariables": {"fontSize": "16px", "fontFamily": "inherit"}, "flowchart": {"nodeSpacing": 50, "rankSpacing": 50}}}%%
 flowchart TD
   A[VARIÁVEIS] --> B("Quantitativas: Números / Medidas")
   A --> C("Qualitativas: Categorias / Atributos")
@@ -69,11 +70,15 @@ flowchart TD
   style I fill:#F2F4F4,stroke:#B4C4C1,color:#000000
 ```
 
-## 🧠 Prática Aleatória: Introdução ao Método Estatístico
+## 🧠 Exercícios de fixação
 
 *A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
 
-> Não se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo!
+::: {.callout-tip}
+## Deixe o seu feedback!
+[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
+:::
 
 ::: {.questao-banco}
 **Questão #CAP1-01**
