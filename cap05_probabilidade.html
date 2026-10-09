@@ -71,101 +71,137 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
+    // Procura todas as gavetas de questões na página
+    document.querySelectorAll('.questao-banco').forEach((gaveta, indexQuestao) => {
+        
+        // Pega no bloco de código do Quarto
+        let codeBlock = gaveta.querySelector('code, .quizdown');
+        if (!codeBlock) return;
 
-        // 1. Limpeza do Quarto
-        document.querySelectorAll('.sourceCode').forEach(function(wrapper) {
-            if (wrapper.querySelector('.quizdown') || wrapper.classList.contains('quizdown')) {
-                let codeEl = wrapper.querySelector('code');
-                let textoPuro = codeEl ? codeEl.textContent : wrapper.textContent;
-                let cleanDiv = document.createElement('div');
-                cleanDiv.className = 'quizdown';
-                cleanDiv.textContent = textoPuro;
-                wrapper.replaceWith(cleanDiv);
+        let texto = codeBlock.textContent;
+        let linhas = texto.split('\n');
+
+        let titulo = '';
+        let alternativas = [];
+        let altAtual = null;
+
+        // "Lê" o markdown que você escreveu
+        linhas.forEach(linha => {
+            linha = linha.trim();
+            if (linha.startsWith('# ')) {
+                titulo = linha.substring(2);
+            } else if (linha.startsWith('- [ ]') || linha.startsWith('- [x]')) {
+                let isCorreta = linha.startsWith('- [x]');
+                let textoAlt = linha.substring(5).trim();
+                altAtual = { texto: textoAlt, isCorreta: isCorreta, feedback: '' };
+                alternativas.push(altAtual);
+            } else if (linha.startsWith('> ') && altAtual) {
+                let textoFeedback = linha.substring(2).trim();
+                // Converte negrito do markdown (**) para HTML
+                altAtual.feedback = textoFeedback.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
             }
         });
 
-        document.querySelectorAll('pre.quizdown').forEach(function(pre) {
-            let cleanDiv = document.createElement('div');
-            cleanDiv.className = 'quizdown';
-            cleanDiv.textContent = pre.textContent;
-            pre.replaceWith(cleanDiv);
+        // Monta o nosso próprio visual do Quiz (Livre de Shadow DOM!)
+        let htmlQuiz = `
+            <div class="meu-quiz-custom" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; font-family: inherit; margin-top: 15px;">
+                <h3 style="font-size: 16px; font-weight: 600; color: #2C3E50; margin-top: 0; margin-bottom: 20px; line-height: 1.4;">${titulo}</h3>
+                
+                <div class="opcoes-lista" style="display: flex; flex-direction: column; gap: 12px;">
+                    ${alternativas.map((alt, i) => `
+                        <label class="opcao-label" style="display: flex; flex-direction: column; padding: 14px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; background: #f8fafc; transition: all 0.2s ease;">
+                            <div style="display: flex; align-items: flex-start; gap: 12px;">
+                                <!-- Botão de Rádio: Garante que só uma opção é selecionada -->
+                                <input type="radio" name="quiz_${indexQuestao}" value="${i}" style="margin-top: 3px; cursor: pointer; width: 16px; height: 16px; accent-color: #6A8A9F;">
+                                <span style="font-size: 14px; color: #1e293b; line-height: 1.5;">${alt.texto}</span>
+                            </div>
+                            
+                            <!-- Caixa de Feedback (escondida por padrão) -->
+                            <div class="feedback-box" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed #cbd5e1; font-size: 13.5px;">
+                                ${alt.feedback}
+                            </div>
+                        </label>
+                    `).join('')}
+                </div>
+
+                <!-- Botão e Ações -->
+                <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="mensagem-status" style="font-size: 13px; font-weight: 600; display: none;"></span>
+                    
+                    <button class="btn-verificar" style="background: #2C3E50; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: 0.2s; margin-left: auto;">
+                        <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Verificar Resposta
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Substitui a tag original do Quarto pela nossa obra de arte
+        let containerAntigo = gaveta.querySelector('.sourceCode') || gaveta.querySelector('pre') || codeBlock;
+        let divNova = document.createElement('div');
+        divNova.innerHTML = htmlQuiz;
+        containerAntigo.replaceWith(divNova);
+
+        // Adiciona a Inteligência (Interatividade)
+        let btn = divNova.querySelector('.btn-verificar');
+        let labels = divNova.querySelectorAll('.opcao-label');
+        let radios = divNova.querySelectorAll('input[type="radio"]');
+        let msgStatus = divNova.querySelector('.mensagem-status');
+
+        // Efeito ao selecionar a bolinha (Highlight)
+        radios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                labels.forEach(l => {
+                    l.style.borderColor = '#cbd5e1';
+                    l.style.background = '#f8fafc';
+                });
+                let labelSelecionada = e.target.closest('label');
+                labelSelecionada.style.borderColor = '#6A8A9F';
+                labelSelecionada.style.background = '#f1f5f9';
+            });
         });
 
-        // 2. Carrega a Biblioteca
-        var script = document.createElement('script');
-        script.src = "https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/quizdown.js";
-        
-        script.onload = function() {
-            // 3. Inicializa o Quiz com o dicionário completo
-            quizdown.init({
-                primaryColor: "#2C3E50", 
-                secondaryColor: "#E2E8F0", 
-                locale: "pt",
-                translations: {
-                    pt: {
-                        evaluate: "Verificar resposta",
-                        retry: "Fazer novamente",
-                        solution: "Mostrar solução",
-                        hint: "Dica",
-                        results: "Seus resultados",
-                        check: "Verificar"
-                    }
-                }
+        // Efeito ao clicar em "Verificar"
+        btn.addEventListener('click', () => {
+            let selecionado = divNova.querySelector('input[type="radio"]:checked');
+            
+            if (!selecionado) {
+                msgStatus.textContent = 'Selecione uma alternativa primeiro!';
+                msgStatus.style.color = '#ef4444';
+                msgStatus.style.display = 'block';
+                return;
+            }
+
+            let idx = parseInt(selecionado.value);
+            let alt = alternativas[idx];
+            let label = selecionado.closest('label');
+            let feedbackBox = label.querySelector('.feedback-box');
+
+            // Limpa as mensagens e oculta os feedbacks anteriores
+            msgStatus.style.display = 'none';
+            labels.forEach(l => {
+                l.querySelector('.feedback-box').style.display = 'none';
+                l.style.opacity = '0.6'; // Escurece as que não foram escolhidas
+                l.style.borderColor = '#cbd5e1';
             });
 
-            // 4. FUNÇÃO VIGILANTE (Aplica estilos e traduções em todos os ecrãs)
-            function aplicarEstilosETraducoes(shadow) {
-                // Diminui a fonte e ajusta o layout (só injeta se ainda não existir)
-                if (!shadow.querySelector('#meu-estilo-quiz')) {
-                    let style = document.createElement('style');
-                    style.id = 'meu-estilo-quiz';
-                    style.textContent = `
-                        /* Reduz os títulos */
-                        h1, h2, h3, .title { font-size: 15px !important; margin-bottom: 12px !important; line-height: 1.3 !important; }
-                        /* Reduz o texto das questões e alternativas */
-                        p, label, span, div, li { font-size: 13.5px !important; line-height: 1.4 !important; }
-                        /* Deixa os botões mais delicados */
-                        button { font-size: 13px !important; padding: 8px 12px !important; color: #1A252F !important; }
-                        button:hover { filter: brightness(0.95); }
-                    `;
-                    shadow.appendChild(style);
-                }
+            // Destaca a escolha do aluno
+            label.style.opacity = '1';
+            feedbackBox.style.display = 'block';
 
-                // Força a tradução de textos soltos que a biblioteca ignore
-                shadow.querySelectorAll('h1, h2, h3, div').forEach(el => {
-                    if (el.innerHTML.includes('Your quiz results')) {
-                        el.innerHTML = el.innerHTML.replace('Your quiz results', 'Seus resultados');
-                    }
-                });
-
-                // Troca o ícone de Check duplo (padrão) por um Check simples e limpo
-                let btnAvaliar = shadow.querySelector('button[title="Verificar resposta"], button[title="Evaluate"]');
-                if (btnAvaliar && btnAvaliar.innerHTML.includes('svg')) {
-                     // Substitui o SVG apenas se ele tiver múltiplos elementos (o original)
-                     if(btnAvaliar.querySelectorAll('path, polyline').length > 1) {
-                         btnAvaliar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-                     }
-                }
+            if (alt.isCorreta) {
+                label.style.borderColor = '#22c55e'; // Borda verde suave
+                label.style.background = '#f0fdf4';  // Fundo verde clarinho
+                feedbackBox.style.color = '#166534';
+            } else {
+                label.style.borderColor = '#ef4444'; // Borda vermelha suave
+                label.style.background = '#fef2f2';  // Fundo vermelho clarinho
+                feedbackBox.style.color = '#991b1b';
             }
-
-            // 5. Injeta o vigilante em cada quiz da página
-            setTimeout(function() {
-                document.querySelectorAll('.quizdown').forEach(function(quizEl) {
-                    if (quizEl.shadowRoot) {
-                        let shadow = quizEl.shadowRoot;
-                        aplicarEstilosETraducoes(shadow); // Aplica na tela inicial
-                        
-                        // Observa qualquer mudança (ex: quando o aluno avança para os resultados)
-                        const observer = new MutationObserver(() => aplicarEstilosETraducoes(shadow));
-                        observer.observe(shadow, { childList: true, subtree: true });
-                    }
-                });
-            }, 800);
-        };
-        
-        document.head.appendChild(script);
+        });
     });
+});
 </script>
 
 
