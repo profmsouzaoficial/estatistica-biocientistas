@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let alternativas = [];
         let altAtual = null;
 
-        // "Lê" o markdown que você escreveu
+        // "Lê" o markdown
         linhas.forEach(linha => {
             linha = linha.trim();
             if (linha.startsWith('# ')) {
@@ -118,26 +118,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 alternativas.push(altAtual);
             } else if (linha.startsWith('> ') && altAtual) {
                 let textoFeedback = linha.substring(2).trim();
-                // Converte negrito do markdown (**) para HTML
                 altAtual.feedback = textoFeedback.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
             }
         });
 
-        // Monta o nosso próprio visual do Quiz (Livre de Shadow DOM!)
+        // Monta o visual transparente (Sem a borda e sem o fundo da Div interna)
         let htmlQuiz = `
-            <div class="meu-quiz-custom" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; font-family: inherit; margin-top: 15px;">
+            <div class="meu-quiz-custom" style="font-family: inherit; margin-top: 10px;">
                 <h3 style="font-size: 16px; font-weight: 600; color: #2C3E50; margin-top: 0; margin-bottom: 20px; line-height: 1.4;">${titulo}</h3>
                 
                 <div class="opcoes-lista" style="display: flex; flex-direction: column; gap: 12px;">
                     ${alternativas.map((alt, i) => `
                         <label class="opcao-label" style="display: flex; flex-direction: column; padding: 14px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; background: #f8fafc; transition: all 0.2s ease;">
                             <div style="display: flex; align-items: flex-start; gap: 12px;">
-                                <!-- Botão de Rádio: Garante que só uma opção é selecionada -->
                                 <input type="radio" name="quiz_${indexQuestao}" value="${i}" style="margin-top: 3px; cursor: pointer; width: 16px; height: 16px; accent-color: #6A8A9F;">
                                 <span style="font-size: 14px; color: #1e293b; line-height: 1.5;">${alt.texto}</span>
                             </div>
                             
-                            <!-- Caixa de Feedback (escondida por padrão) -->
                             <div class="feedback-box" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed #cbd5e1; font-size: 13.5px;">
                                 ${alt.feedback}
                             </div>
@@ -145,31 +142,29 @@ document.addEventListener("DOMContentLoaded", function() {
                     `).join('')}
                 </div>
 
-                <!-- Botão e Ações -->
                 <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
                     <span class="mensagem-status" style="font-size: 13px; font-weight: 600; display: none;"></span>
                     
                     <button class="btn-verificar" style="background: #2C3E50; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: 0.2s; margin-left: auto;">
-                        <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         Verificar Resposta
                     </button>
                 </div>
             </div>
         `;
 
-        // Substitui a tag original do Quarto pela nossa obra de arte
+        // Substitui a tag original do Quarto pela nossa div
         let containerAntigo = gaveta.querySelector('.sourceCode') || gaveta.querySelector('pre') || codeBlock;
         let divNova = document.createElement('div');
         divNova.innerHTML = htmlQuiz;
         containerAntigo.replaceWith(divNova);
 
-        // Adiciona a Inteligência (Interatividade)
+        // Lógica de Interação
         let btn = divNova.querySelector('.btn-verificar');
         let labels = divNova.querySelectorAll('.opcao-label');
         let radios = divNova.querySelectorAll('input[type="radio"]');
         let msgStatus = divNova.querySelector('.mensagem-status');
 
-        // Efeito ao selecionar a bolinha (Highlight)
         radios.forEach(radio => {
             radio.addEventListener('change', (e) => {
                 labels.forEach(l => {
@@ -182,7 +177,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
 
-        // Efeito ao clicar em "Verificar"
         btn.addEventListener('click', () => {
             let selecionado = divNova.querySelector('input[type="radio"]:checked');
             
@@ -198,25 +192,23 @@ document.addEventListener("DOMContentLoaded", function() {
             let label = selecionado.closest('label');
             let feedbackBox = label.querySelector('.feedback-box');
 
-            // Limpa as mensagens e oculta os feedbacks anteriores
             msgStatus.style.display = 'none';
             labels.forEach(l => {
                 l.querySelector('.feedback-box').style.display = 'none';
-                l.style.opacity = '0.6'; // Escurece as que não foram escolhidas
+                l.style.opacity = '0.6';
                 l.style.borderColor = '#cbd5e1';
             });
 
-            // Destaca a escolha do aluno
             label.style.opacity = '1';
             feedbackBox.style.display = 'block';
 
             if (alt.isCorreta) {
-                label.style.borderColor = '#22c55e'; // Borda verde suave
-                label.style.background = '#f0fdf4';  // Fundo verde clarinho
+                label.style.borderColor = '#22c55e';
+                label.style.background = '#f0fdf4';
                 feedbackBox.style.color = '#166534';
             } else {
-                label.style.borderColor = '#ef4444'; // Borda vermelha suave
-                label.style.background = '#fef2f2';  // Fundo vermelho clarinho
+                label.style.borderColor = '#ef4444';
+                label.style.background = '#fef2f2';
                 feedbackBox.style.color = '#991b1b';
             }
         });
