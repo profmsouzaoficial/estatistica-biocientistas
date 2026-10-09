@@ -258,49 +258,44 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Procura o título nativo do livro na barra lateral
     let sidebarTitle = document.querySelector('.sidebar-title');
 
     if (sidebarTitle && !document.querySelector('.meu-perfil-sidebar')) {
         
-        // --- 1. BLOCO SUPERIOR: FOTO E ÍCONES (Antes do título) ---
         let perfilDiv = document.createElement('div');
         perfilDiv.className = 'meu-perfil-sidebar';
-        perfilDiv.style.cssText = 'text-align: center; margin-bottom: 20px; padding-top: 10px;';
+        perfilDiv.style.cssText = 'text-align: left; margin-bottom: 20px; padding-top: 10px;';
         
         perfilDiv.innerHTML = `
-            <!-- Foto Quadrada -->
             <img src="eu-lattes.jpg" alt="Perfil" style="width: 130px; height: 130px; border-radius: 8px; object-fit: cover; border: 2px solid #2C3E50; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             
-            <!-- Painel de Redes Sociais -->
-            <div style="margin-top: 15px; display: flex; justify-content: center; gap: 12px;">
-                <!-- Lattes -->
-                <a href="#" target="_blank" title="Currículo Lattes" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#2C3E50'" onmouseout="this.style.color='#64748b'">
-                    <i class="bi bi-file-earmark-person-fill"></i>
+            <!-- Painel de Redes Sociais com Alinhamento Flex Centralizado -->
+            <div style="margin-top: 15px; display: flex; justify-content: left; align-items: center; gap: 14px; height: 24px;">
+                <!-- Lattes (Capelo Acadêmico) -->
+                <a href="#" target="_blank" title="Currículo Lattes" style="color: #64748b; font-size: 21px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#2C3E50'" onmouseout="this.style.color='#64748b'">
+                    <i class="bi bi-mortarboard-fill"></i>
                 </a>
                 <!-- LinkedIn -->
-                <a href="#" target="_blank" title="LinkedIn" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='#64748b'">
+                <a href="#" target="_blank" title="LinkedIn" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-linkedin"></i>
                 </a>
                 <!-- GitHub -->
-                <a href="#" target="_blank" title="GitHub" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#171515'" onmouseout="this.style.color='#64748b'">
+                <a href="#" target="_blank" title="GitHub" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#171515'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-github"></i>
                 </a>
                 <!-- YouTube -->
-                <a href="#" target="_blank" title="YouTube" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#FF0000'" onmouseout="this.style.color='#64748b'">
+                <a href="#" target="_blank" title="YouTube" style="color: #64748b; font-size: 21px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#FF0000'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-youtube"></i>
                 </a>
                 <!-- Instagram -->
-                <a href="#" target="_blank" title="Instagram" style="color: #64748b; font-size: 18px; transition: 0.2s;" onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='#64748b'">
+                <a href="#" target="_blank" title="Instagram" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-instagram"></i>
                 </a>
             </div>
         `;
         
-        // Insere a foto e ícones ANTES do título
         sidebarTitle.parentNode.insertBefore(perfilDiv, sidebarTitle);
 
-        // --- 2. BLOCO INFERIOR: ISBN e DOI (Depois do título) ---
         let infoDiv = document.createElement('div');
         infoDiv.style.cssText = 'margin-top: 5px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; font-size: 12px; color: #64748b; line-height: 1.6; text-align: left;';
         
@@ -309,7 +304,6 @@ document.addEventListener("DOMContentLoaded", function() {
             <div style="font-family: monospace; font-size: 11px; margin-top: 2px;"><strong>DOI:</strong> <a href="#" style="color: #6A8A9F; text-decoration: none; transition: 0.2s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">10.XXXX/zenodo.XXXXX</a></div>
         `;
         
-        // Insere as credenciais DEPOIS do título
         sidebarTitle.parentNode.insertBefore(infoDiv, sidebarTitle.nextSibling);
     }
 });
@@ -382,7 +376,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap04_aed.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">cap04_aed.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise Exploratória de Dados</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
