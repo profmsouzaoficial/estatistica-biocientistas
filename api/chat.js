@@ -1,44 +1,60 @@
 export default async function handler(req, res) {
-  // Bloqueia requisições que não sejam POST
+  // 1. Bloqueia se não for POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método não permitido.' });
   }
 
-  // A chave de API fica protegida e invisível para o utilizador
-  const apiKey = process.env.GEMINI_API_KEY;
-  const { message } = req.body;
-
-  if (!message) {
-    return res.status(400).json({ error: 'Mensagem vazia.' });
+  // 2. Verifica a chave da DeepSeek
+  const apiKey = process.env.DEEPSEEK_API_KEY;
+  if (!apiKey) {
+    return res.status(200).json({ reply: "Erro 🔴: A variável DEEPSEEK_API_KEY não foi encontrada na Vercel." });
   }
 
-  // O System Prompt que define a "personalidade" do seu tutor
-  const systemInstruction = `Você é o tutor virtual oficial do livro de Bioestatística (https://profmsouzaoficial.github.io/estatistica-biocientistas) do Professor Márcio Souza, da Universidade Federal de Juiz de Fora (UFJF-GV). Seu papel é ajudar estudantes de Odontologia, Farmácia e Fisioterapia com dúvidas sobre R, Estatística e Análise de Dados. Seja sempre encorajador, didático e use exemplos da área da saúde quando aplicável. Se o aluno pedir a resposta para um código ou cálculo, não dê a resposta pronta: aja de forma socrática, dando dicas ou trechos incompletos para que ele mesmo chegue à conclusão. Responda de forma concisa e formate suas mensagens em Markdown (usando negritos e blocos de código quando necessário). Caso o aluno pergunte coisas que fogem do escopo do livro, favor informar, educamente, que essa demanda não é possível de ser atendida por esse canal (peça que o aluno me procure pessoalmente para tratar do referente assunto).`;
+  const { message } = req.body;
+  if (!message) {
+    return res.status(200).json({ reply: "Erro: Nenhuma mensagem recebida." });
+  }
+
+  const systemPrompt = `Você é um tutor socrático especialista em Bioestatística. 
+  Seu objetivo é ajudar alunos da área da saúde a entenderem estatística aplicada com R. 
+  Nunca dê a resposta direta de imediato. Faça perguntas que guiem o aluno ao raciocínio correto.`;
 
   try {
-    // Comunicação direta com a API oficial do Gemini (Sem precisar de pacotes npm)
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    // 3. Chamada para a API da DeepSeek
+    const response = await fetch('https://api.deepseek.com/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}` // A DeepSeek usa Bearer token
+      },
       body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemInstruction }] },
-        contents: [{ role: "user", parts: [{ text: message }] }]
+        model: 'deepseek-chat', // ou 'deepseek-coder' se preferir focar só no código R
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: message }
+        ],
+        temperature: 0.7
       })
     });
 
     const data = await response.json();
     
+    // 4. Captura erros (ex: saldo esgotado, chave errada)
     if (!response.ok) {
-      throw new Error(data.error?.message || 'Erro na API do Gemini');
+      console.error("Erro da DeepSeek:", data);
+      return res.status(200).json({ reply: `**Erro da API DeepSeek:** ${data.error?.message || 'Motivo desconhecido.'}` });
     }
 
-    const reply = data.candidates[0].content.parts[0].text;
-
-    // Resposta enviada de volta para o navegador do aluno
-    res.status(200).json({ reply });
+    // 5. Extrai a resposta no formato da DeepSeek
+    if (data.choices && data.choices.length > 0) {
+      const reply = data.choices[0].message.content;
+      return res.status(200).json({ reply: reply });
+    } else {
+      return res.status(200).json({ reply: "A DeepSeek devolveu uma resposta vazia." });
+    }
 
   } catch (error) {
-    console.error("Erro no Chatbot:", error);
-    res.status(500).json({ error: 'Ocorreu um erro ao processar a sua dúvida. Tente novamente.' });
+    console.error("Erro no Vercel:", error);
+    return res.status(200).json({ reply: `**Erro no Servidor:** ${error.message}` });
   }
 }
