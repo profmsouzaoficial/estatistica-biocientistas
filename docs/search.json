@@ -298,5 +298,85 @@
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidade nas Ciências da Saúde</span>"
     ]
+  },
+  {
+    "objectID": "cap06_diagnosticos.html",
+    "href": "cap06_diagnosticos.html",
+    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
+    "section": "",
+    "text": "6.1 O Padrão-Ouro e a Tabela 2x2\nImagine a rotina de uma Unidade Básica de Saúde: um paciente chega com febre alta, mialgia e dor retro-orbital. A suspeita clínica de dengue é forte, mas a conduta exige confirmação. Aplicamos um teste rápido (antígeno NS1). Se o resultado for positivo, qual é a real chance de o paciente estar infectado? E se der negativo, podemos mandar o paciente para casa e descartar a arbovirose com segurança?\nResponder a essas perguntas é o objetivo central da avaliação quantitativa de testes diagnósticos. Na prática baseada em evidências da farmácia, fisioterapia e odontologia, sabemos que nenhum teste é 100% perfeito; o acaso e a biologia sempre impõem uma margem de erro.\nPara avaliar se um novo teste é bom, precisamos compará-lo com a “verdade absoluta”. Na bioestatística, chamamos essa verdade de Padrão-Ouro (o melhor teste disponível, embora muitas vezes caro, invasivo ou demorado, como um RT-PCR).\nQuando cruzamos os resultados do nosso novo teste rápido com o Padrão-Ouro, obtemos quatro cenários possíveis que formam a Matriz de Confusão (ou Tabela 2x2):",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap06_diagnosticos.html#o-padrão-ouro-e-a-tabela-2x2",
+    "href": "cap06_diagnosticos.html#o-padrão-ouro-e-a-tabela-2x2",
+    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
+    "section": "",
+    "text": "Verdadeiro Positivo (VP): O doente que o teste acertou que está doente.\nFalso Positivo (FP): O saudável que o teste assustou dizendo que está doente.\nVerdadeiro Negativo (VN): O saudável que o teste tranquilizou corretamente.\nFalso Negativo (FN): O doente que o teste mandou para casa dizendo que estava bem (o cenário clínico mais perigoso).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap06_diagnosticos.html#sensibilidade-e-especificidade-o-dna-do-teste",
+    "href": "cap06_diagnosticos.html#sensibilidade-e-especificidade-o-dna-do-teste",
+    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
+    "section": "6.2 Sensibilidade e Especificidade: O DNA do Teste",
+    "text": "6.2 Sensibilidade e Especificidade: O DNA do Teste\nA sensibilidade e a especificidade são propriedades intrínsecas do teste. Elas medem o desempenho do teste sabendo-se previamente o status real do paciente.\n\nSensibilidade (Capacidade de Inclusão): É a proporção de pacientes doentes que têm um teste positivo. Um teste muito sensível tem poucos Falsos Negativos. Quando ele dá negativo, exclui a doença com confiança (regra mnemônica SnNOut). \\[Sensibilidade = \\frac{VP}{VP + FN}\\]\nEspecificidade (Capacidade de Exclusão): É a proporção de pacientes saudáveis que têm um teste negativo. Um teste muito específico tem poucos Falsos Positivos. Quando ele dá positivo, confirma a doença com confiança (regra mnemônica SpPIn). \\[Especificidade = \\frac{VN}{VN + FP}\\]",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap06_diagnosticos.html#valores-preditivos-vpp-e-vpn-a-visão-do-paciente",
+    "href": "cap06_diagnosticos.html#valores-preditivos-vpp-e-vpn-a-visão-do-paciente",
+    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
+    "section": "6.3 Valores Preditivos (VPP e VPN): A Visão do Paciente",
+    "text": "6.3 Valores Preditivos (VPP e VPN): A Visão do Paciente\nNa vida real, o profissional de saúde não sabe se o paciente está doente (senão não faria o teste). O que temos em mãos é o resultado do teste, e queremos descobrir a probabilidade da doença. Para isso usamos os Valores Preditivos, que dependem diretamente da prevalência da doença na população.\n\nValor Preditivo Positivo (VPP): Se o teste deu positivo, qual a chance de eu realmente ter a doença?\nValor Preditivo Negativo (VPN): Se o teste deu negativo, qual a chance de eu estar realmente saudável?\n\n\n\n\n\n\n\nImportanteO Efeito da Prevalência\n\n\n\nDurante uma epidemia de dengue, a prevalência da doença dispara. Isso faz com que o VPP do teste aumente significativamente (é mais fácil “acertar” o diagnóstico positivo quando todo mundo está doente). Por outro lado, testes aplicados em doenças muito raras geram uma avalanche de Falsos Positivos, derrubando o VPP.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap06_diagnosticos.html#prática-no-r-avaliando-um-teste-rápido",
+    "href": "cap06_diagnosticos.html#prática-no-r-avaliando-um-teste-rápido",
+    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
+    "section": "6.4 Prática no R: Avaliando um Teste Rápido",
+    "text": "6.4 Prática no R: Avaliando um Teste Rápido\nVamos utilizar o pacote {epiR} para analisar os dados de um ensaio clínico hipotético que avaliou um novo teste sorológico. (Clique em Run Code para executar).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nNeste nosso ensaio simulado, observamos que, quando o teste dá positivo, a chance real de o paciente estar doente (VPP) é de %. Em contrapartida, um resultado negativo traz uma segurança de % (VPN). O R já calcula os intervalos de confiança exatos, o que é fundamental para a elaboração de relatórios rigorosos.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap06_diagnosticos.html#curva-roc-e-a-busca-pelo-ponto-de-corte",
+    "href": "cap06_diagnosticos.html#curva-roc-e-a-busca-pelo-ponto-de-corte",
+    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
+    "section": "6.5 6.5 Curva ROC e a Busca pelo Ponto de Corte",
+    "text": "6.5 6.5 Curva ROC e a Busca pelo Ponto de Corte\nE quando o teste não devolve “Positivo/Negativo”, mas sim um valor contínuo, como a dosagem de glicemia ou a titulação de anticorpos? Nesses casos, precisamos definir um limite numérico (ponto de corte).\nA Curva ROC (Receiver Operating Characteristic) é um gráfico que plota a Sensibilidade (eixo Y) contra a proporção de Falsos Positivos (\\(1 - Especificidade\\)) (eixo X) para todos os pontos de corte possíveis de um exame.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nDicaPergunte ao Ginger\n\n\n\nNão entendeu como a prevalência altera o VPP? A matemática por trás do Teorema de Bayes pode ser abstrata no início. Clique no ícone do Tutor Virtual (Ginger) no canto inferior direito e digite: “Ginger, me dê um exemplo prático de como a alta prevalência no pico da epidemia altera o Valor Preditivo Positivo de um teste rápido.”",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap06_diagnosticos.html#a-dança-do-ponto-de-corte-o-jogo-de-ganhos-e-perdas",
+    "href": "cap06_diagnosticos.html#a-dança-do-ponto-de-corte-o-jogo-de-ganhos-e-perdas",
+    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
+    "section": "6.5 A Dança do Ponto de Corte: O Jogo de Ganhos e Perdas",
+    "text": "6.5 A Dança do Ponto de Corte: O Jogo de Ganhos e Perdas\nAté aqui, tratamos os testes como ferramentas binárias: “positivo” ou “negativo”. No entanto, a biologia raramente é tão simplista. A maioria dos exames (como a titulação de anticorpos, a dosagem de glicemia ou a carga viral) devolve um valor contínuo.\nPara transformar esse número num diagnóstico clínico, precisamos desenhar uma linha na areia: o ponto de corte (cutoff).\nA escolha desse ponto não é uma decisão puramente matemática; é uma escolha estratégica que envolve um dilema inevitável. A sensibilidade e a especificidade funcionam como uma gangorra: o que você ganha de um lado, perde do outro.\n\n6.5.1 Quando priorizar a Sensibilidade? (O medo do Falso Negativo)\nSituações de emergência em saúde pública e triagens populacionais exigem altíssima sensibilidade.\nO Exemplo da COVID-19: Imagine a triagem de passageiros num aeroporto durante o pico da pandemia utilizando scanners de temperatura corporal. * Se você definir o ponto de corte da febre muito alto (ex: 38,5°C), você terá alta especificidade (quem for parado certamente está doente). Mas o custo da perda é catastrófico: pessoas infectadas com febre leve (37,8°C) passarão direto (Falsos Negativos), embarcarão no avião e iniciarão um novo surto. * A conduta correta aqui é baixar o ponto de corte (ex: 37,2°C). Aumentamos a sensibilidade ao máximo. O ganho é a segurança coletiva (não deixamos escapar quase nenhum doente). A perda é termos muitos Falsos Positivos (pessoas saudáveis que correram para o portão de embarque e ficaram suadas serão barradas). Na saúde pública, o transtorno temporário de um falso positivo é preferível à tragédia de um falso negativo.\n\n\n6.5.2 Quando priorizar a Especificidade? (O medo do Falso Positivo)\nTestes confirmatórios e diagnósticos de doenças graves com tratamentos agressivos exigem altíssima especificidade.\nO Exemplo da Quimioterapia: Imagine um marcador tumoral para um cancro raro. Se o teste der positivo, o paciente será submetido a uma cirurgia de remoção de órgãos e a uma quimioterapia altamente tóxica. * Aqui, o Falso Positivo é o pior cenário possível: você estaria a mutilar e a envenenar uma pessoa completamente saudável. * A conduta é elevar o ponto de corte. Só declaramos “positivo” se o valor for absurdamente alto. O ganho é a certeza absoluta antes de uma intervenção radical. A perda é que alguns doentes em fase inicial (Falsos Negativos) não serão diagnosticados imediatamente.\n\n\n\n6.5.3 Prática Lúdica: Interagindo com o Ponto de Corte\nVamos visualizar essa gangorra na prática. Abaixo, temos as curvas de distribuição de um biomarcador para uma população mista (saudáveis em verde, doentes em laranja).\nO seu desafio: No código R abaixo, altere o valor da variável meu_ponto_de_corte. Teste os valores 30, depois 50, e por fim 70. Clique em Run Code a cada alteração e observe como a linha vermelha se move e como isso destrói ou salva a Sensibilidade e a Especificidade.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nPercebeu como é impossível ter 100% nos dois ao mesmo tempo? Quando você move a linha para a esquerda, “salva” todos os doentes (Sensibilidade sobe), mas condena muitos saudáveis a um falso diagnóstico (Especificidade cai).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap06_diagnosticos.html#e-a-curva-roc-onde-entra",
+    "href": "cap06_diagnosticos.html#e-a-curva-roc-onde-entra",
+    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
+    "section": "6.6 E a Curva ROC, onde entra?",
+    "text": "6.6 E a Curva ROC, onde entra?\nA Curva ROC (Receiver Operating Characteristic) nasce exatamente dessa brincadeira que você acabou de fazer.\nEm vez de o estatístico testar o ponto de corte 30, depois o 31, depois o 32, manualmente (como fizemos acima), o algoritmo da Curva ROC calcula todos os pontos de corte possíveis ao mesmo tempo. Ele plota um gráfico mostrando o desempenho do teste em cada um desses cenários.\nO “ponto ideal” na Curva ROC (geralmente o mais próximo do canto superior esquerdo do gráfico) é aquele que encontra o equilíbrio matemático perfeito entre a Sensibilidade e a Especificidade.\n\n\n\n\n\n\nDicaPergunte ao Ginger\n\n\n\nAinda confuso com a escolha do cutoff? Imagine o teste anti-doping num atleta olímpico. O que é pior: punir um inocente (falso positivo) ou deixar um trapaceiro escapar (falso negativo)? Clique no ícone do Tutor Virtual (Ginger) e pergunte: “Ginger, num teste de doping nas Olimpíadas, o ponto de corte do exame deve priorizar a Sensibilidade ou a Especificidade? Explique-me o porquê.”",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
   }
 ]
