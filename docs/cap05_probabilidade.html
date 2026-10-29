@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>cap05_probabilidade – Análise de Dados para Biocientistas</title>
+<title>5&nbsp; Probabilidade nas Ciências da Saúde – Análise de Dados para Biocientistas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -39,10 +59,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-70896287326667430c62020e2b71b712.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d51bfc6b857e0cf975342d16298fa7f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -249,28 +269,28 @@ document.addEventListener("DOMContentLoaded", function() {
         perfilDiv.style.cssText = 'text-align: left; margin-bottom: 20px; padding-top: 10px;';
         
         perfilDiv.innerHTML = `
-            <img src="eu-lattes.jpg" alt="Perfil" style="width: 130px; height: 130px; border-radius: 8px; object-fit: cover; border: 2px solid #2C3E50; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <img src="eu-lattes.jpg" alt="Perfil" style="width: 80px; height: 80px; border-radius: 4px; object-fit: cover; border: 2px solid #2C3E50; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             
             <!-- Painel de Redes Sociais com Alinhamento Flex Centralizado -->
             <div style="margin-top: 15px; display: flex; justify-content: left; align-items: center; gap: 14px; height: 24px;">
                 <!-- Lattes (Capelo Acadêmico) -->
-                <a href="#" target="_blank" title="Currículo Lattes" style="color: #64748b; font-size: 21px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#2C3E50'" onmouseout="this.style.color='#64748b'">
+                <a href="http://lattes.cnpq.br/4578008002785684" target="_blank" title="Currículo Lattes" style="color: #64748b; font-size: 21px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#2C3E50'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-mortarboard-fill"></i>
                 </a>
                 <!-- LinkedIn -->
-                <a href="#" target="_blank" title="LinkedIn" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='#64748b'">
+                <a href="https://www.linkedin.com/in/profmsouzaoficial" target="_blank" title="LinkedIn" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-linkedin"></i>
                 </a>
                 <!-- GitHub -->
-                <a href="#" target="_blank" title="GitHub" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#171515'" onmouseout="this.style.color='#64748b'">
+                <a href="https://github.com/profmsouzaoficial" target="_blank" title="GitHub" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#171515'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-github"></i>
                 </a>
                 <!-- YouTube -->
-                <a href="#" target="_blank" title="YouTube" style="color: #64748b; font-size: 21px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#FF0000'" onmouseout="this.style.color='#64748b'">
+                <a href="https://www.youtube.com/@profmsouzaoficial" target="_blank" title="YouTube" style="color: #64748b; font-size: 21px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#FF0000'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-youtube"></i>
                 </a>
                 <!-- Instagram -->
-                <a href="#" target="_blank" title="Instagram" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='#64748b'">
+                <a href="https://www.instagram.com/profmsouzaoficial" target="_blank" title="Instagram" style="color: #64748b; font-size: 19px; line-height: 0; transition: 0.2s;" onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-instagram"></i>
                 </a>
             </div>
@@ -290,12 +310,1597 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+<style type="text/css">
+.monaco-editor pre {
+  background-color: unset !important;
+}
 
+.qwebr-editor-toolbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.qwebr-editor-toolbar-left-buttons, .qwebr-editor-toolbar-right-buttons {
+  display: flex;
+}
+
+.qwebr-non-interactive-loading-container.qwebr-cell-needs-evaluation, .qwebr-non-interactive-loading-container.qwebr-cell-evaluated {
+  justify-content: center;
+  display: flex;
+  background-color: rgba(250, 250, 250, 0.65);
+  border: 1px solid rgba(233, 236, 239, 0.65);
+  border-radius: 0.5rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.qwebr-r-project-logo {
+  color: #2767B0; /* R Project's blue color */
+}
+
+.qwebr-icon-status-spinner {
+  color: #7894c4;
+}
+
+.qwebr-icon-run-code {
+  color: #0d9c29
+}
+
+body.quarto-light .qwebr-output-code-stdout {
+  color: #111;
+}
+
+body.quarto-dark .qwebr-output-code-stdout {
+  color: #EEE;
+}
+
+.qwebr-output-code-stderr {
+  color: #db4133;
+}
+
+body.quarto-light .qwebr-editor {
+  border: 1px solid #EEEEEE;
+}
+
+body.quarto-light .qwebr-editor-toolbar {
+  background-color: #EEEEEE;
+  padding: 0.2rem 0.5rem;
+}
+
+body.quarto-dark .qwebr-editor {
+  border: 1px solid #111;
+}
+
+body.quarto-dark .qwebr-editor-toolbar {
+  background-color: #111;
+  padding: 0.2rem 0.5rem;
+}
+
+.qwebr-button {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.375rem 0.75rem;
+  font-size: .9rem;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+body.quarto-light .qwebr-button {
+  background-color: #EEEEEE;
+  color: #000;
+  border-color: #dee2e6;
+  border: 1px solid rgba(0,0,0,0);
+}
+
+body.quarto-dark .qwebr-button {
+  background-color: #111;
+  color: #EEE;
+  border-color: #dee2e6;
+  border: 1px solid rgba(0,0,0,0);
+}
+
+body.quarto-light .qwebr-button:hover {
+  color: #000;
+  background-color: #d9dce0;
+  border-color: #c8ccd0;
+}
+
+body.quarto-dark .qwebr-button:hover {
+  color: #d9dce0;
+  background-color: #323232;
+  border-color: #d9dce0;
+}
+
+.qwebr-button:disabled,.qwebr-button.disabled,fieldset:disabled .qwebr-button {
+  pointer-events: none;
+  opacity: .65
+}
+
+.qwebr-button-reset {
+  color: #696969; /*#4682b4;*/
+}
+
+.qwebr-button-copy {
+  color: #696969;
+}
+
+/* Style the code highlight lines */
+body.quarto-light .qwebr-editor-highlight-line {
+  background-color: lightblue;
+}
+
+body.quarto-dark .qwebr-editor-highlight-line {
+  background-color: darkblue;
+}
+
+/* Style the modal pop-up */
+
+/* The Modal (background) */
+.qwebr-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content */
+.qwebr-modal-content {
+  background-color: #fefefe;
+  margin: 5% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.qwebr-modal-content-code {
+  max-height: 50vh;
+  min-height: 5vh;
+  overflow: scroll;
+  border: 1px solid #888;
+}
+
+/* The Close Button */
+.qwebr-modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.qwebr-modal-close:hover,
+.qwebr-modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.qwebr-download-btn {
+  margin-top: 10px;
+  text-decoration: none !important;
+}
+
+/* Styling to download image that is created */
+
+.qwebr-canvas-image {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.qwebr-canvas-image-download-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+figure:hover .qwebr-canvas-image-download-btn {
+  display: block;
+}
+
+/* Custom styling for RevealJS Presentations*/
+
+/* Reset the style of the interactive area */
+.reveal div.qwebr-interactive-area {
+  display: block;
+  box-shadow: none;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Provide space to entries */
+.reveal div.qwebr-output-code-area pre div {
+  margin: 1px 2px 1px 10px;
+}
+
+/* Collapse the inside code tags to avoid extra space between line outputs */
+.reveal pre div code.qwebr-output-code-stdout, .reveal pre div code.qwebr-output-code-stderr {
+  padding: 0;
+  display: contents;
+}
+
+body.reveal.quarto-light pre div code.qwebr-output-code-stdout {
+  color: #111;
+}
+
+body.reveal.quarto-dark pre div code.qwebr-output-code-stdout {
+  color: #EEEEEE;
+}
+
+.reveal pre div code.qwebr-output-code-stderr {
+  color: #db4133;
+}
+
+
+/* Create a border around console and output (does not effect graphs) */
+body.reveal.quarto-light div.qwebr-console-area {
+  border: 1px solid #EEEEEE;
+  box-shadow: 2px 2px 10px #EEEEEE;
+}
+
+body.reveal.quarto-dark div.qwebr-console-area {
+  border: 1px solid #111;
+  box-shadow: 2px 2px 10px #111;
+}
+
+
+/* Cap output height and allow text to scroll */
+/* TODO: Is there a better way to fit contents/max it parallel to the monaco editor size? */
+.reveal div.qwebr-output-code-area pre {
+  max-height: 400px;
+  overflow: scroll;
+}
+
+iframe.qwebr-output-code-browse {
+  width: 100%;
+
+  /*
+    TODO: How to make the height automatic according to the widget size,
+    or respect the quarto code block options?
+  */
+  min-height: 500px;
+}
+
+</style>
+<script type="module">
+// Document level settings ----
+
+// Determine if we need to install R packages
+globalThis.qwebrInstallRPackagesList = [''];
+
+// Specify possible locations to search for the repository
+globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
+
+// Check to see if we have an empty array, if we do set to skip the installation.
+globalThis.qwebrSetupRPackages = !(qwebrInstallRPackagesList.indexOf("") !== -1);
+globalThis.qwebrAutoloadRPackages = true;
+
+// Display a startup message?
+globalThis.qwebrShowStartupMessage = false;
+globalThis.qwebrShowHeaderMessage = false;
+
+// Describe the webR settings that should be used
+globalThis.qwebrCustomizedWebROptions = {
+  "baseURL": "https://webr.r-wasm.org/v0.6.0/",
+  "serviceWorkerUrl": "",
+  "homedir": "/home/web_user", 
+  "channelType": "ChannelType.Automatic"
+};
+
+// Store cell data
+globalThis.qwebrCellDetails = [{"code":"# 1. Semente para reproduzir o experimento\nset.seed(2026)\n\n# 2. Probabilidade teórica de um filho afetado (Aa x Aa)\np_afetado <- 0.25\nn <- 5000\n\n# 3. Simulando n gestações independentes\nfilhos <- sample(c(\"Afetado\", \"Não afetado\"),\n                 size = n, replace = TRUE,\n                 prob = c(p_afetado, 1 - p_afetado))\n\n# 4. Proporção acumulada de afetados ao longo da simulação\nprop_acumulada <- cumsum(filhos == \"Afetado\") / seq_len(n)\n\n# 5. Visualizando a convergência\nplot(prop_acumulada, type = \"l\", lwd = 2, col = \"#2C3E50\",\n     ylim = c(0, 1),\n     xlab = \"Número de gestações simuladas\",\n     ylab = \"Proporção acumulada de afetados\",\n     main = \"Lei dos Grandes Números\")\nabline(h = p_afetado, col = \"#C0392B\", lty = 2, lwd = 2)\nlegend(\"topright\", bty = \"n\",\n       legend = c(\"Proporção simulada\", \"Probabilidade teórica (25%)\"),\n       col = c(\"#2C3E50\", \"#C0392B\"), lty = c(1, 2), lwd = 2)\n\ncat(\"Proporção final observada:\", round(tail(prop_acumulada, 1), 4), \"\\n\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# 1. Binomial: 10 pacientes, 70% de resposta\ndbinom(7, size = 10, prob = 0.70)   # P(X = 7)\npbinom(7, size = 10, prob = 0.70)   # P(X <= 7)\n\n# 2. Poisson: média de 2 casos por dia\ndpois(3, lambda = 2)                # P(X = 3)\nppois(3, lambda = 2)                # P(X <= 3)\n\n# 3. Normal: altura média 165 cm, desvio padrão 8 cm\npnorm(170, mean = 165, sd = 8)      # P(X < 170)\nqnorm(0.975, mean = 165, sd = 8)    # percentil 97,5%","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+
+</script>
+<script type="module">
+// Declare startupMessageQWebR globally
+globalThis.qwebrStartupMessage = document.createElement("p");
+
+// Verify if OffScreenCanvas is supported
+globalThis.qwebrOffScreenCanvasSupport = function() {
+  return typeof OffscreenCanvas !== 'undefined'
+}
+
+// Function to set the button text
+globalThis.qwebrSetInteractiveButtonState = function(buttonText, enableCodeButton = true) {
+  document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+    btn.innerHTML = buttonText;
+    btn.disabled = !enableCodeButton;
+  });
+}
+
+// Function to update the status message in non-interactive cells
+globalThis.qwebrUpdateStatusMessage = function(message) {
+  document.querySelectorAll(".qwebr-status-text.qwebr-cell-needs-evaluation").forEach((elem) => {
+    elem.innerText = message;
+  });
+}
+
+// Function to update the status message
+globalThis.qwebrUpdateStatusHeader = function(message) {
+  qwebrStartupMessage.innerHTML = `
+    <i class="fa-solid fa-spinner fa-spin qwebr-icon-status-spinner"></i>
+    <span>${message}</span>`;
+}
+
+// Function to return true if element is found, false if not
+globalThis.qwebrCheckHTMLElementExists = function(selector) {
+  const element = document.querySelector(selector);
+  return !!element;
+}
+
+// Function that detects whether reveal.js slides are present
+globalThis.qwebrIsRevealJS = function() {
+  // If the '.reveal .slides' selector exists, RevealJS is likely present
+  return qwebrCheckHTMLElementExists('.reveal .slides');
+}
+
+// Initialize the Quarto sidebar element
+function qwebrSetupQuartoSidebar() {
+  var newSideBarDiv = document.createElement('div');
+  newSideBarDiv.id = 'quarto-margin-sidebar';
+  newSideBarDiv.className = 'sidebar margin-sidebar';
+  newSideBarDiv.style.top = '0px';
+  newSideBarDiv.style.maxHeight = 'calc(0px + 100vh)';
+
+  return newSideBarDiv;
+}
+
+// Position the sidebar in the document
+function qwebrPlaceQuartoSidebar() {
+  // Get the reference to the element with id 'quarto-document-content'
+  var referenceNode = document.getElementById('quarto-document-content');
+
+  // Create the new div element
+  var newSideBarDiv = qwebrSetupQuartoSidebar();
+
+  // Insert the new div before the 'quarto-document-content' element
+  referenceNode.parentNode.insertBefore(newSideBarDiv, referenceNode);
+}
+
+function qwebrPlaceMessageContents(content, html_location = "title-block-header", revealjs_location = "title-slide") {
+
+  // Get references to header elements
+  const headerHTML = document.getElementById(html_location);
+  const headerRevealJS = document.getElementById(revealjs_location);
+
+  // Determine where to insert the quartoTitleMeta element
+  if (headerHTML || headerRevealJS) {
+    // Append to the existing "title-block-header" element or "title-slide" div
+    (headerHTML || headerRevealJS).appendChild(content);
+  } else {
+    // If neither headerHTML nor headerRevealJS is found, insert after "webr-monaco-editor-init" script
+    const monacoScript = document.getElementById("qwebr-monaco-editor-init");
+    const header = document.createElement("header");
+    header.setAttribute("id", "title-block-header");
+    header.appendChild(content);
+    monacoScript.after(header);
+  }
+}
+
+
+
+function qwebrOffScreenCanvasSupportWarningMessage() {
+  
+  // Verify canvas is supported.
+  if(qwebrOffScreenCanvasSupport()) return;
+
+  // Create the main container div
+  var calloutContainer = document.createElement('div');
+  calloutContainer.classList.add('callout', 'callout-style-default', 'callout-warning', 'callout-titled');
+
+  // Create the header div
+  var headerDiv = document.createElement('div');
+  headerDiv.classList.add('callout-header', 'd-flex', 'align-content-center');
+
+  // Create the icon container div
+  var iconContainer = document.createElement('div');
+  iconContainer.classList.add('callout-icon-container');
+
+  // Create the icon element
+  var iconElement = document.createElement('i');
+  iconElement.classList.add('callout-icon');
+
+  // Append the icon element to the icon container
+  iconContainer.appendChild(iconElement);
+
+  // Create the title container div
+  var titleContainer = document.createElement('div');
+  titleContainer.classList.add('callout-title-container', 'flex-fill');
+  titleContainer.innerText = 'Warning: Web Browser Does Not Support Graphing!';
+
+  // Append the icon container and title container to the header div
+  headerDiv.appendChild(iconContainer);
+  headerDiv.appendChild(titleContainer);
+
+  // Create the body container div
+  var bodyContainer = document.createElement('div');
+  bodyContainer.classList.add('callout-body-container', 'callout-body');
+
+  // Create the paragraph element for the body content
+  var paragraphElement = document.createElement('p');
+  paragraphElement.innerHTML = 'This web browser does not have support for displaying graphs through the <code>quarto-webr</code> extension since it lacks an <code>OffScreenCanvas</code>. Please upgrade your web browser to one that supports <code>OffScreenCanvas</code>.';
+
+  // Append the paragraph element to the body container
+  bodyContainer.appendChild(paragraphElement);
+
+  // Append the header div and body container to the main container div
+  calloutContainer.appendChild(headerDiv);
+  calloutContainer.appendChild(bodyContainer);
+
+  // Append the main container div to the document depending on format
+  qwebrPlaceMessageContents(calloutContainer, "title-block-header"); 
+
+}
+
+
+// Function that attaches the document status message and diagnostics
+function displayStartupMessage(showStartupMessage, showHeaderMessage) {
+  if (!showStartupMessage) {
+    return;
+  }
+
+  // Create the outermost div element for metadata
+  const quartoTitleMeta = document.createElement("div");
+  quartoTitleMeta.classList.add("quarto-title-meta");
+
+  // Create the first inner div element
+  const firstInnerDiv = document.createElement("div");
+  firstInnerDiv.setAttribute("id", "qwebr-status-message-area");
+
+  // Create the second inner div element for "WebR Status" heading and contents
+  const secondInnerDiv = document.createElement("div");
+  secondInnerDiv.setAttribute("id", "qwebr-status-message-title");
+  secondInnerDiv.classList.add("quarto-title-meta-heading");
+  secondInnerDiv.innerText = "WebR Status";
+
+  // Create another inner div for contents
+  const secondInnerDivContents = document.createElement("div");
+  secondInnerDivContents.setAttribute("id", "qwebr-status-message-body");
+  secondInnerDivContents.classList.add("quarto-title-meta-contents");
+
+  // Describe the WebR state
+  qwebrStartupMessage.innerText = "🟡 Loading...";
+  qwebrStartupMessage.setAttribute("id", "qwebr-status-message-text");
+  // Add `aria-live` to auto-announce the startup status to screen readers
+  qwebrStartupMessage.setAttribute("aria-live", "assertive");
+
+  // Append the startup message to the contents
+  secondInnerDivContents.appendChild(qwebrStartupMessage);
+
+  // Add a status indicator for COOP and COEP Headers if needed
+  if (showHeaderMessage) {
+    const crossOriginMessage = document.createElement("p");
+    crossOriginMessage.innerText = `${crossOriginIsolated ? '🟢' : '🟡'} COOP & COEP Headers`;
+    crossOriginMessage.setAttribute("id", "qwebr-coop-coep-header");
+    secondInnerDivContents.appendChild(crossOriginMessage);
+  }
+
+  // Combine the inner divs and contents
+  firstInnerDiv.appendChild(secondInnerDiv);
+  firstInnerDiv.appendChild(secondInnerDivContents);
+  quartoTitleMeta.appendChild(firstInnerDiv);
+
+  // Place message on webpage
+  qwebrPlaceMessageContents(quartoTitleMeta); 
+}
+
+function qwebrAddCommandHistoryModal() {
+  // Create the modal div
+  var modalDiv = document.createElement('div');
+  modalDiv.id = 'qwebr-history-modal';
+  modalDiv.className = 'qwebr-modal';
+
+  // Create the modal content div
+  var modalContentDiv = document.createElement('div');
+  modalContentDiv.className = 'qwebr-modal-content';
+
+  // Create the span for closing the modal
+  var closeSpan = document.createElement('span');
+  closeSpan.id = 'qwebr-command-history-close-btn';
+  closeSpan.className = 'qwebr-modal-close';
+  closeSpan.innerHTML = '&times;';
+
+  // Create the h1 element for the modal
+  var modalH1 = document.createElement('h1');
+  modalH1.textContent = 'R History Command Contents';
+
+  // Create an anchor element for downloading the Rhistory file 
+  var downloadLink = document.createElement('a');
+  downloadLink.href = '#';
+  downloadLink.id = 'qwebr-download-history-btn';
+  downloadLink.className = 'qwebr-download-btn';
+
+  // Create an 'i' element for the icon
+  var icon = document.createElement('i');
+  icon.className = 'bi bi-file-code';
+
+  // Append the icon to the anchor element
+  downloadLink.appendChild(icon);
+
+  // Add the text 'Download R History' to the anchor element
+  downloadLink.appendChild(document.createTextNode(' Download R History File'));
+
+  // Create the pre for command history contents
+  var commandContentsPre = document.createElement('pre');
+  commandContentsPre.id = 'qwebr-command-history-contents';
+  commandContentsPre.className = 'qwebr-modal-content-code';
+
+  // Append the close span, h1, and history contents pre to the modal content div
+  modalContentDiv.appendChild(closeSpan);
+  modalContentDiv.appendChild(modalH1);
+  modalContentDiv.appendChild(downloadLink);
+  modalContentDiv.appendChild(commandContentsPre);
+
+  // Append the modal content div to the modal div
+  modalDiv.appendChild(modalContentDiv);
+
+  // Append the modal div to the body
+  document.body.appendChild(modalDiv);
+}
+
+function qwebrRegisterRevealJSCommandHistoryModal() {
+  // Select the <ul> element inside the <div> with data-panel="Custom0"
+  let ulElement = document.querySelector('div[data-panel="Custom0"] > ul.slide-menu-items');
+
+  // Find the last <li> element with class slide-tool-item
+  let lastItem = ulElement.querySelector('li.slide-tool-item:last-child');
+
+  // Calculate the next data-item value
+  let nextItemValue = 0;
+  if (lastItem) {
+      nextItemValue = parseInt(lastItem.dataset.item) + 1;
+  }
+
+  // Create a new <li> element
+  let newListItem = document.createElement('li');
+  newListItem.className = 'slide-tool-item';
+  newListItem.dataset.item = nextItemValue.toString(); // Set the next available data-item value
+
+  // Create the <a> element inside the <li>
+  let newLink = document.createElement('a');
+  newLink.href = '#';
+  newLink.id = 'qwebrRHistoryButton'; // Set the ID for the new link
+  
+  // Create the <kbd> element inside the <a>
+  let newKbd = document.createElement('kbd');
+  newKbd.textContent = ' '; // Set to empty as we are not registering a keyboard shortcut
+
+  // Create text node for the link text
+  let newText = document.createTextNode(' View R History');
+
+  // Append <kbd> and text node to <a>
+  newLink.appendChild(newKbd);
+  newLink.appendChild(newText);
+
+  // Append <a> to <li>
+  newListItem.appendChild(newLink);
+
+  // Append <li> to <ul>
+  ulElement.appendChild(newListItem);
+}
+
+// Handle setting up the R history modal
+function qwebrCodeLinks() {
+
+  if (qwebrIsRevealJS()) {
+    qwebrRegisterRevealJSCommandHistoryModal();
+    return;
+  }
+
+  // Create the container div
+  var containerDiv = document.createElement('div');
+  containerDiv.className = 'quarto-code-links';
+
+  // Create the h2 element
+  var h2 = document.createElement('h2');
+  h2.textContent = 'webR Code Links';
+
+  // Create the ul element
+  var ul = document.createElement('ul');
+
+  // Create the li element
+  var li = document.createElement('li');
+
+  // Create the a_history_btn element
+  var a_history_btn = document.createElement('a');
+  a_history_btn.href = 'javascript:void(0)';
+  a_history_btn.setAttribute('id', 'qwebrRHistoryButton');
+
+  // Create the i_history_btn element
+  var i_history_btn = document.createElement('i');
+  i_history_btn.className = 'bi bi-file-code';
+
+  // Create the text node for the link text
+  var text_history_btn = document.createTextNode('View R History');
+
+  // Append the icon element and link text to the a element
+  a_history_btn.appendChild(i_history_btn);
+  a_history_btn.appendChild(text_history_btn);
+
+  // Append the a element to the li element
+  li.appendChild(a_history_btn);
+
+  // Append the li element to the ul element
+  ul.appendChild(li);
+
+  // Append the h2 and ul elements to the container div
+  containerDiv.appendChild(h2);
+  containerDiv.appendChild(ul);
+
+  // Append the container div to the element with the ID 'quarto-margin-sidebar'
+  var sidebar = document.getElementById('quarto-margin-sidebar');
+    
+  // If the sidebar element is not found, create it
+  if(!sidebar) {
+    qwebrPlaceQuartoSidebar();
+  }
+  
+  // Re-select the sidebar element (if it was just created)
+  sidebar = document.getElementById('quarto-margin-sidebar');   
+
+
+  // If the sidebar element exists, append the container div to it
+  if(sidebar) {
+    // Append the container div to the sidebar
+    sidebar.appendChild(containerDiv);
+    // Force the sidebar to be clickable by removing the 'zindex-bottom' class
+    // added in pre-release: https://github.com/quarto-dev/quarto-cli/commit/f0c53a1ffcaa1de4eccbf07803b096898248adcc
+    sidebar.className = 'sidebar margin-sidebar';
+  } else {
+    // Get a debugger ...
+    console.warn('Element with ID "quarto-margin-sidebar" not found.');
+  }
+}
+
+// Call the function to append the code links for qwebR into the right sidebar
+qwebrCodeLinks();
+
+// Add the command history modal
+qwebrAddCommandHistoryModal();
+
+displayStartupMessage(qwebrShowStartupMessage, qwebrShowHeaderMessage);
+qwebrOffScreenCanvasSupportWarningMessage();
+</script>
+<script type="module">
+// Define a global storage and retrieval solution ----
+
+// Store commands executed in R
+globalThis.qwebrRCommandHistory = [];
+
+// Function to retrieve the command history
+globalThis.qwebrFormatRHistory = function() {
+   return qwebrRCommandHistory.join("\n\n");
+}
+
+// Retrieve HTML Elements ----
+
+// Get the command modal
+const command_history_modal = document.getElementById("qwebr-history-modal");
+
+// Get the button that opens the command modal
+const command_history_btn = document.getElementById("qwebrRHistoryButton");
+
+// Get the <span> element that closes the command modal
+const command_history_close_span = document.getElementById("qwebr-command-history-close-btn");
+
+// Get the download button for r history information
+const command_history_download_btn = document.getElementById("qwebr-download-history-btn");
+
+// Plug in command history into modal/download button ----
+
+// Function to populate the modal with command history
+function populateCommandHistoryModal() {
+    document.getElementById("qwebr-command-history-contents").innerHTML = qwebrFormatRHistory() || "No commands have been executed yet.";
+}
+
+// Function to format the current date and time to
+// a string with the format YYYY-MM-DD-HH-MM-SS
+function formatDateTime() {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
+}
+
+
+// Function to convert document title with datetime to a safe filename
+function safeFileName() {
+    // Get the current page title
+    let pageTitle = document.title;
+
+    // Combine the current page title with the current date and time
+    let pageNameWithDateTime = `Rhistory-${pageTitle}-${formatDateTime()}`;
+
+    // Replace unsafe characters with safe alternatives
+    let safeFilename = pageNameWithDateTime.replace(/[\\/:\*\?! "<>\|]/g, '-');
+
+    return safeFilename;
+}
+
+
+// Function to download list contents as text file
+function downloadRHistory() {
+    // Get the current page title + datetime and use it as the filename
+    const filename = `${safeFileName()}.R`;
+
+    // Get the text contents of the R History list
+    const text = qwebrFormatRHistory();
+
+    // Create a new Blob object with the text contents
+    const blob = new Blob([text], { type: 'text/plain' });
+  
+    // Create a new anchor element for the download
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+
+    // Append the anchor to the body, click it, and remove it
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// Register event handlers ----
+
+// When the user clicks the View R History button, open the command modal
+command_history_btn.onclick = function() {
+    populateCommandHistoryModal();
+    command_history_modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the command modal
+command_history_close_span.onclick = function() {
+    command_history_modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the command modal, close it
+window.onclick = function(event) {
+    if (event.target == command_history_modal) {
+        command_history_modal.style.display = "none";
+    }
+}
+
+// Add an onclick event listener to the download button so that
+// the user can download the R history as a text file
+command_history_download_btn.onclick = function() {
+    downloadRHistory();
+};
+</script>
+<script type="module">
+// Supported Evaluation Types for Context
+globalThis.EvalTypes = Object.freeze({
+  Interactive: 'interactive',
+  Setup: 'setup',
+  Output: 'output',
+});
+
+// Function that obtains the font size for a given element 
+globalThis.qwebrCurrentFontSizeOnElement = function(element, cssProperty = 'font-size') {
+
+  const currentFontSize = parseFloat(
+    window
+    .getComputedStyle(element)
+    .getPropertyValue(cssProperty)
+  );
+  
+  return currentFontSize;
+}
+
+// Function to determine font scaling
+globalThis.qwebrScaledFontSize = function(div, qwebrOptions) {
+  // Determine if we should compute font-size using RevealJS's `--r-main-font-size` 
+  // or if we can directly use the document's `font-size`.
+  const cssProperty = document.body.classList.contains('reveal') ? 
+    "--r-main-font-size" : "font-size";
+  
+  // Get the current font size on the div element
+  const elementFontSize = qwebrCurrentFontSizeOnElement(div, cssProperty);
+
+  // Determine the scaled font size value
+  const scaledFontSize = ((qwebrOptions['editor-font-scale'] ?? 1) * elementFontSize) ?? 17.5;
+
+  return scaledFontSize;
+}
+
+
+// Function that dispatches the creation request
+globalThis.qwebrCreateHTMLElement = function (
+  cellData
+) {
+
+  // Extract key components
+  const evalType = cellData.options.context;
+  const qwebrCounter = cellData.id;
+
+  // We make an assumption that insertion points are defined by the Lua filter as:
+  // qwebr-insertion-location-{qwebrCounter} 
+  const elementLocator = document.getElementById(`qwebr-insertion-location-${qwebrCounter}`);
+
+  // Figure out the routine to use to insert the element.
+  let qwebrElement;
+  switch ( evalType ) {
+    case EvalTypes.Interactive:
+      qwebrElement = qwebrCreateInteractiveElement(qwebrCounter, cellData.options);
+      break;
+    case EvalTypes.Output: 
+      qwebrElement = qwebrCreateNonInteractiveOutputElement(qwebrCounter, cellData.options);
+      break;
+    case EvalTypes.Setup: 
+      qwebrElement = qwebrCreateNonInteractiveSetupElement(qwebrCounter, cellData.options);
+      break;
+    default: 
+      qwebrElement = document.createElement('div');
+      qwebrElement.textContent = 'Error creating `quarto-webr` element';
+  }
+
+  // Insert the dynamically generated object at the document location.
+  elementLocator.appendChild(qwebrElement);
+};
+
+// Function that setups the interactive element creation
+globalThis.qwebrCreateInteractiveElement = function (qwebrCounter, qwebrOptions) {
+
+  // Create main div element
+  var mainDiv = document.createElement('div');
+  mainDiv.id = 'qwebr-interactive-area-' + qwebrCounter;
+  mainDiv.className = `qwebr-interactive-area`;
+  if (qwebrOptions.classes) {
+    mainDiv.className += " " + qwebrOptions.classes
+  }
+
+  // Add a unique cell identifier that users can customize
+  if (qwebrOptions.label) {
+    mainDiv.setAttribute('data-id', qwebrOptions.label);
+  }
+
+  // Create toolbar div
+  var toolbarDiv = document.createElement('div');
+  toolbarDiv.className = 'qwebr-editor-toolbar';
+  toolbarDiv.id = 'qwebr-editor-toolbar-' + qwebrCounter;
+
+  // Create a div to hold the left buttons
+  var leftButtonsDiv = document.createElement('div');
+  leftButtonsDiv.className = 'qwebr-editor-toolbar-left-buttons';
+
+  // Create a div to hold the right buttons
+  var rightButtonsDiv = document.createElement('div');
+  rightButtonsDiv.className = 'qwebr-editor-toolbar-right-buttons';
+
+  // Create Run Code button
+  var runCodeButton = document.createElement('button');
+  runCodeButton.className = 'btn btn-default qwebr-button qwebr-button-run';
+  runCodeButton.disabled = true;
+  runCodeButton.type = 'button';
+  runCodeButton.id = 'qwebr-button-run-' + qwebrCounter;
+  runCodeButton.textContent = '🟡 Loading webR...';
+  runCodeButton.title = `Run code (Shift + Enter)`;
+
+  // Append buttons to the leftButtonsDiv
+  leftButtonsDiv.appendChild(runCodeButton);
+
+  // Create Reset button
+  var resetButton = document.createElement('button');
+  resetButton.className = 'btn btn-light btn-xs qwebr-button qwebr-button-reset';
+  resetButton.type = 'button';
+  resetButton.id = 'qwebr-button-reset-' + qwebrCounter;
+  resetButton.title = 'Start over';
+  resetButton.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i>';
+
+  // Create Copy button
+  var copyButton = document.createElement('button');
+  copyButton.className = 'btn btn-light btn-xs qwebr-button qwebr-button-copy';
+  copyButton.type = 'button';
+  copyButton.id = 'qwebr-button-copy-' + qwebrCounter;
+  copyButton.title = 'Copy code';
+  copyButton.innerHTML = '<i class="fa-regular fa-copy"></i>';
+
+  // Append buttons to the rightButtonsDiv
+  rightButtonsDiv.appendChild(resetButton);
+  rightButtonsDiv.appendChild(copyButton);
+
+  // Create console area div
+  var consoleAreaDiv = document.createElement('div');
+  consoleAreaDiv.id = 'qwebr-console-area-' + qwebrCounter;
+  consoleAreaDiv.className = 'qwebr-console-area';
+
+  // Create editor div
+  var editorDiv = document.createElement('div');
+  editorDiv.id = 'qwebr-editor-' + qwebrCounter;
+  editorDiv.className = 'qwebr-editor';
+
+  // Create output code area div
+  var outputCodeAreaDiv = document.createElement('div');
+  outputCodeAreaDiv.id = 'qwebr-output-code-area-' + qwebrCounter;
+  outputCodeAreaDiv.className = 'qwebr-output-code-area';
+  outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+  // Create pre element inside output code area
+  var preElement = document.createElement('pre');
+  preElement.style.visibility = 'hidden';
+  outputCodeAreaDiv.appendChild(preElement);
+
+  // Create output graph area div
+  var outputGraphAreaDiv = document.createElement('div');
+  outputGraphAreaDiv.id = 'qwebr-output-graph-area-' + qwebrCounter;
+  outputGraphAreaDiv.className = 'qwebr-output-graph-area';
+
+  // Append buttons to the toolbar
+  toolbarDiv.appendChild(leftButtonsDiv);
+  toolbarDiv.appendChild(rightButtonsDiv);
+
+  // Append all elements to the main div
+  mainDiv.appendChild(toolbarDiv);
+  consoleAreaDiv.appendChild(editorDiv);
+  consoleAreaDiv.appendChild(outputCodeAreaDiv);
+  mainDiv.appendChild(consoleAreaDiv);
+  mainDiv.appendChild(outputGraphAreaDiv);
+
+  return mainDiv;
+}
+
+// Function that adds output structure for non-interactive output
+globalThis.qwebrCreateNonInteractiveOutputElement = function(qwebrCounter, qwebrOptions) {
+  // Create main div element
+  var mainDiv = document.createElement('div');
+  mainDiv.id = 'qwebr-noninteractive-area-' + qwebrCounter;
+  mainDiv.className = `qwebr-noninteractive-area`;
+  if (qwebrOptions.classes) {
+    mainDiv.className += " " + qwebrOptions.classes
+  }
+  
+  // Add a unique cell identifier that users can customize
+  if (qwebrOptions.label) {
+    mainDiv.setAttribute('data-id', qwebrOptions.label);
+  }
+  
+  // Create a status container div
+  var statusContainer = createLoadingContainer(qwebrCounter);
+
+  // Create output code area div
+  var outputCodeAreaDiv = document.createElement('div');
+  outputCodeAreaDiv.id = 'qwebr-output-code-area-' + qwebrCounter;
+  outputCodeAreaDiv.className = 'qwebr-output-code-area';
+  outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+  // Create pre element inside output code area
+  var preElement = document.createElement('pre');
+  preElement.style.visibility = 'hidden';
+  outputCodeAreaDiv.appendChild(preElement);
+
+  // Create output graph area div
+  var outputGraphAreaDiv = document.createElement('div');
+  outputGraphAreaDiv.id = 'qwebr-output-graph-area-' + qwebrCounter;
+  outputGraphAreaDiv.className = 'qwebr-output-graph-area';
+
+  // Append all elements to the main div
+  mainDiv.appendChild(statusContainer);
+  mainDiv.appendChild(outputCodeAreaDiv);
+  mainDiv.appendChild(outputGraphAreaDiv);
+
+  return mainDiv;
+};
+
+// Function that adds a stub in the page to indicate a setup cell was used.
+globalThis.qwebrCreateNonInteractiveSetupElement = function(qwebrCounter, qwebrOptions) {
+  // Create main div element
+  var mainDiv = document.createElement('div');
+  mainDiv.id = `qwebr-noninteractive-setup-area-${qwebrCounter}`;
+  mainDiv.className = `qwebr-noninteractive-setup-area`;
+  if (qwebrOptions.classes) {
+    mainDiv.className += " " + qwebrOptions.classes
+  }
+
+
+  // Add a unique cell identifier that users can customize
+  if (qwebrOptions.label) {
+    mainDiv.setAttribute('data-id', qwebrOptions.label);
+  }
+
+  // Create a status container div
+  var statusContainer = createLoadingContainer(qwebrCounter);
+
+  // Append status onto the main div
+  mainDiv.appendChild(statusContainer);
+
+  return mainDiv;
+}
+
+
+// Function to create loading container with specified ID
+globalThis.createLoadingContainer = function(qwebrCounter) {
+
+  // Create a status container
+  const container = document.createElement('div');
+  container.id = `qwebr-non-interactive-loading-container-${qwebrCounter}`;
+  container.className = 'qwebr-non-interactive-loading-container qwebr-cell-needs-evaluation';
+
+  // Create an R project logo to indicate its a code space
+  const rProjectIcon = document.createElement('i');
+  rProjectIcon.className = 'fa-brands fa-r-project fa-3x qwebr-r-project-logo';
+
+  // Setup a loading icon from font awesome
+  const spinnerIcon = document.createElement('i');
+  spinnerIcon.className = 'fa-solid fa-spinner fa-spin fa-1x qwebr-icon-status-spinner';
+
+  // Add a section for status text
+  const statusText = document.createElement('p');
+  statusText.id = `qwebr-status-text-${qwebrCounter}`;
+  statusText.className = `qwebr-status-text qwebr-cell-needs-evaluation`;
+  statusText.innerText = 'Loading webR...';
+
+  // Incorporate an inner container
+  const innerContainer = document.createElement('div');
+
+  // Append elements to the inner container
+  innerContainer.appendChild(spinnerIcon);
+  innerContainer.appendChild(statusText);
+
+  // Append elements to the main container
+  container.appendChild(rProjectIcon);
+  container.appendChild(innerContainer);
+
+  return container;
+}
+</script>
+<script type="module">
+// Function to install a single package
+async function qwebrInstallRPackage(packageName) {
+  await mainWebR.evalRVoid(`webr::install('${packageName}');`);
+}
+
+// Function to load a single package
+async function qwebrLoadRPackage(packageName) {
+  await mainWebR.evalRVoid(`require('${packageName}', quietly = TRUE)`);
+}
+
+// Generic function to process R packages
+async function qwebrProcessRPackagesWithStatus(packages, processType, displayStatusMessageUpdate = true) {
+  // Switch between contexts
+  const messagePrefix = processType === 'install' ? 'Installing' : 'Loading';
+
+  // Modify button state
+  qwebrSetInteractiveButtonState(`🟡 ${messagePrefix} package ...`, false);
+
+  // Iterate over packages
+  for (let i = 0; i < packages.length; i++) {
+    const activePackage = packages[i];
+    const formattedMessage = `${messagePrefix} package ${i + 1} out of ${packages.length}: ${activePackage}`;
+
+    // Display the update in header
+    if (displayStatusMessageUpdate) {
+      qwebrUpdateStatusHeader(formattedMessage);
+    }
+
+    // Display the update in non-active areas
+    qwebrUpdateStatusMessage(formattedMessage);
+
+    // Run package installation
+    if (processType === 'install') {
+      await qwebrInstallRPackage(activePackage);
+    } else {
+      await qwebrLoadRPackage(activePackage);
+    }
+  }
+
+  // Clean slate
+  if (processType === 'load') {
+    await mainWebR.flush();
+  }
+}
+
+// Start a timer
+const initializeWebRTimerStart = performance.now();
+
+// Encase with a dynamic import statement
+globalThis.qwebrInstance = import(qwebrCustomizedWebROptions.baseURL + "webr.mjs").then(
+  async ({ WebR, ChannelType }) => {
+    // Populate WebR options with defaults or new values based on `webr` meta
+    globalThis.mainWebR = new WebR(qwebrCustomizedWebROptions);
+
+    // Initialization WebR
+    await mainWebR.init();
+
+    // Setup a shelter
+    globalThis.mainWebRCodeShelter = await new mainWebR.Shelter();
+
+    // Setup a pager to allow processing help documentation
+    await mainWebR.evalRVoid('webr::pager_install()');
+
+    // Setup a viewer to allow processing htmlwidgets.
+    // This might not be available in old webr version
+    await mainWebR.evalRVoid('try({ webr::viewer_install() })');
+
+    // Override the existing install.packages() to use webr::install()
+    await mainWebR.evalRVoid('webr::shim_install()');
+
+    // Specify the repositories to pull from
+    // Note: webR does not use the `repos` option, but instead uses `webr_pkg_repos`
+    // inside of `install()`. However, other R functions still pull from `repos`.
+    await mainWebR.evalRVoid(`
+      options(
+        webr_pkg_repos = c(${qwebrPackageRepoURLS.map(repoURL => `'${repoURL}'`).join(',')}),
+        repos = c(${qwebrPackageRepoURLS.map(repoURL => `'${repoURL}'`).join(',')})
+      )
+    `);
+
+    // Check to see if any packages need to be installed
+    if (qwebrSetupRPackages) {
+      // Obtain only a unique list of packages
+      const uniqueRPackageList = Array.from(new Set(qwebrInstallRPackagesList));
+
+      // Install R packages one at a time (either silently or with a status update)
+      await qwebrProcessRPackagesWithStatus(uniqueRPackageList, 'install', qwebrShowStartupMessage);
+
+      if (qwebrAutoloadRPackages) {
+        // Load R packages one at a time (either silently or with a status update)
+        await qwebrProcessRPackagesWithStatus(uniqueRPackageList, 'load', qwebrShowStartupMessage);
+      }
+    }
+  }
+);
+
+// Stop timer
+const initializeWebRTimerEnd = performance.now();
+
+</script>
+<script type="module">
+// Function to verify a given JavaScript Object is empty
+globalThis.qwebrIsObjectEmpty = function (arr) {
+    return Object.keys(arr).length === 0;
+}
+
+// Global version of the Escape HTML function that converts HTML
+// characters to their HTML entities.
+globalThis.qwebrEscapeHTMLCharacters = function(unsafe) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+};
+
+// Passthrough results
+globalThis.qwebrIdentity = function(x) {
+    return x;
+};
+
+// Append a comment
+globalThis.qwebrPrefixComment = function(x, comment) {
+    return `${comment}${x}`;
+};
+
+// Function to store the code in the history
+globalThis.qwebrLogCodeToHistory = function(codeToRun, options) {
+    qwebrRCommandHistory.push(
+        `# Ran code in ${options.label} at ${new Date().toLocaleString()} ----\n${codeToRun}`
+    );
+};
+
+// Function to attach a download button onto the canvas
+// allowing the user to download the image.
+function qwebrImageCanvasDownloadButton(canvas, canvasContainer) {
+
+    // Create the download button
+    const downloadButton = document.createElement('button');
+    downloadButton.className = 'qwebr-canvas-image-download-btn';
+    downloadButton.textContent = 'Download Image';
+    canvasContainer.appendChild(downloadButton);
+
+    // Trigger a download of the image when the button is clicked
+    downloadButton.addEventListener('click', function() {
+        const image = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = 'qwebr-canvas-image.png';
+        link.click();
+    });
+}
+
+
+// Function to parse the pager results
+globalThis.qwebrParseTypePager = async function (msg) {
+
+    // Split out the event data
+    const { path, title, deleteFile } = msg.data;
+
+    // Process the pager data by reading the information from disk
+    const paged_data = await mainWebR.FS.readFile(path).then((data) => {
+        // Obtain the file content
+        let content = new TextDecoder().decode(data);
+
+        // Remove excessive backspace characters until none remain
+        while(content.match(/.[\b]/)){
+            content = content.replace(/.[\b]/g, '');
+        }
+
+        // Returned cleaned data
+        return content;
+    });
+
+    // Unlink file if needed
+    if (deleteFile) {
+        await mainWebR.FS.unlink(path);
+    }
+
+    // Return extracted data with spaces
+    return paged_data;
+};
+
+
+// Function to parse the browse results
+globalThis.qwebrParseTypeBrowse = async function (msg) {
+
+    // msg.type === "browse"
+    const path = msg.data.url;
+
+    // Process the browse data by reading the information from disk
+    const browse_data = await mainWebR.FS.readFile(path).then((data) => {
+        // Obtain the file content
+        let content = new TextDecoder().decode(data);
+
+        return content;
+    });
+
+    // Return extracted data as-is
+    return browse_data;
+};
+
+// Function to run the code using webR and parse the output
+globalThis.qwebrComputeEngine = async function(
+    codeToRun,
+    elements,
+    options) {
+
+    // Call into the R compute engine that persists within the document scope.
+    // To be prepared for all scenarios, the following happens:
+    // 1. We setup a canvas device to write to by making a namespace call into the {webr} package
+    // 2. We use values inside of the options array to set the figure size.
+    // 3. We capture the output stream information (STDOUT and STERR)
+    // 4. We disable the current device's image creation.
+    // 5. Piece-wise parse the results into the different output areas
+
+    // Create a pager variable for help/file contents
+    let pager = [];
+
+    // Handle how output is processed
+    let showMarkup = options.results === "markup" && options.output !== "asis";
+    let processOutput;
+
+    if (showMarkup) {
+        processOutput = qwebrEscapeHTMLCharacters;
+    } else {
+        processOutput = qwebrIdentity;
+    }
+
+    // ----
+    // Convert from Inches to Pixels by using DPI (dots per inch)
+    // for bitmap devices (dpi * inches = pixels)
+    let fig_width = options["fig-width"] * options["dpi"];
+    let fig_height = options["fig-height"] * options["dpi"];
+
+    // Initialize webR
+    await mainWebR.init();
+
+    // Configure capture output
+    let captureOutputOptions = {
+        withAutoprint: true,
+        captureStreams: true,
+        captureConditions: false,
+        // env: webR.objs.emptyEnv, // maintain a global environment for webR v0.2.0
+    };
+
+    // Determine if the browser supports OffScreen
+    if (qwebrOffScreenCanvasSupport()) {
+        // Mirror default options of webr::canvas()
+        // with changes to figure height and width.
+        captureOutputOptions.captureGraphics = {
+            width: fig_width,
+            height: fig_height,
+            bg: "white", // default: transparent
+            pointsize: 12,
+            capture: true
+        };
+    }  else {
+        // Disable generating graphics
+        captureOutputOptions.captureGraphics = false;
+    }
+
+    // Store the code to run in history
+    qwebrLogCodeToHistory(codeToRun, options);
+
+    // Setup a webR canvas by making a namespace call into the {webr} package
+    // Evaluate the R code
+    // Remove the active canvas silently
+    const result = await mainWebRCodeShelter.captureR(
+        `${codeToRun}`,
+        captureOutputOptions
+    );
+
+    // -----
+
+    // Start attempting to parse the result data
+    processResultOutput:try {
+
+        // Avoid running through output processing
+        if (options.results === "hide" || options.output === "false") {
+            break processResultOutput;
+        }
+
+        // Merge output streams of STDOUT and STDErr (messages and errors are combined.)
+        // Require both `warning` and `message` to be true to display `STDErr`.
+        const out = result.output
+        .filter(
+            evt => evt.type === "stdout" ||
+            ( evt.type === "stderr" && (options.warning === "true" && options.message === "true"))
+        )
+        .map((evt, index) => {
+            const className = `qwebr-output-code-${evt.type}`;
+            const outputResult = qwebrPrefixComment(processOutput(evt.data), options.comment);
+            return `<code id="${className}-editor-${elements.id}-result-${index + 1}" class="${className}">${outputResult}</code>`;
+        })
+        .join("\n");
+
+
+        // Clean the state
+        // We're now able to process pager events.
+        // As a result, we cannot maintain a true 1-to-1 output order
+        // without individually feeding each line
+        const msgs = await mainWebR.flush();
+
+        // Use `map` to process the filtered "pager" events asynchronously
+        const pager = [];
+        const browse = [];
+
+        await Promise.all(
+            msgs.map(
+                async (msg) => {
+
+                    const msgType = msg.type || "unknown";
+
+                    switch(msgType) {
+                        case 'pager':
+                            const pager_data = await qwebrParseTypePager(msg);
+                            pager.push(pager_data);
+                            break;
+                        case 'browse':
+                            const browse_data = await qwebrParseTypeBrowse(msg);
+                            browse.push(browse_data);
+                            break;
+                    }
+                    return;
+                }
+            )
+        );
+
+        // Nullify the output area of content
+        elements.outputCodeDiv.innerHTML = "";
+        elements.outputGraphDiv.innerHTML = "";
+
+        // Design an output object for messages
+        const pre = document.createElement("pre");
+        if (/\S/.test(out)) {
+            // Display results as HTML elements to retain output styling
+            const div = document.createElement("div");
+            div.innerHTML = out;
+
+            // Calculate a scaled font-size value
+            const scaledFontSize = qwebrScaledFontSize(
+                elements.outputCodeDiv, options);
+
+            // Override output code cell size
+            pre.style.fontSize = `${scaledFontSize}px`;
+            pre.appendChild(div);
+        } else {
+            // If nothing is present, hide the element.
+            pre.style.visibility = "hidden";
+        }
+
+        elements.outputCodeDiv.appendChild(pre);
+
+        // Determine if we have graphs to display
+        if (result.images.length > 0) {
+
+            // Create figure element
+            const figureElement = document.createElement("figure");
+            figureElement.className = "qwebr-canvas-image";
+
+            // Place each rendered graphic onto a canvas element
+            result.images.forEach((img) => {
+
+                // Construct canvas for object
+                const canvas = document.createElement("canvas");
+
+                // Add an image download button
+                qwebrImageCanvasDownloadButton(canvas, figureElement);
+
+                // Set canvas size to image
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Apply output truncations
+                canvas.style.width = options["out-width"] ? options["out-width"] : `${fig_width}px`;
+                if (options["out-height"]) {
+                    canvas.style.height = options["out-height"];
+                }
+
+                // Apply styling
+                canvas.style.display = "block";
+                canvas.style.margin = "auto";
+
+                // Draw image onto Canvas
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+
+                // Append canvas to figure output area
+                figureElement.appendChild(canvas);
+
+            });
+
+            if (options['fig-cap']) {
+                // Create figcaption element
+                const figcaptionElement = document.createElement('figcaption');
+                figcaptionElement.innerText = options['fig-cap'];
+                // Append figcaption to figure
+                figureElement.appendChild(figcaptionElement);
+            }
+
+            elements.outputGraphDiv.appendChild(figureElement);
+
+        }
+
+        // Display the pager data
+        if (pager.length > 0) {
+            // Use the `pre` element to preserve whitespace.
+            pager.forEach((paged_data, index) => {
+                const pre_pager = document.createElement("pre");
+                pre_pager.innerText = paged_data;
+                pre_pager.classList.add("qwebr-output-code-pager");
+                pre_pager.setAttribute("id", `qwebr-output-code-pager-editor-${elements.id}-result-${index + 1}`);
+                elements.outputCodeDiv.appendChild(pre_pager);
+            });
+        }
+
+        // Display the browse data
+        if (browse.length > 0) {
+            // Use the `pre` element to preserve whitespace.
+            browse.forEach((browse_data, index) => {
+                const iframe_browse = document.createElement('iframe');
+                iframe_browse.classList.add("qwebr-output-code-browse");
+                iframe_browse.setAttribute("id", `qwebr-output-code-browse-editor-${elements.id}-result-${index + 1}`);
+                iframe_browse.style.width = "100%";
+                iframe_browse.style.minHeight = "500px";
+                elements.outputCodeDiv.appendChild(iframe_browse);
+
+                iframe_browse.contentWindow.document.open();
+                iframe_browse.contentWindow.document.write(browse_data);
+                iframe_browse.contentWindow.document.close();
+            });
+        }
+    } finally {
+        // Clean up the remaining code
+        mainWebRCodeShelter.purge();
+    }
+};
+
+// Function to execute the code (accepts code as an argument)
+globalThis.qwebrExecuteCode = async function (
+    codeToRun,
+    id,
+    options = {}) {
+
+    // If options are not passed, we fall back on the bare minimum to handle the computation
+    if (qwebrIsObjectEmpty(options)) {
+        options = {
+            "context": "interactive",
+            "fig-width": 7, "fig-height": 5,
+            "out-width": "700px", "out-height": "",
+            "dpi": 72,
+            "results": "markup",
+            "warning": "true", "message": "true",
+        };
+    }
+
+    // Next, we access the compute areas values
+    const elements = {
+        runButton: document.getElementById(`qwebr-button-run-${id}`),
+        outputCodeDiv: document.getElementById(`qwebr-output-code-area-${id}`),
+        outputGraphDiv: document.getElementById(`qwebr-output-graph-area-${id}`),
+        id: id,
+    }
+
+    // Disallowing execution of other code cells
+    document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+        btn.disabled = true;
+    });
+
+    if (options.context == EvalTypes.Interactive) {
+        // Emphasize the active code cell
+        elements.runButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin qwebr-icon-status-spinner"></i> <span>Run Code</span>';
+    }
+
+    // Evaluate the code and parse the output into the document
+    await qwebrComputeEngine(codeToRun, elements, options);
+
+    // Switch to allowing execution of code
+    document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+        btn.disabled = false;
+    });
+
+    if (options.context == EvalTypes.Interactive) {
+        // Revert to the initial code cell state
+        elements.runButton.innerHTML = '<i class="fa-solid fa-play qwebr-icon-run-code"></i> <span>Run Code</span>';
+    }
+}
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -304,7 +1909,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap05_probabilidade.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">cap05_probabilidade.html</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap05_probabilidade.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidade nas Ciências da Saúde</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -317,7 +1922,9 @@ document.addEventListener("DOMContentLoaded", function() {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Análise de Dados para Biocientistas</a> 
     </div>
@@ -362,7 +1969,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap05_probabilidade.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">cap05_probabilidade.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidade nas Ciências da Saúde</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -406,15 +2013,831 @@ document.addEventListener("DOMContentLoaded", function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#o-que-é-probabilidade" id="toc-o-que-é-probabilidade" class="nav-link active" data-scroll-target="#o-que-é-probabilidade"><span class="header-section-number">5.1</span> O que é probabilidade?</a>
+  <ul class="collapse">
+  <li><a href="#três-formas-de-atribuir-probabilidades" id="toc-três-formas-de-atribuir-probabilidades" class="nav-link" data-scroll-target="#três-formas-de-atribuir-probabilidades"><span class="header-section-number">5.1.1</span> Três formas de atribuir probabilidades</a></li>
+  </ul></li>
+  <li><a href="#as-regras-que-governam-o-acaso" id="toc-as-regras-que-governam-o-acaso" class="nav-link" data-scroll-target="#as-regras-que-governam-o-acaso"><span class="header-section-number">5.2</span> As regras que governam o acaso</a>
+  <ul class="collapse">
+  <li><a href="#a-regra-do-complemento" id="toc-a-regra-do-complemento" class="nav-link" data-scroll-target="#a-regra-do-complemento"><span class="header-section-number">5.2.1</span> A regra do complemento</a></li>
+  <li><a href="#a-regra-da-adição" id="toc-a-regra-da-adição" class="nav-link" data-scroll-target="#a-regra-da-adição"><span class="header-section-number">5.2.2</span> A regra da adição</a></li>
+  <li><a href="#a-regra-da-multiplicação" id="toc-a-regra-da-multiplicação" class="nav-link" data-scroll-target="#a-regra-da-multiplicação"><span class="header-section-number">5.2.3</span> A regra da multiplicação</a></li>
+  </ul></li>
+  <li><a href="#probabilidade-condicional-e-independência" id="toc-probabilidade-condicional-e-independência" class="nav-link" data-scroll-target="#probabilidade-condicional-e-independência"><span class="header-section-number">5.3</span> Probabilidade condicional e independência</a></li>
+  <li><a href="#o-teorema-de-bayes" id="toc-o-teorema-de-bayes" class="nav-link" data-scroll-target="#o-teorema-de-bayes"><span class="header-section-number">5.4</span> O teorema de Bayes</a>
+  <ul class="collapse">
+  <li><a href="#um-exemplo-clínico" id="toc-um-exemplo-clínico" class="nav-link" data-scroll-target="#um-exemplo-clínico"><span class="header-section-number">5.4.1</span> Um exemplo clínico</a></li>
+  </ul></li>
+  <li><a href="#prática-interativa-vendo-a-probabilidade-acontecer-no-r" id="toc-prática-interativa-vendo-a-probabilidade-acontecer-no-r" class="nav-link" data-scroll-target="#prática-interativa-vendo-a-probabilidade-acontecer-no-r"><span class="header-section-number">5.5</span> Prática Interativa: vendo a probabilidade acontecer no R</a></li>
+  <li><a href="#modelos-de-distribuição-de-probabilidade" id="toc-modelos-de-distribuição-de-probabilidade" class="nav-link" data-scroll-target="#modelos-de-distribuição-de-probabilidade"><span class="header-section-number">5.6</span> Modelos de distribuição de probabilidade</a>
+  <ul class="collapse">
+  <li><a href="#o-modelo-binomial" id="toc-o-modelo-binomial" class="nav-link" data-scroll-target="#o-modelo-binomial"><span class="header-section-number">5.6.1</span> O modelo binomial</a></li>
+  <li><a href="#o-modelo-de-poisson" id="toc-o-modelo-de-poisson" class="nav-link" data-scroll-target="#o-modelo-de-poisson"><span class="header-section-number">5.6.2</span> O modelo de Poisson</a></li>
+  <li><a href="#o-modelo-gaussiano" id="toc-o-modelo-gaussiano" class="nav-link" data-scroll-target="#o-modelo-gaussiano"><span class="header-section-number">5.6.3</span> O modelo gaussiano</a></li>
+  <li><a href="#qual-modelo-escolher" id="toc-qual-modelo-escolher" class="nav-link" data-scroll-target="#qual-modelo-escolher"><span class="header-section-number">5.6.4</span> Qual modelo escolher?</a></li>
+  <li><a href="#calculando-as-distribuições-no-r" id="toc-calculando-as-distribuições-no-r" class="nav-link" data-scroll-target="#calculando-as-distribuições-no-r"><span class="header-section-number">5.6.5</span> Calculando as distribuições no R</a></li>
+  </ul></li>
+  <li><a href="#ferramenta-de-apoio-probmaster" id="toc-ferramenta-de-apoio-probmaster" class="nav-link" data-scroll-target="#ferramenta-de-apoio-probmaster"><span class="header-section-number">5.7</span> Ferramenta de apoio: ProbMaster</a></li>
+  <li><a href="#probabilidade-no-cotidiano-das-biociências" id="toc-probabilidade-no-cotidiano-das-biociências" class="nav-link" data-scroll-target="#probabilidade-no-cotidiano-das-biociências"><span class="header-section-number">5.8</span> Probabilidade no cotidiano das biociências</a></li>
+  <li><a href="#exercícios-de-fixação" id="toc-exercícios-de-fixação" class="nav-link" data-scroll-target="#exercícios-de-fixação"><span class="header-section-number">5.9</span> 🧠 Exercícios de fixação</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+<script type="module" id="qwebr-monaco-editor-init">
+
+  // Configure the Monaco Editor's loader
+  require.config({
+    paths: {
+      'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs'
+    }
+  });
+</script>
+<script type="module">
+// Function to update Monaco Editors when body class changes
+function updateMonacoEditorsOnBodyClassChange() {
+    // Select the body element
+    const body = document.querySelector('body');
+
+    // Options for the observer (which mutations to observe)
+    const observerOptions = {
+        attributes: true,  // Observe changes to attributes
+        attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+    };
+
+    // Callback function to execute when mutations are observed
+    const bodyClassChangeCallback = function(mutationsList, observer) {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                // Class attribute has changed
+                // Update all Monaco Editors on the page
+                updateMonacoEditorTheme();
+            }
+        }
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(bodyClassChangeCallback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(body, observerOptions);
+}
+
+// Function to update all instances of Monaco Editors on the page
+function updateMonacoEditorTheme() {
+    // Determine what VS Theme to use
+    const vsThemeToUse = document.body.classList.contains("quarto-dark") ? 'vs-dark' : 'vs' ;
+
+    // Iterate through all initialized Monaco Editors
+    qwebrEditorInstances.forEach( function(editorInstance) { 
+        editorInstance.updateOptions({ theme: vsThemeToUse }); 
+    });
+}
+
+// Call the function to start observing changes to body class
+updateMonacoEditorsOnBodyClassChange();
+</script>
+<script type="module">
+// Global array to store Monaco Editor instances
+globalThis.qwebrEditorInstances = [];
+
+function isValidCodeLineNumbers(stringCodeLineNumbers) {
+  // Regular expression to match valid input strings
+  const regex = /^(\d+(-\d+)?)(,\d+(-\d+)?)*$/;
+  return regex.test(stringCodeLineNumbers);
+}
+
+// Function that builds and registers a Monaco Editor instance    
+globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
+
+  const initialCode = cellData.code;
+  const qwebrCounter = cellData.id;
+  const qwebrOptions = cellData.options;
+
+  // Retrieve the previously created document elements
+  let runButton = document.getElementById(`qwebr-button-run-${qwebrCounter}`);
+  let resetButton = document.getElementById(`qwebr-button-reset-${qwebrCounter}`);
+  let copyButton = document.getElementById(`qwebr-button-copy-${qwebrCounter}`);
+  let editorDiv = document.getElementById(`qwebr-editor-${qwebrCounter}`);
+
+  // Load the Monaco Editor and create an instance
+  let editor;
+  require(['vs/editor/editor.main'], function () {
+    editor = monaco.editor.create(editorDiv, {
+      value: initialCode,
+      language: 'r',
+      theme: 'vs-light',
+      automaticLayout: true,           // Works wonderfully with RevealJS
+      scrollBeyondLastLine: false,
+      minimap: {
+        enabled: false
+      },
+      fontSize: qwebrScaledFontSize(editorDiv, qwebrOptions),         
+      renderLineHighlight: "none",      // Disable current line highlighting
+      hideCursorInOverviewRuler: true,  // Remove cursor indictor in right hand side scroll bar
+      readOnly: qwebrOptions['read-only'] ?? false,
+      quickSuggestions: qwebrOptions['editor-quick-suggestions'] ?? false,
+      wordWrap: (qwebrOptions['editor-word-wrap'] == 'true' ? "on" : "off")
+    });
+
+    // Store the official counter ID to be used in keyboard shortcuts
+    editor.__qwebrCounter = qwebrCounter;
+
+    // Store the official div container ID
+    editor.__qwebrEditorId = `qwebr-editor-${qwebrCounter}`;
+
+    // Store the initial code value and options
+    editor.__qwebrinitialCode = initialCode;
+    editor.__qwebrOptions = qwebrOptions;
+
+    // Set at the model level the preferred end of line (EOL) character to LF.
+    // This prevent `\r\n` from being given to the webR engine if the user is on Windows.
+    // See details in: https://github.com/coatless/quarto-webr/issues/94
+    // Associated error text: 
+    // Error: <text>:1:7 unexpected input
+
+    // Retrieve the underlying model
+    const model = editor.getModel();
+    // Set EOL for the model
+    model.setEOL(monaco.editor.EndOfLineSequence.LF);
+    
+    // Dynamically modify the height of the editor window if new lines are added.
+    let ignoreEvent = false;
+    const updateHeight = () => {
+      // Increment editor height by 2 to prevent vertical scroll bar from appearing
+      const contentHeight = editor.getContentHeight() + 2;
+
+      // Retrieve editor-max-height option
+      const maxEditorHeight = qwebrOptions['editor-max-height'];
+
+      // If editor-max-height is missing, allow infinite growth. Otherwise, threshold.
+      const editorHeight = !maxEditorHeight ?  contentHeight : Math.min(contentHeight, maxEditorHeight);
+
+      // We're avoiding a width change
+      //editorDiv.style.width = `${width}px`;
+      editorDiv.style.height = `${editorHeight}px`;
+      try {
+        ignoreEvent = true;
+
+        // The key to resizing is this call
+        editor.layout();
+      } finally {
+        ignoreEvent = false;
+      }
+    };
+
+    // Function to generate decorations to highlight lines
+    // in the editor based on input string.
+    function decoratorHighlightLines(codeLineNumbers) {
+      // Store the lines to be lighlight
+      let linesToHighlight = [];
+      
+      // Parse the codeLineNumbers string to get the line numbers to highlight
+      // First, split the string by commas
+      codeLineNumbers.split(',').forEach(part => {
+        // Check if we have a range of lines
+        if (part.includes('-')) {
+            // Handle range of lines (e.g., "6-8")
+            const [start, end] = part.split('-').map(Number);
+            for (let i = start; i <= end; i++) {
+                linesToHighlight.push(i);
+            }
+        } else {
+            // Handle single line (e.g., "7")
+            linesToHighlight.push(Number(part));
+        }
+      });
+  
+      // Create monaco decorations for the lines to highlight
+      const decorations = linesToHighlight.map(lineNumber => ({
+          range: new monaco.Range(lineNumber, 1, lineNumber, 1),
+          options: {
+              isWholeLine: true,
+              className: 'qwebr-editor-highlight-line'
+          }
+      }));
+  
+      // Return decorations to be applied to the editor
+      return decorations;
+    }
+
+    // Ensure that the editor-code-line-numbers option is set and valid
+    // then apply styling
+    if (qwebrOptions['editor-code-line-numbers']) {
+      // Remove all whitespace from the string
+      const codeLineNumbers = qwebrOptions['editor-code-line-numbers'].replace(/\s/g,'');
+      // Check if the string is valid for line numbers, e.g., "1,3-5,7"
+      if (isValidCodeLineNumbers(codeLineNumbers)) {
+        // Apply the decorations to the editor
+        editor.createDecorationsCollection(decoratorHighlightLines(codeLineNumbers));
+      } else {
+        // Warn the user that the input is invalid
+        console.warn(`Invalid "editor-code-line-numbers" value in code cell ${qwebrOptions['label']}: ${codeLineNumbers}`);
+      }
+    }
+
+    // Helper function to check if selected text is empty
+    function isEmptyCodeText(selectedCodeText) {
+      return (selectedCodeText === null || selectedCodeText === undefined || selectedCodeText === "");
+    }
+
+    // Registry of keyboard shortcuts that should be re-added to each editor window
+    // when focus changes.
+    const addWebRKeyboardShortCutCommands = () => {
+      // Add a keydown event listener for Shift+Enter to run all code in cell
+      editor.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.Enter, () => {
+
+        // Retrieve all text inside the editor
+        qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+      });
+
+      // Add a keydown event listener for CMD/Ctrl+Enter to run selected code
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+
+        // Get the selected text from the editor
+        const selectedText = editor.getModel().getValueInRange(editor.getSelection());
+        // Check if no code is selected
+        if (isEmptyCodeText(selectedText)) {
+          // Obtain the current cursor position
+          let currentPosition = editor.getPosition();
+          // Retrieve the current line content
+          let currentLine = editor.getModel().getLineContent(currentPosition.lineNumber);
+
+          // Propose a new position to move the cursor to
+          let newPosition = new monaco.Position(currentPosition.lineNumber + 1, 1);
+
+          // Check if the new position is beyond the last line of the editor
+          if (newPosition.lineNumber > editor.getModel().getLineCount()) {
+            // Add a new line at the end of the editor
+            editor.executeEdits("addNewLine", [{
+            range: new monaco.Range(newPosition.lineNumber, 1, newPosition.lineNumber, 1),
+            text: "\n", 
+            forceMoveMarkers: true,
+            }]);
+          }
+          
+          // Run the entire line of code.
+          qwebrExecuteCode(currentLine, editor.__qwebrCounter, editor.__qwebrOptions);
+
+          // Move cursor to new position
+          editor.setPosition(newPosition);
+        } else {
+          // Code to run when Ctrl+Enter is pressed with selected code
+          qwebrExecuteCode(selectedText, editor.__qwebrCounter, editor.__qwebrOptions);
+        }
+      });
+    }
+
+    // Register an on focus event handler for when a code cell is selected to update
+    // what keyboard shortcut commands should work.
+    // This is a workaround to fix a regression that happened with multiple
+    // editor windows since Monaco 0.32.0 
+    // https://github.com/microsoft/monaco-editor/issues/2947
+    editor.onDidFocusEditorText(addWebRKeyboardShortCutCommands);
+
+    // Register an on change event for when new code is added to the editor window
+    editor.onDidContentSizeChange(updateHeight);
+
+    // Manually re-update height to account for the content we inserted into the call
+    updateHeight();
+
+    // Store the editor instance in the global dictionary
+    qwebrEditorInstances[editor.__qwebrCounter] = editor;
+
+  });
+
+  // Add a click event listener to the run button
+  runButton.onclick = function () {
+    qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+  };
+
+  // Add a click event listener to the reset button
+  copyButton.onclick = function () {
+    // Retrieve current code data
+    const data = editor.getValue();
+    
+    // Write code data onto the clipboard.
+    navigator.clipboard.writeText(data || "");
+  };
+  
+  // Add a click event listener to the copy button
+  resetButton.onclick = function () {
+    editor.setValue(editor.__qwebrinitialCode);
+  };
+  
+}
+</script>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidade nas Ciências da Saúde</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
+
+<p>A vida é probabilística. Um exame que “deu positivo”, um casal que sonha com um filho saudável ou uma cultura de células que pode ou não contaminar: em todos esses cenários, a resposta raramente é um “sim” ou um “não” absoluto — é um grau de certeza. A probabilidade é a linguagem que usamos para medir e comparar essa incerteza <span class="citation" data-cites="vieira2008">(<a href="referencias.html#ref-vieira2008" role="doc-biblioref">Vieira 2008</a>)</span>.</p>
+<p>Neste capítulo, vamos construir o espaço amostral de um experimento, aplicar as regras da adição e da multiplicação, distinguir eventos independentes de eventos mutuamente exclusivos, usar o teorema de Bayes para atualizar uma suspeita clínica diante de um novo resultado e conhecer os modelos binomial, de Poisson e gaussiano, que descrevem como as probabilidades se distribuem entre os valores de uma variável. O diagrama abaixo resume o caminho que percorreremos.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"fontSize": "15px", "fontFamily": "inherit"}, "flowchart": {"nodeSpacing": 24, "rankSpacing": 42}}}%%
+flowchart TD
+  A[PROBABILIDADE] --&gt; B("Experimento&lt;br&gt;aleatório")
+  B --&gt; C["Espaço&lt;br&gt;amostral"]
+  B --&gt; D["Evento"]
+
+  A --&gt; E("Regras de&lt;br&gt;cálculo")
+  E --&gt; F["Adição"]
+  E --&gt; G["Multiplicação"]
+  E --&gt; H["Complemento"]
+
+  A --&gt; I("Probabilidade&lt;br&gt;condicional")
+  I --&gt; J["Independência"]
+  I --&gt; K["Teorema de&lt;br&gt;Bayes"]
+
+  A --&gt; L("Modelos de&lt;br&gt;distribuição")
+  L --&gt; M["Binomial"]
+  L --&gt; N["Poisson"]
+  L --&gt; O["Gaussiano"]
+
+  style A fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:#ffffff
+  style B fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style E fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style I fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style L fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style C fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style D fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style F fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style G fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style H fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style J fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style K fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style M fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style N fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style O fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+</pre>
+</div>
+<p></p><figcaption> Mapa conceitual da probabilidade nas biociências</figcaption> </figure><p></p>
+</div>
+</div>
+</div>
+<section id="o-que-é-probabilidade" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="o-que-é-probabilidade"><span class="header-section-number">5.1</span> O que é probabilidade?</h2>
+<p>Em estatística, <strong>probabilidade</strong> é a medida numérica da chance de um evento ocorrer <span class="citation" data-cites="vieira2008">(<a href="referencias.html#ref-vieira2008" role="doc-biblioref">Vieira 2008</a>)</span>. Ela existe porque muitos fenômenos biológicos têm resultados incertos, mas não arbitrários: o conjunto de resultados possíveis é conhecido e, com repetição ou modelagem, padrões estáveis emergem.</p>
+<p>Para trabalhar com probabilidade, precisamos de três conceitos:</p>
+<ul>
+<li><strong>Experimento aleatório:</strong> um procedimento cujo resultado não pode ser previsto com certeza, embora todos os resultados possíveis sejam conhecidos. <em>Exemplo:</em> sortear um paciente de uma clínica e registrar o seu tipo sanguíneo.</li>
+<li><strong>Espaço amostral (<span class="math inline">\(\Omega\)</span>):</strong> o conjunto de todos os resultados possíveis do experimento. No exemplo do tipo sanguíneo, <span class="math inline">\(\Omega = \{A, B, AB, O\}\)</span>.</li>
+<li><strong>Evento:</strong> qualquer subconjunto do espaço amostral. O evento “o paciente tem sangue tipo O” é <span class="math inline">\(\{O\}\)</span>; o evento “o paciente tem sangue A ou O” é <span class="math inline">\(\{A, O\}\)</span>.</li>
+</ul>
+<p>A probabilidade de um evento <span class="math inline">\(A\)</span> é um número entre 0 e 1:</p>
+<p><span class="math display">\[0 \leq P(A) \leq 1\]</span></p>
+<p>Se <span class="math inline">\(P(A) = 0\)</span>, o evento é impossível; se <span class="math inline">\(P(A) = 1\)</span>, é certo. Além disso, a soma das probabilidades de todos os resultados do espaço amostral é 1. Essa é a regra que ancora todo o resto.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Probabilidade não é frequência
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A probabilidade é uma propriedade teórica do experimento; a frequência é o que você observa na prática. Se você jogar uma moeda justa 10 vezes, pode obter 7 caras — mas a probabilidade de cara continua sendo 50%. Com muitas repetições, porém, a frequência observada tende a se aproximar da probabilidade. Essa convergência é a <strong>Lei dos Grandes Números</strong>, e é ela que nos permite estimar probabilidades a partir de dados reais.</p>
+</div>
+</div>
+<section id="três-formas-de-atribuir-probabilidades" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="três-formas-de-atribuir-probabilidades"><span class="header-section-number">5.1.1</span> Três formas de atribuir probabilidades</h3>
+<p>Não existe uma única maneira de chegar a um valor de probabilidade. As três abordagens abaixo aparecem o tempo todo na prática científica <span class="citation" data-cites="triola2017">(<a href="referencias.html#ref-triola2017" role="doc-biblioref">Triola 2017</a>)</span>:</p>
+<ul>
+<li><strong>Clássica (a priori):</strong> quando todos os resultados são igualmente prováveis, <span class="math inline">\(P(A)\)</span> é o número de casos favoráveis dividido pelo número de casos possíveis. <em>Exemplo:</em> no cruzamento entre dois heterozigotos (<span class="math inline">\(Aa \times Aa\)</span>), há quatro combinações de alelos igualmente prováveis (<span class="math inline">\(AA\)</span>, <span class="math inline">\(Aa\)</span>, <span class="math inline">\(aA\)</span>, <span class="math inline">\(aa\)</span>); a probabilidade de um filho afetado (<span class="math inline">\(aa\)</span>) é <span class="math inline">\(1/4 = 25\%\)</span>.</li>
+<li><strong>Frequentista (a posteriori):</strong> estima-se a probabilidade pela frequência relativa observada em muitas repetições. <em>Exemplo:</em> se, em 10.000 pacientes de uma clínica, 200 têm uma determinada condição, a probabilidade estimada é <span class="math inline">\(200/10.000 = 0{,}02\)</span>, ou 2%.</li>
+<li><strong>Subjetiva (bayesiana):</strong> a probabilidade expressa o grau de crença de um especialista, que é atualizado à medida que novas evidências aparecem. <em>Exemplo:</em> a probabilidade de um paciente específico ter uma doença rara antes de qualquer exame, com base no quadro clínico e na prevalência.</li>
+</ul>
+<p>As três abordagens não competem entre si: elas respondem a perguntas diferentes e, frequentemente, se complementam.</p>
+</section>
+</section>
+<section id="as-regras-que-governam-o-acaso" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="as-regras-que-governam-o-acaso"><span class="header-section-number">5.2</span> As regras que governam o acaso</h2>
+<p>Com três regras — complementar, adição e multiplicação — você resolve a maior parte dos problemas de probabilidade em biociências.</p>
+<section id="a-regra-do-complemento" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="a-regra-do-complemento"><span class="header-section-number">5.2.1</span> A regra do complemento</h3>
+<p>A probabilidade de um evento <strong>não</strong> ocorrer é o complemento da probabilidade de ele ocorrer:</p>
+<p><span class="math display">\[P(A^c) = 1 - P(A)\]</span></p>
+<p><em>Exemplo:</em> se a probabilidade de um recém-nascido apresentar uma condição genética é 8%, a probabilidade de não apresentar é <span class="math inline">\(1 - 0{,}08 = 0{,}92\)</span>, ou 92%.</p>
+<p>O complemento é especialmente útil no padrão do <strong>“pelo menos um”</strong>. Se três lotes independentes de um reagente têm, cada um, 10% de chance de contaminação, a probabilidade de pelo menos um estar contaminado é:</p>
+<p><span class="math display">\[1 - (0{,}90)^3 = 1 - 0{,}729 = 0{,}271\]</span></p>
+<p>Ou seja, 27,1% — bem maior do que os 10% de um único lote. Esse tipo de cálculo é essencial no controle de qualidade e na avaliação de riscos em cadeia.</p>
+</section>
+<section id="a-regra-da-adição" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="a-regra-da-adição"><span class="header-section-number">5.2.2</span> A regra da adição</h3>
+<p>Para dois eventos <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>, a probabilidade de ocorrer <span class="math inline">\(A\)</span> <strong>ou</strong> <span class="math inline">\(B\)</span> é:</p>
+<p><span class="math display">\[P(A \cup B) = P(A) + P(B) - P(A \cap B)\]</span></p>
+<p>Subtraímos a interseção porque quem está em <span class="math inline">\(A\)</span> e em <span class="math inline">\(B\)</span> ao mesmo tempo seria contado duas vezes.</p>
+<p><em>Exemplo:</em> em uma população, 30% têm hipertensão, 10% têm diabetes e 4% têm as duas condições. A probabilidade de uma pessoa ter hipertensão ou diabetes é <span class="math inline">\(0{,}30 + 0{,}10 - 0{,}04 = 0{,}36\)</span>, ou 36%.</p>
+<p>Quando os eventos são <strong>mutuamente exclusivos</strong> — isto é, não podem ocorrer juntos —, a interseção é vazia e a regra se simplifica:</p>
+<p><span class="math display">\[P(A \cup B) = P(A) + P(B)\]</span></p>
+<p><em>Exemplo:</em> os tipos sanguíneos A e O são mutuamente exclusivos. Se 40% da população tem sangue A e 45% tem sangue O, a probabilidade de uma pessoa ter A ou O é <span class="math inline">\(0{,}40 + 0{,}45 = 0{,}85\)</span>, ou 85%.</p>
+</section>
+<section id="a-regra-da-multiplicação" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="a-regra-da-multiplicação"><span class="header-section-number">5.2.3</span> A regra da multiplicação</h3>
+<p>Para dois eventos <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>, a probabilidade de ocorrer <span class="math inline">\(A\)</span> <strong>e</strong> <span class="math inline">\(B\)</span> é:</p>
+<p><span class="math display">\[P(A \cap B) = P(A) \times P(B \mid A)\]</span></p>
+<p>Se <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> forem <strong>independentes</strong> — ou seja, a ocorrência de um não altera a chance do outro —, a regra se simplifica:</p>
+<p><span class="math display">\[P(A \cap B) = P(A) \times P(B)\]</span></p>
+<p><em>Exemplo:</em> um casal de portadores (<span class="math inline">\(Aa \times Aa\)</span>) tem 25% de chance de ter um filho afetado em cada gestação. Como as gestações são independentes, a probabilidade de os dois primeiros filhos serem afetados é <span class="math inline">\(0{,}25 \times 0{,}25 = 0{,}0625\)</span>, ou 6,25%.</p>
+<p>A independência, porém, nem sempre existe. Se você sorteia dois alunos de uma turma <strong>sem reposição</strong>, o resultado do primeiro sorteio altera a composição da turma e, portanto, a probabilidade do segundo. <em>Exemplo:</em> em uma turma de 10 alunos, 4 têm asma. A probabilidade de sortear dois alunos com asma é <span class="math inline">\(\frac{4}{10} \times \frac{3}{9} = 0{,}133\)</span>, ou 13,3% — e não <span class="math inline">\(0{,}4 \times 0{,}4\)</span>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Mutuamente exclusivos ≠ independentes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Esses dois conceitos são confundidos com frequência. <strong>Mutuamente exclusivos</strong> significa que os eventos não podem ocorrer juntos: se um acontece, o outro não acontece. <strong>Independentes</strong> significa que a ocorrência de um não altera a probabilidade do outro. Se dois eventos mutuamente exclusivos têm probabilidade positiva, eles são necessariamente <strong>dependentes</strong> — saber que um ocorreu elimina a chance do outro. Na dúvida, volte à definição e pergunte: “o espaço amostral mudou?”</p>
+</div>
+</div>
+</section>
+</section>
+<section id="probabilidade-condicional-e-independência" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="probabilidade-condicional-e-independência"><span class="header-section-number">5.3</span> Probabilidade condicional e independência</h2>
+<p>A <strong>probabilidade condicional</strong> é a probabilidade de um evento ocorrer sabendo que outro já ocorreu. Ela é definida por:</p>
+<p><span class="math display">\[P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \quad P(B) &gt; 0\]</span></p>
+<p>A ideia é simples: quando sabemos que <span class="math inline">\(B\)</span> ocorreu, o espaço amostral deixa de ser <span class="math inline">\(\Omega\)</span> e passa a ser <span class="math inline">\(B\)</span>. A probabilidade de <span class="math inline">\(A\)</span> é recalculada dentro desse novo universo.</p>
+<p>Para ver isso na prática, considere uma amostra de 100 pacientes de uma clínica: 20 são fumantes, 30 são hipertensos e 12 são fumantes e hipertensos.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Hipertenso</th>
+<th style="text-align: right;">Não hipertenso</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fumante</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td>Não fumante</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+<p>Com esses dados:</p>
+<ul>
+<li><span class="math inline">\(P(\text{hipertenso}) = 30/100 = 0{,}30\)</span>;</li>
+<li><span class="math inline">\(P(\text{hipertenso} \mid \text{fumante}) = 12/20 = 0{,}60\)</span>;</li>
+<li><span class="math inline">\(P(\text{fumante} \mid \text{hipertenso}) = 12/30 = 0{,}40\)</span>.</li>
+</ul>
+<p>Como <span class="math inline">\(P(\text{hipertenso} \mid \text{fumante}) \neq P(\text{hipertenso})\)</span>, os eventos <strong>não são independentes</strong>: nesta amostra, fumar está associado a uma chance maior de hipertensão. Dois eventos são independentes quando:</p>
+<p><span class="math display">\[P(A \mid B) = P(A) \quad \text{ou, equivalentemente,} \quad P(A \cap B) = P(A) \times P(B)\]</span></p>
+<p>Repare que a independência é uma <strong>suposição forte</strong>. Duas medidas feitas no mesmo paciente, duas bactérias da mesma colônia ou dois exames do mesmo indivíduo raramente são independentes. Antes de multiplicar probabilidades, pergunte se os eventos realmente não se influenciam.</p>
+</section>
+<section id="o-teorema-de-bayes" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="o-teorema-de-bayes"><span class="header-section-number">5.4</span> O teorema de Bayes</h2>
+<p>O teorema de Bayes é a ferramenta que usamos para <strong>atualizar</strong> uma probabilidade quando surge uma evidência nova. Ele conecta a probabilidade de <span class="math inline">\(A\)</span> dado <span class="math inline">\(B\)</span> com a probabilidade de <span class="math inline">\(B\)</span> dado <span class="math inline">\(A\)</span>:</p>
+<p><span class="math display">\[P(D \mid +) = \frac{P(+ \mid D) \times P(D)}{P(+ \mid D) \times P(D) + P(+ \mid D^c) \times P(D^c)}\]</span></p>
+<p>Os nomes das partes ajudam a entender:</p>
+<ul>
+<li><span class="math inline">\(P(D)\)</span> é a <strong>probabilidade a priori</strong> (prior): a prevalência da doença antes do teste;</li>
+<li><span class="math inline">\(P(+ \mid D)\)</span> é a <strong>sensibilidade</strong>: a chance de o teste ser positivo em quem tem a doença;</li>
+<li><span class="math inline">\(P(+ \mid D^c)\)</span> é a <strong>taxa de falso positivo</strong>, ou <span class="math inline">\(1 - \text{especificidade}\)</span>;</li>
+<li><span class="math inline">\(P(D \mid +)\)</span> é a <strong>probabilidade a posteriori</strong> (posterior): a chance de a pessoa ter a doença depois de um resultado positivo.</li>
+</ul>
+<section id="um-exemplo-clínico" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="um-exemplo-clínico"><span class="header-section-number">5.4.1</span> Um exemplo clínico</h3>
+<p>Suponha uma doença com prevalência de 2% na população. Um teste tem sensibilidade de 90% e especificidade de 95%. Se um paciente escolhido ao acaso testa positivo, qual é a probabilidade de ele realmente ter a doença?</p>
+<p>Vamos imaginar 1.000 pessoas:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Doente</th>
+<th style="text-align: right;">Saudável</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Teste positivo</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">67</td>
+</tr>
+<tr class="even">
+<td>Teste negativo</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">931</td>
+<td style="text-align: right;">933</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">980</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+</tbody>
+</table>
+<p>Das 20 pessoas doentes, 90% (18) testam positivo. Das 980 saudáveis, 5% (49) testam positivo por erro. Entre os 67 positivos, apenas 18 têm a doença:</p>
+<p><span class="math display">\[P(D \mid +) = \frac{18}{67} \approx 0{,}269\]</span></p>
+<p>Ou seja, <strong>cerca de 27%</strong> — muito abaixo dos 90% de sensibilidade. O resultado parece contraintuitivo, mas faz sentido: como a doença é rara, a maioria dos resultados positivos vem dos muitos saudáveis que testam positivo por erro, e não dos poucos doentes.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>A falácia da taxa-base
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Confundir <span class="math inline">\(P(+ \mid D)\)</span> com <span class="math inline">\(P(D \mid +)\)</span> é um dos erros mais comuns na interpretação de exames. A sensibilidade descreve o <strong>teste</strong>; o valor preditivo positivo descreve o <strong>paciente</strong>. O mesmo teste pode ter um valor preditivo excelente em uma população de alto risco e um valor preditivo baixo em uma população de baixo risco, simplesmente porque a prevalência mudou. No capítulo 6, vamos aprofundar sensibilidade, especificidade, valores preditivos e curvas ROC.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="prática-interativa-vendo-a-probabilidade-acontecer-no-r" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="prática-interativa-vendo-a-probabilidade-acontecer-no-r"><span class="header-section-number">5.5</span> Prática Interativa: vendo a probabilidade acontecer no R</h2>
+<p>A teoria fica mais clara quando vemos o acaso se repetir. No bloco abaixo, simulamos 5.000 gestações independentes de casais em que ambos são portadores de um alelo recessivo (<span class="math inline">\(Aa \times Aa\)</span>). Em cada gestação, a probabilidade teórica de a criança ser afetada é 25%. Execute o código e acompanhe a proporção acumulada de afetados convergindo para esse valor:</p>
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><em>Dica: altere <code>n</code> para 50 ou para 50.000 e execute novamente. Com poucas gestações, a proporção oscila bastante; com muitas, ela se aproxima de 25%. É essa estabilidade que permite estimar probabilidades a partir de frequências observadas.</em></p>
+</section>
+<section id="modelos-de-distribuição-de-probabilidade" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="modelos-de-distribuição-de-probabilidade"><span class="header-section-number">5.6</span> Modelos de distribuição de probabilidade</h2>
+<p>Até aqui, calculamos a probabilidade de eventos isolados. Mas, na pesquisa, muitas vezes queremos descrever o comportamento de uma <strong>variável aleatória</strong> inteira — o número de pacientes que respondem a um tratamento, a contagem de casos raros em uma semana ou a distribuição das alturas de uma população. Para isso, usamos <strong>modelos de distribuição de probabilidade</strong>: funções que atribuem probabilidades a cada valor possível da variável.</p>
+<p>Uma variável aleatória pode ser <strong>discreta</strong> (contagens, como o número de filhos afetados) ou <strong>contínua</strong> (medidas, como a altura ou a pressão arterial). Os três modelos mais usados nas biociências são o binomial, o de Poisson e o gaussiano. Cada um nasceu de um problema prático diferente — e cada um continua sendo usado todos os dias na clínica, no laboratório e na epidemiologia.</p>
+<section id="o-modelo-binomial" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="o-modelo-binomial"><span class="header-section-number">5.6.1</span> O modelo binomial</h3>
+<p><strong>Um pouco de história.</strong> O modelo binomial está ligado a <strong>Jacob Bernoulli</strong> (1655–1705), matemático suíço de uma família que produziu gerações de matemáticos. Seu livro <em>Ars Conjectandi</em> (“A arte de conjecturar”), publicado postumamente em 1713 pelo sobrinho Nikolaus, foi um marco: nele, Bernoulli formalizou os ensaios com dois resultados possíveis e demonstrou a lei dos grandes números — a ideia de que a frequência observada converge para a probabilidade verdadeira quando o número de repetições cresce. Curiosidade: Jacob e seu irmão Johann eram rivais intelectuais, e a obra que ajudou a fundar a probabilidade moderna ficou pronta anos antes de ser publicada <span class="citation" data-cites="vieira2008">(<a href="referencias.html#ref-vieira2008" role="doc-biblioref">Vieira 2008</a>)</span>.</p>
+<p><strong>Como funciona.</strong> O modelo binomial descreve o número de sucessos em <span class="math inline">\(n\)</span> ensaios independentes, cada um com dois resultados possíveis (sucesso ou fracasso) e a mesma probabilidade <span class="math inline">\(p\)</span> de sucesso. Se <span class="math inline">\(X\)</span> é o número de sucessos:</p>
+<p><span class="math display">\[P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k = 0, 1, \dots, n\]</span></p>
+<p>A média é <span class="math inline">\(np\)</span> e a variância é <span class="math inline">\(np(1-p)\)</span>. O nome vem do desenvolvimento do binômio <span class="math inline">\((p + q)^n\)</span>, em que <span class="math inline">\(q = 1 - p\)</span>.</p>
+<p><strong>Na saúde.</strong> O binomial aparece sempre que contamos quantos, entre <span class="math inline">\(n\)</span> indivíduos, apresentam um desfecho binário: quantos pacientes respondem a um tratamento, quantos apresentam um efeito adverso, quantos filhos de um casal de portadores são afetados, quantos exames concordam com o padrão-ouro. <em>Exemplo:</em> se 70% dos pacientes respondem a um tratamento e tratamos 10 pacientes, a probabilidade de exatamente 7 responderem é <span class="math inline">\(\binom{10}{7} (0{,}7)^7 (0{,}3)^3 \approx 0{,}267\)</span>, ou 26,7%.</p>
+<p><strong>Cuidado com as suposições.</strong> O binomial exige ensaios independentes e probabilidade constante. Em um estudo multicêntrico, pacientes do mesmo centro podem ser correlacionados; em uma população, a probabilidade de resposta pode variar com a gravidade da doença. Quando isso acontece, o modelo binomial simples pode subestimar a variabilidade.</p>
+</section>
+<section id="o-modelo-de-poisson" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="o-modelo-de-poisson"><span class="header-section-number">5.6.2</span> O modelo de Poisson</h3>
+<p><strong>Um pouco de história.</strong> O modelo leva o nome de <strong>Siméon Denis Poisson</strong> (1781–1840), matemático e físico francês. Ele o apresentou em 1837, no livro <em>Recherches sur la probabilité des jugements en matière criminelle et en matière civile</em>, ao estudar a probabilidade de condenações em julgamentos. A distribuição nasceu, portanto, de um problema jurídico — não de contagens de bactérias. O modelo ficou famoso com o economista <strong>Ladislaus von Bortkiewicz</strong>, que em 1898 mostrou que o número de soldados mortos por coices de cavalo em 14 corpos de cavalaria prussianos seguia uma distribuição de Poisson. Em 14 corpos acompanhados por 20 anos (280 registros de corpo-ano), a média foi 0,7 morte, e as frequências observadas (144, 91, 32, 11 e 2) ficaram surpreendentemente próximas das previstas pelo modelo. É o clássico exemplo da “lei dos pequenos números” <span class="citation" data-cites="triola2017">(<a href="referencias.html#ref-triola2017" role="doc-biblioref">Triola 2017</a>)</span>.</p>
+<p><strong>Como funciona.</strong> O modelo de Poisson descreve a contagem de eventos raros em um intervalo fixo de tempo, espaço ou volume, assumindo que os eventos ocorrem de forma independente e com taxa média constante <span class="math inline">\(\lambda\)</span>:</p>
+<p><span class="math display">\[P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}, \quad k = 0, 1, 2, \dots\]</span></p>
+<p>A média e a variância são iguais a <span class="math inline">\(\lambda\)</span>. <em>Exemplo:</em> se uma unidade de saúde registra, em média, 2 casos raros por dia, a probabilidade de nenhum caso em um dia é <span class="math inline">\(e^{-2} \approx 0{,}135\)</span>, ou 13,5%; a de exatamente 3 casos é <span class="math inline">\(\frac{e^{-2} 2^3}{3!} \approx 0{,}180\)</span>, ou 18,0%.</p>
+<p><strong>Na saúde.</strong> O Poisson é útil para contagens de eventos raros: casos de uma doença rara por município, internações por dia, colônias bacterianas por placa, acidentes com material biológico por mês, contagens de radiação e chegadas a um serviço de emergência (com cautela). <em>Curiosidade:</em> o modelo também é a base de muitos cálculos atuariais e de vigilância epidemiológica.</p>
+<p><strong>Cuidado com as suposições.</strong> A suposição de que média e variância são iguais raramente se sustenta em dados reais: a <strong>superdispersão</strong> (variância maior que a média) é comum quando há agrupamento ou heterogeneidade. Nesses casos, modelos como o binomial negativo são mais adequados. Além disso, eventos contagiosos violam a independência — uma epidemia não é um processo de Poisson.</p>
+</section>
+<section id="o-modelo-gaussiano" class="level3" data-number="5.6.3">
+<h3 data-number="5.6.3" class="anchored" data-anchor-id="o-modelo-gaussiano"><span class="header-section-number">5.6.3</span> O modelo gaussiano</h3>
+<p><strong>Um pouco de história.</strong> A curva em forma de sino não tem um único inventor. <strong>Abraham de Moivre</strong> (1667–1754) a obteve em 1733 como uma aproximação da distribuição binomial para <span class="math inline">\(n\)</span> grande. <strong>Carl Friedrich Gauss</strong> (1777–1855) a usou em 1809, em <em>Theoria motus corporum coelestium</em>, para modelar erros de medição em astronomia — e aplicou o método dos mínimos quadrados ao tratamento desses erros. <strong>Pierre-Simon Laplace</strong> (1749–1827) explicou, com o teorema central do limite, por que a normal aparece tantas vezes. Curiosidade: Gauss foi homenageado na nota de 10 marcos alemães, que circulou entre 1989 e 2001 e trazia a curva normal.</p>
+<p><strong>Como funciona.</strong> A distribuição gaussiana (ou normal) é contínua, simétrica e definida por dois parâmetros: a média <span class="math inline">\(\mu\)</span> e o desvio padrão <span class="math inline">\(\sigma\)</span>:</p>
+<p><span class="math display">\[f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left[-\frac{(x-\mu)^2}{2\sigma^2}\right], \quad -\infty &lt; x &lt; \infty\]</span></p>
+<p>A média é <span class="math inline">\(\mu\)</span> e a variância é <span class="math inline">\(\sigma^2\)</span>. A <strong>regra empírica</strong> é uma das ferramentas mais úteis: cerca de 68% dos valores ficam entre <span class="math inline">\(\mu - \sigma\)</span> e <span class="math inline">\(\mu + \sigma\)</span>, 95% entre <span class="math inline">\(\mu - 2\sigma\)</span> e <span class="math inline">\(\mu + 2\sigma\)</span>, e 99,7% entre <span class="math inline">\(\mu - 3\sigma\)</span> e <span class="math inline">\(\mu + 3\sigma\)</span>. Para calcular probabilidades, padronizamos: <span class="math inline">\(z = (x - \mu)/\sigma\)</span>.</p>
+<p><strong>Na saúde.</strong> Altura, peso, pressão arterial, hemoglobina, colesterol, IMC, volume expiratório e muitas outras medidas contínuas são frequentemente modelados como gaussianos. A normal também sustenta os <strong>intervalos de referência</strong> (por exemplo, valores entre <span class="math inline">\(\pm 2\)</span> desvios padrão cobrem cerca de 95% de uma população saudável) e os <strong>gráficos de crescimento</strong>. <em>Exemplo:</em> se a altura de uma população tem média 165 cm e desvio padrão 8 cm, a probabilidade de uma pessoa ter entre 157 e 173 cm é de aproximadamente 68,3% — exatamente o intervalo <span class="math inline">\(\mu \pm \sigma\)</span>.</p>
+<p><strong>Cuidado com as suposições.</strong> Nem todo dado biológico é normal: cargas virais, tempos de espera e renda costumam ser assimétricos. Antes de assumir normalidade, observe o histograma e o gráfico Q-Q; se necessário, transforme os dados (por exemplo, logaritmo) ou use métodos não paramétricos. Além disso, a normal é uma distribuição contínua: a probabilidade de um valor exato é zero, e trabalhamos com intervalos.</p>
+<p><strong>O teorema central do limite.</strong> Por que a normal é tão onipresente? Porque a soma (ou a média) de muitas variáveis independentes tende a se distribuir normalmente, independentemente da forma da população original. É esse teorema que justifica os intervalos de confiança e os testes de hipóteses dos próximos capítulos.</p>
+</section>
+<section id="qual-modelo-escolher" class="level3" data-number="5.6.4">
+<h3 data-number="5.6.4" class="anchored" data-anchor-id="qual-modelo-escolher"><span class="header-section-number">5.6.4</span> Qual modelo escolher?</h3>
+<p>A escolha depende do processo que gerou os dados, não apenas da conveniência matemática:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Tipo de variável</th>
+<th>Parâmetros</th>
+<th>Exemplo na saúde</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Binomial</td>
+<td>contagem de sucessos em <span class="math inline">\(n\)</span> ensaios</td>
+<td><span class="math inline">\(n\)</span> e <span class="math inline">\(p\)</span></td>
+<td>10 pacientes, 70% de resposta</td>
+</tr>
+<tr class="even">
+<td>Poisson</td>
+<td>contagem de eventos raros em um intervalo</td>
+<td><span class="math inline">\(\lambda\)</span></td>
+<td>2 casos raros por dia</td>
+</tr>
+<tr class="odd">
+<td>Gaussiano</td>
+<td>medida contínua</td>
+<td><span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma\)</span></td>
+<td>altura, pressão, hemoglobina</td>
+</tr>
+</tbody>
+</table>
+<p>As médias e variâncias resumem o comportamento de cada modelo: no binomial, média <span class="math inline">\(np\)</span> e variância <span class="math inline">\(np(1-p)\)</span>; no Poisson, ambas iguais a <span class="math inline">\(\lambda\)</span>; no gaussiano, média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Os três modelos conversam entre si:</p>
+<ul>
+<li>quando <span class="math inline">\(n\)</span> é grande e <span class="math inline">\(p\)</span> é pequeno, o binomial se aproxima do Poisson com <span class="math inline">\(\lambda = np\)</span>;</li>
+<li>quando <span class="math inline">\(np\)</span> e <span class="math inline">\(n(1-p)\)</span> são suficientemente grandes, o binomial se aproxima da normal;</li>
+<li>quando <span class="math inline">\(\lambda\)</span> é grande, o Poisson também se aproxima da normal.</li>
+</ul>
+<p>Essas aproximações não são apenas curiosidades: elas explicam por que a normal aparece em tantos testes e por que podemos usar a mesma lógica para contagens e medidas.</p>
+</section>
+<section id="calculando-as-distribuições-no-r" class="level3" data-number="5.6.5">
+<h3 data-number="5.6.5" class="anchored" data-anchor-id="calculando-as-distribuições-no-r"><span class="header-section-number">5.6.5</span> Calculando as distribuições no R</h3>
+<p>O R tem funções prontas para os três modelos. O prefixo <code>d</code> calcula a probabilidade pontual (ou a densidade), <code>p</code> a probabilidade acumulada, <code>q</code> o quantil e <code>r</code> gera valores aleatórios:</p>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><em>Dica: execute o bloco e compare os valores com os exemplos do texto. Depois, mude os parâmetros e veja como as probabilidades mudam.</em></p>
+</section>
+</section>
+<section id="ferramenta-de-apoio-probmaster" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="ferramenta-de-apoio-probmaster"><span class="header-section-number">5.7</span> Ferramenta de apoio: ProbMaster</h2>
+<p>Para explorar esses modelos de forma interativa, o livro conta com o <strong>ProbMaster</strong>, um aplicativo web mobile-first (PWA) desenvolvido pelo autor. Ele reúne:</p>
+<ul>
+<li><strong>calculadora gráfica de distribuições</strong> — binomial, Poisson, normal e outras (t de Student, qui-quadrado, F de Fisher);</li>
+<li><strong>visualização interativa</strong> das curvas, das áreas e dos parâmetros;</li>
+<li><strong>comparação entre modelos</strong> — por exemplo, binomial → Poisson e binomial → normal;</li>
+<li><strong>Academia de Desafios Estatísticos</strong>, com níveis, XP e relatórios em PDF.</li>
+</ul>
+<p>O app funciona no navegador do celular ou do computador e pode ser instalado na tela inicial, sem loja de aplicativos. Clique no botão abaixo para abrir o app em uma nova aba.</p>
+<p style="text-align: center; margin: 30px 0;">
+<a href="https://probmaster-pi.vercel.app/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #2C3E50; color: #ffffff; padding: 15px 32px; border-radius: 10px; font-size: 17px; font-weight: 700; text-decoration: none; box-shadow: 0 6px 16px rgba(44, 62, 80, 0.30); border: 2px solid #2C3E50;"> <i class="bi bi-calculator"></i>&nbsp; Abrir o ProbMaster </a>
+</p>
+<p>Se o botão não abrir, copie o endereço: <a href="https://probmaster-pi.vercel.app/">probmaster-pi.vercel.app</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Como usar o ProbMaster em sala
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Peça aos alunos para calcular, no app, a probabilidade de exatamente 7 sucessos em 10 ensaios com <span class="math inline">\(p = 0{,}7\)</span> e comparar com o valor de <code>dbinom(7, 10, 0.7)</code>.</li>
+<li>Use os sliders para mostrar como a forma da distribuição muda com <span class="math inline">\(n\)</span>, <span class="math inline">\(p\)</span>, <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma\)</span>.</li>
+<li>Proponha um desafio da Academia e use o relatório em PDF como registro da atividade.</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="probabilidade-no-cotidiano-das-biociências" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="probabilidade-no-cotidiano-das-biociências"><span class="header-section-number">5.8</span> Probabilidade no cotidiano das biociências</h2>
+<p>Os conceitos deste capítulo aparecem em praticamente todas as áreas da saúde:</p>
+<ul>
+<li><strong>Genética e aconselhamento genético:</strong> calcular a chance de um casal transmitir uma doença recessiva, como no exemplo <span class="math inline">\(Aa \times Aa\)</span>, e orientar decisões reprodutivas.</li>
+<li><strong>Epidemiologia:</strong> estimar a probabilidade de adoecer, comparar riscos entre expostos e não expostos e interpretar prevalência e incidência.</li>
+<li><strong>Clínica e diagnóstico:</strong> usar o teorema de Bayes para transformar o resultado de um exame em uma probabilidade aplicável ao paciente, considerando a prevalência da doença.</li>
+<li><strong>Laboratório e controle de qualidade:</strong> avaliar a probabilidade de contaminação ou falha em um lote e usar o padrão do “pelo menos um” para dimensionar controles.</li>
+<li><strong>Pesquisa biomédica:</strong> modelar a incerteza de medições e planejar experimentos com poder estatístico adequado — temas que veremos nos próximos capítulos.</li>
+</ul>
+<p>A probabilidade não elimina a incerteza; ela a torna mensurável. E, ao tornar a incerteza mensurável, permite que decisões clínicas e experimentais sejam tomadas com base em evidências, e não apenas em intuição.</p>
+</section>
+<section id="exercícios-de-fixação" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="exercícios-de-fixação"><span class="header-section-number">5.9</span> 🧠 Exercícios de fixação</h2>
+<p><em>A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!</em></p>
+<div class="questao-banco">
+<p><strong>Questão #CAP5-01</strong></p>
+<pre class="quizdown"><code># Um pesquisador sorteia um paciente e registra o seu tipo sanguíneo (A, B, AB ou O). Nesse experimento, o conjunto {A, B, AB, O} representa:
+- [ ] O evento de interesse.
+  &gt; **Incorreto.** O evento é apenas o subconjunto que nos interessa (por exemplo, {O}), não o conjunto de todos os resultados possíveis.
+- [ ] A probabilidade do evento.
+  &gt; **Incorreto.** Probabilidade é um número entre 0 e 1 atribuído a um evento; {A, B, AB, O} é o conjunto de resultados.
+- [x] O espaço amostral.
+  &gt; **Correto!** O espaço amostral (Ω) reúne todos os resultados possíveis do experimento. O evento é qualquer subconjunto desse espaço.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP5-02</strong></p>
+<pre class="quizdown"><code># Em uma população, P(sangue A) = 0,40 e P(sangue O) = 0,45. Como ninguém tem os dois tipos ao mesmo tempo, a probabilidade de uma pessoa ter sangue A ou O é:
+- [x] 0,85.
+  &gt; **Correto!** Para eventos mutuamente exclusivos, P(A ou O) = P(A) + P(O) = 0,40 + 0,45 = 0,85.
+- [ ] 0,18.
+  &gt; **Incorreto.** Você multiplicou as probabilidades. A multiplicação vale para a interseção ("A e O"), que aqui é impossível.
+- [ ] 0,05.
+  &gt; **Incorreto.** Você subtraiu as probabilidades. A subtração aparece na regra da adição apenas para descontar a interseção, que aqui é zero.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP5-03</strong></p>
+<pre class="quizdown"><code># A probabilidade de um recém-nascido apresentar uma condição genética é de 8%. Qual é a probabilidade de ele NÃO apresentar essa condição?
+- [ ] 0,08.
+  &gt; **Incorreto.** 8% é a probabilidade de apresentar a condição, não o complemento.
+- [x] 0,92.
+  &gt; **Correto!** P(não apresentar) = 1 − P(apresentar) = 1 − 0,08 = 0,92, ou 92%.
+- [ ] 0,80.
+  &gt; **Incorreto.** O complemento é calculado em relação a 100% (ou 1), não a 80%.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP5-04</strong></p>
+<pre class="quizdown"><code># Em uma população, 2% das pessoas têm uma doença. Um teste tem sensibilidade de 90% e especificidade de 95%. Um paciente sorteado ao acaso testa positivo. A probabilidade de ele realmente ter a doença é de aproximadamente:
+- [ ] 90%.
+  &gt; **Incorreto.** 90% é a sensibilidade: P(teste positivo | doente). A pergunta é o inverso: P(doente | teste positivo).
+- [ ] 2%.
+  &gt; **Incorreto.** 2% é a prevalência antes do teste (probabilidade a priori). O resultado positivo deve atualizar essa crença.
+- [x] 27%.
+  &gt; **Correto!** P(doente | positivo) = (0,90 × 0,02) / (0,90 × 0,02 + 0,05 × 0,98) ≈ 0,269. Como a doença é rara, a maioria dos positivos é falso-positiva.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP5-05</strong></p>
+<pre class="quizdown"><code># Um casal em que ambos são portadores (Aa) tem 25% de chance de ter um filho afetado em cada gestação, independentemente das gestações anteriores. Qual é a probabilidade de os dois primeiros filhos serem afetados?
+- [x] 6,25%.
+  &gt; **Correto!** Como as gestações são independentes, P(afetado e afetado) = 0,25 × 0,25 = 0,0625, ou 6,25%.
+- [ ] 50%.
+  &gt; **Incorreto.** Somar as probabilidades só seria válido para eventos mutuamente exclusivos; gestações independentes podem resultar em ambos os filhos afetados.
+- [ ] 25%.
+  &gt; **Incorreto.** 25% é a probabilidade para uma única gestação. Para dois filhos, as probabilidades se multiplicam.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP5-06</strong></p>
+<pre class="quizdown"><code># Em um experimento de microbiologia, o número de colônias bacterianas que crescem por placa é uma contagem de eventos raros em uma área fixa. O modelo mais adequado para descrever essa variável é:
+- [ ] Binomial.
+  &gt; **Incorreto.** O binomial conta sucessos em um número fixo de ensaios com dois resultados; aqui não há "n ensaios" com sucesso/fracasso.
+- [x] Poisson.
+  &gt; **Correto!** Contagens de eventos raros em uma área ou intervalo fixo, com taxa média constante, são modeladas pela distribuição de Poisson.
+- [ ] Gaussiano.
+  &gt; **Incorreto.** O modelo gaussiano é para variáveis contínuas, não para contagens discretas.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP5-07</strong></p>
+<pre class="quizdown"><code># Um tratamento tem 70% de chance de resposta. Em 10 pacientes tratados de forma independente, a probabilidade de exatamente 7 responderem é de aproximadamente:
+- [ ] 70%.
+  &gt; **Incorreto.** 70% é a probabilidade de resposta de um paciente (p), não a de exatamente 7 entre 10.
+- [ ] 7%.
+  &gt; **Incorreto.** 7 é o número de sucessos que estamos considerando, não uma probabilidade.
+- [x] 26,7%.
+  &gt; **Correto!** P(X = 7) = C(10,7) × 0,7^7 × 0,3^3 ≈ 0,267, ou 26,7%.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP5-08</strong></p>
+<pre class="quizdown"><code># A altura de uma população segue uma distribuição gaussiana com média 165 cm e desvio padrão 8 cm. Pela regra empírica, a probabilidade de uma pessoa ter altura entre 157 cm e 173 cm é de aproximadamente:
+- [x] 68,3%.
+  &gt; **Correto!** O intervalo 157–173 cm corresponde a μ ± 1σ; pela regra empírica, cerca de 68% dos valores ficam nesse intervalo.
+- [ ] 95,4%.
+  &gt; **Incorreto.** 95,4% corresponde a μ ± 2σ (149–181 cm), não a μ ± 1σ.
+- [ ] 50%.
+  &gt; **Incorreto.** 50% seria a probabilidade de estar abaixo (ou acima) da média, não dentro de um intervalo de um desvio padrão.</code></pre>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Deixe o seu feedback!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span style="color: #2C3E50;">Não se esqueça de curtir e comentar ao final desse capítulo.</span><br> <span style="color: #166534; font-weight: bold;">Isso é muito importante para melhorar o livro interativo! ❤️</span></p>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-triola2017" class="csl-entry" role="listitem">
+Triola, Mario F. 2017. <em>Introdução à Estatística</em>. LTC.
+</div>
+<div id="ref-vieira2008" class="csl-entry" role="listitem">
+Vieira, Sonia. 2008. <em>Introdução à Bioestatística</em>. Elsevier Brasil.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <!-- Biblioteca leve para renderizar o Markdown -->
@@ -1083,6 +3506,122 @@ async function enviarMensagem() {
   </div>
 </nav>
 </div> <!-- /content -->
+<script type="module">
+// Handle cell initialization initialization
+qwebrCellDetails.map(
+  (entry) => {
+    // Handle the creation of the element
+    qwebrCreateHTMLElement(entry);
+    // In the event of interactive, initialize the monaco editor
+    if (entry.options.context == EvalTypes.Interactive) {
+      qwebrCreateMonacoEditorInstance(entry);
+    }
+  }
+);
+
+// Identify non-interactive cells (in order)
+const filteredEntries = qwebrCellDetails.filter(entry => {
+  const contextOption = entry.options && entry.options.context;
+  return ['output', 'setup'].includes(contextOption) || (contextOption == "interactive" && entry.options && entry.options.autorun === 'true');
+});
+
+// Condition non-interactive cells to only be run after webR finishes its initialization.
+qwebrInstance.then(
+  async () => {
+    const nHiddenCells = filteredEntries.length;
+    var currentHiddenCell = 0;
+
+
+    // Modify button state
+    qwebrSetInteractiveButtonState(`🟡 Running hidden code cells ...`, false);
+
+    // Begin processing non-interactive sections
+    // Due to the iteration policy, we must use a for() loop.
+    // Otherwise, we would need to switch to using reduce with an empty
+    // starting promise
+    for (const entry of filteredEntries) {
+
+      // Determine cell being examined
+      currentHiddenCell = currentHiddenCell + 1;
+      const formattedMessage = `Evaluating hidden cell ${currentHiddenCell} out of ${nHiddenCells}`;
+
+      // Update the document status header
+      if (qwebrShowStartupMessage) {
+        qwebrUpdateStatusHeader(formattedMessage);
+      }
+
+      // Display the update in non-active areas
+      qwebrUpdateStatusMessage(formattedMessage);
+
+      // Extract details on the active cell
+      const evalType = entry.options.context;
+      const cellCode = entry.code;
+      const qwebrCounter = entry.id;
+
+      if (['output', 'setup'].includes(evalType)) {
+        // Disable further global status updates
+        const activeContainer = document.getElementById(`qwebr-non-interactive-loading-container-${qwebrCounter}`);
+        activeContainer.classList.remove('qwebr-cell-needs-evaluation');
+        activeContainer.classList.add('qwebr-cell-evaluated');
+
+        // Update status on the code cell
+        const activeStatus = document.getElementById(`qwebr-status-text-${qwebrCounter}`);
+        activeStatus.innerText = " Evaluating hidden code cell...";
+        activeStatus.classList.remove('qwebr-cell-needs-evaluation');
+        activeStatus.classList.add('qwebr-cell-evaluated');
+      }
+
+      switch (evalType) {
+        case 'interactive':
+          // TODO: Make this more standardized.
+          // At the moment, we're overriding the interactive status update by pretending its
+          // output-like. 
+          const tempOptions = entry.options;
+          tempOptions["context"] = "output"
+          // Run the code in a non-interactive state that is geared to displaying output
+          await qwebrExecuteCode(`${cellCode}`, qwebrCounter, tempOptions);
+          break;
+        case 'output':
+          // Run the code in a non-interactive state that is geared to displaying output
+          await qwebrExecuteCode(`${cellCode}`, qwebrCounter, entry.options);
+          break;
+        case 'setup':
+          const activeDiv = document.getElementById(`qwebr-noninteractive-setup-area-${qwebrCounter}`);
+
+          // Store code in history
+          qwebrLogCodeToHistory(cellCode, entry.options);
+
+          // Run the code in a non-interactive state with all output thrown away
+          await mainWebR.evalRVoid(`${cellCode}`);
+          break;
+        default: 
+          break; 
+      }
+
+      if (['output', 'setup'].includes(evalType)) {
+        // Disable further global status updates
+        const activeContainer = document.getElementById(`qwebr-non-interactive-loading-container-${qwebrCounter}`);
+        // Disable visibility
+        activeContainer.style.visibility = 'hidden';
+        activeContainer.style.display = 'none';
+      }
+    }
+  }
+).then(
+  () => {
+    // Release document status as ready
+
+    if (qwebrShowStartupMessage) {
+      qwebrStartupMessage.innerText = "🟢 Ready!"
+    }
+  
+    qwebrSetInteractiveButtonState(
+      `<i class="fa-solid fa-play qwebr-icon-run-code"></i> <span>Run Code</span>`, 
+      true
+    );  
+  }
+);
+</script>
 
 
 

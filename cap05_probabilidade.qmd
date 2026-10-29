@@ -1,0 +1,471 @@
+# Probabilidade nas Ciências da Saúde
+
+A vida é probabilística. Um exame que "deu positivo", um casal que sonha com um filho saudável ou uma cultura de células que pode ou não contaminar: em todos esses cenários, a resposta raramente é um "sim" ou um "não" absoluto — é um grau de certeza. A probabilidade é a linguagem que usamos para medir e comparar essa incerteza [@vieira2008].
+
+Neste capítulo, vamos construir o espaço amostral de um experimento, aplicar as regras da adição e da multiplicação, distinguir eventos independentes de eventos mutuamente exclusivos, usar o teorema de Bayes para atualizar uma suspeita clínica diante de um novo resultado e conhecer os modelos binomial, de Poisson e gaussiano, que descrevem como as probabilidades se distribuem entre os valores de uma variável. O diagrama abaixo resume o caminho que percorreremos.
+
+```{mermaid}
+%%| fig-cap: "Mapa conceitual da probabilidade nas biociências"
+%%{init: {"themeVariables": {"fontSize": "15px", "fontFamily": "inherit"}, "flowchart": {"nodeSpacing": 24, "rankSpacing": 42}}}%%
+flowchart TD
+  A[PROBABILIDADE] --> B("Experimento<br>aleatório")
+  B --> C["Espaço<br>amostral"]
+  B --> D["Evento"]
+
+  A --> E("Regras de<br>cálculo")
+  E --> F["Adição"]
+  E --> G["Multiplicação"]
+  E --> H["Complemento"]
+
+  A --> I("Probabilidade<br>condicional")
+  I --> J["Independência"]
+  I --> K["Teorema de<br>Bayes"]
+
+  A --> L("Modelos de<br>distribuição")
+  L --> M["Binomial"]
+  L --> N["Poisson"]
+  L --> O["Gaussiano"]
+
+  style A fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:#ffffff
+  style B fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style E fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style I fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style L fill:#6A8A9F,stroke:#2C3E50,stroke-width:2px,color:#ffffff
+  style C fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style D fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style F fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style G fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style H fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style J fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style K fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style M fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style N fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+  style O fill:#F2F4F4,stroke:#B4C4C1,color:#000000
+```
+
+## O que é probabilidade?
+
+Em estatística, **probabilidade** é a medida numérica da chance de um evento ocorrer [@vieira2008]. Ela existe porque muitos fenômenos biológicos têm resultados incertos, mas não arbitrários: o conjunto de resultados possíveis é conhecido e, com repetição ou modelagem, padrões estáveis emergem.
+
+Para trabalhar com probabilidade, precisamos de três conceitos:
+
+* **Experimento aleatório:** um procedimento cujo resultado não pode ser previsto com certeza, embora todos os resultados possíveis sejam conhecidos. *Exemplo:* sortear um paciente de uma clínica e registrar o seu tipo sanguíneo.
+* **Espaço amostral ($\Omega$):** o conjunto de todos os resultados possíveis do experimento. No exemplo do tipo sanguíneo, $\Omega = \{A, B, AB, O\}$.
+* **Evento:** qualquer subconjunto do espaço amostral. O evento "o paciente tem sangue tipo O" é $\{O\}$; o evento "o paciente tem sangue A ou O" é $\{A, O\}$.
+
+A probabilidade de um evento $A$ é um número entre 0 e 1:
+
+$$0 \leq P(A) \leq 1$$
+
+Se $P(A) = 0$, o evento é impossível; se $P(A) = 1$, é certo. Além disso, a soma das probabilidades de todos os resultados do espaço amostral é 1. Essa é a regra que ancora todo o resto.
+
+::: {.callout-note}
+## Probabilidade não é frequência
+A probabilidade é uma propriedade teórica do experimento; a frequência é o que você observa na prática. Se você jogar uma moeda justa 10 vezes, pode obter 7 caras — mas a probabilidade de cara continua sendo 50%. Com muitas repetições, porém, a frequência observada tende a se aproximar da probabilidade. Essa convergência é a **Lei dos Grandes Números**, e é ela que nos permite estimar probabilidades a partir de dados reais.
+:::
+
+### Três formas de atribuir probabilidades
+
+Não existe uma única maneira de chegar a um valor de probabilidade. As três abordagens abaixo aparecem o tempo todo na prática científica [@triola2017]:
+
+* **Clássica (a priori):** quando todos os resultados são igualmente prováveis, $P(A)$ é o número de casos favoráveis dividido pelo número de casos possíveis. *Exemplo:* no cruzamento entre dois heterozigotos ($Aa \times Aa$), há quatro combinações de alelos igualmente prováveis ($AA$, $Aa$, $aA$, $aa$); a probabilidade de um filho afetado ($aa$) é $1/4 = 25\%$.
+* **Frequentista (a posteriori):** estima-se a probabilidade pela frequência relativa observada em muitas repetições. *Exemplo:* se, em 10.000 pacientes de uma clínica, 200 têm uma determinada condição, a probabilidade estimada é $200/10.000 = 0{,}02$, ou 2%.
+* **Subjetiva (bayesiana):** a probabilidade expressa o grau de crença de um especialista, que é atualizado à medida que novas evidências aparecem. *Exemplo:* a probabilidade de um paciente específico ter uma doença rara antes de qualquer exame, com base no quadro clínico e na prevalência.
+
+As três abordagens não competem entre si: elas respondem a perguntas diferentes e, frequentemente, se complementam.
+
+## As regras que governam o acaso
+
+Com três regras — complementar, adição e multiplicação — você resolve a maior parte dos problemas de probabilidade em biociências.
+
+### A regra do complemento
+
+A probabilidade de um evento **não** ocorrer é o complemento da probabilidade de ele ocorrer:
+
+$$P(A^c) = 1 - P(A)$$
+
+*Exemplo:* se a probabilidade de um recém-nascido apresentar uma condição genética é 8%, a probabilidade de não apresentar é $1 - 0{,}08 = 0{,}92$, ou 92%.
+
+O complemento é especialmente útil no padrão do **"pelo menos um"**. Se três lotes independentes de um reagente têm, cada um, 10% de chance de contaminação, a probabilidade de pelo menos um estar contaminado é:
+
+$$1 - (0{,}90)^3 = 1 - 0{,}729 = 0{,}271$$
+
+Ou seja, 27,1% — bem maior do que os 10% de um único lote. Esse tipo de cálculo é essencial no controle de qualidade e na avaliação de riscos em cadeia.
+
+### A regra da adição
+
+Para dois eventos $A$ e $B$, a probabilidade de ocorrer $A$ **ou** $B$ é:
+
+$$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+
+Subtraímos a interseção porque quem está em $A$ e em $B$ ao mesmo tempo seria contado duas vezes.
+
+*Exemplo:* em uma população, 30% têm hipertensão, 10% têm diabetes e 4% têm as duas condições. A probabilidade de uma pessoa ter hipertensão ou diabetes é $0{,}30 + 0{,}10 - 0{,}04 = 0{,}36$, ou 36%.
+
+Quando os eventos são **mutuamente exclusivos** — isto é, não podem ocorrer juntos —, a interseção é vazia e a regra se simplifica:
+
+$$P(A \cup B) = P(A) + P(B)$$
+
+*Exemplo:* os tipos sanguíneos A e O são mutuamente exclusivos. Se 40% da população tem sangue A e 45% tem sangue O, a probabilidade de uma pessoa ter A ou O é $0{,}40 + 0{,}45 = 0{,}85$, ou 85%.
+
+### A regra da multiplicação
+
+Para dois eventos $A$ e $B$, a probabilidade de ocorrer $A$ **e** $B$ é:
+
+$$P(A \cap B) = P(A) \times P(B \mid A)$$
+
+Se $A$ e $B$ forem **independentes** — ou seja, a ocorrência de um não altera a chance do outro —, a regra se simplifica:
+
+$$P(A \cap B) = P(A) \times P(B)$$
+
+*Exemplo:* um casal de portadores ($Aa \times Aa$) tem 25% de chance de ter um filho afetado em cada gestação. Como as gestações são independentes, a probabilidade de os dois primeiros filhos serem afetados é $0{,}25 \times 0{,}25 = 0{,}0625$, ou 6,25%.
+
+A independência, porém, nem sempre existe. Se você sorteia dois alunos de uma turma **sem reposição**, o resultado do primeiro sorteio altera a composição da turma e, portanto, a probabilidade do segundo. *Exemplo:* em uma turma de 10 alunos, 4 têm asma. A probabilidade de sortear dois alunos com asma é $\frac{4}{10} \times \frac{3}{9} = 0{,}133$, ou 13,3% — e não $0{,}4 \times 0{,}4$.
+
+::: {.callout-warning}
+## Mutuamente exclusivos ≠ independentes
+Esses dois conceitos são confundidos com frequência. **Mutuamente exclusivos** significa que os eventos não podem ocorrer juntos: se um acontece, o outro não acontece. **Independentes** significa que a ocorrência de um não altera a probabilidade do outro. Se dois eventos mutuamente exclusivos têm probabilidade positiva, eles são necessariamente **dependentes** — saber que um ocorreu elimina a chance do outro. Na dúvida, volte à definição e pergunte: "o espaço amostral mudou?"
+:::
+
+## Probabilidade condicional e independência
+
+A **probabilidade condicional** é a probabilidade de um evento ocorrer sabendo que outro já ocorreu. Ela é definida por:
+
+$$P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \quad P(B) > 0$$
+
+A ideia é simples: quando sabemos que $B$ ocorreu, o espaço amostral deixa de ser $\Omega$ e passa a ser $B$. A probabilidade de $A$ é recalculada dentro desse novo universo.
+
+Para ver isso na prática, considere uma amostra de 100 pacientes de uma clínica: 20 são fumantes, 30 são hipertensos e 12 são fumantes e hipertensos.
+
+| | Hipertenso | Não hipertenso | Total |
+|---|---:|---:|---:|
+| Fumante | 12 | 8 | 20 |
+| Não fumante | 18 | 62 | 80 |
+| Total | 30 | 70 | 100 |
+
+Com esses dados:
+
+* $P(\text{hipertenso}) = 30/100 = 0{,}30$;
+* $P(\text{hipertenso} \mid \text{fumante}) = 12/20 = 0{,}60$;
+* $P(\text{fumante} \mid \text{hipertenso}) = 12/30 = 0{,}40$.
+
+Como $P(\text{hipertenso} \mid \text{fumante}) \neq P(\text{hipertenso})$, os eventos **não são independentes**: nesta amostra, fumar está associado a uma chance maior de hipertensão. Dois eventos são independentes quando:
+
+$$P(A \mid B) = P(A) \quad \text{ou, equivalentemente,} \quad P(A \cap B) = P(A) \times P(B)$$
+
+Repare que a independência é uma **suposição forte**. Duas medidas feitas no mesmo paciente, duas bactérias da mesma colônia ou dois exames do mesmo indivíduo raramente são independentes. Antes de multiplicar probabilidades, pergunte se os eventos realmente não se influenciam.
+
+## O teorema de Bayes
+
+O teorema de Bayes é a ferramenta que usamos para **atualizar** uma probabilidade quando surge uma evidência nova. Ele conecta a probabilidade de $A$ dado $B$ com a probabilidade de $B$ dado $A$:
+
+$$P(D \mid +) = \frac{P(+ \mid D) \times P(D)}{P(+ \mid D) \times P(D) + P(+ \mid D^c) \times P(D^c)}$$
+
+Os nomes das partes ajudam a entender:
+
+* $P(D)$ é a **probabilidade a priori** (prior): a prevalência da doença antes do teste;
+* $P(+ \mid D)$ é a **sensibilidade**: a chance de o teste ser positivo em quem tem a doença;
+* $P(+ \mid D^c)$ é a **taxa de falso positivo**, ou $1 - \text{especificidade}$;
+* $P(D \mid +)$ é a **probabilidade a posteriori** (posterior): a chance de a pessoa ter a doença depois de um resultado positivo.
+
+### Um exemplo clínico
+
+Suponha uma doença com prevalência de 2% na população. Um teste tem sensibilidade de 90% e especificidade de 95%. Se um paciente escolhido ao acaso testa positivo, qual é a probabilidade de ele realmente ter a doença?
+
+Vamos imaginar 1.000 pessoas:
+
+| | Doente | Saudável | Total |
+|---|---:|---:|---:|
+| Teste positivo | 18 | 49 | 67 |
+| Teste negativo | 2 | 931 | 933 |
+| Total | 20 | 980 | 1.000 |
+
+Das 20 pessoas doentes, 90% (18) testam positivo. Das 980 saudáveis, 5% (49) testam positivo por erro. Entre os 67 positivos, apenas 18 têm a doença:
+
+$$P(D \mid +) = \frac{18}{67} \approx 0{,}269$$
+
+Ou seja, **cerca de 27%** — muito abaixo dos 90% de sensibilidade. O resultado parece contraintuitivo, mas faz sentido: como a doença é rara, a maioria dos resultados positivos vem dos muitos saudáveis que testam positivo por erro, e não dos poucos doentes.
+
+::: {.callout-warning}
+## A falácia da taxa-base
+Confundir $P(+ \mid D)$ com $P(D \mid +)$ é um dos erros mais comuns na interpretação de exames. A sensibilidade descreve o **teste**; o valor preditivo positivo descreve o **paciente**. O mesmo teste pode ter um valor preditivo excelente em uma população de alto risco e um valor preditivo baixo em uma população de baixo risco, simplesmente porque a prevalência mudou. No capítulo 6, vamos aprofundar sensibilidade, especificidade, valores preditivos e curvas ROC.
+:::
+
+## Prática Interativa: vendo a probabilidade acontecer no R
+
+A teoria fica mais clara quando vemos o acaso se repetir. No bloco abaixo, simulamos 5.000 gestações independentes de casais em que ambos são portadores de um alelo recessivo ($Aa \times Aa$). Em cada gestação, a probabilidade teórica de a criança ser afetada é 25%. Execute o código e acompanhe a proporção acumulada de afetados convergindo para esse valor:
+
+```{webr-r}
+# 1. Semente para reproduzir o experimento
+set.seed(2026)
+
+# 2. Probabilidade teórica de um filho afetado (Aa x Aa)
+p_afetado <- 0.25
+n <- 5000
+
+# 3. Simulando n gestações independentes
+filhos <- sample(c("Afetado", "Não afetado"),
+                 size = n, replace = TRUE,
+                 prob = c(p_afetado, 1 - p_afetado))
+
+# 4. Proporção acumulada de afetados ao longo da simulação
+prop_acumulada <- cumsum(filhos == "Afetado") / seq_len(n)
+
+# 5. Visualizando a convergência
+plot(prop_acumulada, type = "l", lwd = 2, col = "#2C3E50",
+     ylim = c(0, 1),
+     xlab = "Número de gestações simuladas",
+     ylab = "Proporção acumulada de afetados",
+     main = "Lei dos Grandes Números")
+abline(h = p_afetado, col = "#C0392B", lty = 2, lwd = 2)
+legend("topright", bty = "n",
+       legend = c("Proporção simulada", "Probabilidade teórica (25%)"),
+       col = c("#2C3E50", "#C0392B"), lty = c(1, 2), lwd = 2)
+
+cat("Proporção final observada:", round(tail(prop_acumulada, 1), 4), "\n")
+```
+
+*Dica: altere `n` para 50 ou para 50.000 e execute novamente. Com poucas gestações, a proporção oscila bastante; com muitas, ela se aproxima de 25%. É essa estabilidade que permite estimar probabilidades a partir de frequências observadas.*
+
+## Modelos de distribuição de probabilidade
+
+Até aqui, calculamos a probabilidade de eventos isolados. Mas, na pesquisa, muitas vezes queremos descrever o comportamento de uma **variável aleatória** inteira — o número de pacientes que respondem a um tratamento, a contagem de casos raros em uma semana ou a distribuição das alturas de uma população. Para isso, usamos **modelos de distribuição de probabilidade**: funções que atribuem probabilidades a cada valor possível da variável.
+
+Uma variável aleatória pode ser **discreta** (contagens, como o número de filhos afetados) ou **contínua** (medidas, como a altura ou a pressão arterial). Os três modelos mais usados nas biociências são o binomial, o de Poisson e o gaussiano. Cada um nasceu de um problema prático diferente — e cada um continua sendo usado todos os dias na clínica, no laboratório e na epidemiologia.
+
+### O modelo binomial
+
+**Um pouco de história.** O modelo binomial está ligado a **Jacob Bernoulli** (1655–1705), matemático suíço de uma família que produziu gerações de matemáticos. Seu livro *Ars Conjectandi* ("A arte de conjecturar"), publicado postumamente em 1713 pelo sobrinho Nikolaus, foi um marco: nele, Bernoulli formalizou os ensaios com dois resultados possíveis e demonstrou a lei dos grandes números — a ideia de que a frequência observada converge para a probabilidade verdadeira quando o número de repetições cresce. Curiosidade: Jacob e seu irmão Johann eram rivais intelectuais, e a obra que ajudou a fundar a probabilidade moderna ficou pronta anos antes de ser publicada [@vieira2008].
+
+**Como funciona.** O modelo binomial descreve o número de sucessos em $n$ ensaios independentes, cada um com dois resultados possíveis (sucesso ou fracasso) e a mesma probabilidade $p$ de sucesso. Se $X$ é o número de sucessos:
+
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k = 0, 1, \dots, n$$
+
+A média é $np$ e a variância é $np(1-p)$. O nome vem do desenvolvimento do binômio $(p + q)^n$, em que $q = 1 - p$.
+
+**Na saúde.** O binomial aparece sempre que contamos quantos, entre $n$ indivíduos, apresentam um desfecho binário: quantos pacientes respondem a um tratamento, quantos apresentam um efeito adverso, quantos filhos de um casal de portadores são afetados, quantos exames concordam com o padrão-ouro. *Exemplo:* se 70% dos pacientes respondem a um tratamento e tratamos 10 pacientes, a probabilidade de exatamente 7 responderem é $\binom{10}{7} (0{,}7)^7 (0{,}3)^3 \approx 0{,}267$, ou 26,7%.
+
+**Cuidado com as suposições.** O binomial exige ensaios independentes e probabilidade constante. Em um estudo multicêntrico, pacientes do mesmo centro podem ser correlacionados; em uma população, a probabilidade de resposta pode variar com a gravidade da doença. Quando isso acontece, o modelo binomial simples pode subestimar a variabilidade.
+
+### O modelo de Poisson
+
+**Um pouco de história.** O modelo leva o nome de **Siméon Denis Poisson** (1781–1840), matemático e físico francês. Ele o apresentou em 1837, no livro *Recherches sur la probabilité des jugements en matière criminelle et en matière civile*, ao estudar a probabilidade de condenações em julgamentos. A distribuição nasceu, portanto, de um problema jurídico — não de contagens de bactérias. O modelo ficou famoso com o economista **Ladislaus von Bortkiewicz**, que em 1898 mostrou que o número de soldados mortos por coices de cavalo em 14 corpos de cavalaria prussianos seguia uma distribuição de Poisson. Em 14 corpos acompanhados por 20 anos (280 registros de corpo-ano), a média foi 0,7 morte, e as frequências observadas (144, 91, 32, 11 e 2) ficaram surpreendentemente próximas das previstas pelo modelo. É o clássico exemplo da "lei dos pequenos números" [@triola2017].
+
+**Como funciona.** O modelo de Poisson descreve a contagem de eventos raros em um intervalo fixo de tempo, espaço ou volume, assumindo que os eventos ocorrem de forma independente e com taxa média constante $\lambda$:
+
+$$P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}, \quad k = 0, 1, 2, \dots$$
+
+A média e a variância são iguais a $\lambda$. *Exemplo:* se uma unidade de saúde registra, em média, 2 casos raros por dia, a probabilidade de nenhum caso em um dia é $e^{-2} \approx 0{,}135$, ou 13,5%; a de exatamente 3 casos é $\frac{e^{-2} 2^3}{3!} \approx 0{,}180$, ou 18,0%.
+
+**Na saúde.** O Poisson é útil para contagens de eventos raros: casos de uma doença rara por município, internações por dia, colônias bacterianas por placa, acidentes com material biológico por mês, contagens de radiação e chegadas a um serviço de emergência (com cautela). *Curiosidade:* o modelo também é a base de muitos cálculos atuariais e de vigilância epidemiológica.
+
+**Cuidado com as suposições.** A suposição de que média e variância são iguais raramente se sustenta em dados reais: a **superdispersão** (variância maior que a média) é comum quando há agrupamento ou heterogeneidade. Nesses casos, modelos como o binomial negativo são mais adequados. Além disso, eventos contagiosos violam a independência — uma epidemia não é um processo de Poisson.
+
+### O modelo gaussiano
+
+**Um pouco de história.** A curva em forma de sino não tem um único inventor. **Abraham de Moivre** (1667–1754) a obteve em 1733 como uma aproximação da distribuição binomial para $n$ grande. **Carl Friedrich Gauss** (1777–1855) a usou em 1809, em *Theoria motus corporum coelestium*, para modelar erros de medição em astronomia — e aplicou o método dos mínimos quadrados ao tratamento desses erros. **Pierre-Simon Laplace** (1749–1827) explicou, com o teorema central do limite, por que a normal aparece tantas vezes. Curiosidade: Gauss foi homenageado na nota de 10 marcos alemães, que circulou entre 1989 e 2001 e trazia a curva normal.
+
+**Como funciona.** A distribuição gaussiana (ou normal) é contínua, simétrica e definida por dois parâmetros: a média $\mu$ e o desvio padrão $\sigma$:
+
+$$f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left[-\frac{(x-\mu)^2}{2\sigma^2}\right], \quad -\infty < x < \infty$$
+
+A média é $\mu$ e a variância é $\sigma^2$. A **regra empírica** é uma das ferramentas mais úteis: cerca de 68% dos valores ficam entre $\mu - \sigma$ e $\mu + \sigma$, 95% entre $\mu - 2\sigma$ e $\mu + 2\sigma$, e 99,7% entre $\mu - 3\sigma$ e $\mu + 3\sigma$. Para calcular probabilidades, padronizamos: $z = (x - \mu)/\sigma$.
+
+**Na saúde.** Altura, peso, pressão arterial, hemoglobina, colesterol, IMC, volume expiratório e muitas outras medidas contínuas são frequentemente modelados como gaussianos. A normal também sustenta os **intervalos de referência** (por exemplo, valores entre $\pm 2$ desvios padrão cobrem cerca de 95% de uma população saudável) e os **gráficos de crescimento**. *Exemplo:* se a altura de uma população tem média 165 cm e desvio padrão 8 cm, a probabilidade de uma pessoa ter entre 157 e 173 cm é de aproximadamente 68,3% — exatamente o intervalo $\mu \pm \sigma$.
+
+**Cuidado com as suposições.** Nem todo dado biológico é normal: cargas virais, tempos de espera e renda costumam ser assimétricos. Antes de assumir normalidade, observe o histograma e o gráfico Q-Q; se necessário, transforme os dados (por exemplo, logaritmo) ou use métodos não paramétricos. Além disso, a normal é uma distribuição contínua: a probabilidade de um valor exato é zero, e trabalhamos com intervalos.
+
+**O teorema central do limite.** Por que a normal é tão onipresente? Porque a soma (ou a média) de muitas variáveis independentes tende a se distribuir normalmente, independentemente da forma da população original. É esse teorema que justifica os intervalos de confiança e os testes de hipóteses dos próximos capítulos.
+
+### Qual modelo escolher?
+
+A escolha depende do processo que gerou os dados, não apenas da conveniência matemática:
+
+| Modelo | Tipo de variável | Parâmetros | Exemplo na saúde |
+|---|---|---|---|
+| Binomial | contagem de sucessos em $n$ ensaios | $n$ e $p$ | 10 pacientes, 70% de resposta |
+| Poisson | contagem de eventos raros em um intervalo | $\lambda$ | 2 casos raros por dia |
+| Gaussiano | medida contínua | $\mu$ e $\sigma$ | altura, pressão, hemoglobina |
+
+As médias e variâncias resumem o comportamento de cada modelo: no binomial, média $np$ e variância $np(1-p)$; no Poisson, ambas iguais a $\lambda$; no gaussiano, média $\mu$ e variância $\sigma^2$.
+
+Os três modelos conversam entre si:
+
+* quando $n$ é grande e $p$ é pequeno, o binomial se aproxima do Poisson com $\lambda = np$;
+* quando $np$ e $n(1-p)$ são suficientemente grandes, o binomial se aproxima da normal;
+* quando $\lambda$ é grande, o Poisson também se aproxima da normal.
+
+Essas aproximações não são apenas curiosidades: elas explicam por que a normal aparece em tantos testes e por que podemos usar a mesma lógica para contagens e medidas.
+
+### Calculando as distribuições no R
+
+O R tem funções prontas para os três modelos. O prefixo `d` calcula a probabilidade pontual (ou a densidade), `p` a probabilidade acumulada, `q` o quantil e `r` gera valores aleatórios:
+
+```{webr-r}
+# 1. Binomial: 10 pacientes, 70% de resposta
+dbinom(7, size = 10, prob = 0.70)   # P(X = 7)
+pbinom(7, size = 10, prob = 0.70)   # P(X <= 7)
+
+# 2. Poisson: média de 2 casos por dia
+dpois(3, lambda = 2)                # P(X = 3)
+ppois(3, lambda = 2)                # P(X <= 3)
+
+# 3. Normal: altura média 165 cm, desvio padrão 8 cm
+pnorm(170, mean = 165, sd = 8)      # P(X < 170)
+qnorm(0.975, mean = 165, sd = 8)    # percentil 97,5%
+```
+
+*Dica: execute o bloco e compare os valores com os exemplos do texto. Depois, mude os parâmetros e veja como as probabilidades mudam.*
+
+## Ferramenta de apoio: ProbMaster
+
+Para explorar esses modelos de forma interativa, o livro conta com o **ProbMaster**, um aplicativo web mobile-first (PWA) desenvolvido pelo autor. Ele reúne:
+
+* **calculadora gráfica de distribuições** — binomial, Poisson, normal e outras (t de Student, qui-quadrado, F de Fisher);
+* **visualização interativa** das curvas, das áreas e dos parâmetros;
+* **comparação entre modelos** — por exemplo, binomial → Poisson e binomial → normal;
+* **Academia de Desafios Estatísticos**, com níveis, XP e relatórios em PDF.
+
+O app funciona no navegador do celular ou do computador e pode ser instalado na tela inicial, sem loja de aplicativos. Clique no botão abaixo para abrir o app em uma nova aba.
+
+<p style="text-align: center; margin: 30px 0;">
+  <a href="https://probmaster-pi.vercel.app/" target="_blank" rel="noopener noreferrer"
+     style="display: inline-block; background-color: #2C3E50; color: #ffffff; padding: 15px 32px; border-radius: 10px; font-size: 17px; font-weight: 700; text-decoration: none; box-shadow: 0 6px 16px rgba(44, 62, 80, 0.30); border: 2px solid #2C3E50;">
+    <i class="bi bi-calculator"></i>&nbsp; Abrir o ProbMaster
+  </a>
+</p>
+
+Se o botão não abrir, copie o endereço: [probmaster-pi.vercel.app](https://probmaster-pi.vercel.app/).
+
+::: {.callout-tip}
+## Como usar o ProbMaster em sala
+1. Peça aos alunos para calcular, no app, a probabilidade de exatamente 7 sucessos em 10 ensaios com $p = 0{,}7$ e comparar com o valor de `dbinom(7, 10, 0.7)`.
+2. Use os sliders para mostrar como a forma da distribuição muda com $n$, $p$, $\lambda$, $\mu$ e $\sigma$.
+3. Proponha um desafio da Academia e use o relatório em PDF como registro da atividade.
+:::
+
+## Probabilidade no cotidiano das biociências
+
+Os conceitos deste capítulo aparecem em praticamente todas as áreas da saúde:
+
+* **Genética e aconselhamento genético:** calcular a chance de um casal transmitir uma doença recessiva, como no exemplo $Aa \times Aa$, e orientar decisões reprodutivas.
+* **Epidemiologia:** estimar a probabilidade de adoecer, comparar riscos entre expostos e não expostos e interpretar prevalência e incidência.
+* **Clínica e diagnóstico:** usar o teorema de Bayes para transformar o resultado de um exame em uma probabilidade aplicável ao paciente, considerando a prevalência da doença.
+* **Laboratório e controle de qualidade:** avaliar a probabilidade de contaminação ou falha em um lote e usar o padrão do "pelo menos um" para dimensionar controles.
+* **Pesquisa biomédica:** modelar a incerteza de medições e planejar experimentos com poder estatístico adequado — temas que veremos nos próximos capítulos.
+
+A probabilidade não elimina a incerteza; ela a torna mensurável. E, ao tornar a incerteza mensurável, permite que decisões clínicas e experimentais sejam tomadas com base em evidências, e não apenas em intuição.
+
+## 🧠 Exercícios de fixação
+
+*A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
+
+::: {.questao-banco}
+**Questão #CAP5-01**
+```quizdown
+# Um pesquisador sorteia um paciente e registra o seu tipo sanguíneo (A, B, AB ou O). Nesse experimento, o conjunto {A, B, AB, O} representa:
+- [ ] O evento de interesse.
+  > **Incorreto.** O evento é apenas o subconjunto que nos interessa (por exemplo, {O}), não o conjunto de todos os resultados possíveis.
+- [ ] A probabilidade do evento.
+  > **Incorreto.** Probabilidade é um número entre 0 e 1 atribuído a um evento; {A, B, AB, O} é o conjunto de resultados.
+- [x] O espaço amostral.
+  > **Correto!** O espaço amostral (Ω) reúne todos os resultados possíveis do experimento. O evento é qualquer subconjunto desse espaço.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-02**
+```quizdown
+# Em uma população, P(sangue A) = 0,40 e P(sangue O) = 0,45. Como ninguém tem os dois tipos ao mesmo tempo, a probabilidade de uma pessoa ter sangue A ou O é:
+- [x] 0,85.
+  > **Correto!** Para eventos mutuamente exclusivos, P(A ou O) = P(A) + P(O) = 0,40 + 0,45 = 0,85.
+- [ ] 0,18.
+  > **Incorreto.** Você multiplicou as probabilidades. A multiplicação vale para a interseção ("A e O"), que aqui é impossível.
+- [ ] 0,05.
+  > **Incorreto.** Você subtraiu as probabilidades. A subtração aparece na regra da adição apenas para descontar a interseção, que aqui é zero.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-03**
+```quizdown
+# A probabilidade de um recém-nascido apresentar uma condição genética é de 8%. Qual é a probabilidade de ele NÃO apresentar essa condição?
+- [ ] 0,08.
+  > **Incorreto.** 8% é a probabilidade de apresentar a condição, não o complemento.
+- [x] 0,92.
+  > **Correto!** P(não apresentar) = 1 − P(apresentar) = 1 − 0,08 = 0,92, ou 92%.
+- [ ] 0,80.
+  > **Incorreto.** O complemento é calculado em relação a 100% (ou 1), não a 80%.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-04**
+```quizdown
+# Em uma população, 2% das pessoas têm uma doença. Um teste tem sensibilidade de 90% e especificidade de 95%. Um paciente sorteado ao acaso testa positivo. A probabilidade de ele realmente ter a doença é de aproximadamente:
+- [ ] 90%.
+  > **Incorreto.** 90% é a sensibilidade: P(teste positivo | doente). A pergunta é o inverso: P(doente | teste positivo).
+- [ ] 2%.
+  > **Incorreto.** 2% é a prevalência antes do teste (probabilidade a priori). O resultado positivo deve atualizar essa crença.
+- [x] 27%.
+  > **Correto!** P(doente | positivo) = (0,90 × 0,02) / (0,90 × 0,02 + 0,05 × 0,98) ≈ 0,269. Como a doença é rara, a maioria dos positivos é falso-positiva.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-05**
+```quizdown
+# Um casal em que ambos são portadores (Aa) tem 25% de chance de ter um filho afetado em cada gestação, independentemente das gestações anteriores. Qual é a probabilidade de os dois primeiros filhos serem afetados?
+- [x] 6,25%.
+  > **Correto!** Como as gestações são independentes, P(afetado e afetado) = 0,25 × 0,25 = 0,0625, ou 6,25%.
+- [ ] 50%.
+  > **Incorreto.** Somar as probabilidades só seria válido para eventos mutuamente exclusivos; gestações independentes podem resultar em ambos os filhos afetados.
+- [ ] 25%.
+  > **Incorreto.** 25% é a probabilidade para uma única gestação. Para dois filhos, as probabilidades se multiplicam.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-06**
+```quizdown
+# Em um experimento de microbiologia, o número de colônias bacterianas que crescem por placa é uma contagem de eventos raros em uma área fixa. O modelo mais adequado para descrever essa variável é:
+- [ ] Binomial.
+  > **Incorreto.** O binomial conta sucessos em um número fixo de ensaios com dois resultados; aqui não há "n ensaios" com sucesso/fracasso.
+- [x] Poisson.
+  > **Correto!** Contagens de eventos raros em uma área ou intervalo fixo, com taxa média constante, são modeladas pela distribuição de Poisson.
+- [ ] Gaussiano.
+  > **Incorreto.** O modelo gaussiano é para variáveis contínuas, não para contagens discretas.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-07**
+```quizdown
+# Um tratamento tem 70% de chance de resposta. Em 10 pacientes tratados de forma independente, a probabilidade de exatamente 7 responderem é de aproximadamente:
+- [ ] 70%.
+  > **Incorreto.** 70% é a probabilidade de resposta de um paciente (p), não a de exatamente 7 entre 10.
+- [ ] 7%.
+  > **Incorreto.** 7 é o número de sucessos que estamos considerando, não uma probabilidade.
+- [x] 26,7%.
+  > **Correto!** P(X = 7) = C(10,7) × 0,7^7 × 0,3^3 ≈ 0,267, ou 26,7%.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-08**
+```quizdown
+# A altura de uma população segue uma distribuição gaussiana com média 165 cm e desvio padrão 8 cm. Pela regra empírica, a probabilidade de uma pessoa ter altura entre 157 cm e 173 cm é de aproximadamente:
+- [x] 68,3%.
+  > **Correto!** O intervalo 157–173 cm corresponde a μ ± 1σ; pela regra empírica, cerca de 68% dos valores ficam nesse intervalo.
+- [ ] 95,4%.
+  > **Incorreto.** 95,4% corresponde a μ ± 2σ (149–181 cm), não a μ ± 1σ.
+- [ ] 50%.
+  > **Incorreto.** 50% seria a probabilidade de estar abaixo (ou acima) da média, não dentro de um intervalo de um desvio padrão.
+```
+:::
+
+::: {.callout-tip}
+## Deixe o seu feedback!
+[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
+:::
