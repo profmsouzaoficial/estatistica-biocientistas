@@ -2,7 +2,6 @@
 title: "Probabilidade nas Ciências da Saúde"
 subtitle: "Análise de Dados para Biocientistas - Capítulo 5"
 author: "Márcio Souza"
-output-dir: docs              
 format: 
   revealjs:
     theme: default
