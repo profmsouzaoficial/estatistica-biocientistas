@@ -4,12 +4,12 @@ subtitle: "Análise de Dados para Biocientistas - Capítulo 5"
 author: "Márcio Souza"
 format: 
   revealjs:
+    output-file: docs/aula05_probabilidade.html 
     theme: default
-    css: custom.css
-    slide-number: c/t
+    slide-number: true
     width: 1280
     height: 720
-    transition: fade
+    transition: slide
     controls-layout: bottom-right
     menu: true
 webr:
