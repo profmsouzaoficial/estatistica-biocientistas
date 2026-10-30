@@ -2,7 +2,7 @@
 
 ::: {.callout-tip icon="false"}
 ## 📽️ Material para Projeção
-[Abrir Apresentação de Slides](aula05_probabilidade.html){target="_blank"}
+[Abrir Apresentação de Slides](slides/aula05_probabilidade/index.html){target="_blank"}
 :::
 
 A vida é probabilística. Um exame que "deu positivo", um casal que sonha com um filho saudável ou uma cultura de células que pode ou não contaminar: em todos esses cenários, a resposta raramente é um "sim" ou um "não" absoluto — é um grau de certeza. A probabilidade é a linguagem que usamos para medir e comparar essa incerteza [@vieira2008].

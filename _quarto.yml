@@ -3,6 +3,10 @@ project:
   output-dir: docs
   resources:
     - "eu-lattes.jpg"
+    - "avatar.png"
+  # Compila também as apresentações (slides/) depois do livro
+  post-render:
+    - ./build-slides.sh
 
 lang: pt-BR
 bibliography: referencias.bib
@@ -16,6 +20,7 @@ book:
   cover-image: capa.png
   chapters:
     - index.qmd
+    - apresentacoes.qmd
     - cap01_introducao.qmd
     - cap02_estudos.qmd
     - cap03_amostragem.qmd

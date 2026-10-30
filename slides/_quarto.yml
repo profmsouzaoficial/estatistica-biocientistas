@@ -1,0 +1,46 @@
+project:
+  type: default
+  output-dir: ../docs/slides
+
+lang: pt-BR
+
+format:
+  revealjs:
+    # ---- Template (marca visual) -------------------------------------------
+    theme:
+      - default
+      - tema/slides.scss
+    include-in-header: tema/fontes.html
+    footer: "Análise de Dados para Biocientistas"
+    slide-number: true
+
+    # ---- Tela e movimento ---------------------------------------------------
+    width: 1280
+    height: 720
+    margin: 0
+    center: false
+    transition: fade
+    transition-speed: fast
+    background-transition: fade
+
+    # ---- Navegação ----------------------------------------------------------
+    controls: true
+    controls-layout: bottom-right
+    controls-tutorial: false
+    progress: true
+    hash: true
+    menu: true
+
+    # ---- Conteúdo -----------------------------------------------------------
+    slide-level: 2
+    incremental: false
+    scrollable: false
+    highlight-style: github-dark
+    fig-align: center
+    pdf-separate-fragments: false
+
+filters:
+  - webr
+
+webr:
+  show-startup-message: false

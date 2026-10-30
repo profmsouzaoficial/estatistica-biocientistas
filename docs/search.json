@@ -10,6 +10,26 @@
     ]
   },
   {
+    "objectID": "apresentacoes.html",
+    "href": "apresentacoes.html",
+    "title": "Apresentações",
+    "section": "",
+    "text": "Como adicionar uma nova apresentação\nCada capítulo tem (ou terá) um conjunto de slides próprio, pensado para projeção em sala de aula: tipografia grande, pouco texto por tela, equações formatadas e células de código R executáveis direto no navegador.\nAs apresentações abrem em tela cheia com ← → para navegar, F para tela cheia, S para o modo apresentador e O para a visão geral dos slides.\nO projeto dos slides é separado do livro, mas compila junto: ao rodar quarto render na raiz, a pasta slides/ é compilada automaticamente para docs/slides/.",
+    "crumbs": [
+      "Apresentações"
+    ]
+  },
+  {
+    "objectID": "apresentacoes.html#como-adicionar-uma-nova-apresentação",
+    "href": "apresentacoes.html#como-adicionar-uma-nova-apresentação",
+    "title": "Apresentações",
+    "section": "",
+    "text": "Crie uma pasta em slides/, por exemplo slides/aula06_diagnosticos/.\nColoque dentro um arquivo index.qmd (o index faz a URL ficar limpa: /slides/aula06_diagnosticos/).\nEscreva os slides normalmente, usando ## para cada tela:\n---\ntitle: \"Diagnósticos\"\nsubtitle: \"Análise de Dados para Biocientistas — Capítulo 6\"\nauthor: \"Márcio Luís Moreira de Souza\"\ninstitute: \"UFJF · Campus Avançado Governador Valadares\"\ndate: \"2026-10-07\"\ndate-format: \"MMMM [de] YYYY\"\n---\n\n## Primeira tela\n\nTexto da tela.\nRenderize com ./build-slides.sh (ou quarto render na raiz).\nCadastre o link em uma nova .deck-card aqui nesta página.\n\n\n\n\n\n\n\nNota\n\n\n\nO visual das apresentações vem de um único arquivo: slides/tema/slides.scss. Mudou a cor de destaque, a fonte ou o formato dos cards ali, todas as aulas mudam junto.",
+    "crumbs": [
+      "Apresentações"
+    ]
+  },
+  {
     "objectID": "cap01_introducao.html",
     "href": "cap01_introducao.html",
     "title": "1  Introdução ao método estatístico",
@@ -357,6 +377,46 @@
     "text": "6.6 E a Curva ROC, onde entra?\nA Curva ROC (Receiver Operating Characteristic) nasce exatamente dessa brincadeira que você acabou de fazer.\nEm vez de o estatístico testar o ponto de corte 30, depois o 31, depois o 32, manualmente (como fizemos acima), o algoritmo da Curva ROC calcula todos os pontos de corte possíveis ao mesmo tempo. Ele plota um gráfico mostrando o desempenho do teste em cada um desses cenários.\nO “ponto ideal” na Curva ROC (geralmente o mais próximo do canto superior esquerdo do gráfico) é aquele que encontra o equilíbrio matemático perfeito entre a Sensibilidade e a Especificidade.\n\n\n\n\n\n\nDicaPergunte ao Ginger\n\n\n\nAinda confuso com a escolha do cutoff? Imagine o teste anti-doping num atleta olímpico. O que é pior: punir um inocente (falso positivo) ou deixar um trapaceiro escapar (falso negativo)? Clique no ícone do Tutor Virtual (Ginger) e pergunte: “Ginger, num teste de doping nas Olimpíadas, o ponto de corte do exame deve priorizar a Sensibilidade ou a Especificidade? Explique-me o porquê.”",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html",
+    "href": "cap07_modelos.html",
+    "title": "7  Modelos Estatísticos",
+    "section": "",
+    "text": "Este capítulo está em preparação.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html",
+    "href": "cap08_hipoteses.html",
+    "title": "8  Testes de Hipóteses",
+    "section": "",
+    "text": "Este capítulo está em preparação.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html",
+    "href": "cap09_intervalos.html",
+    "title": "9  Intervalos de Confiança",
+    "section": "",
+    "text": "Este capítulo está em preparação.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html",
+    "href": "cap10_correlacao.html",
+    "title": "10  Correlação e Regressão",
+    "section": "",
+    "text": "Este capítulo está em preparação.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
     ]
   },
   {

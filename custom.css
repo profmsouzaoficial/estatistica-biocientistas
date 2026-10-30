@@ -24,3 +24,73 @@
     border-radius: 8px;
     border-left: 5px solid #6A8A9F; /* Detalhe visual elegante da capa */
 }
+/* ==========================================================================
+   Grade de apresentações (apresentacoes.qmd)
+   ========================================================================== */
+
+.deck-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.1rem;
+    margin: 1.6rem 0;
+}
+
+.deck-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e6ecf5;
+    border-radius: 16px;
+    padding: 1.25rem 1.4rem 1.1rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 14px 30px -22px rgba(15, 23, 42, .55);
+    transition: transform .18s ease, box-shadow .18s ease;
+    overflow: hidden;
+}
+
+.deck-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(100deg, #0d9488, #4f46e5);
+}
+
+.deck-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 2px 4px rgba(15, 23, 42, .06), 0 20px 42px -20px rgba(15, 23, 42, .55);
+}
+
+.deck-card h3 {
+    font-size: 1.05rem;
+    margin: .2rem 0 .6rem;
+    line-height: 1.35;
+}
+
+.deck-card h3 a {
+    text-decoration: none;
+    color: #0b1220;
+}
+
+.deck-card h3 a:hover { color: #0d9488; }
+
+.deck-card p {
+    font-size: .9rem;
+    color: #475569;
+    margin-bottom: .85rem;
+}
+
+.deck-btn {
+    display: inline-block;
+    font-size: .82rem;
+    font-weight: 600;
+    color: #ffffff !important;
+    background: linear-gradient(100deg, #0d9488, #4f46e5);
+    padding: .42rem 1.05rem;
+    border-radius: 999px;
+    text-decoration: none !important;
+    border: 0;
+}
+
+.deck-btn:hover { filter: brightness(1.09); }
+
+.deck-card-soon { opacity: .62; }
+.deck-card-soon::before { background: #cbd5e1; }

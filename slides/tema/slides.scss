@@ -1,0 +1,744 @@
+/* ==========================================================================
+   TEMA "BIOCIÊNCIAS" — apresentações reveal.js
+   Análise de Dados para Biocientistas
+   --------------------------------------------------------------------------
+   Estrutura:
+     1. Tokens de design
+     2. Base tipográfica
+     3. Slide de título
+     4. Slides de conteúdo (cabeçalhos, listas, texto)
+     5. Componentes (cards, destaque, citação, tabela, código, callout)
+     6. Slides divisores
+     7. Cromo da apresentação (progresso, número, rodapé, controles)
+   ========================================================================== */
+
+/*-- scss:rules --*/
+
+/* --------------------------------------------------------------------------
+   1. Tokens de design
+   -------------------------------------------------------------------------- */
+
+:root {
+  --bc-ink: #0b1220;
+  --bc-ink-soft: #1e293b;
+  --bc-body: #334155;
+  --bc-muted: #64748b;
+  --bc-faint: #94a3b8;
+  --bc-line: #e6ecf5;
+  --bc-surface: #ffffff;
+  --bc-canvas: #f6f8fc;
+
+  --bc-teal: #0d9488;
+  --bc-teal-bright: #14b8a6;
+  --bc-teal-soft: #e6fffb;
+  --bc-indigo: #4f46e5;
+  --bc-indigo-soft: #eef2ff;
+  --bc-amber: #f59e0b;
+
+  --bc-radius: 16px;
+  --bc-radius-sm: 10px;
+  --bc-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 4px 12px -6px rgba(15, 23, 42, 0.18);
+  --bc-shadow: 0 1px 3px rgba(15, 23, 42, 0.07), 0 18px 40px -22px rgba(15, 23, 42, 0.45);
+  --bc-grad: linear-gradient(100deg, var(--bc-teal) 0%, var(--bc-indigo) 100%);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base tipográfica
+   -------------------------------------------------------------------------- */
+
+.reveal {
+  --r-main-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --r-heading-font: "Sora", "Inter", -apple-system, sans-serif;
+  --r-code-font: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --r-main-font-size: 30px;
+  --r-heading-color: var(--bc-ink);
+  --r-link-color: var(--bc-indigo);
+  --r-link-color-hover: var(--bc-teal);
+  --r-selection-background-color: var(--bc-teal);
+  --r-selection-color: #fff;
+
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  color: var(--bc-body);
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  padding: 0 2.2em;
+  box-sizing: border-box;
+}
+
+/* respiro vertical consistente (center: false alinha ao topo) */
+.reveal .slides > section.slide {
+  padding-top: 1.25em;
+  padding-bottom: 2.4em;
+}
+
+/* slides de capa/divisor ocupam a tela inteira */
+.reveal .slides > section#title-slide,
+.reveal .slides > section#title-slide.present,
+.reveal .slides > section.divider,
+.reveal .slides > section.divider.present {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 100%;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .slides > section#title-slide > *,
+.reveal .slides > section.divider > * {
+  flex: 0 0 auto;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: var(--r-heading-font);
+  color: var(--bc-ink);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.12;
+  text-transform: none;
+  margin-bottom: 0.55em;
+  text-shadow: none;
+}
+
+.reveal h1 { font-size: 2.15em; }
+.reveal h2 { font-size: 1.62em; }
+.reveal h3 { font-size: 1.18em; font-weight: 600; color: var(--bc-ink-soft); }
+.reveal h4 { font-size: 1em; font-weight: 600; color: var(--bc-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* Barra de acento acima de cada H2 — assinatura visual do tema */
+.reveal .slides > section > h2::before {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--bc-grad);
+  margin-bottom: 0.72em;
+}
+
+.reveal p {
+  line-height: 1.62;
+  margin: 0 0 0.85em;
+  font-weight: 400;
+}
+
+.reveal strong,
+.reveal b {
+  color: var(--bc-ink);
+  font-weight: 650;
+}
+
+.reveal em,
+.reveal i {
+  color: var(--bc-teal);
+  font-style: italic;
+}
+
+.reveal a {
+  color: var(--bc-indigo);
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(79, 70, 229, 0.28);
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.reveal a:hover {
+  color: var(--bc-teal);
+  border-bottom-color: var(--bc-teal);
+}
+
+.reveal mark {
+  background: linear-gradient(180deg, transparent 58%, var(--bc-teal-soft) 58%);
+  color: inherit;
+  padding: 0 0.12em;
+}
+
+.reveal hr {
+  border: 0;
+  height: 1px;
+  background: var(--bc-line);
+  margin: 1.3em 0;
+}
+
+/* Listas -------------------------------------------------------------- */
+
+.reveal ul,
+.reveal ol {
+  margin: 0.2em 0 0.9em 0;
+  padding-left: 1.15em;
+}
+
+.reveal ul { list-style: none; padding-left: 0.1em; }
+
+.reveal ul > li {
+  position: relative;
+  padding-left: 1.05em;
+  margin-bottom: 0.42em;
+  line-height: 1.55;
+}
+
+.reveal ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.12em;
+  top: 0.62em;
+  width: 0.42em;
+  height: 0.42em;
+  border-radius: 3px;
+  background: var(--bc-grad);
+  transform: rotate(45deg);
+}
+
+.reveal ul ul > li::before {
+  background: var(--bc-faint);
+  width: 0.34em;
+  height: 0.34em;
+  border-radius: 50%;
+  transform: none;
+}
+
+.reveal ol { counter-reset: bc-ol; list-style: none; }
+
+.reveal ol > li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+  counter-increment: bc-ol;
+}
+
+.reveal ol > li::before {
+  content: counter(bc-ol);
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  font-family: var(--r-heading-font);
+  font-size: 0.62em;
+  font-weight: 700;
+  color: #fff;
+  background: var(--bc-grad);
+  width: 1.45em;
+  height: 1.45em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   3. Slide de título
+   -------------------------------------------------------------------------- */
+
+.reveal #title-slide {
+  background:
+    radial-gradient(900px 520px at 88% 8%, rgba(20, 184, 166, 0.30), transparent 62%),
+    radial-gradient(760px 520px at 6% 96%, rgba(79, 70, 229, 0.32), transparent 60%),
+    linear-gradient(148deg, #0b1220 0%, #102134 52%, #0a2f2c 100%);
+  padding: 0 3.1em;
+  text-align: left;
+}
+
+.reveal #title-slide::after {
+  content: "";
+  position: absolute;
+  right: -140px;
+  top: -140px;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0 0 60px rgba(255, 255, 255, 0.028), 0 0 0 130px rgba(255, 255, 255, 0.018);
+  pointer-events: none;
+}
+
+.reveal #title-slide .title,
+.reveal #title-slide h1.title {
+  font-family: var(--r-heading-font);
+  font-size: 2.5em;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: #fff;
+  max-width: 15em;
+  margin: 0 0 0.32em;
+}
+
+.reveal #title-slide .subtitle {
+  font-size: 0.92em;
+  font-weight: 400;
+  color: rgba(226, 240, 255, 0.72);
+  letter-spacing: 0.004em;
+  max-width: 22em;
+  line-height: 1.5;
+  margin-bottom: 1.6em;
+}
+
+/* filete gradiente antes dos autores */
+.reveal #title-slide .quarto-title-authors::before,
+.reveal #title-slide .author::before {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--bc-teal-bright), rgba(20, 184, 166, 0));
+  margin-bottom: 1em;
+}
+
+.reveal #title-slide .author,
+.reveal #title-slide .quarto-title-author-name {
+  font-family: var(--r-heading-font);
+  font-size: 0.78em;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.reveal #title-slide .institute,
+.reveal #title-slide .quarto-title-affiliation,
+.reveal #title-slide .date {
+  font-size: 0.62em;
+  color: rgba(203, 220, 240, 0.66);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.reveal .quarto-title-block .quarto-title-authors {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   4. Slides de conteúdo
+   -------------------------------------------------------------------------- */
+
+.reveal .slides > section:not(#title-slide):not(.divider) {
+  background:
+    radial-gradient(640px 380px at 100% 0%, rgba(13, 148, 136, 0.045), transparent 70%),
+    var(--bc-surface);
+}
+
+.reveal .slides > section[data-background-color] {
+  padding: 0 2.1em;
+}
+
+.reveal .columns {
+  gap: 1.4em;
+  align-items: flex-start;
+}
+
+.reveal .column {
+  flex-basis: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. Componentes
+   -------------------------------------------------------------------------- */
+
+/* Cards ---------------------------------------------------------------- */
+
+.reveal .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 0.72em;
+  margin: 1em 0 0.4em;
+}
+
+.reveal .cards.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.reveal .cards.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.reveal .card {
+  position: relative;
+  background: var(--bc-surface);
+  border: 1px solid var(--bc-line);
+  border-radius: var(--bc-radius);
+  padding: 0.85em 0.9em 0.8em;
+  box-shadow: var(--bc-shadow-sm);
+  font-size: 0.74em;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+.reveal .card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--bc-grad);
+}
+
+.reveal .card h3 {
+  font-size: 1.06em;
+  margin: 0.15em 0 0.35em;
+  letter-spacing: -0.015em;
+}
+
+.reveal .card p:last-child,
+.reveal .card ul:last-child { margin-bottom: 0; }
+
+/* títulos de card (negrito no topo — headings criariam slides) */
+.reveal .card > p:first-child {
+  font-family: var(--r-heading-font);
+  font-size: 1.18em;
+  letter-spacing: -0.02em;
+  color: var(--bc-ink);
+  margin: 0.1em 0 0.5em;
+  line-height: 1.25;
+}
+
+.reveal .card > p:first-child strong {
+  font-weight: 600;
+  color: inherit;
+}
+
+.reveal .card .icon {
+  font-size: 1.5em;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.18em;
+}
+
+/* Destaque / caixa de ideia-chave -------------------------------------- */
+
+.reveal .keybox {
+  border-radius: var(--bc-radius);
+  background: linear-gradient(120deg, var(--bc-teal-soft), #f2fffe 60%, #fff);
+  border: 1px solid rgba(13, 148, 136, 0.22);
+  border-left: 4px solid var(--bc-teal);
+  padding: 0.75em 1em;
+  margin: 0.8em 0;
+  font-size: 0.84em;
+  line-height: 1.55;
+  box-shadow: var(--bc-shadow-sm);
+}
+
+.reveal .keybox strong { color: var(--bc-teal); }
+
+/* Pílulas --------------------------------------------------------------- */
+
+.reveal .pill {
+  display: inline-block;
+  font-family: var(--r-heading-font);
+  font-size: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--bc-teal);
+  background: var(--bc-teal-soft);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  border-radius: 99px;
+  padding: 0.42em 0.95em;
+  margin-bottom: 1.1em;
+  vertical-align: middle;
+}
+
+/* Fórmula em destaque --------------------------------------------------- */
+
+.reveal .formula {
+  background: var(--bc-canvas);
+  border: 1px solid var(--bc-line);
+  border-radius: var(--bc-radius);
+  padding: 0.55em 0.9em;
+  margin: 0.7em 0;
+  text-align: center;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.reveal .formula .math.display { margin: 0; }
+
+/* Citação --------------------------------------------------------------- */
+
+.reveal blockquote {
+  position: relative;
+  background: transparent;
+  border: 0;
+  border-left: 4px solid var(--bc-teal);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0.15em 0 0.15em 1em;
+  margin: 0.9em 0;
+  font-family: var(--r-heading-font);
+  font-size: 0.92em;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--bc-ink-soft);
+  line-height: 1.5;
+  width: 100%;
+  max-width: none;
+}
+
+.reveal blockquote p:last-child { margin-bottom: 0; }
+.reveal blockquote cite { display: block; margin-top: 0.5em; font-size: 0.72em; font-style: normal; color: var(--bc-muted); }
+
+/* Tabelas --------------------------------------------------------------- */
+
+.reveal table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 0.72em;
+  border-radius: var(--bc-radius-sm);
+  overflow: hidden;
+  box-shadow: var(--bc-shadow-sm);
+  margin: 0.7em 0;
+}
+
+.reveal table thead th {
+  background: var(--bc-ink);
+  color: #fff;
+  font-family: var(--r-heading-font);
+  font-weight: 600;
+  font-size: 0.94em;
+  letter-spacing: 0.015em;
+  border: 0 !important;
+  padding: 0.62em 0.85em;
+  text-align: left;
+}
+
+.reveal table tbody td {
+  border: 0 !important;
+  border-top: 1px solid var(--bc-line) !important;
+  padding: 0.55em 0.85em;
+  background: #fff;
+}
+
+.reveal table tbody tr:nth-child(even) td { background: #fafcff; }
+
+/* Código ---------------------------------------------------------------- */
+
+.reveal pre {
+  width: 100%;
+  margin: 0.6em 0 0.9em;
+  border-radius: var(--bc-radius);
+  box-shadow: var(--bc-shadow);
+  font-size: 0.58em;
+  line-height: 1.5;
+}
+
+.reveal pre code {
+  background: #0e1726;
+  color: #dbeafe;
+  border-radius: var(--bc-radius);
+  padding: 1em 1.15em;
+  font-family: var(--r-code-font);
+  font-size: 1em;
+  max-height: none;
+  overflow: auto;
+}
+
+.reveal code:not(pre code) {
+  background: var(--bc-indigo-soft);
+  color: var(--bc-indigo);
+  font-family: var(--r-code-font);
+  font-size: 0.8em;
+  padding: 0.14em 0.42em;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Callouts do Quarto ---------------------------------------------------- */
+
+.reveal .callout {
+  border-radius: var(--bc-radius) !important;
+  border: 1px solid var(--bc-line);
+  border-left: 4px solid var(--bc-indigo);
+  background: var(--bc-surface);
+  box-shadow: var(--bc-shadow-sm);
+  margin: 0.9em 0;
+  font-size: 0.8em;
+  overflow: hidden;
+}
+
+.reveal .callout.callout-style-note { border-left-color: var(--bc-indigo); }
+.reveal .callout.callout-style-tip { border-left-color: var(--bc-teal); }
+.reveal .callout.callout-style-warning { border-left-color: var(--bc-amber); }
+
+.reveal .callout-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background: var(--bc-indigo-soft);
+  border-bottom: 1px solid rgba(79, 70, 229, 0.12);
+  padding: 0.55em 0.9em;
+  font-family: var(--r-heading-font);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.reveal .callout.callout-style-tip .callout-header { background: var(--bc-teal-soft); border-bottom-color: rgba(13, 148, 136, 0.14); }
+.reveal .callout.callout-style-warning .callout-header { background: #fff8e8; border-bottom-color: rgba(245, 158, 11, 0.18); }
+
+.reveal .callout-header h2,
+.reveal .callout-header p { margin: 0; font-size: 0.98em; font-weight: 600; color: var(--bc-ink); }
+
+.reveal .callout-body { padding: 0.7em 0.9em 0.55em; }
+.reveal .callout-body p:last-child { margin-bottom: 0; }
+
+/* Figuras --------------------------------------------------------------- */
+
+.reveal img,
+.reveal video,
+.reveal iframe {
+  border-radius: var(--bc-radius-sm);
+  max-height: 100%;
+}
+
+.reveal figure { margin: 0.5em 0; }
+.reveal figure figcaption { font-size: 0.6em; color: var(--bc-muted); margin-top: 0.6em; text-align: center; }
+
+/* Monaco usa um <pre> invisível: neutraliza os estilos de código acima */
+.reveal .monaco-editor pre {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: inherit;
+  background: transparent;
+}
+
+/* webr (células executáveis) -------------------------------------------- */
+
+.reveal .qwebr-non-interactive-loading-container,
+.reveal .qwebr-interactive-area {
+  border-radius: var(--bc-radius-sm) !important;
+  overflow: hidden;
+}
+
+.reveal .qwebr-editor,
+.reveal .qwebr-console-area,
+.reveal .qwebr-output-code-area {
+  font-size: 15px !important;
+}
+
+.reveal .qwebr-editor-toolbar {
+  font-size: 13px !important;
+  padding: 0.25rem 0.6rem !important;
+}
+
+.reveal .qwebr-button,
+.reveal .qwebr-download-btn,
+.reveal .qwebr-canvas-image-download-btn {
+  font-size: 12px !important;
+  border-radius: 7px !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Slides divisores (## Título {.divider})
+   -------------------------------------------------------------------------- */
+
+.reveal .slides > section.divider {
+  background:
+    radial-gradient(720px 420px at 92% 6%, rgba(20, 184, 166, 0.28), transparent 62%),
+    radial-gradient(620px 420px at 4% 98%, rgba(79, 70, 229, 0.30), transparent 60%),
+    linear-gradient(140deg, #0b1220 0%, #101f33 55%, #0a2b29 100%);
+  text-align: left;
+  padding: 0 3.1em;
+}
+
+.reveal .slides > section.divider h2 {
+  color: #fff;
+  font-size: 1.9em;
+  max-width: 17em;
+  letter-spacing: -0.03em;
+}
+
+.reveal .slides > section.divider h2::before {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--bc-grad);
+  margin-bottom: 0.72em;
+}
+
+.reveal .slides > section.divider p,
+.reveal .slides > section.divider h3 {
+  color: rgba(203, 220, 240, 0.7);
+  font-size: 0.8em;
+  font-weight: 400;
+  max-width: 24em;
+}
+
+/* --------------------------------------------------------------------------
+   7. Cromo da apresentação
+   -------------------------------------------------------------------------- */
+
+.reveal .progress {
+  height: 5px;
+  color: transparent;
+  background: rgba(148, 163, 184, 0.16);
+}
+
+.reveal .progress span {
+  background: var(--bc-grad);
+  border-radius: 0 99px 99px 0;
+}
+
+.reveal .slide-number {
+  right: 18px;
+  bottom: 14px;
+  background: transparent;
+  font-family: var(--r-heading-font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bc-muted);
+  letter-spacing: 0.06em;
+  padding: 0;
+}
+
+.reveal .slide-number a { color: var(--bc-muted); border: 0; }
+
+.reveal .footer {
+  left: 22px;
+  right: auto;
+  width: auto;
+  text-align: left;
+  bottom: 15px;
+  font-family: var(--r-main-font);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  color: var(--bc-faint);
+}
+
+.reveal .footer a { color: var(--bc-faint); border: 0; }
+
+.reveal .controls {
+  color: var(--bc-teal);
+  right: 16px;
+  bottom: 44px;
+  opacity: 0.55;
+}
+
+.reveal .controls:hover { opacity: 1; }
+.reveal .controls button { font-size: 11px; }
+
+/* Slide de título e divisores: rodapé/número em versão clara */
+.reveal .slides > section.has-dark-background .footer,
+.reveal .slides > section.has-dark-background .slide-number { color: rgba(203, 220, 240, 0.45); }
+
+.reveal .slides > section.has-dark-background .controls { color: var(--bc-teal-bright); }
+
+/* Ajustes finos ---------------------------------------------------------- */
+
+.reveal .slides section .fragment.visible { opacity: 1; }
+
+.reveal .small { font-size: 0.74em; color: var(--bc-muted); }
+.reveal .center { text-align: center; }
+.reveal .mt-0 { margin-top: 0; }
+
+@media print {
+  .reveal .slides section { padding: 0 1.2em; }
+}

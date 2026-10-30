@@ -1,0 +1,64 @@
+# Apresentações {.unnumbered}
+
+Cada capítulo tem (ou terá) um **conjunto de slides** próprio, pensado para projeção em
+sala de aula: tipografia grande, pouco texto por tela, equações formatadas e células de
+código R executáveis direto no navegador.
+
+As apresentações abrem em tela cheia com **← →** para navegar, **F** para tela cheia,
+**S** para o modo apresentador e **O** para a visão geral dos slides.
+
+::: {.deck-grid}
+
+::: {.deck-card}
+### [Aula 05 · Probabilidade nas Ciências da Saúde](slides/aula05_probabilidade/index.html){target="_blank"}
+
+Da gramática do acaso ao Teorema de Bayes e às três distribuições fundamentais —
+Binomial, Poisson e Gaussiana — com exemplos clínicos e R executável.
+
+[▶ Abrir apresentação](slides/aula05_probabilidade/index.html){.deck-btn target="_blank"}
+:::
+
+::: {.deck-card .deck-card-soon}
+### Aula 06 · Diagnósticos
+
+Sensibilidade, especificidade, valores preditivos e curvas ROC.
+
+Em preparação
+:::
+
+:::
+
+---
+
+## Como adicionar uma nova apresentação {.unnumbered}
+
+O projeto dos slides é **separado** do livro, mas compila junto: ao rodar `quarto render`
+na raiz, a pasta `slides/` é compilada automaticamente para `docs/slides/`.
+
+1. Crie uma pasta em `slides/`, por exemplo `slides/aula06_diagnosticos/`.
+2. Coloque dentro um arquivo `index.qmd` (o `index` faz a URL ficar limpa:
+   `/slides/aula06_diagnosticos/`).
+3. Escreva os slides normalmente, usando `##` para cada tela:
+
+   ```markdown
+   ---
+   title: "Diagnósticos"
+   subtitle: "Análise de Dados para Biocientistas — Capítulo 6"
+   author: "Márcio Luís Moreira de Souza"
+   institute: "UFJF · Campus Avançado Governador Valadares"
+   date: "2026-10-07"
+   date-format: "MMMM [de] YYYY"
+   ---
+
+   ## Primeira tela
+
+   Texto da tela.
+   ```
+
+4. Renderize com `./build-slides.sh` (ou `quarto render` na raiz).
+5. Cadastre o link em uma nova `.deck-card` aqui nesta página.
+
+::: {.callout-note icon="false"}
+O visual das apresentações vem de um único arquivo: `slides/tema/slides.scss`.
+Mudou a cor de destaque, a fonte ou o formato dos cards ali, **todas** as aulas mudam junto.
+:::
