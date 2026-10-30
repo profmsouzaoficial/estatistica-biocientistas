@@ -854,6 +854,162 @@ A probabilidade não elimina a incerteza; ela a torna mensurável. E, ao tornar 
 ```
 :::
 
+::: {.questao-banco}
+**Questão #CAP5-39**
+```quizdown
+# O peso de recém-nascidos segue uma curva Normal. Se um bebê recebe um Escore Z (Z-score) de -3,0 para o peso ao nascer, isso indica que:
+- [ ] Ele pesa 3 kg a menos que a média da população.
+  > **Incorreto.** O Escore Z não usa a unidade de medida original (kg), mas sim o número de desvios padrões de distância da média.
+- [x] O peso dele está 3 desvios padrões abaixo da média da população, o que é um valor extremo e raro.
+  > **Correto!** Um Escore Z negativo indica que o valor está à esquerda (abaixo) da média. O valor -3 significa uma distância de três desvios padrões, englobando o percentil mais baixo e raro da curva (cerca de 0,15%).
+- [ ] O peso dele é 3 vezes menor que a mediana, caracterizando microcefalia associada.
+  > **Incorreto.** O Z-score é uma medida aditiva de desvios, não um fator multiplicativo, e não tem relação com outras medidas clínicas como o PC.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-40**
+```quizdown
+# Um técnico de laboratório está a processar 50 amostras. À medida que o dia avança e ele fica cansado, a probabilidade de cometer um erro de pipetagem aumenta da amostra 1 para a 50. É correto usar o modelo Binomial para calcular a probabilidade de erros neste cenário?
+- [ ] Sim, porque existem apenas dois desfechos possíveis (erro ou sucesso) e um número fixo de tentativas (n = 50).
+  > **Incorreto.** O número de tentativas e a natureza dicotômica são preenchidos, mas falta um pilar essencial.
+- [ ] Sim, porque o limite de 50 tentativas garante que a distribuição se aproxime da curva Normal Padrão.
+  > **Incorreto.** A aproximação para a Normal não justifica o uso do modelo quando as premissas básicas são violadas.
+- [x] Não, porque a probabilidade de sucesso (ou erro) "p" não é constante em todos os ensaios.
+  > **Correto!** O modelo Binomial exige rigorosamente que a probabilidade "p" seja idêntica e constante da primeira à última tentativa. Se o cansaço altera a chance, os eventos deixam de ser idênticos.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-41**
+```quizdown
+# Uma análise de água detecta, em média, 10 colônias de bactérias a cada 5 mL de amostra. Se um pesquisador for modelar o número de colônias em uma alíquota de apenas 1 mL usando a distribuição de Poisson, qual será a taxa (λ) utilizada?
+- [x] λ = 2.
+  > **Correto!** A taxa no modelo de Poisson é estritamente proporcional ao tamanho do intervalo (espaço, tempo ou volume). Se há 10 colônias em 5 mL, esperamos 2 colônias em 1 mL.
+- [ ] λ = 5.
+  > **Incorreto.** O volume é 1 mL, o que corresponde a 1/5 do volume original, não à metade da taxa.
+- [ ] λ = 10.
+  > **Incorreto.** Usar λ = 10 implicaria que a concentração de bactérias permaneceu inalterada mesmo num volume cinco vezes menor.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-42**
+```quizdown
+# Dois eventos biológicos, A e B, são mutuamente exclusivos (não podem ocorrer no mesmo paciente simultaneamente). Como se calcula a probabilidade de o paciente apresentar o evento A OU o evento B?
+- [ ] Multiplica-se a probabilidade de A pela probabilidade de B: P(A) × P(B).
+  > **Incorreto.** A regra da multiplicação é usada para calcular a ocorrência conjunta (A e B) em eventos independentes.
+- [ ] Soma-se as probabilidades e subtrai-se a multiplicação de ambas: P(A) + P(B) - [P(A)×P(B)].
+  > **Incorreto.** Isso só é aplicável se os eventos puderem ocorrer ao mesmo tempo (possuírem intersecção).
+- [x] Soma-se simplesmente a probabilidade de A com a probabilidade de B: P(A) + P(B).
+  > **Correto!** Como os eventos são mutuamente exclusivos, a intersecção entre eles é nula. A regra da adição se simplifica à soma direta das probabilidades isoladas.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-43**
+```quizdown
+# O que o Teorema de Bayes nos ensina sobre o "Valor Preditivo Positivo" (VPP) de um teste de rastreio genético caso a doença passe a ser cada vez MAIS RARA na população?
+- [ ] O VPP aumenta proporcionalmente com a diminuição da prevalência, pois o teste erra menos.
+  > **Incorreto.** Exatamente o oposto: quanto menor a prevalência da doença, mais a amostra de pessoas saudáveis domina os testes.
+- [x] O VPP cai drasticamente, pois a esmagadora maioria dos resultados positivos acabará por ser de falsos positivos gerados pela imensa população saudável.
+  > **Correto!** Esta é a clássica Falácia da Taxa-Base. Mesmo um teste com 99% de especificidade vai gerar um mar de falsos positivos quando aplicado numa população onde quase ninguém tem a doença.
+- [ ] O VPP permanece inalterado, pois é uma característica fixa de fábrica do teste laboratorial, como a Sensibilidade.
+  > **Incorreto.** Sensibilidade e Especificidade são intrínsecas ao teste, mas o VPP e o VPN dependem intrinsecamente da prevalência na população.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-44**
+```quizdown
+# Considerando a curva Normal Padrão, em que a média é 0 (Z = 0) e o desvio padrão é 1. Qual é a área (probabilidade) rigorosamente localizada à direita de Z = 0?
+- [ ] 0,68 (68%).
+  > **Incorreto.** 68% é a área central da curva limitada entre Z = -1 e Z = 1.
+- [x] 0,50 (50%).
+  > **Correto!** A curva Normal é simétrica e a média (Z = 0) divide a curva em duas metades perfeitamente iguais. Portanto, 50% da área está à direita e 50% à esquerda.
+- [ ] 0,95 (95%).
+  > **Incorreto.** 95% é a área entre Z = -2 e Z = 2.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-45**
+```quizdown
+# Qual é a diferença fundamental na estrutura dos limites possíveis (o espaço amostral de resultados) entre as distribuições Binomial e de Poisson?
+- [x] A Binomial tem um limite superior estrito (n), enquanto a de Poisson pode, teoricamente, tender ao infinito.
+  > **Correto!** Numa Binomial com n = 10 pacientes, o máximo absoluto de curas possíveis é 10. Em Poisson, não há um teto rígido: se esperamos 2 bactérias por placa, teoricamente é possível encontrar 5, 20 ou 100, embora com probabilidade quase zero.
+- [ ] A Binomial aceita valores negativos para insucessos, enquanto a Poisson não.
+  > **Incorreto.** Nenhuma das duas distribuições aceita valores negativos, pois ambas modelam contagens (0, 1, 2, 3...).
+- [ ] A Poisson exige variáveis contínuas (com casas decimais), ao contrário da Binomial que só aceita inteiros.
+  > **Incorreto.** Ambas são distribuições para variáveis discretas inteiras. Variáveis contínuas são modeladas pela Normal.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-46**
+```quizdown
+# Numa placa de biologia molecular, um braço robótico tem 50% de chance de errar a rampa a cada pipetagem. Ele errou 5 vezes seguidas. Qual a probabilidade de ele errar na 6ª tentativa?
+- [ ] Maior que 50%, pois existe uma "maré de azar" ou erro mecânico acumulado.
+  > **Incorreto.** Se as pipetagens são eventos matematicamente independentes, o passado não afeta o futuro (falácia do jogador).
+- [ ] Quase zero (0,50⁶), porque é raríssimo errar 6 vezes seguidas.
+  > **Incorreto.** Você calculou a probabilidade acumulada desde o início, mas a pergunta é isoladamente sobre o sexto evento.
+- [x] Exatamente 50%, porque eventos independentes não possuem memória.
+  > **Correto!** Se cada tentativa é estritamente independente das outras, a probabilidade do braço errar na 6ª, na 100ª ou na primeira tentativa é exatamente a mesma: o 50% isolado daquele único ensaio.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-47**
+```quizdown
+# A "Lei dos Grandes Números" assegura o quê na prática epidemiológica?
+- [ ] Que doenças raras eventualmente irão transformar-se em pandemias com o passar do tempo.
+  > **Incorreto.** O nome da lei matemática não tem relação com o agravamento biológico de uma doença.
+- [x] Que, à medida que aumentamos exponencialmente o tamanho da nossa amostra, a frequência relativa observada nos pacientes convergirá para a verdadeira probabilidade teórica.
+  > **Correto!** É isso que justifica fazer grandes ensaios clínicos: com poucos doentes, o acaso gera flutuações e ruído; com milhares de doentes, a verdadeira eficácia da droga ou prevalência da doença estabiliza e revela-se.
+- [ ] Que estatísticas com números amostrais gigantes (n > 10.000) não precisam ser padronizadas pela curva Normal.
+  > **Incorreto.** O volume de dados não isenta o investigador de utilizar os modelos e normalizações apropriadas; pelo contrário, permite-o com mais segurança (pelo Teorema Central do Limite).
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-48**
+```quizdown
+# Duas populações de estudo (A e B) têm a mesma média de glicemia de 100 mg/dL e seguem curva Normal. Contudo, a população A tem desvio padrão σ = 5 e a população B tem σ = 20. Qual das curvas é visualmente mais esparramada e achatada?
+- [ ] A curva da População A.
+  > **Incorreto.** Como o desvio é menor (5), os valores da população A estão aglomerados muito perto da média de 100, formando uma curva estreita e alta.
+- [x] A curva da População B.
+  > **Correto!** O desvio padrão dita a dispersão da distribuição. Um σ = 20 significa grande variabilidade biológica; a curva será "gorda", larga e achatada, ocupando uma grande extensão do eixo X.
+- [ ] Ambas são iguais, pois possuem exatamente a mesma média.
+  > **Incorreto.** A média apenas determina a posição da curva no eixo X (mais à direita ou esquerda), não afeta de todo a sua forma, altura ou largura.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-49**
+```quizdown
+# Após um tratamento agressivo, a probabilidade de um doente NÃO sofrer nenhum efeito adverso é de 0,60 (60%). Como usar a Regra do Complemento para calcular a probabilidade de ele sofrer PELO MENOS UM efeito adverso?
+- [x] 1 - 0,60 = 0,40 (40%).
+  > **Correto!** O evento "pelo menos um" (1, 2, 3... efeitos) é o complemento exato do evento "zero efeitos". A probabilidade total (1) menos a chance do zero (0,60) fornece os 0,40 restantes.
+- [ ] 0,60 / 2 = 0,30 (30%).
+  > **Incorreto.** Efeitos adversos não são divididos em 50% de hipóteses.
+- [ ] 1 - (0,60)² = 0,64 (64%).
+  > **Incorreto.** Essa fórmula só seria utilizada se estivéssemos a considerar dois pacientes simultaneamente em vez do universo das respostas de um único paciente.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP5-50**
+```quizdown
+# Em genética clássica, sortear sucessivamente alelos de um pool gênico restrito (população muito pequena) SEM REPOSIÇÃO viola qual princípio estatístico frequentemente exigido nas equações de probabilidade?
+- [ ] A simetria Gaussiana.
+  > **Incorreto.** Este modelo descreve variáveis contínuas, e alelos são unidades discretas, logo não há curva normal intrínseca nesse passo.
+- [ ] O axioma de que todas as probabilidades têm de somar mais do que 1.
+  > **Incorreto.** A soma de todas as probabilidades de um espaço amostral nunca passa de 1, independentemente do tipo de sorteio.
+- [x] A Independência dos Eventos.
+  > **Correto!** Quando sorteamos algo sem reposição, o tamanho e a composição do espaço amostral mudam. Logo, o resultado do primeiro sorteio altera matematicamente as probabilidades do segundo, tornando-os dependentes.
+```
+:::
+
 ::: {.callout-tip}
 ## Deixe o seu feedback!
 [Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
