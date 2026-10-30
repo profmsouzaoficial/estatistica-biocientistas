@@ -15,7 +15,7 @@ Neste capítulo, embarcaremos numa jornada pela AED, desvendando os seus princip
 
 ---
 
-## 4.1. O que é AED e qual a sua importância?
+## O que é AED e qual a sua importância?
 
 A AED é um conjunto de técnicas que visa explorar e entender um conjunto de dados de forma iterativa e visual. É um processo informal e flexível que permite ao analista "mergulhar" nos dados e descobrir padrões e relações que poderiam passar despercebidos em análises mais formais.
 
@@ -24,7 +24,7 @@ A importância da AED reside nos seus benefícios práticos:
 2.  **Identificação de problemas:** Revela *outliers* biológicos (ex: uma frequência cardíaca registrada como 800 bpm devido a erro de digitação).
 3.  **Tomada de decisões:** Fornece a base de evidências para escolher o teste de hipótese correto (paramétrico vs. não-paramétrico).
 
-## 4.2. Tipos de Dados e Medidas Descritivas
+## Tipos de Dados e Medidas Descritivas
 
 O primeiro passo na AED é compreender a natureza dos dados que temos em mãos. Como vimos no Capítulo 1, eles dividem-se em qualitativos (atributos) e quantitativos (medidas). Para resumir essas informações, recorremos às **Medidas Descritivas**:
 
@@ -52,7 +52,7 @@ dados_clinicos %>%
 
 ---
 
-## 4.3. Gráficos como Aliados na Exploração
+## Gráficos como Aliados na Exploração
 
 A visualização de dados transforma números brutos em intuição visual. A escolha do gráfico correto depende inteiramente do tipo de dado:
 
@@ -75,7 +75,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 
 ---
 
-## 4.4 🧠 Prática: Teste os seus Conhecimentos
+## 🧠 Prática: Teste os seus Conhecimentos
 
 <div class="questao-banco">
 **Questão #CAP4-01**

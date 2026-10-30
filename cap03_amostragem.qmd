@@ -45,7 +45,7 @@ flowchart TD
 
 A escolha da técnica de amostragem adequada é crucial para o sucesso de qualquer estudo. Este capítulo apresenta uma descrição detalhada, dividindo as técnicas em duas categorias principais [@pagano2004]:
 
-### 1. Amostragem Probabilística
+### Amostragem Probabilística
 
 Garante que cada indivíduo da população tenha uma chance conhecida e não nula de ser selecionado. É o padrão-ouro para inferência estatística.
 
@@ -100,7 +100,7 @@ print(amostra_sorteada)
 
 ---
 
-### 2. Amostragem Não Probabilística
+### Amostragem Não Probabilística
 
 Não garante que todos os indivíduos tenham chance de serem selecionados. Os resultados não podem ser extrapolados matematicamente para toda a população com margem de erro conhecida, mas são fundamentais para estudos iniciais ou populações de difícil acesso.
 
