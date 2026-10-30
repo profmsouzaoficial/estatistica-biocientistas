@@ -1,47 +1,58 @@
 {
-  "intro.qmd": {
-    "intro.html": "76fb902e"
-  },
-  "index.qmd": {
-    "index.html": "dfbd7132"
-  },
-  "summary.qmd": {
-    "summary.html": "94fb5431"
-  },
-  "references.qmd": {
-    "references.html": "12154cf1"
-  },
-  "cap01_introducao.qmd": {
-    "cap01_introducao.html": "ddaf1645"
-  },
-  "cap02_estudos.qmd": {
-    "cap02_estudos.html": "9639d860"
-  },
-  "cap03_amostragem.qmd": {
-    "cap03_amostragem.html": "73873b16"
-  },
-  "cap04_aed.qmd": {
-    "cap04_aed.html": "4635e58a"
-  },
-  "cap05_probabilidade.qmd": {
-    "cap05_probabilidade.html": "5760fc39"
+  "cap08_hipoteses.qmd": {
+    "cap08_hipoteses.html": "2e387f11",
+    "cap08_hipoteses.slide.html": "5ec0fada"
   },
   "cap06_diagnosticos.qmd": {
-    "cap06_diagnosticos.html": "8d3a83a6"
+    "cap06_diagnosticos.html": "5d77ec43",
+    "cap06_diagnosticos.slide.html": "f18a97ee"
+  },
+  "index.qmd": {
+    "index.html": "26b26e04",
+    "index.slide.html": "d6c4d20a"
+  },
+  "summary.qmd": {
+    "summary.html": "2d0310b1",
+    "summary.slide.html": "3742d7ae"
+  },
+  "cap02_estudos.qmd": {
+    "cap02_estudos.html": "0b667488",
+    "cap02_estudos.slide.html": "a9db4f03"
+  },
+  "cap01_introducao.qmd": {
+    "cap01_introducao.html": "b63f7101",
+    "cap01_introducao.slide.html": "25938cef"
+  },
+  "cap04_aed.qmd": {
+    "cap04_aed.html": "22a2ded1",
+    "cap04_aed.slide.html": "a45dd1cb"
+  },
+  "cap03_amostragem.qmd": {
+    "cap03_amostragem.html": "3a647eeb",
+    "cap03_amostragem.slide.html": "b4508979"
   },
   "cap07_modelos.qmd": {
-    "cap07_modelos.html": "43b74ffd"
+    "cap07_modelos.html": "d8d9c39e",
+    "cap07_modelos.slide.html": "de8b6644"
   },
-  "cap08_hipoteses.qmd": {
-    "cap08_hipoteses.html": "675d0096"
-  },
-  "cap09_intervalos.qmd": {
-    "cap09_intervalos.html": "bd56479c"
+  "cap05_probabilidade.qmd": {
+    "cap05_probabilidade.html": "1394c011",
+    "cap05_probabilidade.slide.html": "f9cc80cb"
   },
   "cap10_correlacao.qmd": {
-    "cap10_correlacao.html": "6a2f75b9"
+    "cap10_correlacao.html": "e48a16ee",
+    "cap10_correlacao.slide.html": "14ebf823"
+  },
+  "intro.qmd": {
+    "intro.html": "a737da06",
+    "intro.slide.html": "aba6622e"
   },
   "referencias.qmd": {
-    "referencias.html": "2a057a8e"
+    "referencias.html": "41a9465d",
+    "referencias.slide.html": "3a4918d2"
+  },
+  "cap09_intervalos.qmd": {
+    "cap09_intervalos.html": "9ca59faf",
+    "cap09_intervalos.slide.html": "94910eb7"
   }
 }

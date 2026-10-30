@@ -317,6 +317,18 @@ qnorm(0.975, mean = 165, sd = 8)    # percentil 97,5%
 
 *Dica: execute o bloco e compare os valores com os exemplos do texto. Depois, mude os parâmetros e veja como as probabilidades mudam.*
 
+## Probabilidade no cotidiano das biociências
+
+Os conceitos deste capítulo aparecem em praticamente todas as áreas da saúde:
+
+* **Genética e aconselhamento genético:** calcular a chance de um casal transmitir uma doença recessiva, como no exemplo $Aa \times Aa$, e orientar decisões reprodutivas.
+* **Epidemiologia:** estimar a probabilidade de adoecer, comparar riscos entre expostos e não expostos e interpretar prevalência e incidência.
+* **Clínica e diagnóstico:** usar o teorema de Bayes para transformar o resultado de um exame em uma probabilidade aplicável ao paciente, considerando a prevalência da doença.
+* **Laboratório e controle de qualidade:** avaliar a probabilidade de contaminação ou falha em um lote e usar o padrão do "pelo menos um" para dimensionar controles.
+* **Pesquisa biomédica:** modelar a incerteza de medições e planejar experimentos com poder estatístico adequado — temas que veremos nos próximos capítulos.
+
+A probabilidade não elimina a incerteza; ela a torna mensurável. E, ao tornar a incerteza mensurável, permite que decisões clínicas e experimentais sejam tomadas com base em evidências, e não apenas em intuição.
+
 ## Ferramenta de apoio: ProbMaster
 
 Para explorar esses modelos de forma interativa, o livro conta com o **ProbMaster**, um aplicativo web mobile-first (PWA) desenvolvido pelo autor. Ele reúne:
@@ -343,18 +355,6 @@ Se o botão não abrir, copie o endereço: [probmaster-pi.vercel.app](https://pr
 2. Use os sliders para mostrar como a forma da distribuição muda com $n$, $p$, $\lambda$, $\mu$ e $\sigma$.
 3. Proponha um desafio da Academia e use o relatório em PDF como registro da atividade.
 :::
-
-## Probabilidade no cotidiano das biociências
-
-Os conceitos deste capítulo aparecem em praticamente todas as áreas da saúde:
-
-* **Genética e aconselhamento genético:** calcular a chance de um casal transmitir uma doença recessiva, como no exemplo $Aa \times Aa$, e orientar decisões reprodutivas.
-* **Epidemiologia:** estimar a probabilidade de adoecer, comparar riscos entre expostos e não expostos e interpretar prevalência e incidência.
-* **Clínica e diagnóstico:** usar o teorema de Bayes para transformar o resultado de um exame em uma probabilidade aplicável ao paciente, considerando a prevalência da doença.
-* **Laboratório e controle de qualidade:** avaliar a probabilidade de contaminação ou falha em um lote e usar o padrão do "pelo menos um" para dimensionar controles.
-* **Pesquisa biomédica:** modelar a incerteza de medições e planejar experimentos com poder estatístico adequado — temas que veremos nos próximos capítulos.
-
-A probabilidade não elimina a incerteza; ela a torna mensurável. E, ao tornar a incerteza mensurável, permite que decisões clínicas e experimentais sejam tomadas com base em evidências, e não apenas em intuição.
 
 ## 🧠 Exercícios de fixação
 
