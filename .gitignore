@@ -7,3 +7,5 @@ _book/
 .Ruserdata
 .DS_Store
 docs/_book/
+
+/.quarto/
