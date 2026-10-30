@@ -1,5 +1,5 @@
 project:
-  type: website
+  type: book
   output-dir: docs
   resources:
     - "eu-lattes.jpg"
@@ -7,29 +7,30 @@ project:
 lang: pt-BR
 bibliography: referencias.bib
 
-website:
+book:
   title: "Análise de Dados para Biocientistas"
-  sidebar:
-    style: docked
-    search: true
-    contents:
-      - index.qmd
-      - cap01_introducao.qmd
-      - cap02_estudos.qmd
-      - cap03_amostragem.qmd
-      - cap04_aed.qmd
-      - cap05_probabilidade.qmd
-      - cap06_diagnosticos.qmd
-      - cap07_modelos.qmd
-      - cap08_hipoteses.qmd
-      - cap09_intervalos.qmd
-      - cap10_correlacao.qmd
-      - referencias.qmd
+  author: "Márcio Souza"
+  date: "2026-10-07"
+  isbn: "978-X-XXXX-XXXX-X" 
+  doi: "10.XXXX/zenodo.XXXXX" 
+  cover-image: capa.png
+  chapters:
+    - index.qmd
+    - cap01_introducao.qmd
+    - cap02_estudos.qmd
+    - cap03_amostragem.qmd
+    - cap04_aed.qmd
+    - cap05_probabilidade.qmd
+    - cap06_diagnosticos.qmd
+    - cap07_modelos.qmd
+    - cap08_hipoteses.qmd
+    - cap09_intervalos.qmd
+    - cap10_correlacao.qmd
+    - referencias.qmd
 
 format:
   html:
     theme: cosmo
-    format-links: [revealjs]
     css: custom.css
     include-in-header: 
       - quiz.html
@@ -42,12 +43,6 @@ format:
         category: "General"
         mapping: "title"
         reactions-enabled: true
-  revealjs:
-    output-ext: slide.html
-    theme: default
-    scrollable: true
-    navigation-mode: linear
-    controls-layout: bottom-right
 
 filters:
   - webr
