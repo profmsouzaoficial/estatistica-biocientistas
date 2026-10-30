@@ -2,9 +2,9 @@
 title: "Probabilidade nas Ciências da Saúde"
 subtitle: "Análise de Dados para Biocientistas - Capítulo 5"
 author: "Márcio Souza"
+output-dir: docs              
 format: 
   revealjs:
-    output-file: docs/aula05_probabilidade.html 
     theme: default
     slide-number: true
     width: 1280
