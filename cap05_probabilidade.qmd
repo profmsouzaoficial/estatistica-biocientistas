@@ -1,8 +1,6 @@
 # Probabilidade nas Ciências da Saúde
 
-::: {.callout-tip icon="false"}
 [▶ Abrir apresentação](slides/aula05_probabilidade/index.html){.deck-btn target="_blank"}
-:::
 
 A vida é probabilística. Um exame que "deu positivo", um casal que sonha com um filho saudável ou uma cultura de células que pode ou não contaminar: em todos esses cenários, a resposta raramente é um "sim" ou um "não" absoluto — é um grau de certeza. A probabilidade é a linguagem que usamos para medir e comparar essa incerteza [@vieira2008].
 
