@@ -1,0 +1,155 @@
+---
+title: "Probabilidade nas Ciências da Saúde"
+subtitle: "Análise de Dados para Biocientistas - Capítulo 5"
+author: "Márcio Souza"
+format: 
+  revealjs:
+    theme: default
+    css: custom.css
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: fade
+    controls-layout: bottom-right
+    menu: true
+webr:
+  packages: ['ggplot2']
+  show-startup-message: false
+filters:
+  - webr
+---
+
+## A Vida é Probabilística
+
+Na biologia e na saúde, a resposta raramente é um "sim" ou um "não" absoluto — é um **grau de certeza**.
+
+A probabilidade é a linguagem que usamos para medir e comparar essa incerteza.
+
+- Um exame que "deu positivo"
+- Um casal que sonha com um filho saudável
+- Uma cultura de células que pode contaminar
+
+---
+
+## Conceitos Fundamentais
+
+Para trabalhar com o acaso, precisamos definir três pilares:
+
+::: {.incremental}
+1. **Experimento aleatório:** Resultado incerto, mas com possibilidades conhecidas (ex: tipagem sanguínea).
+2. **Espaço amostral ($\Omega$):** O conjunto de todos os resultados possíveis $\{A, B, AB, O\}$.
+3. **Evento:** Qualquer subconjunto de interesse dentro do espaço amostral (ex: paciente ser tipo $\{O\}$).
+:::
+
+. . .
+
+**A Regra de Ouro:** A probabilidade de um evento $A$ é sempre um número entre 0 (impossível) e 1 (certo).
+$$0 \leq P(A) \leq 1$$
+
+---
+
+## Três Formas de Medir o Acaso
+
+Como chegamos ao valor de uma probabilidade?
+
+- **Clássica (a priori):** Baseada na teoria pura. Ex: Cruzamento genético $Aa \times Aa$. Chance de filho $aa$ é $1/4 = 25\%$.
+- **Frequentista (a posteriori):** Baseada na observação contínua de dados (Lei dos Grandes Números). Ex: 200 doentes em 10.000 pacientes = $2\%$.
+- **Subjetiva (bayesiana):** Atualização de crenças. Ex: A intuição clínica do médico baseada na prevalência da doença.
+
+---
+
+## As Regras do Jogo
+
+Com três regras, resolvemos quase tudo:
+
+::: {.incremental}
+- **Complemento:** A chance de um evento **não** ocorrer.
+  - $P(A^c) = 1 - P(A)$
+- **Adição (Eventos Mutuamente Exclusivos):** A chance de ocorrer $A$ **ou** $B$.
+  - $P(A \cup B) = P(A) + P(B)$
+- **Multiplicação (Eventos Independentes):** A chance de ocorrer $A$ **e** $B$.
+  - $P(A \cap B) = P(A) \times P(B)$
+:::
+
+---
+
+## O Teorema de Bayes
+
+Usado para **atualizar** uma probabilidade quando surge uma nova evidência (como o resultado de um exame).
+
+$$P(D \mid +) = \frac{P(+ \mid D) \times P(D)}{P(+ \mid D) \times P(D) + P(+ \mid D^c) \times P(D^c)}$$
+
+**Falácia da Taxa-Base:** Cuidado! Um teste rápido positivo numa doença muito rara gera, na esmagadora maioria das vezes, um Falso Positivo. A prevalência importa muito!
+
+---
+
+## Modelos de Distribuição
+
+Como a probabilidade se distribui na natureza quando medimos populações inteiras?
+
+1. **Binomial:** Sucessos vs Fracassos.
+2. **Poisson:** Contagem de eventos raros.
+3. **Gaussiano (Normal):** A curva de sino para medidas contínuas.
+
+---
+
+## 1. O Modelo Binomial
+
+Descreve o número de sucessos em $n$ ensaios independentes, com apenas dois resultados possíveis e a mesma probabilidade $p$.
+
+*Exemplo:* Um tratamento tem 70% de chance de resposta. Tratamos 10 pacientes. Qual a chance de exatamente 7 responderem?
+
+```{webr-r}
+# Calculando P(X = 7) numa Binomial (n=10, p=0.7)
+dbinom(x = 7, size = 10, prob = 0.70)
+```
+
+---
+
+## 2. O Modelo de Poisson
+
+Descreve a contagem de **eventos raros** em um intervalo fixo de tempo, espaço ou volume (taxa média $\lambda$).
+
+*Exemplo:* Uma unidade registra em média 2 casos raros por dia. Qual a probabilidade de ocorrerem 3 casos amanhã?
+
+```{webr-r}
+# Calculando P(X = 3) numa Poisson (lambda = 2)
+dpois(x = 3, lambda = 2)
+```
+
+---
+
+## 3. O Modelo Gaussiano (Normal)
+
+A famosa "curva de sino". Usada para variáveis contínuas (altura, peso, pressão). É governada pela **Média** (centro) e **Desvio Padrão** (largura).
+
+```{webr-r}
+library(ggplot2)
+
+media_pa <- 120
+desvio_pa <- 10
+
+x <- seq(70, 170, length.out = 100)
+y <- dnorm(x, mean = media_pa, sd = desvio_pa)
+
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "#2c3e50", linewidth = 1.5) +
+  geom_area(fill = "#3498db", alpha = 0.5) +
+  theme_minimal() +
+  labs(title = "Distribuição da Pressão Arterial", x = "mmHg", y = "Densidade")
+```
+
+---
+
+## Próximos Passos
+
+A probabilidade não elimina a incerteza; ela a torna **mensurável**.
+
+<br>
+
+::: {.callout-note icon="false"}
+## 📚 Material de Apoio
+Para aprofundar a teoria, brincar com o **ProbMaster** e resolver as **50 questões de fixação**, acesse o portal da disciplina.
+
+[Ir para o Livro Interativo: Capítulo 5](../cap05_probabilidade.html){target="_blank"}
+:::

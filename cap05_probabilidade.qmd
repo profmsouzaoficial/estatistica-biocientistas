@@ -1,5 +1,10 @@
 # Probabilidade nas Ciências da Saúde
 
+::: {.callout-tip icon="false"}
+## 📽️ Material para Projeção
+[Abrir Apresentação de Slides](aula05_probabilidade.html){target="_blank"}
+:::
+
 A vida é probabilística. Um exame que "deu positivo", um casal que sonha com um filho saudável ou uma cultura de células que pode ou não contaminar: em todos esses cenários, a resposta raramente é um "sim" ou um "não" absoluto — é um grau de certeza. A probabilidade é a linguagem que usamos para medir e comparar essa incerteza [@vieira2008].
 
 Neste capítulo, vamos construir o espaço amostral de um experimento, aplicar as regras da adição e da multiplicação, distinguir eventos independentes de eventos mutuamente exclusivos, usar o teorema de Bayes para atualizar uma suspeita clínica diante de um novo resultado e conhecer os modelos binomial, de Poisson e gaussiano, que descrevem como as probabilidades se distribuem entre os valores de uma variável. O diagrama abaixo resume o caminho que percorreremos.
