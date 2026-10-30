@@ -190,16 +190,6 @@
     ]
   },
   {
-    "objectID": "referencias.html",
-    "href": "referencias.html",
-    "title": "Referências Bibliográficas",
-    "section": "",
-    "text": "Pagano, Marcello, and Kimberlee Gauvreau. 2004. Princípios de\nBioestatística. Cengage Learning.\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.\n\n\nVieira, Sonia. 2008. Introdução à Bioestatística. Elsevier\nBrasil.",
-    "crumbs": [
-      "Referências Bibliográficas"
-    ]
-  },
-  {
     "objectID": "cap05_probabilidade.html",
     "href": "cap05_probabilidade.html",
     "title": "5  Probabilidade nas Ciências da Saúde",
@@ -260,26 +250,6 @@
     ]
   },
   {
-    "objectID": "cap05_probabilidade.html#probabilidade-no-cotidiano-das-biociências",
-    "href": "cap05_probabilidade.html#probabilidade-no-cotidiano-das-biociências",
-    "title": "5  Probabilidade nas Ciências da Saúde",
-    "section": "5.8 Probabilidade no cotidiano das biociências",
-    "text": "5.8 Probabilidade no cotidiano das biociências\nOs conceitos deste capítulo aparecem em praticamente todas as áreas da saúde:\n\nGenética e aconselhamento genético: calcular a chance de um casal transmitir uma doença recessiva, como no exemplo \\(Aa \\times Aa\\), e orientar decisões reprodutivas.\nEpidemiologia: estimar a probabilidade de adoecer, comparar riscos entre expostos e não expostos e interpretar prevalência e incidência.\nClínica e diagnóstico: usar o teorema de Bayes para transformar o resultado de um exame em uma probabilidade aplicável ao paciente, considerando a prevalência da doença.\nLaboratório e controle de qualidade: avaliar a probabilidade de contaminação ou falha em um lote e usar o padrão do “pelo menos um” para dimensionar controles.\nPesquisa biomédica: modelar a incerteza de medições e planejar experimentos com poder estatístico adequado — temas que veremos nos próximos capítulos.\n\nA probabilidade não elimina a incerteza; ela a torna mensurável. E, ao tornar a incerteza mensurável, permite que decisões clínicas e experimentais sejam tomadas com base em evidências, e não apenas em intuição.",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidade nas Ciências da Saúde</span>"
-    ]
-  },
-  {
-    "objectID": "cap05_probabilidade.html#exercícios-de-fixação",
-    "href": "cap05_probabilidade.html#exercícios-de-fixação",
-    "title": "5  Probabilidade nas Ciências da Saúde",
-    "section": "5.9 🧠 Exercícios de fixação",
-    "text": "5.9 🧠 Exercícios de fixação\nA cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!\n\nQuestão #CAP5-01\n# Um pesquisador sorteia um paciente e registra o seu tipo sanguíneo (A, B, AB ou O). Nesse experimento, o conjunto {A, B, AB, O} representa:\n- [ ] O evento de interesse.\n  &gt; **Incorreto.** O evento é apenas o subconjunto que nos interessa (por exemplo, {O}), não o conjunto de todos os resultados possíveis.\n- [ ] A probabilidade do evento.\n  &gt; **Incorreto.** Probabilidade é um número entre 0 e 1 atribuído a um evento; {A, B, AB, O} é o conjunto de resultados.\n- [x] O espaço amostral.\n  &gt; **Correto!** O espaço amostral (Ω) reúne todos os resultados possíveis do experimento. O evento é qualquer subconjunto desse espaço.\n\n\nQuestão #CAP5-02\n# Em uma população, P(sangue A) = 0,40 e P(sangue O) = 0,45. Como ninguém tem os dois tipos ao mesmo tempo, a probabilidade de uma pessoa ter sangue A ou O é:\n- [x] 0,85.\n  &gt; **Correto!** Para eventos mutuamente exclusivos, P(A ou O) = P(A) + P(O) = 0,40 + 0,45 = 0,85.\n- [ ] 0,18.\n  &gt; **Incorreto.** Você multiplicou as probabilidades. A multiplicação vale para a interseção (\"A e O\"), que aqui é impossível.\n- [ ] 0,05.\n  &gt; **Incorreto.** Você subtraiu as probabilidades. A subtração aparece na regra da adição apenas para descontar a interseção, que aqui é zero.\n\n\nQuestão #CAP5-03\n# A probabilidade de um recém-nascido apresentar uma condição genética é de 8%. Qual é a probabilidade de ele NÃO apresentar essa condição?\n- [ ] 0,08.\n  &gt; **Incorreto.** 8% é a probabilidade de apresentar a condição, não o complemento.\n- [x] 0,92.\n  &gt; **Correto!** P(não apresentar) = 1 − P(apresentar) = 1 − 0,08 = 0,92, ou 92%.\n- [ ] 0,80.\n  &gt; **Incorreto.** O complemento é calculado em relação a 100% (ou 1), não a 80%.\n\n\nQuestão #CAP5-04\n# Em uma população, 2% das pessoas têm uma doença. Um teste tem sensibilidade de 90% e especificidade de 95%. Um paciente sorteado ao acaso testa positivo. A probabilidade de ele realmente ter a doença é de aproximadamente:\n- [ ] 90%.\n  &gt; **Incorreto.** 90% é a sensibilidade: P(teste positivo | doente). A pergunta é o inverso: P(doente | teste positivo).\n- [ ] 2%.\n  &gt; **Incorreto.** 2% é a prevalência antes do teste (probabilidade a priori). O resultado positivo deve atualizar essa crença.\n- [x] 27%.\n  &gt; **Correto!** P(doente | positivo) = (0,90 × 0,02) / (0,90 × 0,02 + 0,05 × 0,98) ≈ 0,269. Como a doença é rara, a maioria dos positivos é falso-positiva.\n\n\nQuestão #CAP5-05\n# Um casal em que ambos são portadores (Aa) tem 25% de chance de ter um filho afetado em cada gestação, independentemente das gestações anteriores. Qual é a probabilidade de os dois primeiros filhos serem afetados?\n- [x] 6,25%.\n  &gt; **Correto!** Como as gestações são independentes, P(afetado e afetado) = 0,25 × 0,25 = 0,0625, ou 6,25%.\n- [ ] 50%.\n  &gt; **Incorreto.** Somar as probabilidades só seria válido para eventos mutuamente exclusivos; gestações independentes podem resultar em ambos os filhos afetados.\n- [ ] 25%.\n  &gt; **Incorreto.** 25% é a probabilidade para uma única gestação. Para dois filhos, as probabilidades se multiplicam.\n\n\nQuestão #CAP5-06\n# Em um experimento de microbiologia, o número de colônias bacterianas que crescem por placa é uma contagem de eventos raros em uma área fixa. O modelo mais adequado para descrever essa variável é:\n- [ ] Binomial.\n  &gt; **Incorreto.** O binomial conta sucessos em um número fixo de ensaios com dois resultados; aqui não há \"n ensaios\" com sucesso/fracasso.\n- [x] Poisson.\n  &gt; **Correto!** Contagens de eventos raros em uma área ou intervalo fixo, com taxa média constante, são modeladas pela distribuição de Poisson.\n- [ ] Gaussiano.\n  &gt; **Incorreto.** O modelo gaussiano é para variáveis contínuas, não para contagens discretas.\n\n\nQuestão #CAP5-07\n# Um tratamento tem 70% de chance de resposta. Em 10 pacientes tratados de forma independente, a probabilidade de exatamente 7 responderem é de aproximadamente:\n- [ ] 70%.\n  &gt; **Incorreto.** 70% é a probabilidade de resposta de um paciente (p), não a de exatamente 7 entre 10.\n- [ ] 7%.\n  &gt; **Incorreto.** 7 é o número de sucessos que estamos considerando, não uma probabilidade.\n- [x] 26,7%.\n  &gt; **Correto!** P(X = 7) = C(10,7) × 0,7^7 × 0,3^3 ≈ 0,267, ou 26,7%.\n\n\nQuestão #CAP5-08\n# A altura de uma população segue uma distribuição gaussiana com média 165 cm e desvio padrão 8 cm. Pela regra empírica, a probabilidade de uma pessoa ter altura entre 157 cm e 173 cm é de aproximadamente:\n- [x] 68,3%.\n  &gt; **Correto!** O intervalo 157–173 cm corresponde a μ ± 1σ; pela regra empírica, cerca de 68% dos valores ficam nesse intervalo.\n- [ ] 95,4%.\n  &gt; **Incorreto.** 95,4% corresponde a μ ± 2σ (149–181 cm), não a μ ± 1σ.\n- [ ] 50%.\n  &gt; **Incorreto.** 50% seria a probabilidade de estar abaixo (ou acima) da média, não dentro de um intervalo de um desvio padrão.\n\n\n\n\n\n\n\nDicaDeixe o seu feedback!\n\n\n\nNão se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo! ❤️\n\n\n\n\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.\n\n\nVieira, Sonia. 2008. Introdução à Bioestatística. Elsevier Brasil.",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidade nas Ciências da Saúde</span>"
-    ]
-  },
-  {
     "objectID": "cap05_probabilidade.html#modelos-de-distribuição-de-probabilidade",
     "href": "cap05_probabilidade.html#modelos-de-distribuição-de-probabilidade",
     "title": "5  Probabilidade nas Ciências da Saúde",
@@ -295,6 +265,26 @@
     "title": "5  Probabilidade nas Ciências da Saúde",
     "section": "5.7 Ferramenta de apoio: ProbMaster",
     "text": "5.7 Ferramenta de apoio: ProbMaster\nPara explorar esses modelos de forma interativa, o livro conta com o ProbMaster, um aplicativo web mobile-first (PWA) desenvolvido pelo autor. Ele reúne:\n\ncalculadora gráfica de distribuições — binomial, Poisson, normal e outras (t de Student, qui-quadrado, F de Fisher);\nvisualização interativa das curvas, das áreas e dos parâmetros;\ncomparação entre modelos — por exemplo, binomial → Poisson e binomial → normal;\nAcademia de Desafios Estatísticos, com níveis, XP e relatórios em PDF.\n\nO app funciona no navegador do celular ou do computador e pode ser instalado na tela inicial, sem loja de aplicativos. Clique no botão abaixo para abrir o app em uma nova aba.\n\n   Abrir o ProbMaster \n\nSe o botão não abrir, copie o endereço: probmaster-pi.vercel.app.\n\n\n\n\n\n\nDicaComo usar o ProbMaster em sala\n\n\n\n\nPeça aos alunos para calcular, no app, a probabilidade de exatamente 7 sucessos em 10 ensaios com \\(p = 0{,}7\\) e comparar com o valor de dbinom(7, 10, 0.7).\nUse os sliders para mostrar como a forma da distribuição muda com \\(n\\), \\(p\\), \\(\\lambda\\), \\(\\mu\\) e \\(\\sigma\\).\nProponha um desafio da Academia e use o relatório em PDF como registro da atividade.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidade nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap05_probabilidade.html#probabilidade-no-cotidiano-das-biociências",
+    "href": "cap05_probabilidade.html#probabilidade-no-cotidiano-das-biociências",
+    "title": "5  Probabilidade nas Ciências da Saúde",
+    "section": "5.8 Probabilidade no cotidiano das biociências",
+    "text": "5.8 Probabilidade no cotidiano das biociências\nOs conceitos deste capítulo aparecem em praticamente todas as áreas da saúde:\n\nGenética e aconselhamento genético: calcular a chance de um casal transmitir uma doença recessiva, como no exemplo \\(Aa \\times Aa\\), e orientar decisões reprodutivas.\nEpidemiologia: estimar a probabilidade de adoecer, comparar riscos entre expostos e não expostos e interpretar prevalência e incidência.\nClínica e diagnóstico: usar o teorema de Bayes para transformar o resultado de um exame em uma probabilidade aplicável ao paciente, considerando a prevalência da doença.\nLaboratório e controle de qualidade: avaliar a probabilidade de contaminação ou falha em um lote e usar o padrão do “pelo menos um” para dimensionar controles.\nPesquisa biomédica: modelar a incerteza de medições e planejar experimentos com poder estatístico adequado — temas que veremos nos próximos capítulos.\n\nA probabilidade não elimina a incerteza; ela a torna mensurável. E, ao tornar a incerteza mensurável, permite que decisões clínicas e experimentais sejam tomadas com base em evidências, e não apenas em intuição.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidade nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "cap05_probabilidade.html#exercícios-de-fixação",
+    "href": "cap05_probabilidade.html#exercícios-de-fixação",
+    "title": "5  Probabilidade nas Ciências da Saúde",
+    "section": "5.9 🧠 Exercícios de fixação",
+    "text": "5.9 🧠 Exercícios de fixação\nA cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!\n\nQuestão #CAP5-01\n# Um pesquisador sorteia um paciente e registra o seu tipo sanguíneo (A, B, AB ou O). Nesse experimento, o conjunto {A, B, AB, O} representa:\n- [ ] O evento de interesse.\n  &gt; **Incorreto.** O evento é apenas o subconjunto que nos interessa (por exemplo, {O}), não o conjunto de todos os resultados possíveis.\n- [ ] A probabilidade do evento.\n  &gt; **Incorreto.** Probabilidade é um número entre 0 e 1 atribuído a um evento; {A, B, AB, O} é o conjunto de resultados.\n- [x] O espaço amostral.\n  &gt; **Correto!** O espaço amostral (Ω) reúne todos os resultados possíveis do experimento. O evento é qualquer subconjunto desse espaço.\n\n\nQuestão #CAP5-02\n# Em uma população, P(sangue A) = 0,40 e P(sangue O) = 0,45. Como ninguém tem os dois tipos ao mesmo tempo, a probabilidade de uma pessoa ter sangue A ou O é:\n- [x] 0,85.\n  &gt; **Correto!** Para eventos mutuamente exclusivos, P(A ou O) = P(A) + P(O) = 0,40 + 0,45 = 0,85.\n- [ ] 0,18.\n  &gt; **Incorreto.** Você multiplicou as probabilidades. A multiplicação vale para a interseção (\"A e O\"), que aqui é impossível.\n- [ ] 0,05.\n  &gt; **Incorreto.** Você subtraiu as probabilidades. A subtração aparece na regra da adição apenas para descontar a interseção, que aqui é zero.\n\n\nQuestão #CAP5-03\n# A probabilidade de um recém-nascido apresentar uma condição genética é de 8%. Qual é a probabilidade de ele NÃO apresentar essa condição?\n- [ ] 0,08.\n  &gt; **Incorreto.** 8% é a probabilidade de apresentar a condição, não o complemento.\n- [x] 0,92.\n  &gt; **Correto!** P(não apresentar) = 1 − P(apresentar) = 1 − 0,08 = 0,92, ou 92%.\n- [ ] 0,80.\n  &gt; **Incorreto.** O complemento é calculado em relação a 100% (ou 1), não a 80%.\n\n\nQuestão #CAP5-04\n# Em uma população, 2% das pessoas têm uma doença. Um teste tem sensibilidade de 90% e especificidade de 95%. Um paciente sorteado ao acaso testa positivo. A probabilidade de ele realmente ter a doença é de aproximadamente:\n- [ ] 90%.\n  &gt; **Incorreto.** 90% é a sensibilidade: P(teste positivo | doente). A pergunta é o inverso: P(doente | teste positivo).\n- [ ] 2%.\n  &gt; **Incorreto.** 2% é a prevalência antes do teste (probabilidade a priori). O resultado positivo deve atualizar essa crença.\n- [x] 27%.\n  &gt; **Correto!** P(doente | positivo) = (0,90 × 0,02) / (0,90 × 0,02 + 0,05 × 0,98) ≈ 0,269. Como a doença é rara, a maioria dos positivos é falso-positiva.\n\n\nQuestão #CAP5-05\n# Um casal em que ambos são portadores (Aa) tem 25% de chance de ter um filho afetado em cada gestação, independentemente das gestações anteriores. Qual é a probabilidade de os dois primeiros filhos serem afetados?\n- [x] 6,25%.\n  &gt; **Correto!** Como as gestações são independentes, P(afetado e afetado) = 0,25 × 0,25 = 0,0625, ou 6,25%.\n- [ ] 50%.\n  &gt; **Incorreto.** Somar as probabilidades só seria válido para eventos mutuamente exclusivos; gestações independentes podem resultar em ambos os filhos afetados.\n- [ ] 25%.\n  &gt; **Incorreto.** 25% é a probabilidade para uma única gestação. Para dois filhos, as probabilidades se multiplicam.\n\n\nQuestão #CAP5-06\n# Em um experimento de microbiologia, o número de colônias bacterianas que crescem por placa é uma contagem de eventos raros em uma área fixa. O modelo mais adequado para descrever essa variável é:\n- [ ] Binomial.\n  &gt; **Incorreto.** O binomial conta sucessos em um número fixo de ensaios com dois resultados; aqui não há \"n ensaios\" com sucesso/fracasso.\n- [x] Poisson.\n  &gt; **Correto!** Contagens de eventos raros em uma área ou intervalo fixo, com taxa média constante, são modeladas pela distribuição de Poisson.\n- [ ] Gaussiano.\n  &gt; **Incorreto.** O modelo gaussiano é para variáveis contínuas, não para contagens discretas.\n\n\nQuestão #CAP5-07\n# Um tratamento tem 70% de chance de resposta. Em 10 pacientes tratados de forma independente, a probabilidade de exatamente 7 responderem é de aproximadamente:\n- [ ] 70%.\n  &gt; **Incorreto.** 70% é a probabilidade de resposta de um paciente (p), não a de exatamente 7 entre 10.\n- [ ] 7%.\n  &gt; **Incorreto.** 7 é o número de sucessos que estamos considerando, não uma probabilidade.\n- [x] 26,7%.\n  &gt; **Correto!** P(X = 7) = C(10,7) × 0,7^7 × 0,3^3 ≈ 0,267, ou 26,7%.\n\n\nQuestão #CAP5-08\n# A altura de uma população segue uma distribuição gaussiana com média 165 cm e desvio padrão 8 cm. Pela regra empírica, a probabilidade de uma pessoa ter altura entre 157 cm e 173 cm é de aproximadamente:\n- [x] 68,3%.\n  &gt; **Correto!** O intervalo 157–173 cm corresponde a μ ± 1σ; pela regra empírica, cerca de 68% dos valores ficam nesse intervalo.\n- [ ] 95,4%.\n  &gt; **Incorreto.** 95,4% corresponde a μ ± 2σ (149–181 cm), não a μ ± 1σ.\n- [ ] 50%.\n  &gt; **Incorreto.** 50% seria a probabilidade de estar abaixo (ou acima) da média, não dentro de um intervalo de um desvio padrão.\n\n\n\n\n\n\n\nDicaDeixe o seu feedback!\n\n\n\nNão se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo! ❤️\n\n\n\n\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.\n\n\nVieira, Sonia. 2008. Introdução à Bioestatística. Elsevier Brasil.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidade nas Ciências da Saúde</span>"
     ]
@@ -350,16 +340,6 @@
     ]
   },
   {
-    "objectID": "cap06_diagnosticos.html#curva-roc-e-a-busca-pelo-ponto-de-corte",
-    "href": "cap06_diagnosticos.html#curva-roc-e-a-busca-pelo-ponto-de-corte",
-    "title": "6  Testes Diagnósticos nas Ciências da Saúde",
-    "section": "6.5 6.5 Curva ROC e a Busca pelo Ponto de Corte",
-    "text": "6.5 6.5 Curva ROC e a Busca pelo Ponto de Corte\nE quando o teste não devolve “Positivo/Negativo”, mas sim um valor contínuo, como a dosagem de glicemia ou a titulação de anticorpos? Nesses casos, precisamos definir um limite numérico (ponto de corte).\nA Curva ROC (Receiver Operating Characteristic) é um gráfico que plota a Sensibilidade (eixo Y) contra a proporção de Falsos Positivos (\\(1 - Especificidade\\)) (eixo X) para todos os pontos de corte possíveis de um exame.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nDicaPergunte ao Ginger\n\n\n\nNão entendeu como a prevalência altera o VPP? A matemática por trás do Teorema de Bayes pode ser abstrata no início. Clique no ícone do Tutor Virtual (Ginger) no canto inferior direito e digite: “Ginger, me dê um exemplo prático de como a alta prevalência no pico da epidemia altera o Valor Preditivo Positivo de um teste rápido.”",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
-    ]
-  },
-  {
     "objectID": "cap06_diagnosticos.html#a-dança-do-ponto-de-corte-o-jogo-de-ganhos-e-perdas",
     "href": "cap06_diagnosticos.html#a-dança-do-ponto-de-corte-o-jogo-de-ganhos-e-perdas",
     "title": "6  Testes Diagnósticos nas Ciências da Saúde",
@@ -377,6 +357,16 @@
     "text": "6.6 E a Curva ROC, onde entra?\nA Curva ROC (Receiver Operating Characteristic) nasce exatamente dessa brincadeira que você acabou de fazer.\nEm vez de o estatístico testar o ponto de corte 30, depois o 31, depois o 32, manualmente (como fizemos acima), o algoritmo da Curva ROC calcula todos os pontos de corte possíveis ao mesmo tempo. Ele plota um gráfico mostrando o desempenho do teste em cada um desses cenários.\nO “ponto ideal” na Curva ROC (geralmente o mais próximo do canto superior esquerdo do gráfico) é aquele que encontra o equilíbrio matemático perfeito entre a Sensibilidade e a Especificidade.\n\n\n\n\n\n\nDicaPergunte ao Ginger\n\n\n\nAinda confuso com a escolha do cutoff? Imagine o teste anti-doping num atleta olímpico. O que é pior: punir um inocente (falso positivo) ou deixar um trapaceiro escapar (falso negativo)? Clique no ícone do Tutor Virtual (Ginger) e pergunte: “Ginger, num teste de doping nas Olimpíadas, o ponto de corte do exame deve priorizar a Sensibilidade ou a Especificidade? Explique-me o porquê.”",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Testes Diagnósticos nas Ciências da Saúde</span>"
+    ]
+  },
+  {
+    "objectID": "referencias.html",
+    "href": "referencias.html",
+    "title": "Referências Bibliográficas",
+    "section": "",
+    "text": "Pagano, Marcello, and Kimberlee Gauvreau. 2004. Princípios de\nBioestatística. Cengage Learning.\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.\n\n\nVieira, Sonia. 2008. Introdução à Bioestatística. Elsevier\nBrasil.",
+    "crumbs": [
+      "Referências Bibliográficas"
     ]
   }
 ]
