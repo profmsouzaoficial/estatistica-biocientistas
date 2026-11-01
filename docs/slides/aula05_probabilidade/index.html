@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-575082959dfaf7df28ef90ea7f800d9a.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-ab350e7c71b51c4b7ce963f7a562c4f2.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -425,7 +425,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"# P(X = 7) numa Binomial (n = 10, p = 0.70)\ndbinom(x = 7, size = 10, prob = 0.70)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# P(X = 3) numa Poisson (lambda = 2)\ndpois(x = 3, lambda = 2)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(ggplot2)\n\nmedia_pa <- 120\ndesvio_pa <- 10\n\nx <- seq(70, 170, length.out = 100)\ny <- dnorm(x, mean = media_pa, sd = desvio_pa)\n\nggplot(data.frame(x, y), aes(x, y)) +\n  geom_line(color = \"#0d9488\", linewidth = 1.6) +\n  geom_area(fill = \"#14b8a6\", alpha = 0.25) +\n  theme_minimal() +\n  labs(title = \"Distribuição da Pressão Arterial\", x = \"mmHg\", y = \"Densidade\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"# P(X = 7) - Binomial n=10, p=0.70\ndbinom(x = 7, size = 10, prob = 0.70)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# P(X = 3) - Poisson lambda = 2\ndpois(x = 3, lambda = 2)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(ggplot2)\n\nx <- seq(70, 170, 100)\ny <- dnorm(x, mean = 120, sd = 10)\n\nggplot(data.frame(x, y), aes(x, y)) +\n  geom_area(fill = \"#14b8a6\", alpha = .25) +\n  geom_line(color = \"#0d9488\", lwd = 1.4) +\n  theme_minimal()","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":"144","editor-font-scale":"0.64","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":"4.3","fig-width":"7","label":"unnamed-chunk-3","message":"true","out-height":"295px","out-width":"480px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -2010,11 +2010,7 @@ Márcio Luís Moreira de Souza
 <section id="conceitos-fundamentais" class="slide level2">
 <h2>Conceitos fundamentais</h2>
 <p>Para trabalhar com o acaso, precisamos definir três pilares.</p>
-<ol type="1">
-<li class="fragment"><strong>Experimento aleatório</strong> — resultado incerto, mas com possibilidades conhecidas (ex.: tipagem sanguínea).</li>
-<li class="fragment"><strong>Espaço amostral</strong> (<span class="math inline">\(\Omega\)</span>) — o conjunto de todos os resultados possíveis <span class="math inline">\(\{A, B, AB, O\}\)</span>.</li>
-<li class="fragment"><strong>Evento</strong> — qualquer subconjunto de interesse dentro do espaço amostral (ex.: paciente ser tipo <span class="math inline">\(\{O\}\)</span>).</li>
-</ol>
+<p><strong>Experimento aleatório</strong> — resultado incerto, mas com possibilidades conhecidas (ex.: tipagem sanguínea). <strong>Espaço amostral</strong> (<span class="math inline">\(\Omega\)</span>) — o conjunto de todos os resultados possíveis <span class="math inline">\(\{A, B, AB, O\}\)</span>. <strong>Evento</strong> — qualquer subconjunto de interesse dentro do espaço amostral (ex.: paciente ser tipo <span class="math inline">\(\{O\}\)</span>).</p>
 <div class="keybox">
 <p>A probabilidade de um evento <span class="math inline">\(A\)</span> é sempre um número entre <strong>0</strong> (impossível) e <strong>1</strong> (certo).</p>
 </div>
@@ -2092,20 +2088,41 @@ A terceira visão é a porta de entrada do pensamento bayesiano — e a mais pr�
 <section id="o-modelo-binomial" class="slide level2">
 <h2>O modelo Binomial</h2>
 <p>Descreve o número de sucessos em <span class="math inline">\(n\)</span> ensaios independentes, com apenas dois resultados possíveis e a mesma probabilidade <span class="math inline">\(p\)</span>.</p>
-<p><em>Exemplo:</em> um tratamento tem 70% de chance de resposta. Tratamos 10 pacientes. Qual a chance de exatamente 7 responderem?</p>
+<div class="formula">
+<p><span class="math display">\[P(X = k) = \binom{n}{k}\, p^{k}\,(1-p)^{n-k}\]</span></p>
+</div>
+<p><em>Exemplo:</em> um tratamento tem 70% de chance de resposta. Tratamos <strong>10 pacientes</strong>.</p>
+</section>
+<section id="binomial-mão-na-massa" class="slide level2">
+<h2>Binomial · mão na massa</h2>
+<p><strong>Pergunta:</strong> qual a chance de exatamente <strong>7</strong> dos 10 pacientes responderem?</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="o-modelo-de-poisson" class="slide level2">
 <h2>O modelo de Poisson</h2>
 <p>Descreve a contagem de <strong>eventos raros</strong> em um intervalo fixo de tempo, espaço ou volume — governado pela taxa média <span class="math inline">\(\lambda\)</span>.</p>
-<p><em>Exemplo:</em> uma unidade registra em média 2 casos raros por dia. Qual a probabilidade de ocorrerem 3 casos amanhã?</p>
+<div class="formula">
+<p><span class="math display">\[P(X = k) = \frac{\lambda^{k}\, e^{-\lambda}}{k!}\]</span></p>
+</div>
+<p><em>Exemplo:</em> uma unidade registra em média 2 casos raros por dia.</p>
+</section>
+<section id="poisson-mão-na-massa" class="slide level2">
+<h2>Poisson · mão na massa</h2>
+<p><strong>Pergunta:</strong> qual a probabilidade de ocorrerem <strong>3 casos</strong> amanhã, se a média é de 2 por dia?</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="o-modelo-gaussiano" class="slide level2">
 <h2>O modelo Gaussiano</h2>
 <p>A famosa “curva de sino”. Usada para variáveis contínuas (altura, peso, pressão). É governada pela <strong>média</strong> (centro) e pelo <strong>desvio padrão</strong> (largura).</p>
+<div class="formula">
+<p><span class="math display">\[f(x) = \frac{1}{\sigma\sqrt{2\pi}}\; e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p>
+</div>
+<p><em>Exemplo:</em> pressão arterial de uma população com média 120 mmHg e desvio padrão 10 mmHg.</p>
+</section>
+<section id="gaussiano-mão-na-massa" class="slide level2">
+<h2>Gaussiano · mão na massa</h2>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>

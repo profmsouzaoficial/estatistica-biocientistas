@@ -606,26 +606,161 @@
   background: transparent;
 }
 
-/* webr (células executáveis) -------------------------------------------- */
+/* ==========================================================================
+   webr — células R executáveis
+   Layout: barra de ações no topo, CÓDIGO à esquerda e SAÍDA à direita
+   (console em cima, gráfico embaixo).
+   ========================================================================== */
 
 .reveal .qwebr-non-interactive-loading-container,
 .reveal .qwebr-interactive-area {
   border-radius: var(--bc-radius-sm) !important;
-  overflow: hidden;
 }
 
-.reveal .qwebr-editor,
-.reveal .qwebr-console-area,
-.reveal .qwebr-output-code-area {
-  font-size: 15px !important;
+/* A célula inteira vira um grid de duas colunas */
+.reveal .qwebr-interactive-area {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    "toolbar toolbar"
+    "editor  console"
+    "editor  graph";
+  column-gap: 1.1em;
+  row-gap: 0.45em;
+  align-items: start;
+  margin: 0.5em 0 0;
+  overflow: visible !important;
 }
+
+/* O wrapper `console-area` embrulha editor + saída: dissolvemos o wrapper
+   para que os dois filhos se tornem itens diretos do grid acima. */
+.reveal .qwebr-interactive-area > .qwebr-console-area {
+  display: contents !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.reveal .qwebr-editor-toolbar { grid-area: toolbar; }
+
+.reveal .qwebr-editor {
+  grid-area: editor;
+  /* garante presença visual mesmo com poucas linhas de código */
+  min-height: 150px;
+}
+
+/* ---- Saída de texto (console) ------------------------------------------ */
+
+.reveal .qwebr-output-code-area {
+  grid-area: console;
+  background: #f7f9fc;
+  border: 1px solid var(--bc-line);
+  border-left: 3px solid var(--bc-teal);
+  border-radius: var(--bc-radius-sm);
+  padding: 0.45em 0.75em;
+  display: flex;
+  align-items: center;
+}
+
+/* Sem saída de texto (ex.: célula que só gera gráfico), o cartão some */
+.reveal .qwebr-output-code-area:has(> pre[style*="hidden"]) {
+  display: none;
+}
+
+.reveal .qwebr-output-code-area pre {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: var(--r-code-font) !important;
+  line-height: 1.4 !important;
+  white-space: pre-wrap;
+  overflow: auto;
+  max-height: 9em;
+}
+
+/* Texto do console: escuro sobre claro.
+   Neutraliza qualquer fundo escuro herdado do tema de código do Quarto
+   (era isso que deixava texto preto sobre fundo preto). */
+.reveal .qwebr-output-code-area pre,
+.reveal .qwebr-output-code-area pre * {
+  color: var(--bc-ink) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.reveal .qwebr-output-code-area pre .qwebr-output-code-stdout { color: var(--bc-ink) !important; }
+.reveal .qwebr-output-code-area pre .qwebr-output-code-stderr { color: #b91c1c !important; }
+
+/* ---- Área do gráfico ---------------------------------------------------- */
+
+.reveal .qwebr-output-graph-area {
+  grid-area: graph;
+  margin-top: 0.1em;
+}
+
+.reveal .qwebr-canvas-image {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0;
+}
+
+.reveal .qwebr-canvas-image canvas {
+  border-radius: 10px;
+  box-shadow: var(--bc-shadow-sm);
+  max-width: 100%;
+}
+
+.reveal .qwebr-canvas-image-download-btn {
+  display: none !important;
+}
+
+/* ---- Barra de ações ----------------------------------------------------- */
 
 .reveal .qwebr-editor-toolbar {
-  font-size: 13px !important;
-  padding: 0.25rem 0.6rem !important;
+  font-size: 15px;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  align-items: center;
 }
 
-.reveal .qwebr-button,
+.reveal .qwebr-button-run {
+  font-family: var(--r-heading-font) !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  background: var(--bc-grad) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 0.42em 1.15em !important;
+  box-shadow: var(--bc-shadow-sm) !important;
+  cursor: pointer;
+}
+
+.reveal .qwebr-button-run:hover { filter: brightness(1.08); }
+
+.reveal .qwebr-button-reset,
+.reveal .qwebr-button-copy {
+  font-size: 15px !important;
+  color: var(--bc-muted) !important;
+  background: #f1f5f9 !important;
+  border: 1px solid var(--bc-line) !important;
+  border-radius: 999px !important;
+  padding: 0.35em 0.75em !important;
+  cursor: pointer;
+}
+
+.reveal .qwebr-button-reset:hover,
+.reveal .qwebr-button-copy:hover {
+  color: var(--bc-teal) !important;
+  border-color: rgba(13, 148, 136, 0.35) !important;
+}
+
 .reveal .qwebr-download-btn,
 .reveal .qwebr-canvas-image-download-btn {
   font-size: 12px !important;

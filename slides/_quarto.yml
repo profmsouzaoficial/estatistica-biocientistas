@@ -44,3 +44,11 @@ filters:
 
 webr:
   show-startup-message: false
+  # Pacotes R carregados no início da sessão (WebAssembly)
+  packages: ["ggplot2"]
+  # Fonte das células de código. A escala é aplicada sobre --r-main-font-size
+  # (30px), então 0.75 => 22,5px — legível do fundo da sala.
+  cell-options:
+    editor-font-scale: "0.75"
+    editor-word-wrap: "true"
+    editor-max-height: "430"

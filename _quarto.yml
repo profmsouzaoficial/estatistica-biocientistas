@@ -16,7 +16,7 @@ book:
   author: "Márcio Souza"
   date: "2026-10-07"
   isbn: "978-X-XXXX-XXXX-X" 
-  doi: "10.XXXX/zenodo.XXXXX" 
+  doi: "10.5281/zenodo.23858967" 
   cover-image: capa.png
   chapters:
     - index.qmd

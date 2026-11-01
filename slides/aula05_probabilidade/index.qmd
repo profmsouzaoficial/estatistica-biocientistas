@@ -5,9 +5,6 @@ author: "Márcio Luís Moreira de Souza"
 institute: "UFJF · Campus Avançado Governador Valadares"
 date: "2026-10-07"
 date-format: "MMMM [de] YYYY"
-webr:
-  packages: ["ggplot2"]
-  show-startup-message: false
 ---
 
 ## A vida é probabilística
@@ -45,9 +42,9 @@ Bloco 1 · Onde a intuição falha e a matemática começa
 Para trabalhar com o acaso, precisamos definir três pilares.
 
 ::: {.incremental}
-1. **Experimento aleatório** — resultado incerto, mas com possibilidades conhecidas (ex.: tipagem sanguínea).
-2. **Espaço amostral** ($\Omega$) — o conjunto de todos os resultados possíveis $\{A, B, AB, O\}$.
-3. **Evento** — qualquer subconjunto de interesse dentro do espaço amostral (ex.: paciente ser tipo $\{O\}$).
+**Experimento aleatório** — resultado incerto, mas com possibilidades conhecidas (ex.: tipagem sanguínea).
+**Espaço amostral** ($\Omega$) — o conjunto de todos os resultados possíveis $\{A, B, AB, O\}$.
+**Evento** — qualquer subconjunto de interesse dentro do espaço amostral (ex.: paciente ser tipo $\{O\}$).
 :::
 
 ::: {.keybox}
@@ -136,10 +133,18 @@ A curva de sino para medidas contínuas.
 
 Descreve o número de sucessos em $n$ ensaios independentes, com apenas dois resultados possíveis e a mesma probabilidade $p$.
 
-*Exemplo:* um tratamento tem 70% de chance de resposta. Tratamos 10 pacientes. Qual a chance de exatamente 7 responderem?
+::: {.formula}
+$$P(X = k) = \binom{n}{k}\, p^{k}\,(1-p)^{n-k}$$
+:::
+
+*Exemplo:* um tratamento tem 70% de chance de resposta. Tratamos **10 pacientes**.
+
+## Binomial · mão na massa
+
+**Pergunta:** qual a chance de exatamente **7** dos 10 pacientes responderem?
 
 ```{webr-r}
-# P(X = 7) numa Binomial (n = 10, p = 0.70)
+# P(X = 7) - Binomial n=10, p=0.70
 dbinom(x = 7, size = 10, prob = 0.70)
 ```
 
@@ -147,10 +152,18 @@ dbinom(x = 7, size = 10, prob = 0.70)
 
 Descreve a contagem de **eventos raros** em um intervalo fixo de tempo, espaço ou volume — governado pela taxa média $\lambda$.
 
-*Exemplo:* uma unidade registra em média 2 casos raros por dia. Qual a probabilidade de ocorrerem 3 casos amanhã?
+::: {.formula}
+$$P(X = k) = \frac{\lambda^{k}\, e^{-\lambda}}{k!}$$
+:::
+
+*Exemplo:* uma unidade registra em média 2 casos raros por dia.
+
+## Poisson · mão na massa
+
+**Pergunta:** qual a probabilidade de ocorrerem **3 casos** amanhã, se a média é de 2 por dia?
 
 ```{webr-r}
-# P(X = 3) numa Poisson (lambda = 2)
+# P(X = 3) - Poisson lambda = 2
 dpois(x = 3, lambda = 2)
 ```
 
@@ -158,20 +171,30 @@ dpois(x = 3, lambda = 2)
 
 A famosa "curva de sino". Usada para variáveis contínuas (altura, peso, pressão). É governada pela **média** (centro) e pelo **desvio padrão** (largura).
 
+::: {.formula}
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}}\; e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
+:::
+
+*Exemplo:* pressão arterial de uma população com média 120 mmHg e desvio padrão 10 mmHg.
+
+## Gaussiano · mão na massa
+
 ```{webr-r}
+#| editor-font-scale: 0.64
+#| fig-width: 7
+#| fig-height: 4.3
+#| out-width: 480px
+#| out-height: 295px
+#| dpi: 144
 library(ggplot2)
 
-media_pa <- 120
-desvio_pa <- 10
-
-x <- seq(70, 170, length.out = 100)
-y <- dnorm(x, mean = media_pa, sd = desvio_pa)
+x <- seq(70, 170, 100)
+y <- dnorm(x, mean = 120, sd = 10)
 
 ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "#0d9488", linewidth = 1.6) +
-  geom_area(fill = "#14b8a6", alpha = 0.25) +
-  theme_minimal() +
-  labs(title = "Distribuição da Pressão Arterial", x = "mmHg", y = "Densidade")
+  geom_area(fill = "#14b8a6", alpha = .25) +
+  geom_line(color = "#0d9488", lwd = 1.4) +
+  theme_minimal()
 ```
 
 ## Próximos passos
