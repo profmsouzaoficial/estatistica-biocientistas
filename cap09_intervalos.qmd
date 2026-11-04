@@ -1,3 +1,194 @@
 # Intervalos de Confiança
 
-Este capítulo está em preparação.
+O capítulo anterior mostrou como decidir se uma diferença é compatível com o acaso. Mas há uma pergunta anterior, mais fundamental: **quanto vale a estimativa que eu calculei?**
+
+Uma média de 142,4 mmHg obtida em oito pacientes não é "a" pressão média da população. É uma estimativa — e toda estimativa calculada a partir de uma amostra carrega incerteza. O intervalo de confiança é a forma padrão de declarar essa incerteza junto com o valor [@triola2017].
+
+## O problema da estimativa pontual
+
+Suponha que você meça a pressão sistólica de oito pacientes e obtenha média de 142,4 mmHg. Outro pesquisador, com outros oito pacientes da mesma população, obteria talvez 139,8. Um terceiro, 145,1. Todas essas médias são plausíveis, e nenhuma delas coincide exatamente com a média verdadeira da população.
+
+A estimativa pontual esconde essa variação. Ela dá a impressão de precisão que os dados não sustentam.
+
+::: {.callout-note}
+## A origem da incerteza
+A média varia de amostra para amostra porque a amostra é um sorteio. Se você pudesse repetir o estudo infinitas vezes, obteria uma distribuição de médias — e é essa distribuição que o intervalo de confiança resume.
+:::
+
+## O que é um intervalo de confiança
+
+Um **intervalo de confiança** de 95% é um intervalo construído por um método que, se repetido em infinitas amostras da mesma população, conteria o verdadeiro parâmetro em 95% das vezes.
+
+Essa frase é precisa de propósito, e vale desmontá-la:
+
+* O intervalo **varia** de amostra para amostra. Cada estudo produz um intervalo diferente.
+* O **parâmetro é fixo** — ele não tem distribuição. Quem tem propriedades probabilísticas é o *método*, não o valor.
+* Dizer que "há 95% de probabilidade de o parâmetro estar neste intervalo" é uma leitura **bayesiana**, não frequentista. Não é o que o intervalo de confiança clássico afirma.
+
+Na prática, o que se pode afirmar sobre um intervalo específico é: *se o estudo fosse repetido muitas vezes, 95% dos intervalos assim construídos conteriam o valor verdadeiro*. Para o intervalo que você tem em mãos, a honestidade é dizer "é compatível com valores entre X e Y".
+
+## A anatomia do intervalo
+
+Todo intervalo de confiança tem a mesma estrutura:
+
+$$\text{IC}_{95\%} = \text{estimativa} \pm \left(z \times EP\right)$$
+
+* A **estimativa** é o valor pontual (média, proporção, diferença entre médias).
+* O **erro padrão (EP)** é o desvio padrão da estimativa — ele mede o quanto ela varia de amostra para amostra.
+* O **multiplicador** $z$ depende do nível de confiança: 1,96 para 95%, 2,58 para 99%.
+
+Trocar 95% por 99% alarga o intervalo. Não porque os dados ficaram menos precisos, mas porque se exige mais garantia do método.
+
+## Intervalo de confiança para uma média
+
+Quando o desvio padrão populacional é desconhecido — o caso normal —, troca-se $z$ pela distribuição $t$ de Student:
+
+$$\text{IC}_{95\%} = \bar{x} \pm t_{0{,}975;\, n-1} \times \frac{s}{\sqrt{n}}$$
+
+O termo $\frac{s}{\sqrt{n}}$ é o erro padrão da média. A dependência de $\sqrt{n}$ é o ponto central: **para reduzir a margem de erro à metade, é preciso quadruplicar a amostra**. Ganhos de precisão ficam cada vez mais caros.
+
+*Exemplo:* com $n = 8$, $\bar{x} = 142{,}4$ mmHg e $s = 4{,}93$ mmHg, o erro padrão é $4{,}93/\sqrt{8} = 1{,}74$ mmHg e $t = 2{,}365$. O intervalo é:
+
+$$142{,}4 \pm 2{,}365 \times 1{,}74 = [138{,}3;\; 146{,}5] \text{ mmHg}$$
+
+## Intervalo de confiança para uma proporção
+
+Para proporções, a aproximação normal dá:
+
+$$\text{IC}_{95\%} = \hat{p} \pm 1{,}96\sqrt{\frac{\hat{p}\,(1-\hat{p})}{n}}$$
+
+*Exemplo:* se 45 de 120 pacientes apresentaram melhora, $\hat{p} = 0{,}375$ e o intervalo é $[0{,}288;\; 0{,}462]$ — ou seja, de 28,8% a 46,2%.
+
+::: {.callout-warning}
+## Aproximação tem limite
+Essa fórmula funciona bem quando $n\hat{p}$ e $n(1-\hat{p})$ são ambos maiores que 5. Para proporções extremas (perto de 0% ou 100%) ou amostras pequenas, é preciso usar métodos exatos ou o intervalo de Wilson, que o R oferece em `prop.test()`. O resultado muda um pouco — no exemplo acima, Wilson devolve $[29{,}4\%;\; 46{,}4\%]$ em vez de $[28{,}8\%;\; 46{,}2\%]$.
+:::
+
+## O que alarga e o que estreita o intervalo
+
+| Fator | Efeito na largura | Por quê |
+|---|---|---|
+| Aumentar $n$ | estreita | o erro padrão cai com $\sqrt{n}$ |
+| Aumentar o nível de confiança | alarga | exige-se mais garantia do método |
+| Maior variabilidade dos dados | alarga | o desvio padrão entra no numerador |
+| Amostra pareada em vez de independente | estreita | remove a variabilidade entre indivíduos |
+
+## O intervalo de confiança e o teste de hipóteses
+
+Os dois são a mesma conta vista de ângulos diferentes. Um intervalo de 95% para uma diferença **equivale** a um teste bilateral com $\alpha = 0{,}05$:
+
+* Se o intervalo **não inclui o zero**, o teste rejeita $H_0$.
+* Se o intervalo **inclui o zero**, o teste não rejeita $H_0$.
+
+No exemplo do capítulo 8, a diferença de pressão entre os grupos foi de $-11{,}75$ mmHg, com intervalo de $[-16{,}2;\; -7{,}3]$. Como o zero está fora, o teste também rejeitou a nula.
+
+O intervalo é mais informativo que o p-valor porque mostra **onde** o efeito provavelmente está — e não apenas se ele é diferente de zero.
+
+## Três erros comuns
+
+1. **"95% de chance de o parâmetro estar no intervalo."** Não é isso: o parâmetro é fixo. A probabilidade descreve o método, não este intervalo específico.
+2. **Tratar a margem de erro como um selo de qualidade.** Um intervalo estreito pode vir de um estudo enviesado — precisão não corrige viés.
+3. **Ignorar o que o intervalo significa clinicamente.** Um intervalo de $[0{,}1;\; 0{,}3]$ mmHg para a diferença de pressão é estreito e irrelevante.
+
+## Prática Interativa: do cálculo à mão ao `t.test()`
+
+Vamos reconstruir, linha por linha, o intervalo de confiança da média daquele grupo de pressão sistólica — e depois conferir com a função pronta do R.
+
+```{webr-r}
+pressao <- c(142, 138, 145, 139, 150, 136, 148, 141)
+
+n     <- length(pressao)
+media <- mean(pressao)
+dp    <- sd(pressao)
+ep    <- dp / sqrt(n)
+
+# Multiplicador t para 95% de confiança
+tcrit <- qt(0.975, df = n - 1)
+tcrit
+
+# Intervalo calculado à mão
+media + c(-1, 1) * tcrit * ep
+
+# Conferindo com a função do R
+t.test(pressao)$conf.int
+```
+
+O resultado é o mesmo: $[138{,}3;\; 146{,}5]$ mmHg. Repare que o `t.test()` devolve o intervalo pronto no objeto `$conf.int` — mas agora você sabe exatamente o que ele fez por dentro.
+
+**Exercício rápido:** troque `0.975` por `0.995` e rode novamente. O intervalo fica mais largo ou mais estreito? Por quê?
+
+## O que levar deste capítulo
+
+::: {.callout-note icon="false"}
+## Resumo em quatro pontos
+
+1. **Toda estimativa tem incerteza.** O intervalo de confiança é a forma padrão de declará-la.
+2. **95% descreve o método, não o intervalo.** É a proporção de intervalos que conteriam o parâmetro se o estudo se repetisse.
+3. **Precisão custa caro.** Quadruplicar a amostra apenas divide a margem de erro por dois.
+4. **O intervalo é mais informativo que o p-valor.** Ele mostra o tamanho do efeito e a faixa de valores plausíveis.
+
+O capítulo 10 fecha a parte de modelagem com as duas ferramentas mais usadas — e mais confundidas — da estatística aplicada: a correlação e a regressão.
+:::
+
+## 🧠 Exercícios de fixação
+
+*A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
+
+::: {.questao-banco}
+**Questão #CAP9-01**
+```quizdown
+# Um estudo reporta média de 142 mmHg com intervalo de confiança de 95% igual a [138,3; 146,5]. Qual leitura é correta?
+- [ ] Há 95% de probabilidade de a média populacional estar entre 138,3 e 146,5 mmHg.
+  > **Incorreto.** Essa é a leitura bayesiana. O método do intervalo é que tem a propriedade dos 95%, não o intervalo específico.
+- [x] Se o estudo fosse repetido muitas vezes, cerca de 95% dos intervalos assim construídos conteriam a média populacional verdadeira.
+  > **Correto!** A garantia é sobre o procedimento de construção do intervalo, não sobre um intervalo particular.
+- [ ] 95% dos pacientes têm pressão entre 138,3 e 146,5 mmHg.
+  > **Incorreto.** O intervalo é da média, não dos indivíduos. A dispersão entre pacientes é muito maior.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP9-02**
+```quizdown
+# Um pesquisador quer reduzir a margem de erro do intervalo de confiança da média pela metade. O que precisa fazer com a amostra?
+- [ ] Dobrar o tamanho da amostra.
+  > **Incorreto.** A margem de erro cai com a raiz de n; dobrar n reduz a margem por cerca de 1,41.
+- [x] Quadruplicar o tamanho da amostra.
+  > **Correto!** Como a margem é proporcional a 1 sobre raiz de n, dividir por dois exige multiplicar n por quatro.
+- [ ] Aumentar o nível de confiança para 99%.
+  > **Incorreto.** Aumentar a confiança ALARGA o intervalo — é o efeito oposto ao desejado.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP9-03**
+```quizdown
+# Um teste t bilateral para a diferença entre dois tratamentos resultou em p = 0,03. O que se espera do intervalo de confiança de 95% para essa diferença?
+- [ ] Que o intervalo inclua o zero, pois o p-valor é pequeno.
+  > **Incorreto.** p menor que 0,05 e intervalo que inclui o zero seriam conclusões contraditórias.
+- [x] Que o intervalo não inclua o zero, pois p menor que 0,05 corresponde a um intervalo de 95% que exclui o valor nulo.
+  > **Correto!** O intervalo de 95% e o teste bilateral com alfa igual a 0,05 são duas formas da mesma informação.
+- [ ] Nada se pode concluir: o intervalo não tem relação com o teste.
+  > **Incorreto.** Os dois procedimentos são equivalentes; o intervalo apenas mostra também a magnitude e a precisão.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP9-04**
+```quizdown
+# Um estudo com amostra muito pequena apresentou intervalo de confiança bastante largo. Qual é a interpretação adequada?
+- [ ] O resultado é inválido e deve ser descartado.
+  > **Incorreto.** Intervalo largo indica baixa precisão, não invalidade. Excluir estudos pequenos sistematicamente gera viés de publicação.
+- [x] A estimativa pontual é bastante incerta: os dados são compatíveis com uma faixa ampla de valores do parâmetro.
+  > **Correto!** É exatamente o que o intervalo informa. Ele não invalida o estudo, mas limita o que se pode afirmar.
+- [ ] O intervalo deveria ter sido de 99% para ficar mais estreito.
+  > **Incorreto.** Aumentar o nível de confiança só alarga ainda mais o intervalo.
+```
+:::
+
+::: {.callout-tip}
+## Deixe o seu feedback!
+
+[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
+:::

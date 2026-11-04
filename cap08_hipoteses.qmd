@@ -1,3 +1,202 @@
 # Testes de Hipóteses
 
-Este capítulo está em preparação.
+Um novo anti-hipertensivo baixou a pressão média de 12 mmHg num grupo de pacientes. O medicamento funciona ou foi sorte? A diferença é grande o bastante para vencer a variabilidade natural de qualquer medida biológica?
+
+Essa é a pergunta que o teste de hipóteses responde. Ele não diz se o fármaco é bom; diz **qual a probabilidade de uma diferença desse tamanho aparecer por acaso**, se não houver efeito nenhum. É a ferramenta mais usada — e mais mal interpretada — da estatística aplicada à saúde [@triola2017].
+
+## A lógica do teste
+
+O raciocínio do teste de hipóteses é o mesmo da presunção de inocência no direito. Começa-se supondo que **não há efeito**, e só se abandona essa suposição quando a evidência é forte demais para ser explicada pelo acaso.
+
+As duas hipóteses são:
+
+* **$H_0$ (hipótese nula)** — a suposição de "nada aconteceu". Não há diferença entre os grupos, ou o parâmetro é igual a um valor de referência.
+* **$H_1$ (hipótese alternativa)** — a afirmação que se quer sustentar. Há diferença, ou o parâmetro é diferente do valor de referência.
+
+*Exemplo:* queremos testar se um novo fármaco reduz a pressão. Então $H_0: \mu_{\text{tratamento}} = \mu_{\text{controle}}$ e $H_1: \mu_{\text{tratamento}} \neq \mu_{\text{controle}}$.
+
+Repare numa consequência importante desse desenho: o teste **nunca prova $H_0$**. "Não rejeitar $H_0$" significa apenas que a amostra não trouxe evidência suficiente contra ela — o que é diferente de afirmar que $H_0$ é verdadeira.
+
+## Erro tipo I e erro tipo II
+
+Toda decisão tomada sob incerteza pode errar de duas maneiras, e as duas têm nome próprio:
+
+| Decisão | $H_0$ é verdadeira | $H_0$ é falsa |
+|---|---|---|
+| **Não rejeitar $H_0$** | decisão correta ($1 - \alpha$) | **erro tipo II** ($\beta$) |
+| **Rejeitar $H_0$** | **erro tipo I** ($\alpha$) | decisão correta (poder $= 1 - \beta$) |
+
+* **Erro tipo I** — dizer que existe efeito quando não existe. É o **falso positivo**. Sua probabilidade é o nível de significância $\alpha$, normalmente fixado em 0,05.
+* **Erro tipo II** — dizer que não existe efeito quando existe. É o **falso negativo**. Sua probabilidade é $\beta$.
+* **Poder** — a capacidade de detectar um efeito que realmente existe. É $1 - \beta$, e o valor de referência é 80%.
+
+Há um compromisso entre os dois: baixar $\alpha$ reduz os falsos positivos, mas aumenta os falsos negativos. Quem decide o equilíbrio é o custo clínico de cada erro.
+
+::: {.callout-important}
+## O erro tem consequência clínica
+Num teste de triagem de uma doença grave, o erro tipo II (deixar passar um doente) costuma ser mais grave que o tipo I. Num exame que leva a cirurgia invasiva, o raciocínio se inverte. O $\alpha = 0{,}05$ não é sagrado: ele é uma convenção que deve ser discutida à luz do contexto.
+:::
+
+## O p-valor
+
+O **p-valor** é a probabilidade de observar um resultado **tão ou mais extremo** que o obtido, **supondo que $H_0$ seja verdadeira**.
+
+$$p = P\left(\text{dados tão extremos quanto os observados} \mid H_0 \text{ verdadeira}\right)$$
+
+Essa definição é curta e cheia de armadilhas. Vale desmontar as três interpretações erradas mais comuns:
+
+| O p-valor **não** é | Por quê |
+|---|---|
+| A probabilidade de $H_0$ ser verdadeira | O p-valor é calculado **supondo** $H_0$; ele não a avalia |
+| A probabilidade de o resultado ter sido acaso | Ele mede a compatibilidade dos dados com $H_0$, não a origem do resultado |
+| Uma medida do tamanho do efeito | Um p-valor minúsculo pode vir de um efeito clinicamente irrelevante, desde que a amostra seja grande |
+
+::: {.callout-warning}
+## O p-valor mais famoso do mundo
+Em 2016, a American Statistical Association publicou um comunicado formal com seis princípios sobre o uso do p-valor. O primeiro deles lembra que o p-valor **não mede a probabilidade de a hipótese nula ser verdadeira** nem a força da evidência a favor dela. A confusão é tão comum que ganhou nome: *p-hacking*, quando se testam muitas hipóteses até uma delas cruzar o 0,05 por acaso.
+:::
+
+## A regra de decisão
+
+Definido $\alpha$ antes do estudo, a decisão é mecânica:
+
+* Se **$p \leq \alpha$** → rejeita-se $H_0$. O resultado é chamado de **estatisticamente significativo**.
+* Se **$p > \alpha$** → não se rejeita $H_0$. Não há evidência suficiente contra a hipótese nula.
+
+Essa regra é apenas um resumo. O relato científico completo inclui sempre: a estimativa do efeito, o intervalo de confiança e o p-valor. Um p-valor sozinho não informa o tamanho nem a precisão do efeito.
+
+## Testes unilaterais e bilaterais
+
+* **Bilateral** — $H_1$ diz apenas "é diferente". É o padrão, e divide o $\alpha$ entre as duas caudas da distribuição.
+* **Unilateral** — $H_1$ diz "é maior" ou "é menor". Concentra todo o $\alpha$ numa cauda, o que dá mais poder — mas só vale se a direção for definida **antes** de ver os dados.
+
+Escolher a direção depois de olhar o resultado é uma forma de manipulação: dobra-se artificialmente a chance de achar significância.
+
+## Os testes mais usados
+
+| Situação | Teste | No R |
+|---|---|---|
+| Média de um grupo contra um valor de referência | t de uma amostra | `t.test(x, mu = 120)` |
+| Médias de dois grupos independentes | t de duas amostras | `t.test(y ~ grupo)` |
+| Médias de três ou mais grupos | ANOVA | `aov(y ~ grupo)` |
+| Associação entre variáveis categóricas | qui-quadrado | `chisq.test(tabela)` |
+| Duas amostras pareadas (antes e depois) | t pareado | `t.test(antes, depois, paired = TRUE)` |
+| Medianas, sem pressuposto de normalidade | Mann-Whitney / Wilcoxon | `wilcox.test(y ~ grupo)` |
+
+A escolha depende de três perguntas: quantos grupos, os dados são pareados e os pressupostos de normalidade se sustentam.
+
+## Significância estatística não é relevância clínica
+
+Este é o ponto que mais causa dano na prática. Com uma amostra grande o suficiente, **qualquer** diferença se torna estatisticamente significativa.
+
+*Exemplo:* num estudo com 100.000 pacientes, um fármaco que reduz a pressão em 0,2 mmHg produz $p < 0{,}001$. O resultado é estatisticamente significativo e clinicamente irrelevante.
+
+O contrário também acontece: um efeito grande e clinicamente importante pode não atingir significância num estudo pequeno — não porque não exista, mas porque o estudo não tinha poder para detectá-lo.
+
+::: {.callout-tip}
+## A pergunta que importa
+A pergunta certa nunca é só "deu significativo?". É: **qual o tamanho do efeito, qual a precisão da estimativa e isso muda a conduta do paciente?**
+:::
+
+## Prática Interativa: um teste t no R
+
+Um ensaio compara um novo anti-hipertensivo com o tratamento padrão. A pressão sistólica final (mmHg) de oito pacientes de cada grupo está abaixo.
+
+Rode o teste e observe as três informações que ele devolve: a diferença entre as médias, o intervalo de confiança dessa diferença e o p-valor.
+
+```{webr-r}
+# Pressão sistólica final (mmHg) após 8 semanas
+controle   <- c(142, 138, 145, 139, 150, 136, 148, 141)
+tratamento <- c(130, 128, 135, 129, 132, 126, 134, 131)
+
+# Média de cada grupo
+mean(controle)
+mean(tratamento)
+
+# Teste t de duas amostras independentes
+t.test(tratamento, controle)
+```
+
+Leitura do resultado:
+
+* A pressão média caiu de 142,4 para 130,6 mmHg — uma diferença de **11,75 mmHg** a favor do tratamento.
+* O intervalo de confiança de 95% para essa diferença é de **-16,2 a -7,3 mmHg**. Como ele não inclui o zero, a diferença é compatível com um efeito real.
+* O p-valor é de aproximadamente **0,0001**, muito abaixo de 0,05.
+
+A conclusão honesta não é "o fármaco funciona", mas sim: *neste ensaio de 16 pacientes, o novo anti-hipertensivo reduziu a pressão sistólica em cerca de 12 mmHg, com intervalo de confiança entre 7 e 16 mmHg*. O tamanho do efeito está dito, e a incerteza também.
+
+## O que levar deste capítulo
+
+::: {.callout-note icon="false"}
+## Resumo em quatro pontos
+
+1. **O teste parte da inocência.** Assume-se $H_0$ e só se abandona com evidência forte; nunca se "prova" a nula.
+2. **O p-valor não responde a pergunta que parece responder.** Ele supõe $H_0$, não mede a probabilidade dela.
+3. **Existem dois jeitos de errar.** $\alpha$ controla o falso positivo; o poder controla o falso negativo.
+4. **Significância não é importância.** Sempre reporte o tamanho do efeito e o intervalo de confiança.
+
+O capítulo 9 aprofunda justamente o intervalo de confiança — a peça que transforma um teste em uma estimativa com margem de erro declarada.
+:::
+
+## 🧠 Exercícios de fixação
+
+*A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
+
+::: {.questao-banco}
+**Questão #CAP8-01**
+```quizdown
+# Um estudo encontrou p-valor igual a 0,03 para a diferença entre dois grupos. Como interpretar esse valor?
+- [ ] Há 3% de probabilidade de a hipótese nula ser verdadeira.
+  > **Incorreto.** O p-valor é calculado supondo que a nula seja verdadeira; ele não indica a probabilidade dela.
+- [x] Supondo que não exista diferença real, a chance de observar uma diferença tão ou mais extrema que a encontrada é de 3%.
+  > **Correto!** Essa é a definição correta: probabilidade dos dados, condicionada à hipótese nula.
+- [ ] A diferença encontrada tem 97% de chance de ser real.
+  > **Incorreto.** O p-valor não mede a probabilidade de o efeito ser real nem a força da evidência.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-02**
+```quizdown
+# Em um teste de triagem para uma doença grave e tratável, qual erro deve ser minimizado com mais prioridade?
+- [ ] O erro tipo I, porque um falso positivo sempre causa dano irreversível.
+  > **Incorreto.** No rastreamento, o falso positivo gera exames adicionais e ansiedade, mas é reversível.
+- [x] O erro tipo II, porque um falso negativo significa deixar um doente sem diagnóstico e sem tratamento.
+  > **Correto!** Quando a doença é grave e tratável, perder um caso é o erro mais custoso; por isso se aceita mais falso positivo.
+- [ ] Nenhum dos dois, pois o p-valor controla ambos simultaneamente.
+  > **Incorreto.** O p-valor controla apenas o erro tipo I; o tipo II depende do poder do estudo.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-03**
+```quizdown
+# Um ensaio com 100.000 pacientes encontrou p menor que 0,001 para um fármaco que reduz a pressão em 0,2 mmHg. Qual é a leitura correta?
+- [ ] O resultado é irrelevante porque a amostra era grande demais.
+  > **Incorreto.** A amostra grande é uma qualidade do estudo; o problema é o tamanho do efeito, não o número de pacientes.
+- [x] O resultado é estatisticamente significativo, mas o efeito de 0,2 mmHg é clinicamente irrelevante.
+  > **Correto!** Com amostras grandes, diferenças mínimas atingem significância. Significância estatística não é relevância clínica.
+- [ ] O p-valor está errado, pois um efeito tão pequeno não pode ser significativo.
+  > **Incorreto.** Estatisticamente, um efeito pequeno pode ser significativo; a magnitude do efeito não é o que o p-valor mede.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-04**
+```quizdown
+# O que significa o poder de um teste estatístico igual a 80%?
+- [ ] Que há 80% de chance de o resultado publicado estar correto.
+  > **Incorreto.** Poder não se refere à probabilidade de acerto geral do estudo.
+- [ ] Que 80% das hipóteses testadas serão rejeitadas.
+  > **Incorreto.** Poder não é uma taxa de rejeição sobre todas as hipóteses, e sim sobre as que realmente têm efeito.
+- [x] Que, se o efeito realmente existir, o estudo tem 80% de chance de detectá-lo.
+  > **Correto!** Poder é 1 menos beta, a probabilidade de rejeitar a nula quando ela é de fato falsa.
+```
+:::
+
+::: {.callout-tip}
+## Deixe o seu feedback!
+
+[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
+:::

@@ -94,17 +94,7 @@
     "href": "cap01_introducao.html#exercícios-de-fixação",
     "title": "1  Introdução ao método estatístico",
     "section": "1.8 🧠 Exercícios de fixação",
-    "text": "1.8 🧠 Exercícios de fixação\nA cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!\n\nQuestão #CAP1-01\n# Segundo o texto, qual é a diferença fundamental entre \"Dados\" e \"Informação\" nas ciências da saúde?\n- [ ] Não há diferença, ambos representam tabelas numéricas usadas na bioestatística.\n  &gt; **Incorreto.** Existe uma hierarquia clara entre os dois conceitos.\n- [ ] Informação são os números recolhidos brutamente, enquanto dados são os laudos em texto livre.\n  &gt; **Incorreto.** Os conceitos estão invertidos nesta alternativa.\n- [x] Dados são um conjunto de símbolos, números ou medidas recolhidos; Informação é esse conjunto de dados com significado, usado para tomar decisões clínicas.\n  &gt; **Correto!** O dado é a matéria-prima (ex: o número \"120/80\"). A informação é o significado extraído disso (ex: \"O paciente está normotenso\", o que guia a decisão clínica).\n\n\nQuestão #CAP1-02\n# Um aluno de Odontologia regista o \"Índice CPO-D\" (número de dentes cariados, perdidos e obturados) dos pacientes. Como esta variável é classificada?\n- [ ] Qualitativa Ordinal.\n  &gt; **Incorreto.** O índice CPO-D não é uma categoria ou um atributo qualitativo, é uma contagem numérica.\n- [ ] Quantitativa Contínua.\n  &gt; **Incorreto.** Variáveis contínuas admitem frações (como o peso ou a altura). Não existe \"meio dente cariado\" nesta contagem.\n- [x] Quantitativa Discreta.\n  &gt; **Correto!** Perfeito. O CPO-D baseia-se em contagens numéricas inteiras, assim como a contagem de colônias de bactérias.\n\n\nQuestão #CAP1-03\n# Numa aula de Fisioterapia, a marcha de um paciente é analisada visualmente durante uma caminhada na clínica, sem qualquer intervenção do avaliador. Qual foi o método de recolha de dados utilizado?\n- [ ] Experimentação.\n  &gt; **Incorreto.** Na experimentação, o avaliador precisaria de intervir (ex: aplicar um tratamento e ver como a marcha se altera).\n- [ ] Levantamento.\n  &gt; **Incorreto.** O levantamento é feito através de questionários ou entrevistas diretas.\n- [x] Observação.\n  &gt; **Correto!** A recolha foi feita por observação, pois o avaliador não interferiu no ambiente ou no comportamento do paciente durante a análise.\n\n\nQuestão #CAP1-04\n# Como classificamos a variável \"Grau de dor na Escala Visual Analógica (EVA)\", frequentemente utilizada em avaliações clínicas?\n- [ ] Qualitativa Nominal.\n  &gt; **Incorreto.** A escala de dor tem uma progressão clara (ex: dor leve, moderada, intensa), logo, não é nominal.\n- [x] Qualitativa Ordinal.\n  &gt; **Correto!** É um dado categórico que possui uma hierarquia ou progressão clara, assim como o estágio de desenvolvimento de uma lesão.\n- [ ] Quantitativa Discreta.\n  &gt; **Incorreto.** Embora a EVA muitas vezes use números (0 a 10), ela representa uma gradação subjetiva de uma qualidade (a dor), não uma contagem exata e matematicamente estrita.\n\n\nQuestão #CAP1-05\n# Qual das opções abaixo é um exemplo de recolha de dados por \"Experimentação\" no ciclo básico?\n- [ ] Aplicar questionários sobre higiene bucal na comunidade.\n  &gt; **Incorreto.** A aplicação de questionários estruturados caracteriza um \"Levantamento\".\n- [x] Testar a eficácia antimicrobiana de um extrato vegetal em placas de Petri.\n  &gt; **Correto!** Aqui há uma intervenção clara do investigador no ambiente/amostra para observar o resultado.\n- [ ] Avaliar o nível de ansiedade dos pacientes na sala de espera.\n  &gt; **Incorreto.** Isto é uma \"Observação\", pois não há intervenção no estado do paciente.\n\n\nQuestão #CAP1-06\n# Um pesquisador mede a glicemia de 120 pacientes atendidos no ambulatório e usa essa média para estimar a glicemia média de todos os diabéticos do município. Que ramo da estatística ele está praticando?\n- [ ] Estatística descritiva, porque começou calculando uma média.\n  &gt; **Incorreto.** Calcular a média da amostra é descritivo, mas o objetivo aqui é concluir sobre a população — isso é inferência.\n- [x] Estatística inferencial, porque generaliza da amostra para a população.\n  &gt; **Correto!** O salto da amostra (n = 120) para a população de diabéticos do município é exatamente o que define a inferência.\n- [ ] Amostragem, porque houve seleção de pacientes.\n  &gt; **Incorreto.** A amostragem é a técnica de seleção (capítulo 3); o uso do resultado para concluir sobre a população é inferência.\n\n\nQuestão #CAP1-07\n# A média de peso de 30 recém-nascidos de uma maternidade foi de 3,2 kg. Nesse contexto, qual é o papel do valor 3,2 kg?\n- [ ] É um parâmetro populacional, simbolizado por mu.\n  &gt; **Incorreto.** O parâmetro descreve a população inteira; aqui a medida veio de uma amostra de 30 recém-nascidos.\n- [x] É uma estatística amostral, simbolizada por x-barra, que estima o parâmetro populacional desconhecido.\n  &gt; **Correto!** A média de uma amostra é uma estatística; ela serve de estimativa para o parâmetro populacional, que nunca observamos diretamente.\n- [ ] É uma variável qualitativa ordinal, pois o peso tem ordem crescente.\n  &gt; **Incorreto.** Peso é uma variável quantitativa contínua. Ter ordem não faz dela qualitativa.\n\n\nQuestão #CAP1-08\n# Em um estudo, os pesquisadores apenas acompanharam pacientes fumantes e não fumantes por 10 anos, sem indicar tratamento a ninguém. Que tipo de conclusão esse desenho permite sustentar com mais segurança?\n- [ ] Causalidade: fumar provoca a doença estudada.\n  &gt; **Incorreto.** Sem intervenção e aleatorização, não é possível isolar todos os fatores de confusão; a causalidade fica como hipótese.\n- [x] Associação: há relação entre fumar e a doença, mas outros fatores podem explicar parte do efeito.\n  &gt; **Correto!** Estudos observacionais sustentam associação. A causalidade exige desenho experimental com aleatorização.\n- [ ] Nenhuma conclusão, pois não houve intervenção.\n  &gt; **Incorreto.** Estudos observacionais bem desenhados geram evidência relevante, apenas de natureza associativa.\n\n\nQuestão #CAP1-09\n# Um questionário de pesquisa de satisfação usa as opções: \"ruim\", \"regular\", \"bom\" e \"excelente\". Como essa variável deve ser classificada?\n- [ ] Qualitativa nominal, pois são palavras e não números.\n  &gt; **Incorreto.** As categorias têm ordem crescente de qualidade, o que caracteriza a escala ordinal, não a nominal.\n- [x] Qualitativa ordinal, pois as categorias têm uma hierarquia clara.\n  &gt; **Correto!** Existe progressão evidente entre ruim, regular, bom e excelente, o mesmo que ocorre com a escala de dor.\n- [ ] Quantitativa discreta, pois pode ser convertida em notas de 1 a 4.\n  &gt; **Incorreto.** Converter em notas é uma decisão do pesquisador; a variável original é uma categorização com ordem.\n\n\nQuestão #CAP1-10\n# No R, a coluna \"gravidade\" foi criada como factor com ordered = TRUE. Por que isso importa na análise?\n- [ ] Porque só assim o R consegue calcular a média da coluna.\n  &gt; **Incorreto.** Média não faz sentido para categorias, com ou sem ordem definida.\n- [ ] Porque sem ordered o R não consegue exibir a tabela de frequências.\n  &gt; **Incorreto.** O table() funciona com qualquer factor; a ordem não é exigida para contar.\n- [x] Porque sem ordered o R ordena as categorias alfabeticamente, e leve/grave/moderada perderia a ordem clínica.\n  &gt; **Correto!** O R ordena níveis de um factor comum alfabeticamente. Usar ordered e declarar levels preserva a progressão clínica — essencial para gráficos e modelos.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao método estatístico</span>"
-    ]
-  },
-  {
-    "objectID": "cap01_introducao.html#deixe-o-seu-feedback",
-    "href": "cap01_introducao.html#deixe-o-seu-feedback",
-    "title": "1  Introdução ao método estatístico",
-    "section": "1.9 Deixe o seu feedback!",
-    "text": "1.9 Deixe o seu feedback!\n\n\n\n\n\n\nDicaDeixe o seu feedback!\n\n\n\nNão se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo! ❤️\n\n\n\n\n\n\nPagano, Marcello, e Kimberlee Gauvreau. 2004. Princípios de Bioestatística. Cengage Learning.\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.\n\n\nVieira, Sonia. 2008. Introdução à Bioestatística. Elsevier Brasil.",
+    "text": "1.8 🧠 Exercícios de fixação\nA cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!\n\nQuestão #CAP1-01\n# Segundo o texto, qual é a diferença fundamental entre \"Dados\" e \"Informação\" nas ciências da saúde?\n- [ ] Não há diferença, ambos representam tabelas numéricas usadas na bioestatística.\n  &gt; **Incorreto.** Existe uma hierarquia clara entre os dois conceitos.\n- [ ] Informação são os números recolhidos brutamente, enquanto dados são os laudos em texto livre.\n  &gt; **Incorreto.** Os conceitos estão invertidos nesta alternativa.\n- [x] Dados são um conjunto de símbolos, números ou medidas recolhidos; Informação é esse conjunto de dados com significado, usado para tomar decisões clínicas.\n  &gt; **Correto!** O dado é a matéria-prima (ex: o número \"120/80\"). A informação é o significado extraído disso (ex: \"O paciente está normotenso\", o que guia a decisão clínica).\n\n\nQuestão #CAP1-02\n# Um aluno de Odontologia regista o \"Índice CPO-D\" (número de dentes cariados, perdidos e obturados) dos pacientes. Como esta variável é classificada?\n- [ ] Qualitativa Ordinal.\n  &gt; **Incorreto.** O índice CPO-D não é uma categoria ou um atributo qualitativo, é uma contagem numérica.\n- [ ] Quantitativa Contínua.\n  &gt; **Incorreto.** Variáveis contínuas admitem frações (como o peso ou a altura). Não existe \"meio dente cariado\" nesta contagem.\n- [x] Quantitativa Discreta.\n  &gt; **Correto!** Perfeito. O CPO-D baseia-se em contagens numéricas inteiras, assim como a contagem de colônias de bactérias.\n\n\nQuestão #CAP1-03\n# Numa aula de Fisioterapia, a marcha de um paciente é analisada visualmente durante uma caminhada na clínica, sem qualquer intervenção do avaliador. Qual foi o método de recolha de dados utilizado?\n- [ ] Experimentação.\n  &gt; **Incorreto.** Na experimentação, o avaliador precisaria de intervir (ex: aplicar um tratamento e ver como a marcha se altera).\n- [ ] Levantamento.\n  &gt; **Incorreto.** O levantamento é feito através de questionários ou entrevistas diretas.\n- [x] Observação.\n  &gt; **Correto!** A recolha foi feita por observação, pois o avaliador não interferiu no ambiente ou no comportamento do paciente durante a análise.\n\n\nQuestão #CAP1-04\n# Como classificamos a variável \"Grau de dor na Escala Visual Analógica (EVA)\", frequentemente utilizada em avaliações clínicas?\n- [ ] Qualitativa Nominal.\n  &gt; **Incorreto.** A escala de dor tem uma progressão clara (ex: dor leve, moderada, intensa), logo, não é nominal.\n- [x] Qualitativa Ordinal.\n  &gt; **Correto!** É um dado categórico que possui uma hierarquia ou progressão clara, assim como o estágio de desenvolvimento de uma lesão.\n- [ ] Quantitativa Discreta.\n  &gt; **Incorreto.** Embora a EVA muitas vezes use números (0 a 10), ela representa uma gradação subjetiva de uma qualidade (a dor), não uma contagem exata e matematicamente estrita.\n\n\nQuestão #CAP1-05\n# Qual das opções abaixo é um exemplo de recolha de dados por \"Experimentação\" no ciclo básico?\n- [ ] Aplicar questionários sobre higiene bucal na comunidade.\n  &gt; **Incorreto.** A aplicação de questionários estruturados caracteriza um \"Levantamento\".\n- [x] Testar a eficácia antimicrobiana de um extrato vegetal em placas de Petri.\n  &gt; **Correto!** Aqui há uma intervenção clara do investigador no ambiente/amostra para observar o resultado.\n- [ ] Avaliar o nível de ansiedade dos pacientes na sala de espera.\n  &gt; **Incorreto.** Isto é uma \"Observação\", pois não há intervenção no estado do paciente.\n\n\nQuestão #CAP1-06\n# Um pesquisador mede a glicemia de 120 pacientes atendidos no ambulatório e usa essa média para estimar a glicemia média de todos os diabéticos do município. Que ramo da estatística ele está praticando?\n- [ ] Estatística descritiva, porque começou calculando uma média.\n  &gt; **Incorreto.** Calcular a média da amostra é descritivo, mas o objetivo aqui é concluir sobre a população — isso é inferência.\n- [x] Estatística inferencial, porque generaliza da amostra para a população.\n  &gt; **Correto!** O salto da amostra (n = 120) para a população de diabéticos do município é exatamente o que define a inferência.\n- [ ] Amostragem, porque houve seleção de pacientes.\n  &gt; **Incorreto.** A amostragem é a técnica de seleção (capítulo 3); o uso do resultado para concluir sobre a população é inferência.\n\n\nQuestão #CAP1-07\n# A média de peso de 30 recém-nascidos de uma maternidade foi de 3,2 kg. Nesse contexto, qual é o papel do valor 3,2 kg?\n- [ ] É um parâmetro populacional, simbolizado por mu.\n  &gt; **Incorreto.** O parâmetro descreve a população inteira; aqui a medida veio de uma amostra de 30 recém-nascidos.\n- [x] É uma estatística amostral, simbolizada por x-barra, que estima o parâmetro populacional desconhecido.\n  &gt; **Correto!** A média de uma amostra é uma estatística; ela serve de estimativa para o parâmetro populacional, que nunca observamos diretamente.\n- [ ] É uma variável qualitativa ordinal, pois o peso tem ordem crescente.\n  &gt; **Incorreto.** Peso é uma variável quantitativa contínua. Ter ordem não faz dela qualitativa.\n\n\nQuestão #CAP1-08\n# Em um estudo, os pesquisadores apenas acompanharam pacientes fumantes e não fumantes por 10 anos, sem indicar tratamento a ninguém. Que tipo de conclusão esse desenho permite sustentar com mais segurança?\n- [ ] Causalidade: fumar provoca a doença estudada.\n  &gt; **Incorreto.** Sem intervenção e aleatorização, não é possível isolar todos os fatores de confusão; a causalidade fica como hipótese.\n- [x] Associação: há relação entre fumar e a doença, mas outros fatores podem explicar parte do efeito.\n  &gt; **Correto!** Estudos observacionais sustentam associação. A causalidade exige desenho experimental com aleatorização.\n- [ ] Nenhuma conclusão, pois não houve intervenção.\n  &gt; **Incorreto.** Estudos observacionais bem desenhados geram evidência relevante, apenas de natureza associativa.\n\n\nQuestão #CAP1-09\n# Um questionário de pesquisa de satisfação usa as opções: \"ruim\", \"regular\", \"bom\" e \"excelente\". Como essa variável deve ser classificada?\n- [ ] Qualitativa nominal, pois são palavras e não números.\n  &gt; **Incorreto.** As categorias têm ordem crescente de qualidade, o que caracteriza a escala ordinal, não a nominal.\n- [x] Qualitativa ordinal, pois as categorias têm uma hierarquia clara.\n  &gt; **Correto!** Existe progressão evidente entre ruim, regular, bom e excelente, o mesmo que ocorre com a escala de dor.\n- [ ] Quantitativa discreta, pois pode ser convertida em notas de 1 a 4.\n  &gt; **Incorreto.** Converter em notas é uma decisão do pesquisador; a variável original é uma categorização com ordem.\n\n\nQuestão #CAP1-10\n# No R, a coluna \"gravidade\" foi criada como factor com ordered = TRUE. Por que isso importa na análise?\n- [ ] Porque só assim o R consegue calcular a média da coluna.\n  &gt; **Incorreto.** Média não faz sentido para categorias, com ou sem ordem definida.\n- [ ] Porque sem ordered o R não consegue exibir a tabela de frequências.\n  &gt; **Incorreto.** O table() funciona com qualquer factor; a ordem não é exigida para contar.\n- [x] Porque sem ordered o R ordena as categorias alfabeticamente, e leve/grave/moderada perderia a ordem clínica.\n  &gt; **Correto!** O R ordena níveis de um factor comum alfabeticamente. Usar ordered e declarar levels preserva a progressão clínica — essencial para gráficos e modelos.\n\n\n\n\n\n\n\nDicaDeixe o seu feedback!\n\n\n\nNão se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo! ❤️\n\n\n\n\n\n\nPagano, Marcello, e Kimberlee Gauvreau. 2004. Princípios de Bioestatística. Cengage Learning.\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.\n\n\nVieira, Sonia. 2008. Introdução à Bioestatística. Elsevier Brasil.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao método estatístico</span>"
     ]
@@ -404,7 +394,117 @@
     "href": "cap07_modelos.html",
     "title": "7  Modelos Estatísticos",
     "section": "",
-    "text": "Este capítulo está em preparação.",
+    "text": "7.1 O que é um modelo estatístico\nAté aqui descrevemos dados, calculamos probabilidades e avaliamos testes diagnósticos. Mas as perguntas mais interessantes das biociências raramente são sobre uma variável isolada — são sobre como uma coisa depende de outra. A dose muda a resposta? A idade explica o tempo de internação? O tratamento reduz a pressão?\nUm modelo estatístico é a resposta formal a esse tipo de pergunta. Este capítulo apresenta o vocabulário da modelagem — o que é um modelo, o que ele promete, o que ele não promete e como saber se ele está funcionando. Os detalhes de dois modelos específicos, a correlação e a regressão, ficam para o capítulo 10.\nUm modelo é uma representação simplificada da realidade. Nenhum modelo é a realidade: ele é uma lente que destaca o que interessa e ignora o resto (Pagano e Gauvreau 2004).\nDe forma geral, um modelo estatístico tem a seguinte estrutura:\n\\[Y = f(X_1, X_2, \\dots, X_p) + \\varepsilon\\]\nA presença de \\(\\varepsilon\\) é o que separa um modelo estatístico de uma equação determinística. A segunda lei de Newton, \\(F = m \\cdot a\\), prevê a força exatamente. Já a pressão arterial de um paciente após uma dose de anti-hipertensivo não é previsível com essa precisão: dois pacientes com o mesmo perfil respondem de forma diferente, e o mesmo paciente responde diferente em dias diferentes (Triola 2017).",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#o-que-é-um-modelo-estatístico",
+    "href": "cap07_modelos.html#o-que-é-um-modelo-estatístico",
+    "title": "7  Modelos Estatísticos",
+    "section": "",
+    "text": "\\(Y\\) é a variável resposta (o desfecho que queremos explicar).\n\\(X_1, \\dots, X_p\\) são os preditores (as variáveis explicativas).\n\\(f\\) é a forma da relação — a parte sistemática, também chamada de sinal.\n\\(\\varepsilon\\) é o erro aleatório — tudo o que o modelo não capturou, também chamado de ruído.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#para-que-serve-um-modelo",
+    "href": "cap07_modelos.html#para-que-serve-um-modelo",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.2 Para que serve um modelo",
+    "text": "7.2 Para que serve um modelo\nUm modelo pode perseguir quatro objetivos, e o objetivo define o critério de sucesso:\n\nDescrever — resumir a relação entre variáveis de forma compacta. Exemplo: “a pressão cai, em média, 1,5 mmHg por mg de fármaco”.\nExplicar — avaliar se um preditor tem efeito, controlando os demais. Exemplo: a resposta ao tratamento se mantém depois de ajustar para idade e sexo?\nPrever — estimar o desfecho de um novo paciente. Exemplo: qual o risco de complicação no pós-operatório?\nDecidir — embasar uma escolha clínica ou de política pública. Exemplo: determinado programa de triagem vale o custo?\n\nAqui está a armadilha: um modelo bom para prever não é necessariamente bom para explicar, e vice-versa. Um modelo preditivo pode ter dezenas de preditores e nenhuma interpretação clínica. Um modelo explicativo tem poucos preditores, escolhidos por hipótese, para que cada coeficiente signifique algo.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#modelos-determinísticos-e-probabilísticos",
+    "href": "cap07_modelos.html#modelos-determinísticos-e-probabilísticos",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.3 Modelos determinísticos e probabilísticos",
+    "text": "7.3 Modelos determinísticos e probabilísticos\n\n\n\n\n\n\n\n\n\nDeterminístico\nProbabilístico\n\n\n\n\nForma\n\\(Y = f(X)\\)\n\\(Y = f(X) + \\varepsilon\\)\n\n\nPrevisão\nexata\ncom margem de erro\n\n\nExemplo\ndiluição \\(C_1V_1 = C_2V_2\\)\nglicemia em função da dose\n\n\nUso em saúde\ncálculos de bancada\npraticamente tudo com seres vivos\n\n\n\nSempre que o desfecho depender de um organismo — e não de uma lei física —, o modelo precisa do termo de erro. Ignorá-lo dá uma falsa sensação de precisão.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#as-famílias-de-modelos",
+    "href": "cap07_modelos.html#as-famílias-de-modelos",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.4 As famílias de modelos",
+    "text": "7.4 As famílias de modelos\nA escolha do modelo começa pelo tipo da variável resposta. Cada família resolve um problema diferente:\n\n\n\n\n\n\n\n\nFamília\nVariável resposta\nExemplo na saúde\n\n\n\n\nRegressão linear\ncontínua\npressão arterial em função da dose\n\n\nRegressão logística\nbinária\ncura ou não cura\n\n\nRegressão de Poisson\ncontagem\nnúmero de casos por semana\n\n\nAnálise de sobrevivência\ntempo até o evento\ntempo até a falha de um implante\n\n\nModelos mistos\ncontínua, com medidas repetidas\nglicemia ao longo do tratamento, por paciente\n\n\nModelos não paramétricos\nqualquer, sem forma assumida\nquando a distribuição é desconhecida\n\n\n\nNenhuma família é “melhor” que outra. A pergunta é sempre: qual delas respeita a natureza do desfecho e o desenho que gerou os dados?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#parâmetros-e-o-ajuste-do-modelo",
+    "href": "cap07_modelos.html#parâmetros-e-o-ajuste-do-modelo",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.5 Parâmetros e o ajuste do modelo",
+    "text": "7.5 Parâmetros e o ajuste do modelo\nOs parâmetros são os números que definem a forma específica de \\(f\\) para o seu conjunto de dados — no caso de uma reta, o intercepto e a inclinação. Eles são desconhecidos e precisam ser estimados a partir da amostra.\nMas o que significa estimar? Significa escolher os valores que tornam o modelo o mais próximo possível dos dados observados. “Próximo” precisa de uma definição, e essa definição é a função de perda.\nNo método dos mínimos quadrados, a perda é a soma dos quadrados das diferenças entre o valor observado e o valor previsto:\n\\[S(\\beta) = \\sum_{i=1}^{n} \\left(y_i - \\hat{y}_i\\right)^2\\]\nOs valores de \\(\\beta\\) que minimizam essa soma são as estimativas do modelo. Elevar ao quadrado tem duas consequências: erros grandes pesam muito mais que erros pequenos, e erros positivos e negativos não se cancelam.\n\n\n\n\n\n\nNotaOutra função de perda\n\n\n\nMínimos quadrados não é a única opção. O método da máxima verossimilhança escolhe os parâmetros que tornam os dados observados os mais prováveis possível. É ele que sustenta a regressão logística e a de Poisson, onde mínimos quadrados não se aplica.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#como-avaliar-um-modelo",
+    "href": "cap07_modelos.html#como-avaliar-um-modelo",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.6 Como avaliar um modelo",
+    "text": "7.6 Como avaliar um modelo\nAjustar é fácil: qualquer software devolve coeficientes. O difícil é saber se o modelo merece confiança.\n\n7.6.1 Resíduos\nO resíduo é a parte que o modelo não explicou:\n\\[e_i = y_i - \\hat{y}_i\\]\nUm modelo adequado deixa resíduos sem padrão: eles devem se distribuir aleatoriamente em torno de zero. Se os resíduos formam uma curva, o modelo está errado na forma. Se a dispersão dos resíduos cresce com o valor previsto, a variância não é constante.\n\n\n7.6.2 Coeficiente de determinação\nO \\(R^2\\) mede a proporção da variabilidade de \\(Y\\) que o modelo consegue explicar:\n\\[R^2 = 1 - \\frac{\\sum (y_i - \\hat{y}_i)^2}{\\sum (y_i - \\bar{y})^2}\\]\nEle varia de 0 a 1. Um \\(R^2\\) de 0,89 significa que 89% da variação foi explicada. Mas atenção: \\(R^2\\) alto não prova que o modelo está correto, e \\(R^2\\) baixo não prova que ele é inútil. Em dados biológicos, valores entre 0,3 e 0,7 são comuns e perfeitamente respeitáveis.\n\n\n7.6.3 Os pressupostos\nA maior parte dos modelos clássicos assume quatro condições:\n\nLinearidade — a relação entre \\(Y\\) e os preditores tem a forma assumida.\nIndependência — as observações não se influenciam (o que quebra em medidas repetidas do mesmo paciente).\nHomocedasticidade — a variância do erro é constante em todos os níveis dos preditores.\nNormalidade dos resíduos — necessária para os testes e intervalos de confiança do modelo.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#o-perigo-do-excesso-de-ajuste",
+    "href": "cap07_modelos.html#o-perigo-do-excesso-de-ajuste",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.7 O perigo do excesso de ajuste",
+    "text": "7.7 O perigo do excesso de ajuste\nUm modelo pode ficar bom demais nos dados que viu — e péssimo em qualquer dado novo. Esse fenômeno se chama sobreajuste (overfitting).\nA intuição é simples: quanto mais flexível o modelo, mais ele consegue “decorar” o ruído da amostra em vez de aprender a estrutura. Compare com um aluno que memoriza o gabarito: tira 10 na prova antiga e fracassa na nova.\nA solução é sempre a mesma: avaliar o modelo em dados que ele não viu. Separa-se uma parte dos dados para treinar e outra para testar, ou usa-se validação cruzada.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#prática-interativa-vendo-o-sobreajuste-acontecer",
+    "href": "cap07_modelos.html#prática-interativa-vendo-o-sobreajuste-acontecer",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.8 Prática Interativa: vendo o sobreajuste acontecer",
+    "text": "7.8 Prática Interativa: vendo o sobreajuste acontecer\nNo bloco abaixo há 12 pacientes com idade e tempo de internação. O modelo reta usa uma única inclinação; o modelo complexo usa um polinômio de grau 8 — um absurdo deliberado, com quase tantos parâmetros quanto observações.\nOs 10 primeiros pacientes servem para treinar; os 2 últimos ficam guardados para testar.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nO que os números mostram:\n\nDentro da amostra, o modelo complexo vence: \\(R^2 = 0{,}882\\) contra \\(0{,}778\\) da reta.\nNos dois pacientes guardados, a reta prevê 7,8 e 8,3 dias — perto dos 7 e 9 observados.\nO modelo complexo prevê 56 e 299 dias. Ele decorou o ruído e extrapolou sem qualquer controle.\n\nEsse é o retrato fiel do sobreajuste: o modelo mais complexo sempre parece melhor nos dados que já viu. A pergunta que importa é sempre sobre os dados que ele ainda não viu.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#parcimônia-o-modelo-mais-simples-que-funciona",
+    "href": "cap07_modelos.html#parcimônia-o-modelo-mais-simples-que-funciona",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.9 Parcimônia: o modelo mais simples que funciona",
+    "text": "7.9 Parcimônia: o modelo mais simples que funciona\nO princípio da parcimônia (a navalha de Occam) diz que, entre dois modelos com desempenho equivalente, deve-se preferir o mais simples. Não é estética: modelos simples são mais fáceis de interpretar, mais estáveis e menos propensos ao sobreajuste.\nCritérios como AIC e BIC formalizam esse compromisso, penalizando o número de parâmetros. A regra prática, porém, é anterior a qualquer fórmula: cada variável a mais no modelo precisa se justificar com um ganho real de compreensão.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#o-que-levar-deste-capítulo",
+    "href": "cap07_modelos.html#o-que-levar-deste-capítulo",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.10 O que levar deste capítulo",
+    "text": "7.10 O que levar deste capítulo\n\n\n\n\n\n\nNotaResumo em quatro pontos\n\n\n\n\nModelo é simplificação, não verdade. Ele destaca uma parte da realidade e descarta o resto — por decisão, não por descuido.\nSempre existe o termo de erro. Em seres vivos, a parte sistemática nunca explica tudo.\nO objetivo define o critério. Modelo para explicar e modelo para prever se avaliam de formas diferentes.\nSobreajuste é o inimigo silencioso. Só a avaliação em dados novos revela se o modelo aprendeu a estrutura ou decorou o ruído.\n\nO capítulo 8 dá o passo seguinte: como decidir, com rigor, se o efeito que um modelo mostra é real ou apenas fruto do acaso.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
+    ]
+  },
+  {
+    "objectID": "cap07_modelos.html#exercícios-de-fixação",
+    "href": "cap07_modelos.html#exercícios-de-fixação",
+    "title": "7  Modelos Estatísticos",
+    "section": "7.11 🧠 Exercícios de fixação",
+    "text": "7.11 🧠 Exercícios de fixação\nA cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!\n\nQuestão #CAP7-01\n# Em um modelo estatístico, o que representa o termo de erro (épsilon)?\n- [ ] Um defeito do pesquisador, que deveria ser eliminado com mais amostras.\n  &gt; **Incorreto.** O erro aleatório não é falha: é a variabilidade inerente ao fenômeno biológico.\n- [x] A parte da variação do desfecho que o modelo não conseguiu explicar.\n  &gt; **Correto!** O termo de erro reúne tudo o que não foi incluído no modelo: variáveis não medidas, variação biológica e imprecisão de medição.\n- [ ] O valor da variável resposta previsto pelo modelo.\n  &gt; **Incorreto.** O previsto é a parte sistemática; o erro é a diferença entre observado e previsto.\n\n\nQuestão #CAP7-02\n# Um modelo de regressão obteve R-quadrado igual a 0,92 em 30 pacientes. Qual afirmação é correta?\n- [ ] O modelo é válido, pois R-quadrado acima de 0,90 garante bom ajuste.\n  &gt; **Incorreto.** R-quadrado alto não verifica pressupostos nem descarta sobreajuste; só indica quanta variação foi explicada naquela amostra.\n- [x] 92% da variação do desfecho foi explicada pelo modelo, mas ainda é preciso checar os resíduos e validar em dados novos.\n  &gt; **Correto!** R-quadrado mede a proporção da variabilidade explicada. Ele não substitui a análise de resíduos nem a validação.\n- [ ] Há 92% de probabilidade de o modelo acertar a previsão de um novo paciente.\n  &gt; **Incorreto.** R-quadrado não é probabilidade de acerto individual, e esse número tende a piorar em dados não vistos.\n\n\nQuestão #CAP7-03\n# O que caracteriza o sobreajuste (overfitting) de um modelo?\n- [ ] O modelo tem poucos parâmetros e por isso não capta a relação entre as variáveis.\n  &gt; **Incorreto.** Esse é o problema oposto, o subajuste.\n- [x] O modelo se ajusta muito bem aos dados de treino, mas tem desempenho ruim em dados novos.\n  &gt; **Correto!** O modelo decorou o ruído da amostra. Por isso a avaliação precisa ser feita em dados que ele não viu.\n- [ ] O modelo apresenta resíduos com média zero e variância constante.\n  &gt; **Incorreto.** Isso descreve um bom comportamento dos resíduos, não um defeito.\n\n\nQuestão #CAP7-04\n# Por que os critérios de avaliação de um modelo podem ser diferentes conforme o objetivo do estudo?\n- [ ] Porque a regressão logística é sempre superior à regressão linear.\n  &gt; **Incorreto.** As famílias de modelos resolvem problemas diferentes; não há superioridade geral entre elas.\n- [x] Porque o modelo explicativo valoriza coeficientes interpretáveis e poucos preditores, enquanto o preditivo valoriza a capacidade de acertar em novos casos.\n  &gt; **Correto!** O objetivo do modelo define o que é sucesso. Explicar pede interpretabilidade; prever pede desempenho fora da amostra.\n- [ ] Porque não é possível avaliar modelos com variáveis binárias.\n  &gt; **Incorreto.** Modelos para desfechos binários são avaliados normalmente, com métricas próprias como a curva ROC.\n\n\n\n\n\n\n\nDicaDeixe o seu feedback!\n\n\n\nNão se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo! ❤️\n\n\n\n\n\n\nPagano, Marcello, e Kimberlee Gauvreau. 2004. Princípios de Bioestatística. Cengage Learning.\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Modelos Estatísticos</span>"
     ]
@@ -414,7 +514,107 @@
     "href": "cap08_hipoteses.html",
     "title": "8  Testes de Hipóteses",
     "section": "",
-    "text": "Este capítulo está em preparação.",
+    "text": "8.1 A lógica do teste\nUm novo anti-hipertensivo baixou a pressão média de 12 mmHg num grupo de pacientes. O medicamento funciona ou foi sorte? A diferença é grande o bastante para vencer a variabilidade natural de qualquer medida biológica?\nEssa é a pergunta que o teste de hipóteses responde. Ele não diz se o fármaco é bom; diz qual a probabilidade de uma diferença desse tamanho aparecer por acaso, se não houver efeito nenhum. É a ferramenta mais usada — e mais mal interpretada — da estatística aplicada à saúde (Triola 2017).\nO raciocínio do teste de hipóteses é o mesmo da presunção de inocência no direito. Começa-se supondo que não há efeito, e só se abandona essa suposição quando a evidência é forte demais para ser explicada pelo acaso.\nAs duas hipóteses são:\nExemplo: queremos testar se um novo fármaco reduz a pressão. Então \\(H_0: \\mu_{\\text{tratamento}} = \\mu_{\\text{controle}}\\) e \\(H_1: \\mu_{\\text{tratamento}} \\neq \\mu_{\\text{controle}}\\).\nRepare numa consequência importante desse desenho: o teste nunca prova \\(H_0\\). “Não rejeitar \\(H_0\\)” significa apenas que a amostra não trouxe evidência suficiente contra ela — o que é diferente de afirmar que \\(H_0\\) é verdadeira.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#a-lógica-do-teste",
+    "href": "cap08_hipoteses.html#a-lógica-do-teste",
+    "title": "8  Testes de Hipóteses",
+    "section": "",
+    "text": "\\(H_0\\) (hipótese nula) — a suposição de “nada aconteceu”. Não há diferença entre os grupos, ou o parâmetro é igual a um valor de referência.\n\\(H_1\\) (hipótese alternativa) — a afirmação que se quer sustentar. Há diferença, ou o parâmetro é diferente do valor de referência.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#erro-tipo-i-e-erro-tipo-ii",
+    "href": "cap08_hipoteses.html#erro-tipo-i-e-erro-tipo-ii",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.2 Erro tipo I e erro tipo II",
+    "text": "8.2 Erro tipo I e erro tipo II\nToda decisão tomada sob incerteza pode errar de duas maneiras, e as duas têm nome próprio:\n\n\n\n\n\n\n\n\nDecisão\n\\(H_0\\) é verdadeira\n\\(H_0\\) é falsa\n\n\n\n\nNão rejeitar \\(H_0\\)\ndecisão correta (\\(1 - \\alpha\\))\nerro tipo II (\\(\\beta\\))\n\n\nRejeitar \\(H_0\\)\nerro tipo I (\\(\\alpha\\))\ndecisão correta (poder \\(= 1 - \\beta\\))\n\n\n\n\nErro tipo I — dizer que existe efeito quando não existe. É o falso positivo. Sua probabilidade é o nível de significância \\(\\alpha\\), normalmente fixado em 0,05.\nErro tipo II — dizer que não existe efeito quando existe. É o falso negativo. Sua probabilidade é \\(\\beta\\).\nPoder — a capacidade de detectar um efeito que realmente existe. É \\(1 - \\beta\\), e o valor de referência é 80%.\n\nHá um compromisso entre os dois: baixar \\(\\alpha\\) reduz os falsos positivos, mas aumenta os falsos negativos. Quem decide o equilíbrio é o custo clínico de cada erro.\n\n\n\n\n\n\nImportanteO erro tem consequência clínica\n\n\n\nNum teste de triagem de uma doença grave, o erro tipo II (deixar passar um doente) costuma ser mais grave que o tipo I. Num exame que leva a cirurgia invasiva, o raciocínio se inverte. O \\(\\alpha = 0{,}05\\) não é sagrado: ele é uma convenção que deve ser discutida à luz do contexto.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#o-p-valor",
+    "href": "cap08_hipoteses.html#o-p-valor",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.3 O p-valor",
+    "text": "8.3 O p-valor\nO p-valor é a probabilidade de observar um resultado tão ou mais extremo que o obtido, supondo que \\(H_0\\) seja verdadeira.\n\\[p = P\\left(\\text{dados tão extremos quanto os observados} \\mid H_0 \\text{ verdadeira}\\right)\\]\nEssa definição é curta e cheia de armadilhas. Vale desmontar as três interpretações erradas mais comuns:\n\n\n\n\n\n\n\nO p-valor não é\nPor quê\n\n\n\n\nA probabilidade de \\(H_0\\) ser verdadeira\nO p-valor é calculado supondo \\(H_0\\); ele não a avalia\n\n\nA probabilidade de o resultado ter sido acaso\nEle mede a compatibilidade dos dados com \\(H_0\\), não a origem do resultado\n\n\nUma medida do tamanho do efeito\nUm p-valor minúsculo pode vir de um efeito clinicamente irrelevante, desde que a amostra seja grande\n\n\n\n\n\n\n\n\n\nAvisoO p-valor mais famoso do mundo\n\n\n\nEm 2016, a American Statistical Association publicou um comunicado formal com seis princípios sobre o uso do p-valor. O primeiro deles lembra que o p-valor não mede a probabilidade de a hipótese nula ser verdadeira nem a força da evidência a favor dela. A confusão é tão comum que ganhou nome: p-hacking, quando se testam muitas hipóteses até uma delas cruzar o 0,05 por acaso.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#a-regra-de-decisão",
+    "href": "cap08_hipoteses.html#a-regra-de-decisão",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.4 A regra de decisão",
+    "text": "8.4 A regra de decisão\nDefinido \\(\\alpha\\) antes do estudo, a decisão é mecânica:\n\nSe \\(p \\leq \\alpha\\) → rejeita-se \\(H_0\\). O resultado é chamado de estatisticamente significativo.\nSe \\(p &gt; \\alpha\\) → não se rejeita \\(H_0\\). Não há evidência suficiente contra a hipótese nula.\n\nEssa regra é apenas um resumo. O relato científico completo inclui sempre: a estimativa do efeito, o intervalo de confiança e o p-valor. Um p-valor sozinho não informa o tamanho nem a precisão do efeito.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#testes-unilaterais-e-bilaterais",
+    "href": "cap08_hipoteses.html#testes-unilaterais-e-bilaterais",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.5 Testes unilaterais e bilaterais",
+    "text": "8.5 Testes unilaterais e bilaterais\n\nBilateral — \\(H_1\\) diz apenas “é diferente”. É o padrão, e divide o \\(\\alpha\\) entre as duas caudas da distribuição.\nUnilateral — \\(H_1\\) diz “é maior” ou “é menor”. Concentra todo o \\(\\alpha\\) numa cauda, o que dá mais poder — mas só vale se a direção for definida antes de ver os dados.\n\nEscolher a direção depois de olhar o resultado é uma forma de manipulação: dobra-se artificialmente a chance de achar significância.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#os-testes-mais-usados",
+    "href": "cap08_hipoteses.html#os-testes-mais-usados",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.6 Os testes mais usados",
+    "text": "8.6 Os testes mais usados\n\n\n\n\n\n\n\n\nSituação\nTeste\nNo R\n\n\n\n\nMédia de um grupo contra um valor de referência\nt de uma amostra\nt.test(x, mu = 120)\n\n\nMédias de dois grupos independentes\nt de duas amostras\nt.test(y ~ grupo)\n\n\nMédias de três ou mais grupos\nANOVA\naov(y ~ grupo)\n\n\nAssociação entre variáveis categóricas\nqui-quadrado\nchisq.test(tabela)\n\n\nDuas amostras pareadas (antes e depois)\nt pareado\nt.test(antes, depois, paired = TRUE)\n\n\nMedianas, sem pressuposto de normalidade\nMann-Whitney / Wilcoxon\nwilcox.test(y ~ grupo)\n\n\n\nA escolha depende de três perguntas: quantos grupos, os dados são pareados e os pressupostos de normalidade se sustentam.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#significância-estatística-não-é-relevância-clínica",
+    "href": "cap08_hipoteses.html#significância-estatística-não-é-relevância-clínica",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.7 Significância estatística não é relevância clínica",
+    "text": "8.7 Significância estatística não é relevância clínica\nEste é o ponto que mais causa dano na prática. Com uma amostra grande o suficiente, qualquer diferença se torna estatisticamente significativa.\nExemplo: num estudo com 100.000 pacientes, um fármaco que reduz a pressão em 0,2 mmHg produz \\(p &lt; 0{,}001\\). O resultado é estatisticamente significativo e clinicamente irrelevante.\nO contrário também acontece: um efeito grande e clinicamente importante pode não atingir significância num estudo pequeno — não porque não exista, mas porque o estudo não tinha poder para detectá-lo.\n\n\n\n\n\n\nDicaA pergunta que importa\n\n\n\nA pergunta certa nunca é só “deu significativo?”. É: qual o tamanho do efeito, qual a precisão da estimativa e isso muda a conduta do paciente?",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#prática-interativa-um-teste-t-no-r",
+    "href": "cap08_hipoteses.html#prática-interativa-um-teste-t-no-r",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.8 Prática Interativa: um teste t no R",
+    "text": "8.8 Prática Interativa: um teste t no R\nUm ensaio compara um novo anti-hipertensivo com o tratamento padrão. A pressão sistólica final (mmHg) de oito pacientes de cada grupo está abaixo.\nRode o teste e observe as três informações que ele devolve: a diferença entre as médias, o intervalo de confiança dessa diferença e o p-valor.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nLeitura do resultado:\n\nA pressão média caiu de 142,4 para 130,6 mmHg — uma diferença de 11,75 mmHg a favor do tratamento.\nO intervalo de confiança de 95% para essa diferença é de -16,2 a -7,3 mmHg. Como ele não inclui o zero, a diferença é compatível com um efeito real.\nO p-valor é de aproximadamente 0,0001, muito abaixo de 0,05.\n\nA conclusão honesta não é “o fármaco funciona”, mas sim: neste ensaio de 16 pacientes, o novo anti-hipertensivo reduziu a pressão sistólica em cerca de 12 mmHg, com intervalo de confiança entre 7 e 16 mmHg. O tamanho do efeito está dito, e a incerteza também.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#o-que-levar-deste-capítulo",
+    "href": "cap08_hipoteses.html#o-que-levar-deste-capítulo",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.9 O que levar deste capítulo",
+    "text": "8.9 O que levar deste capítulo\n\n\n\n\n\n\nNotaResumo em quatro pontos\n\n\n\n\nO teste parte da inocência. Assume-se \\(H_0\\) e só se abandona com evidência forte; nunca se “prova” a nula.\nO p-valor não responde a pergunta que parece responder. Ele supõe \\(H_0\\), não mede a probabilidade dela.\nExistem dois jeitos de errar. \\(\\alpha\\) controla o falso positivo; o poder controla o falso negativo.\nSignificância não é importância. Sempre reporte o tamanho do efeito e o intervalo de confiança.\n\nO capítulo 9 aprofunda justamente o intervalo de confiança — a peça que transforma um teste em uma estimativa com margem de erro declarada.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
+    ]
+  },
+  {
+    "objectID": "cap08_hipoteses.html#exercícios-de-fixação",
+    "href": "cap08_hipoteses.html#exercícios-de-fixação",
+    "title": "8  Testes de Hipóteses",
+    "section": "8.10 🧠 Exercícios de fixação",
+    "text": "8.10 🧠 Exercícios de fixação\nA cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!\n\nQuestão #CAP8-01\n# Um estudo encontrou p-valor igual a 0,03 para a diferença entre dois grupos. Como interpretar esse valor?\n- [ ] Há 3% de probabilidade de a hipótese nula ser verdadeira.\n  &gt; **Incorreto.** O p-valor é calculado supondo que a nula seja verdadeira; ele não indica a probabilidade dela.\n- [x] Supondo que não exista diferença real, a chance de observar uma diferença tão ou mais extrema que a encontrada é de 3%.\n  &gt; **Correto!** Essa é a definição correta: probabilidade dos dados, condicionada à hipótese nula.\n- [ ] A diferença encontrada tem 97% de chance de ser real.\n  &gt; **Incorreto.** O p-valor não mede a probabilidade de o efeito ser real nem a força da evidência.\n\n\nQuestão #CAP8-02\n# Em um teste de triagem para uma doença grave e tratável, qual erro deve ser minimizado com mais prioridade?\n- [ ] O erro tipo I, porque um falso positivo sempre causa dano irreversível.\n  &gt; **Incorreto.** No rastreamento, o falso positivo gera exames adicionais e ansiedade, mas é reversível.\n- [x] O erro tipo II, porque um falso negativo significa deixar um doente sem diagnóstico e sem tratamento.\n  &gt; **Correto!** Quando a doença é grave e tratável, perder um caso é o erro mais custoso; por isso se aceita mais falso positivo.\n- [ ] Nenhum dos dois, pois o p-valor controla ambos simultaneamente.\n  &gt; **Incorreto.** O p-valor controla apenas o erro tipo I; o tipo II depende do poder do estudo.\n\n\nQuestão #CAP8-03\n# Um ensaio com 100.000 pacientes encontrou p menor que 0,001 para um fármaco que reduz a pressão em 0,2 mmHg. Qual é a leitura correta?\n- [ ] O resultado é irrelevante porque a amostra era grande demais.\n  &gt; **Incorreto.** A amostra grande é uma qualidade do estudo; o problema é o tamanho do efeito, não o número de pacientes.\n- [x] O resultado é estatisticamente significativo, mas o efeito de 0,2 mmHg é clinicamente irrelevante.\n  &gt; **Correto!** Com amostras grandes, diferenças mínimas atingem significância. Significância estatística não é relevância clínica.\n- [ ] O p-valor está errado, pois um efeito tão pequeno não pode ser significativo.\n  &gt; **Incorreto.** Estatisticamente, um efeito pequeno pode ser significativo; a magnitude do efeito não é o que o p-valor mede.\n\n\nQuestão #CAP8-04\n# O que significa o poder de um teste estatístico igual a 80%?\n- [ ] Que há 80% de chance de o resultado publicado estar correto.\n  &gt; **Incorreto.** Poder não se refere à probabilidade de acerto geral do estudo.\n- [ ] Que 80% das hipóteses testadas serão rejeitadas.\n  &gt; **Incorreto.** Poder não é uma taxa de rejeição sobre todas as hipóteses, e sim sobre as que realmente têm efeito.\n- [x] Que, se o efeito realmente existir, o estudo tem 80% de chance de detectá-lo.\n  &gt; **Correto!** Poder é 1 menos beta, a probabilidade de rejeitar a nula quando ela é de fato falsa.\n\n\n\n\n\n\n\nDicaDeixe o seu feedback!\n\n\n\nNão se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo! ❤️\n\n\n\n\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Testes de Hipóteses</span>"
     ]
@@ -424,7 +624,117 @@
     "href": "cap09_intervalos.html",
     "title": "9  Intervalos de Confiança",
     "section": "",
-    "text": "Este capítulo está em preparação.",
+    "text": "9.1 O problema da estimativa pontual\nO capítulo anterior mostrou como decidir se uma diferença é compatível com o acaso. Mas há uma pergunta anterior, mais fundamental: quanto vale a estimativa que eu calculei?\nUma média de 142,4 mmHg obtida em oito pacientes não é “a” pressão média da população. É uma estimativa — e toda estimativa calculada a partir de uma amostra carrega incerteza. O intervalo de confiança é a forma padrão de declarar essa incerteza junto com o valor (Triola 2017).\nSuponha que você meça a pressão sistólica de oito pacientes e obtenha média de 142,4 mmHg. Outro pesquisador, com outros oito pacientes da mesma população, obteria talvez 139,8. Um terceiro, 145,1. Todas essas médias são plausíveis, e nenhuma delas coincide exatamente com a média verdadeira da população.\nA estimativa pontual esconde essa variação. Ela dá a impressão de precisão que os dados não sustentam.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#o-problema-da-estimativa-pontual",
+    "href": "cap09_intervalos.html#o-problema-da-estimativa-pontual",
+    "title": "9  Intervalos de Confiança",
+    "section": "",
+    "text": "NotaA origem da incerteza\n\n\n\nA média varia de amostra para amostra porque a amostra é um sorteio. Se você pudesse repetir o estudo infinitas vezes, obteria uma distribuição de médias — e é essa distribuição que o intervalo de confiança resume.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#o-que-é-um-intervalo-de-confiança",
+    "href": "cap09_intervalos.html#o-que-é-um-intervalo-de-confiança",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.2 O que é um intervalo de confiança",
+    "text": "9.2 O que é um intervalo de confiança\nUm intervalo de confiança de 95% é um intervalo construído por um método que, se repetido em infinitas amostras da mesma população, conteria o verdadeiro parâmetro em 95% das vezes.\nEssa frase é precisa de propósito, e vale desmontá-la:\n\nO intervalo varia de amostra para amostra. Cada estudo produz um intervalo diferente.\nO parâmetro é fixo — ele não tem distribuição. Quem tem propriedades probabilísticas é o método, não o valor.\nDizer que “há 95% de probabilidade de o parâmetro estar neste intervalo” é uma leitura bayesiana, não frequentista. Não é o que o intervalo de confiança clássico afirma.\n\nNa prática, o que se pode afirmar sobre um intervalo específico é: se o estudo fosse repetido muitas vezes, 95% dos intervalos assim construídos conteriam o valor verdadeiro. Para o intervalo que você tem em mãos, a honestidade é dizer “é compatível com valores entre X e Y”.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#a-anatomia-do-intervalo",
+    "href": "cap09_intervalos.html#a-anatomia-do-intervalo",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.3 A anatomia do intervalo",
+    "text": "9.3 A anatomia do intervalo\nTodo intervalo de confiança tem a mesma estrutura:\n\\[\\text{IC}_{95\\%} = \\text{estimativa} \\pm \\left(z \\times EP\\right)\\]\n\nA estimativa é o valor pontual (média, proporção, diferença entre médias).\nO erro padrão (EP) é o desvio padrão da estimativa — ele mede o quanto ela varia de amostra para amostra.\nO multiplicador \\(z\\) depende do nível de confiança: 1,96 para 95%, 2,58 para 99%.\n\nTrocar 95% por 99% alarga o intervalo. Não porque os dados ficaram menos precisos, mas porque se exige mais garantia do método.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#intervalo-de-confiança-para-uma-média",
+    "href": "cap09_intervalos.html#intervalo-de-confiança-para-uma-média",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.4 Intervalo de confiança para uma média",
+    "text": "9.4 Intervalo de confiança para uma média\nQuando o desvio padrão populacional é desconhecido — o caso normal —, troca-se \\(z\\) pela distribuição \\(t\\) de Student:\n\\[\\text{IC}_{95\\%} = \\bar{x} \\pm t_{0{,}975;\\, n-1} \\times \\frac{s}{\\sqrt{n}}\\]\nO termo \\(\\frac{s}{\\sqrt{n}}\\) é o erro padrão da média. A dependência de \\(\\sqrt{n}\\) é o ponto central: para reduzir a margem de erro à metade, é preciso quadruplicar a amostra. Ganhos de precisão ficam cada vez mais caros.\nExemplo: com \\(n = 8\\), \\(\\bar{x} = 142{,}4\\) mmHg e \\(s = 4{,}93\\) mmHg, o erro padrão é \\(4{,}93/\\sqrt{8} = 1{,}74\\) mmHg e \\(t = 2{,}365\\). O intervalo é:\n\\[142{,}4 \\pm 2{,}365 \\times 1{,}74 = [138{,}3;\\; 146{,}5] \\text{ mmHg}\\]",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#intervalo-de-confiança-para-uma-proporção",
+    "href": "cap09_intervalos.html#intervalo-de-confiança-para-uma-proporção",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.5 Intervalo de confiança para uma proporção",
+    "text": "9.5 Intervalo de confiança para uma proporção\nPara proporções, a aproximação normal dá:\n\\[\\text{IC}_{95\\%} = \\hat{p} \\pm 1{,}96\\sqrt{\\frac{\\hat{p}\\,(1-\\hat{p})}{n}}\\]\nExemplo: se 45 de 120 pacientes apresentaram melhora, \\(\\hat{p} = 0{,}375\\) e o intervalo é \\([0{,}288;\\; 0{,}462]\\) — ou seja, de 28,8% a 46,2%.\n\n\n\n\n\n\nAvisoAproximação tem limite\n\n\n\nEssa fórmula funciona bem quando \\(n\\hat{p}\\) e \\(n(1-\\hat{p})\\) são ambos maiores que 5. Para proporções extremas (perto de 0% ou 100%) ou amostras pequenas, é preciso usar métodos exatos ou o intervalo de Wilson, que o R oferece em prop.test(). O resultado muda um pouco — no exemplo acima, Wilson devolve \\([29{,}4\\%;\\; 46{,}4\\%]\\) em vez de \\([28{,}8\\%;\\; 46{,}2\\%]\\).",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#o-que-alarga-e-o-que-estreita-o-intervalo",
+    "href": "cap09_intervalos.html#o-que-alarga-e-o-que-estreita-o-intervalo",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.6 O que alarga e o que estreita o intervalo",
+    "text": "9.6 O que alarga e o que estreita o intervalo\n\n\n\n\n\n\n\n\nFator\nEfeito na largura\nPor quê\n\n\n\n\nAumentar \\(n\\)\nestreita\no erro padrão cai com \\(\\sqrt{n}\\)\n\n\nAumentar o nível de confiança\nalarga\nexige-se mais garantia do método\n\n\nMaior variabilidade dos dados\nalarga\no desvio padrão entra no numerador\n\n\nAmostra pareada em vez de independente\nestreita\nremove a variabilidade entre indivíduos",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#o-intervalo-de-confiança-e-o-teste-de-hipóteses",
+    "href": "cap09_intervalos.html#o-intervalo-de-confiança-e-o-teste-de-hipóteses",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.7 O intervalo de confiança e o teste de hipóteses",
+    "text": "9.7 O intervalo de confiança e o teste de hipóteses\nOs dois são a mesma conta vista de ângulos diferentes. Um intervalo de 95% para uma diferença equivale a um teste bilateral com \\(\\alpha = 0{,}05\\):\n\nSe o intervalo não inclui o zero, o teste rejeita \\(H_0\\).\nSe o intervalo inclui o zero, o teste não rejeita \\(H_0\\).\n\nNo exemplo do capítulo 8, a diferença de pressão entre os grupos foi de \\(-11{,}75\\) mmHg, com intervalo de \\([-16{,}2;\\; -7{,}3]\\). Como o zero está fora, o teste também rejeitou a nula.\nO intervalo é mais informativo que o p-valor porque mostra onde o efeito provavelmente está — e não apenas se ele é diferente de zero.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#três-erros-comuns",
+    "href": "cap09_intervalos.html#três-erros-comuns",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.8 Três erros comuns",
+    "text": "9.8 Três erros comuns\n\n“95% de chance de o parâmetro estar no intervalo.” Não é isso: o parâmetro é fixo. A probabilidade descreve o método, não este intervalo específico.\nTratar a margem de erro como um selo de qualidade. Um intervalo estreito pode vir de um estudo enviesado — precisão não corrige viés.\nIgnorar o que o intervalo significa clinicamente. Um intervalo de \\([0{,}1;\\; 0{,}3]\\) mmHg para a diferença de pressão é estreito e irrelevante.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#prática-interativa-do-cálculo-à-mão-ao-t.test",
+    "href": "cap09_intervalos.html#prática-interativa-do-cálculo-à-mão-ao-t.test",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.9 Prática Interativa: do cálculo à mão ao t.test()",
+    "text": "9.9 Prática Interativa: do cálculo à mão ao t.test()\nVamos reconstruir, linha por linha, o intervalo de confiança da média daquele grupo de pressão sistólica — e depois conferir com a função pronta do R.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nO resultado é o mesmo: \\([138{,}3;\\; 146{,}5]\\) mmHg. Repare que o t.test() devolve o intervalo pronto no objeto $conf.int — mas agora você sabe exatamente o que ele fez por dentro.\nExercício rápido: troque 0.975 por 0.995 e rode novamente. O intervalo fica mais largo ou mais estreito? Por quê?",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#o-que-levar-deste-capítulo",
+    "href": "cap09_intervalos.html#o-que-levar-deste-capítulo",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.10 O que levar deste capítulo",
+    "text": "9.10 O que levar deste capítulo\n\n\n\n\n\n\nNotaResumo em quatro pontos\n\n\n\n\nToda estimativa tem incerteza. O intervalo de confiança é a forma padrão de declará-la.\n95% descreve o método, não o intervalo. É a proporção de intervalos que conteriam o parâmetro se o estudo se repetisse.\nPrecisão custa caro. Quadruplicar a amostra apenas divide a margem de erro por dois.\nO intervalo é mais informativo que o p-valor. Ele mostra o tamanho do efeito e a faixa de valores plausíveis.\n\nO capítulo 10 fecha a parte de modelagem com as duas ferramentas mais usadas — e mais confundidas — da estatística aplicada: a correlação e a regressão.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
+    ]
+  },
+  {
+    "objectID": "cap09_intervalos.html#exercícios-de-fixação",
+    "href": "cap09_intervalos.html#exercícios-de-fixação",
+    "title": "9  Intervalos de Confiança",
+    "section": "9.11 🧠 Exercícios de fixação",
+    "text": "9.11 🧠 Exercícios de fixação\nA cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!\n\nQuestão #CAP9-01\n# Um estudo reporta média de 142 mmHg com intervalo de confiança de 95% igual a [138,3; 146,5]. Qual leitura é correta?\n- [ ] Há 95% de probabilidade de a média populacional estar entre 138,3 e 146,5 mmHg.\n  &gt; **Incorreto.** Essa é a leitura bayesiana. O método do intervalo é que tem a propriedade dos 95%, não o intervalo específico.\n- [x] Se o estudo fosse repetido muitas vezes, cerca de 95% dos intervalos assim construídos conteriam a média populacional verdadeira.\n  &gt; **Correto!** A garantia é sobre o procedimento de construção do intervalo, não sobre um intervalo particular.\n- [ ] 95% dos pacientes têm pressão entre 138,3 e 146,5 mmHg.\n  &gt; **Incorreto.** O intervalo é da média, não dos indivíduos. A dispersão entre pacientes é muito maior.\n\n\nQuestão #CAP9-02\n# Um pesquisador quer reduzir a margem de erro do intervalo de confiança da média pela metade. O que precisa fazer com a amostra?\n- [ ] Dobrar o tamanho da amostra.\n  &gt; **Incorreto.** A margem de erro cai com a raiz de n; dobrar n reduz a margem por cerca de 1,41.\n- [x] Quadruplicar o tamanho da amostra.\n  &gt; **Correto!** Como a margem é proporcional a 1 sobre raiz de n, dividir por dois exige multiplicar n por quatro.\n- [ ] Aumentar o nível de confiança para 99%.\n  &gt; **Incorreto.** Aumentar a confiança ALARGA o intervalo — é o efeito oposto ao desejado.\n\n\nQuestão #CAP9-03\n# Um teste t bilateral para a diferença entre dois tratamentos resultou em p = 0,03. O que se espera do intervalo de confiança de 95% para essa diferença?\n- [ ] Que o intervalo inclua o zero, pois o p-valor é pequeno.\n  &gt; **Incorreto.** p menor que 0,05 e intervalo que inclui o zero seriam conclusões contraditórias.\n- [x] Que o intervalo não inclua o zero, pois p menor que 0,05 corresponde a um intervalo de 95% que exclui o valor nulo.\n  &gt; **Correto!** O intervalo de 95% e o teste bilateral com alfa igual a 0,05 são duas formas da mesma informação.\n- [ ] Nada se pode concluir: o intervalo não tem relação com o teste.\n  &gt; **Incorreto.** Os dois procedimentos são equivalentes; o intervalo apenas mostra também a magnitude e a precisão.\n\n\nQuestão #CAP9-04\n# Um estudo com amostra muito pequena apresentou intervalo de confiança bastante largo. Qual é a interpretação adequada?\n- [ ] O resultado é inválido e deve ser descartado.\n  &gt; **Incorreto.** Intervalo largo indica baixa precisão, não invalidade. Excluir estudos pequenos sistematicamente gera viés de publicação.\n- [x] A estimativa pontual é bastante incerta: os dados são compatíveis com uma faixa ampla de valores do parâmetro.\n  &gt; **Correto!** É exatamente o que o intervalo informa. Ele não invalida o estudo, mas limita o que se pode afirmar.\n- [ ] O intervalo deveria ter sido de 99% para ficar mais estreito.\n  &gt; **Incorreto.** Aumentar o nível de confiança só alarga ainda mais o intervalo.\n\n\n\n\n\n\n\nDicaDeixe o seu feedback!\n\n\n\nNão se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo! ❤️\n\n\n\n\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Intervalos de Confiança</span>"
     ]
@@ -434,7 +744,117 @@
     "href": "cap10_correlacao.html",
     "title": "10  Correlação e Regressão",
     "section": "",
-    "text": "Este capítulo está em preparação.",
+    "text": "10.1 Sempre comece pelo gráfico\n“Essas duas variáveis estão correlacionadas” é provavelmente a frase mais repetida — e mais mal usada — da análise de dados em saúde. Ela costuma vir acompanhada de gráficos, de um número entre -1 e 1 e, com frequência, de uma conclusão causal que os dados não sustentam.\nEste capítulo apresenta as duas ferramentas que medem relação entre variáveis: a correlação, que quantifica o quanto duas variáveis caminham juntas, e a regressão, que descreve como uma variável muda em função da outra. Elas respondem perguntas diferentes, e confundi-las é a origem de boa parte dos erros de interpretação (Triola 2017).\nAntes de qualquer número, olhe os dados. Em 1973, o estatístico Francis Anscombe montou quatro conjuntos de dados com médias, variâncias e correlações praticamente idênticas — e formas completamente diferentes no gráfico. Um deles era uma reta limpa; outro, uma curva evidente; outro tinha um único ponto extremo que sustentava toda a correlação.\nA lição permanece: o coeficiente de correlação é cego para a forma da relação. Só o diagrama de dispersão revela se a relação é linear, se há curvatura, se existem agrupamentos ou valores extremos.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#sempre-comece-pelo-gráfico",
+    "href": "cap10_correlacao.html#sempre-comece-pelo-gráfico",
+    "title": "10  Correlação e Regressão",
+    "section": "",
+    "text": "AvisoA regra prática\n\n\n\nCorrelação calculada sem inspeção visual é um número sem contexto. Plote primeiro, calcule depois — sempre.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#o-coeficiente-de-correlação-de-pearson",
+    "href": "cap10_correlacao.html#o-coeficiente-de-correlação-de-pearson",
+    "title": "10  Correlação e Regressão",
+    "section": "10.2 O coeficiente de correlação de Pearson",
+    "text": "10.2 O coeficiente de correlação de Pearson\nO coeficiente de Pearson, representado por \\(r\\), mede a intensidade e a direção da relação linear entre duas variáveis quantitativas:\n\\[r = \\frac{\\sum_{i=1}^{n}(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum_{i=1}^{n}(x_i - \\bar{x})^2} \\cdot \\sqrt{\\sum_{i=1}^{n}(y_i - \\bar{y})^2}}\\]\nEle varia sempre entre \\(-1\\) e \\(1\\):\n\n\n\nValor de \\(r\\)\nInterpretação\n\n\n\n\n\\(r = 1\\)\nrelação linear positiva perfeita\n\n\n\\(r &gt; 0\\)\nas duas variáveis crescem juntas\n\n\n\\(r = 0\\)\nnenhuma relação linear (pode haver relação não linear)\n\n\n\\(r &lt; 0\\)\nquando uma cresce, a outra cai\n\n\n\\(r = -1\\)\nrelação linear negativa perfeita\n\n\n\nTrês limitações precisam estar sempre em mente:\n\n\\(r\\) só detecta relação linear. Uma relação em U perfeita pode ter \\(r\\) próximo de zero.\n\\(r\\) é sensível a valores extremos. Um único ponto discrepante pode levar \\(r\\) de 0,2 para 0,9.\n\\(r\\) não distingue causa de consequência. Ele é simétrico: a correlação entre \\(X\\) e \\(Y\\) é idêntica à correlação entre \\(Y\\) e \\(X\\).",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#quando-a-relação-não-é-linear-spearman",
+    "href": "cap10_correlacao.html#quando-a-relação-não-é-linear-spearman",
+    "title": "10  Correlação e Regressão",
+    "section": "10.3 Quando a relação não é linear: Spearman",
+    "text": "10.3 Quando a relação não é linear: Spearman\nSe a relação é monótona mas não linear — cresce sempre, mas em curva —, ou se as variáveis são ordinais, usa-se o coeficiente de Spearman, que é simplesmente o Pearson calculado sobre os postos (a ordem) dos valores, e não sobre os valores em si.\nExemplo: relacionar o estágio de uma doença (leve, moderado, grave) com um escore de qualidade de vida. Spearman respeita a ordem sem exigir que a distância entre as categorias seja igual.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#correlação-não-é-causalidade",
+    "href": "cap10_correlacao.html#correlação-não-é-causalidade",
+    "title": "10  Correlação e Regressão",
+    "section": "10.4 Correlação não é causalidade",
+    "text": "10.4 Correlação não é causalidade\nEsta é a advertência mais importante do capítulo.\nDuas variáveis podem se mover juntas por pelo menos quatro motivos:\n\n\\(X\\) causa \\(Y\\) — a dose do fármaco causa a queda da pressão.\n\\(Y\\) causa \\(X\\) — a causalidade corre no sentido inverso ao imaginado.\nUma terceira variável causa as duas — confundimento. O consumo de café se associa a câncer de pulmão porque o tabagismo causa as duas coisas.\nCoincidência — com variáveis suficientes, sempre existe alguma correlação alta por acaso.\n\nNenhum coeficiente de correlação, por si só, distingue esses quatro cenários. Para sustentar causalidade são necessários desenho adequado — intervenção, aleatorização, controle de confundidores —, e não um \\(r\\) alto.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#a-regressão-linear-simples",
+    "href": "cap10_correlacao.html#a-regressão-linear-simples",
+    "title": "10  Correlação e Regressão",
+    "section": "10.5 A regressão linear simples",
+    "text": "10.5 A regressão linear simples\nEnquanto a correlação mede a força da relação, a regressão descreve a forma dela e permite prever valores:\n\\[y = \\beta_0 + \\beta_1 x + \\varepsilon\\]\n\n\\(\\beta_0\\) é o intercepto — o valor previsto de \\(y\\) quando \\(x = 0\\).\n\\(\\beta_1\\) é a inclinação — quanto \\(y\\) muda, em média, para cada unidade a mais em \\(x\\).\n\\(\\varepsilon\\) é o erro aleatório, como no capítulo 7.\n\nO coeficiente \\(\\beta_1\\) é a peça interpretativa central. Dizer que \\(\\beta_1 = 6{,}46\\) metros por semana é uma afirmação clínica: a cada semana de programa, a distância percorrida aumenta, em média, 6,46 metros.\n\n\n\n\n\n\nImportanteCuidado com o intercepto\n\n\n\nO intercepto só tem significado quando \\(x = 0\\) é um valor possível e relevante. Num modelo de distância percorrida em função da semana, o intercepto estima o desempenho na semana zero — que pode não existir, se o programa começa na semana 1. Não interprete \\(\\beta_0\\) fora do intervalo observado dos dados.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#correlação-e-regressão-a-mesma-informação",
+    "href": "cap10_correlacao.html#correlação-e-regressão-a-mesma-informação",
+    "title": "10  Correlação e Regressão",
+    "section": "10.6 Correlação e regressão: a mesma informação?",
+    "text": "10.6 Correlação e regressão: a mesma informação?\nNa regressão linear simples, existe uma relação exata:\n\\[R^2 = r^2\\]\nOu seja, o coeficiente de determinação é o quadrado do coeficiente de Pearson. Um \\(r = 0{,}94\\) corresponde a \\(R^2 = 0{,}89\\): 89% da variabilidade do desfecho é explicada pela reta.\nMas as duas ferramentas respondem perguntas distintas. A correlação é simétrica e não estabelece direção. A regressão impõe uma direção — escolhe quem é resposta e quem é preditor — e produz uma equação utilizável para previsão.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#resíduos-e-diagnóstico",
+    "href": "cap10_correlacao.html#resíduos-e-diagnóstico",
+    "title": "10  Correlação e Regressão",
+    "section": "10.7 Resíduos e diagnóstico",
+    "text": "10.7 Resíduos e diagnóstico\nComo em qualquer modelo, a regressão precisa ser checada. Os resíduos (\\(e_i = y_i - \\hat{y}_i\\)) devem se distribuir aleatoriamente em torno de zero, sem padrão.\nUm resíduo grande e isolado merece investigação: pode ser erro de digitação, pode ser um paciente atípico — e, em ambos os casos, influencia desproporcionalmente a reta. Vale rodar a análise com e sem o ponto para ver o quanto as conclusões mudam.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#previsão-e-extrapolação",
+    "href": "cap10_correlacao.html#previsão-e-extrapolação",
+    "title": "10  Correlação e Regressão",
+    "section": "10.8 Previsão e extrapolação",
+    "text": "10.8 Previsão e extrapolação\nA reta ajustada permite prever \\(y\\) para novos valores de \\(x\\) dentro do intervalo observado. Fora dele, a previsão é extrapolação — e extrapolar é exatamente o que produziu os 299 dias de internação do capítulo 7.\n\n\n\n\n\n\nAvisoO limite da previsão\n\n\n\nNenhum modelo avisa quando você saiu da região em que foi treinado. A responsabilidade é do pesquisador: verifique sempre se o valor de \\(x\\) para o qual você quer prever está dentro da faixa de dados que sustentou o ajuste.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#prática-interativa-correlação-e-regressão-no-r",
+    "href": "cap10_correlacao.html#prática-interativa-correlação-e-regressão-no-r",
+    "title": "10  Correlação e Regressão",
+    "section": "10.9 Prática Interativa: correlação e regressão no R",
+    "text": "10.9 Prática Interativa: correlação e regressão no R\nUm programa de reabilitação acompanhou oito pacientes ao longo de oito semanas, medindo a distância percorrida no teste de caminhada de seis minutos (TC6). Rode o bloco e acompanhe a ordem: gráfico, correlação, teste e, por fim, a reta.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nLendo o resultado:\n\nA correlação é \\(r = 0{,}943\\) — forte e positiva. O teste devolve p-valor de aproximadamente 0,0004, com intervalo de confiança de \\([0{,}711;\\; 0{,}990]\\) para \\(r\\).\nA reta é \\(\\widehat{\\text{metros}} = 289{,}79 + 6{,}46 \\times \\text{semana}\\). Cada semana adicional acrescenta, em média, 6,46 metros ao TC6.\nO \\(R^2\\) é 0,890 — a semana explica 89% da variação na distância percorrida.\nPara a semana 10, a previsão é de 354 metros. Como o estudo foi até a semana 8, esse valor é extrapolação e deve ser lido como tal.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#o-que-levar-deste-capítulo",
+    "href": "cap10_correlacao.html#o-que-levar-deste-capítulo",
+    "title": "10  Correlação e Regressão",
+    "section": "10.10 O que levar deste capítulo",
+    "text": "10.10 O que levar deste capítulo\n\n\n\n\n\n\nNotaResumo em quatro pontos\n\n\n\n\nGráfico antes do número. O coeficiente é cego para curvatura, agrupamentos e valores extremos.\n\\(r\\) mede relação linear, de \\(-1\\) a \\(1\\), e é simétrico entre as variáveis.\nCorrelação não é causalidade. Confundimento e coincidência produzem os mesmos coeficientes altos.\nRegressão impõe direção e permite prever — mas só dentro da faixa de dados que a sustentou.\n\nCom isso, o livro percorreu o caminho completo: do dado bruto à conclusão com incerteza declarada. A estatística não elimina a dúvida; ela a torna mensurável.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
+    ]
+  },
+  {
+    "objectID": "cap10_correlacao.html#exercícios-de-fixação",
+    "href": "cap10_correlacao.html#exercícios-de-fixação",
+    "title": "10  Correlação e Regressão",
+    "section": "10.11 🧠 Exercícios de fixação",
+    "text": "10.11 🧠 Exercícios de fixação\nA cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!\n\nQuestão #CAP10-01\n# Um estudo encontrou correlação de Pearson igual a 0,85 entre o consumo de café e o câncer de pulmão. Qual é a conclusão mais defensável?\n- [ ] O café causa câncer de pulmão, pois a correlação é forte.\n  &gt; **Incorreto.** Correlação não estabelece causalidade. É preciso verificar se há confundidores e qual foi o desenho do estudo.\n- [x] Existe associação positiva entre as duas variáveis, mas o tabagismo pode confundir essa relação.\n  &gt; **Correto!** O tabagismo se associa tanto ao consumo de café quanto ao câncer, e é o confundidor clássico desse exemplo.\n- [ ] Não há nenhuma relação, porque correlação não prova nada.\n  &gt; **Incorreto.** Há uma associação real nos dados. O que não se pode concluir é a causalidade.\n\n\nQuestão #CAP10-02\n# Um coeficiente de Pearson entre duas variáveis resultou em aproximadamente zero. O que isso permite concluir?\n- [ ] Que as duas variáveis são independentes em qualquer sentido.\n  &gt; **Incorreto.** Independência estatística é mais forte que ausência de correlação linear.\n- [x] Que não existe relação LINEAR entre elas, mas pode existir uma relação não linear.\n  &gt; **Correto!** Pearson mede apenas associação linear. Uma relação em U pode ter r próximo de zero.\n- [ ] Que houve erro de cálculo, pois toda relação gera correlação.\n  &gt; **Incorreto.** Relações não lineares produzem, legitimamente, correlação de Pearson próxima de zero.\n\n\nQuestão #CAP10-03\n# Em uma regressão linear simples, a inclinação estimada foi 6,46 metros por semana. Como interpretar esse valor?\n- [ ] Que o paciente percorre 6,46 metros na primeira semana do programa.\n  &gt; **Incorreto.** Esse valor é o do intercepto, não o da inclinação.\n- [x] Que, a cada semana adicional, a distância percorrida aumenta em média 6,46 metros.\n  &gt; **Correto!** A inclinação é a mudança média no desfecho para cada unidade de aumento no preditor.\n- [ ] Que 6,46% da variação da distância é explicada pela semana.\n  &gt; **Incorreto.** Isso seria uma leitura do R-quadrado, e o valor é outro: 0,890.\n\n\nQuestão #CAP10-04\n# Por que prever a distância no TC6 para a semana 20 com um modelo ajustado em dados das semanas 1 a 8 é arriscado?\n- [ ] Porque a regressão deixa de funcionar depois de oito observações.\n  &gt; **Incorreto.** Não há limite de observações; o problema é outro.\n- [x] Porque é extrapolação: o modelo foi ajustado numa faixa de valores e nada garante que a relação se mantenha fora dela.\n  &gt; **Correto!** Extrapolar assume que a forma da relação continua válida além dos dados observados, o que raramente se pode verificar.\n- [ ] Porque o R-quadrado ficaria maior que 1.\n  &gt; **Incorreto.** O R-quadrado não é recalculado com o novo valor; a previsão não altera o ajuste.\n\n\n\n\n\n\n\nDicaDeixe o seu feedback!\n\n\n\nNão se esqueça de curtir e comentar ao final desse capítulo. Isso é muito importante para melhorar o livro interativo! ❤️\n\n\n\n\n\n\nTriola, Mario F. 2017. Introdução à Estatística. LTC.",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlação e Regressão</span>"
     ]

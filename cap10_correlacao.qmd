@@ -1,3 +1,207 @@
 # Correlação e Regressão
 
-Este capítulo está em preparação.
+"Essas duas variáveis estão correlacionadas" é provavelmente a frase mais repetida — e mais mal usada — da análise de dados em saúde. Ela costuma vir acompanhada de gráficos, de um número entre -1 e 1 e, com frequência, de uma conclusão causal que os dados não sustentam.
+
+Este capítulo apresenta as duas ferramentas que medem relação entre variáveis: a **correlação**, que quantifica o quanto duas variáveis caminham juntas, e a **regressão**, que descreve como uma variável muda em função da outra. Elas respondem perguntas diferentes, e confundi-las é a origem de boa parte dos erros de interpretação [@triola2017].
+
+## Sempre comece pelo gráfico
+
+Antes de qualquer número, olhe os dados. Em 1973, o estatístico Francis Anscombe montou quatro conjuntos de dados com médias, variâncias e correlações praticamente idênticas — e formas completamente diferentes no gráfico. Um deles era uma reta limpa; outro, uma curva evidente; outro tinha um único ponto extremo que sustentava toda a correlação.
+
+A lição permanece: **o coeficiente de correlação é cego para a forma da relação**. Só o diagrama de dispersão revela se a relação é linear, se há curvatura, se existem agrupamentos ou valores extremos.
+
+::: {.callout-warning}
+## A regra prática
+Correlação calculada sem inspeção visual é um número sem contexto. Plote primeiro, calcule depois — sempre.
+:::
+
+## O coeficiente de correlação de Pearson
+
+O coeficiente de Pearson, representado por $r$, mede a **intensidade e a direção da relação linear** entre duas variáveis quantitativas:
+
+$$r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}$$
+
+Ele varia sempre entre $-1$ e $1$:
+
+| Valor de $r$ | Interpretação |
+|---|---|
+| $r = 1$ | relação linear positiva perfeita |
+| $r > 0$ | as duas variáveis crescem juntas |
+| $r = 0$ | nenhuma relação **linear** (pode haver relação não linear) |
+| $r < 0$ | quando uma cresce, a outra cai |
+| $r = -1$ | relação linear negativa perfeita |
+
+Três limitações precisam estar sempre em mente:
+
+1. **$r$ só detecta relação linear.** Uma relação em U perfeita pode ter $r$ próximo de zero.
+2. **$r$ é sensível a valores extremos.** Um único ponto discrepante pode levar $r$ de 0,2 para 0,9.
+3. **$r$ não distingue causa de consequência.** Ele é simétrico: a correlação entre $X$ e $Y$ é idêntica à correlação entre $Y$ e $X$.
+
+## Quando a relação não é linear: Spearman
+
+Se a relação é monótona mas não linear — cresce sempre, mas em curva —, ou se as variáveis são ordinais, usa-se o coeficiente de **Spearman**, que é simplesmente o Pearson calculado sobre os **postos** (a ordem) dos valores, e não sobre os valores em si.
+
+*Exemplo:* relacionar o estágio de uma doença (leve, moderado, grave) com um escore de qualidade de vida. Spearman respeita a ordem sem exigir que a distância entre as categorias seja igual.
+
+## Correlação não é causalidade
+
+Esta é a advertência mais importante do capítulo.
+
+Duas variáveis podem se mover juntas por pelo menos quatro motivos:
+
+* **$X$ causa $Y$** — a dose do fármaco causa a queda da pressão.
+* **$Y$ causa $X$** — a causalidade corre no sentido inverso ao imaginado.
+* **Uma terceira variável causa as duas** — confundimento. O consumo de café se associa a câncer de pulmão porque o tabagismo causa as duas coisas.
+* **Coincidência** — com variáveis suficientes, sempre existe alguma correlação alta por acaso.
+
+Nenhum coeficiente de correlação, por si só, distingue esses quatro cenários. Para sustentar causalidade são necessários desenho adequado — intervenção, aleatorização, controle de confundidores —, e não um $r$ alto.
+
+## A regressão linear simples
+
+Enquanto a correlação mede a **força** da relação, a regressão descreve a **forma** dela e permite prever valores:
+
+$$y = \beta_0 + \beta_1 x + \varepsilon$$
+
+* $\beta_0$ é o **intercepto** — o valor previsto de $y$ quando $x = 0$.
+* $\beta_1$ é a **inclinação** — quanto $y$ muda, em média, para cada unidade a mais em $x$.
+* $\varepsilon$ é o erro aleatório, como no capítulo 7.
+
+O coeficiente $\beta_1$ é a peça interpretativa central. Dizer que $\beta_1 = 6{,}46$ metros por semana é uma afirmação clínica: a cada semana de programa, a distância percorrida aumenta, em média, 6,46 metros.
+
+::: {.callout-important}
+## Cuidado com o intercepto
+O intercepto só tem significado quando $x = 0$ é um valor possível e relevante. Num modelo de distância percorrida em função da semana, o intercepto estima o desempenho na semana zero — que pode não existir, se o programa começa na semana 1. Não interprete $\beta_0$ fora do intervalo observado dos dados.
+:::
+
+## Correlação e regressão: a mesma informação?
+
+Na regressão linear simples, existe uma relação exata:
+
+$$R^2 = r^2$$
+
+Ou seja, o coeficiente de determinação é o quadrado do coeficiente de Pearson. Um $r = 0{,}94$ corresponde a $R^2 = 0{,}89$: 89% da variabilidade do desfecho é explicada pela reta.
+
+Mas as duas ferramentas respondem perguntas distintas. A correlação é simétrica e não estabelece direção. A regressão **impõe uma direção** — escolhe quem é resposta e quem é preditor — e produz uma equação utilizável para previsão.
+
+## Resíduos e diagnóstico
+
+Como em qualquer modelo, a regressão precisa ser checada. Os resíduos ($e_i = y_i - \hat{y}_i$) devem se distribuir aleatoriamente em torno de zero, sem padrão.
+
+Um resíduo grande e isolado merece investigação: pode ser erro de digitação, pode ser um paciente atípico — e, em ambos os casos, influencia desproporcionalmente a reta. Vale rodar a análise com e sem o ponto para ver o quanto as conclusões mudam.
+
+## Previsão e extrapolação
+
+A reta ajustada permite prever $y$ para novos valores de $x$ **dentro do intervalo observado**. Fora dele, a previsão é extrapolação — e extrapolar é exatamente o que produziu os 299 dias de internação do capítulo 7.
+
+::: {.callout-warning}
+## O limite da previsão
+Nenhum modelo avisa quando você saiu da região em que foi treinado. A responsabilidade é do pesquisador: verifique sempre se o valor de $x$ para o qual você quer prever está dentro da faixa de dados que sustentou o ajuste.
+:::
+
+## Prática Interativa: correlação e regressão no R
+
+Um programa de reabilitação acompanhou oito pacientes ao longo de oito semanas, medindo a distância percorrida no teste de caminhada de seis minutos (TC6). Rode o bloco e acompanhe a ordem: gráfico, correlação, teste e, por fim, a reta.
+
+```{webr-r}
+# Semana do programa e distância no TC6 (metros)
+semana <- c(1, 2, 3, 4, 5, 6, 7, 8)
+metros <- c(295, 308, 302, 321, 318, 334, 328, 345)
+
+# 1. Sempre comece pelo gráfico
+plot(semana, metros, pch = 19, col = "#0d9488")
+
+# 2. Correlação de Pearson e seu teste
+cor(semana, metros)
+cor.test(semana, metros)
+
+# 3. A reta de regressão
+ajuste <- lm(metros ~ semana)
+coef(ajuste)
+summary(ajuste)$r.squared
+
+# 4. Previsão para a semana 10 (extrapolação!)
+predict(ajuste, data.frame(semana = 10))
+```
+
+Lendo o resultado:
+
+* A correlação é $r = 0{,}943$ — forte e positiva. O teste devolve p-valor de aproximadamente 0,0004, com intervalo de confiança de $[0{,}711;\; 0{,}990]$ para $r$.
+* A reta é $\widehat{\text{metros}} = 289{,}79 + 6{,}46 \times \text{semana}$. Cada semana adicional acrescenta, em média, **6,46 metros** ao TC6.
+* O $R^2$ é 0,890 — a semana explica 89% da variação na distância percorrida.
+* Para a semana 10, a previsão é de 354 metros. Como o estudo foi até a semana 8, **esse valor é extrapolação** e deve ser lido como tal.
+
+## O que levar deste capítulo
+
+::: {.callout-note icon="false"}
+## Resumo em quatro pontos
+
+1. **Gráfico antes do número.** O coeficiente é cego para curvatura, agrupamentos e valores extremos.
+2. **$r$ mede relação linear**, de $-1$ a $1$, e é simétrico entre as variáveis.
+3. **Correlação não é causalidade.** Confundimento e coincidência produzem os mesmos coeficientes altos.
+4. **Regressão impõe direção e permite prever** — mas só dentro da faixa de dados que a sustentou.
+
+Com isso, o livro percorreu o caminho completo: do dado bruto à conclusão com incerteza declarada. A estatística não elimina a dúvida; ela a torna mensurável.
+:::
+
+## 🧠 Exercícios de fixação
+
+*A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
+
+::: {.questao-banco}
+**Questão #CAP10-01**
+```quizdown
+# Um estudo encontrou correlação de Pearson igual a 0,85 entre o consumo de café e o câncer de pulmão. Qual é a conclusão mais defensável?
+- [ ] O café causa câncer de pulmão, pois a correlação é forte.
+  > **Incorreto.** Correlação não estabelece causalidade. É preciso verificar se há confundidores e qual foi o desenho do estudo.
+- [x] Existe associação positiva entre as duas variáveis, mas o tabagismo pode confundir essa relação.
+  > **Correto!** O tabagismo se associa tanto ao consumo de café quanto ao câncer, e é o confundidor clássico desse exemplo.
+- [ ] Não há nenhuma relação, porque correlação não prova nada.
+  > **Incorreto.** Há uma associação real nos dados. O que não se pode concluir é a causalidade.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP10-02**
+```quizdown
+# Um coeficiente de Pearson entre duas variáveis resultou em aproximadamente zero. O que isso permite concluir?
+- [ ] Que as duas variáveis são independentes em qualquer sentido.
+  > **Incorreto.** Independência estatística é mais forte que ausência de correlação linear.
+- [x] Que não existe relação LINEAR entre elas, mas pode existir uma relação não linear.
+  > **Correto!** Pearson mede apenas associação linear. Uma relação em U pode ter r próximo de zero.
+- [ ] Que houve erro de cálculo, pois toda relação gera correlação.
+  > **Incorreto.** Relações não lineares produzem, legitimamente, correlação de Pearson próxima de zero.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP10-03**
+```quizdown
+# Em uma regressão linear simples, a inclinação estimada foi 6,46 metros por semana. Como interpretar esse valor?
+- [ ] Que o paciente percorre 6,46 metros na primeira semana do programa.
+  > **Incorreto.** Esse valor é o do intercepto, não o da inclinação.
+- [x] Que, a cada semana adicional, a distância percorrida aumenta em média 6,46 metros.
+  > **Correto!** A inclinação é a mudança média no desfecho para cada unidade de aumento no preditor.
+- [ ] Que 6,46% da variação da distância é explicada pela semana.
+  > **Incorreto.** Isso seria uma leitura do R-quadrado, e o valor é outro: 0,890.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP10-04**
+```quizdown
+# Por que prever a distância no TC6 para a semana 20 com um modelo ajustado em dados das semanas 1 a 8 é arriscado?
+- [ ] Porque a regressão deixa de funcionar depois de oito observações.
+  > **Incorreto.** Não há limite de observações; o problema é outro.
+- [x] Porque é extrapolação: o modelo foi ajustado numa faixa de valores e nada garante que a relação se mantenha fora dela.
+  > **Correto!** Extrapolar assume que a forma da relação continua válida além dos dados observados, o que raramente se pode verificar.
+- [ ] Porque o R-quadrado ficaria maior que 1.
+  > **Incorreto.** O R-quadrado não é recalculado com o novo valor; a previsão não altera o ajuste.
+```
+:::
+
+::: {.callout-tip}
+## Deixe o seu feedback!
+
+[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
+:::

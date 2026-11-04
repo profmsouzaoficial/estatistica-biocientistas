@@ -308,8 +308,6 @@ O próximo capítulo detalha justamente esse último ponto: os tipos de estudo q
 ```
 :::
 
-## Deixe o seu feedback!
-
 ::: {.callout-tip}
 ## Deixe o seu feedback!
 

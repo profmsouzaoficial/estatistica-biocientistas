@@ -1,3 +1,228 @@
 # Modelos Estatísticos
 
-Este capítulo está em preparação.
+Até aqui descrevemos dados, calculamos probabilidades e avaliamos testes diagnósticos. Mas as perguntas mais interessantes das biociências raramente são sobre uma variável isolada — são sobre como uma coisa depende de outra. A dose muda a resposta? A idade explica o tempo de internação? O tratamento reduz a pressão?
+
+Um **modelo estatístico** é a resposta formal a esse tipo de pergunta. Este capítulo apresenta o vocabulário da modelagem — o que é um modelo, o que ele promete, o que ele não promete e como saber se ele está funcionando. Os detalhes de dois modelos específicos, a correlação e a regressão, ficam para o capítulo 10.
+
+## O que é um modelo estatístico
+
+Um modelo é uma representação **simplificada** da realidade. Nenhum modelo é a realidade: ele é uma lente que destaca o que interessa e ignora o resto [@pagano2004].
+
+De forma geral, um modelo estatístico tem a seguinte estrutura:
+
+$$Y = f(X_1, X_2, \dots, X_p) + \varepsilon$$
+
+* $Y$ é a **variável resposta** (o desfecho que queremos explicar).
+* $X_1, \dots, X_p$ são os **preditores** (as variáveis explicativas).
+* $f$ é a **forma da relação** — a parte sistemática, também chamada de sinal.
+* $\varepsilon$ é o **erro aleatório** — tudo o que o modelo não capturou, também chamado de ruído.
+
+A presença de $\varepsilon$ é o que separa um modelo estatístico de uma equação determinística. A segunda lei de Newton, $F = m \cdot a$, prevê a força exatamente. Já a pressão arterial de um paciente após uma dose de anti-hipertensivo não é previsível com essa precisão: dois pacientes com o mesmo perfil respondem de forma diferente, e o mesmo paciente responde diferente em dias diferentes [@triola2017].
+
+## Para que serve um modelo
+
+Um modelo pode perseguir quatro objetivos, e o objetivo define o critério de sucesso:
+
+* **Descrever** — resumir a relação entre variáveis de forma compacta. *Exemplo:* "a pressão cai, em média, 1,5 mmHg por mg de fármaco".
+* **Explicar** — avaliar se um preditor tem efeito, controlando os demais. *Exemplo:* a resposta ao tratamento se mantém depois de ajustar para idade e sexo?
+* **Prever** — estimar o desfecho de um novo paciente. *Exemplo:* qual o risco de complicação no pós-operatório?
+* **Decidir** — embasar uma escolha clínica ou de política pública. *Exemplo:* determinado programa de triagem vale o custo?
+
+Aqui está a armadilha: **um modelo bom para prever não é necessariamente bom para explicar**, e vice-versa. Um modelo preditivo pode ter dezenas de preditores e nenhuma interpretação clínica. Um modelo explicativo tem poucos preditores, escolhidos por hipótese, para que cada coeficiente signifique algo.
+
+## Modelos determinísticos e probabilísticos
+
+| | **Determinístico** | **Probabilístico** |
+|---|---|---|
+| Forma | $Y = f(X)$ | $Y = f(X) + \varepsilon$ |
+| Previsão | exata | com margem de erro |
+| Exemplo | diluição $C_1V_1 = C_2V_2$ | glicemia em função da dose |
+| Uso em saúde | cálculos de bancada | praticamente tudo com seres vivos |
+
+Sempre que o desfecho depender de um organismo — e não de uma lei física —, o modelo precisa do termo de erro. Ignorá-lo dá uma falsa sensação de precisão.
+
+## As famílias de modelos
+
+A escolha do modelo começa pelo tipo da variável resposta. Cada família resolve um problema diferente:
+
+| Família | Variável resposta | Exemplo na saúde |
+|---|---|---|
+| Regressão linear | contínua | pressão arterial em função da dose |
+| Regressão logística | binária | cura ou não cura |
+| Regressão de Poisson | contagem | número de casos por semana |
+| Análise de sobrevivência | tempo até o evento | tempo até a falha de um implante |
+| Modelos mistos | contínua, com medidas repetidas | glicemia ao longo do tratamento, por paciente |
+| Modelos não paramétricos | qualquer, sem forma assumida | quando a distribuição é desconhecida |
+
+Nenhuma família é "melhor" que outra. A pergunta é sempre: qual delas respeita a natureza do desfecho e o desenho que gerou os dados?
+
+## Parâmetros e o ajuste do modelo
+
+Os **parâmetros** são os números que definem a forma específica de $f$ para o seu conjunto de dados — no caso de uma reta, o intercepto e a inclinação. Eles são desconhecidos e precisam ser **estimados** a partir da amostra.
+
+Mas o que significa estimar? Significa escolher os valores que tornam o modelo o mais próximo possível dos dados observados. "Próximo" precisa de uma definição, e essa definição é a **função de perda**.
+
+No método dos **mínimos quadrados**, a perda é a soma dos quadrados das diferenças entre o valor observado e o valor previsto:
+
+$$S(\beta) = \sum_{i=1}^{n} \left(y_i - \hat{y}_i\right)^2$$
+
+Os valores de $\beta$ que minimizam essa soma são as estimativas do modelo. Elevar ao quadrado tem duas consequências: erros grandes pesam muito mais que erros pequenos, e erros positivos e negativos não se cancelam.
+
+::: {.callout-note}
+## Outra função de perda
+Mínimos quadrados não é a única opção. O método da **máxima verossimilhança** escolhe os parâmetros que tornam os dados observados os mais prováveis possível. É ele que sustenta a regressão logística e a de Poisson, onde mínimos quadrados não se aplica.
+:::
+
+## Como avaliar um modelo
+
+Ajustar é fácil: qualquer software devolve coeficientes. O difícil é saber se o modelo **merece confiança**.
+
+### Resíduos
+
+O resíduo é a parte que o modelo não explicou:
+
+$$e_i = y_i - \hat{y}_i$$
+
+Um modelo adequado deixa resíduos sem padrão: eles devem se distribuir aleatoriamente em torno de zero. Se os resíduos formam uma curva, o modelo está errado na forma. Se a dispersão dos resíduos cresce com o valor previsto, a variância não é constante.
+
+### Coeficiente de determinação
+
+O $R^2$ mede a proporção da variabilidade de $Y$ que o modelo consegue explicar:
+
+$$R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$$
+
+Ele varia de 0 a 1. Um $R^2$ de 0,89 significa que 89% da variação foi explicada. Mas atenção: **$R^2$ alto não prova que o modelo está correto**, e $R^2$ baixo não prova que ele é inútil. Em dados biológicos, valores entre 0,3 e 0,7 são comuns e perfeitamente respeitáveis.
+
+### Os pressupostos
+
+A maior parte dos modelos clássicos assume quatro condições:
+
+1. **Linearidade** — a relação entre $Y$ e os preditores tem a forma assumida.
+2. **Independência** — as observações não se influenciam (o que quebra em medidas repetidas do mesmo paciente).
+3. **Homocedasticidade** — a variância do erro é constante em todos os níveis dos preditores.
+4. **Normalidade dos resíduos** — necessária para os testes e intervalos de confiança do modelo.
+
+## O perigo do excesso de ajuste
+
+Um modelo pode ficar **bom demais** nos dados que viu — e péssimo em qualquer dado novo. Esse fenômeno se chama **sobreajuste** (*overfitting*).
+
+A intuição é simples: quanto mais flexível o modelo, mais ele consegue "decorar" o ruído da amostra em vez de aprender a estrutura. Compare com um aluno que memoriza o gabarito: tira 10 na prova antiga e fracassa na nova.
+
+A solução é sempre a mesma: **avaliar o modelo em dados que ele não viu**. Separa-se uma parte dos dados para treinar e outra para testar, ou usa-se validação cruzada.
+
+## Prática Interativa: vendo o sobreajuste acontecer
+
+No bloco abaixo há 12 pacientes com idade e tempo de internação. O modelo **reta** usa uma única inclinação; o modelo **complexo** usa um polinômio de grau 8 — um absurdo deliberado, com quase tantos parâmetros quanto observações.
+
+Os 10 primeiros pacientes servem para treinar; os 2 últimos ficam guardados para testar.
+
+```{webr-r}
+# 12 pacientes: idade e tempo de internação (dias)
+idade <- c(22, 25, 31, 34, 38, 41, 45, 49, 53, 57, 61, 65)
+dias  <- c(3, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9)
+
+treino <- 1:10
+teste  <- 11:12
+
+reta     <- lm(dias ~ idade, subset = treino)
+complexo <- lm(dias ~ poly(idade, 8), subset = treino)
+
+# Desempenho DENTRO da amostra de treino
+summary(reta)$r.squared
+summary(complexo)$r.squared
+
+# Desempenho nos pacientes que o modelo nunca viu
+predict(reta,     data.frame(idade = idade[teste]))
+predict(complexo, data.frame(idade = idade[teste]))
+dias[teste]
+```
+
+O que os números mostram:
+
+* Dentro da amostra, o modelo complexo vence: $R^2 = 0{,}882$ contra $0{,}778$ da reta.
+* Nos dois pacientes guardados, a reta prevê 7,8 e 8,3 dias — perto dos 7 e 9 observados.
+* O modelo complexo prevê **56 e 299 dias**. Ele decorou o ruído e extrapolou sem qualquer controle.
+
+Esse é o retrato fiel do sobreajuste: o modelo mais complexo sempre parece melhor nos dados que já viu. A pergunta que importa é sempre sobre os dados que ele **ainda não viu**.
+
+## Parcimônia: o modelo mais simples que funciona
+
+O princípio da parcimônia (a navalha de Occam) diz que, entre dois modelos com desempenho equivalente, deve-se preferir o mais simples. Não é estética: modelos simples são mais fáceis de interpretar, mais estáveis e menos propensos ao sobreajuste.
+
+Critérios como **AIC** e **BIC** formalizam esse compromisso, penalizando o número de parâmetros. A regra prática, porém, é anterior a qualquer fórmula: cada variável a mais no modelo precisa se justificar com um ganho real de compreensão.
+
+## O que levar deste capítulo
+
+::: {.callout-note icon="false"}
+## Resumo em quatro pontos
+
+1. **Modelo é simplificação, não verdade.** Ele destaca uma parte da realidade e descarta o resto — por decisão, não por descuido.
+2. **Sempre existe o termo de erro.** Em seres vivos, a parte sistemática nunca explica tudo.
+3. **O objetivo define o critério.** Modelo para explicar e modelo para prever se avaliam de formas diferentes.
+4. **Sobreajuste é o inimigo silencioso.** Só a avaliação em dados novos revela se o modelo aprendeu a estrutura ou decorou o ruído.
+
+O capítulo 8 dá o passo seguinte: como decidir, com rigor, se o efeito que um modelo mostra é real ou apenas fruto do acaso.
+:::
+
+## 🧠 Exercícios de fixação
+
+*A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
+
+::: {.questao-banco}
+**Questão #CAP7-01**
+```quizdown
+# Em um modelo estatístico, o que representa o termo de erro (épsilon)?
+- [ ] Um defeito do pesquisador, que deveria ser eliminado com mais amostras.
+  > **Incorreto.** O erro aleatório não é falha: é a variabilidade inerente ao fenômeno biológico.
+- [x] A parte da variação do desfecho que o modelo não conseguiu explicar.
+  > **Correto!** O termo de erro reúne tudo o que não foi incluído no modelo: variáveis não medidas, variação biológica e imprecisão de medição.
+- [ ] O valor da variável resposta previsto pelo modelo.
+  > **Incorreto.** O previsto é a parte sistemática; o erro é a diferença entre observado e previsto.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP7-02**
+```quizdown
+# Um modelo de regressão obteve R-quadrado igual a 0,92 em 30 pacientes. Qual afirmação é correta?
+- [ ] O modelo é válido, pois R-quadrado acima de 0,90 garante bom ajuste.
+  > **Incorreto.** R-quadrado alto não verifica pressupostos nem descarta sobreajuste; só indica quanta variação foi explicada naquela amostra.
+- [x] 92% da variação do desfecho foi explicada pelo modelo, mas ainda é preciso checar os resíduos e validar em dados novos.
+  > **Correto!** R-quadrado mede a proporção da variabilidade explicada. Ele não substitui a análise de resíduos nem a validação.
+- [ ] Há 92% de probabilidade de o modelo acertar a previsão de um novo paciente.
+  > **Incorreto.** R-quadrado não é probabilidade de acerto individual, e esse número tende a piorar em dados não vistos.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP7-03**
+```quizdown
+# O que caracteriza o sobreajuste (overfitting) de um modelo?
+- [ ] O modelo tem poucos parâmetros e por isso não capta a relação entre as variáveis.
+  > **Incorreto.** Esse é o problema oposto, o subajuste.
+- [x] O modelo se ajusta muito bem aos dados de treino, mas tem desempenho ruim em dados novos.
+  > **Correto!** O modelo decorou o ruído da amostra. Por isso a avaliação precisa ser feita em dados que ele não viu.
+- [ ] O modelo apresenta resíduos com média zero e variância constante.
+  > **Incorreto.** Isso descreve um bom comportamento dos resíduos, não um defeito.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP7-04**
+```quizdown
+# Por que os critérios de avaliação de um modelo podem ser diferentes conforme o objetivo do estudo?
+- [ ] Porque a regressão logística é sempre superior à regressão linear.
+  > **Incorreto.** As famílias de modelos resolvem problemas diferentes; não há superioridade geral entre elas.
+- [x] Porque o modelo explicativo valoriza coeficientes interpretáveis e poucos preditores, enquanto o preditivo valoriza a capacidade de acertar em novos casos.
+  > **Correto!** O objetivo do modelo define o que é sucesso. Explicar pede interpretabilidade; prever pede desempenho fora da amostra.
+- [ ] Porque não é possível avaliar modelos com variáveis binárias.
+  > **Incorreto.** Modelos para desfechos binários são avaliados normalmente, com métricas próprias como a curva ROC.
+```
+:::
+
+::: {.callout-tip}
+## Deixe o seu feedback!
+
+[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
+:::
