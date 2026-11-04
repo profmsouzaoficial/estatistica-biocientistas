@@ -473,10 +473,21 @@ document.addEventListener("DOMContentLoaded", function() {
 <h3 class="anchored" data-anchor-id="ficha-técnica">Ficha Técnica</h3>
 <ul>
 <li><strong>Autor:</strong> Márcio Luís Moreira de Souza</li>
-<li><strong>ISBN:</strong> 978-X-XXXX-XXXX-X</li>
-<li><strong>DOI:</strong> <a href="https://doi.org/10.XXXX/zenodo.XXXXX">10.XXXX/zenodo.XXXXX</a></li>
-<li><strong>Licença:</strong> Este material é disponibilizado sob a licença Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).</li>
+<li><strong>ISBN:</strong> <code>{r} meta('isbn')</code><br>
+</li>
+<li><strong>DOI:</strong> <a href="https://doi.org/%7Br%7D%20meta('doi')">{r} meta(‘doi’)</a></li>
 </ul>
+<div class="callout callout-style-simple callout-note no-icon" style="font-size: 0.9em; color: #555;">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Licença:</strong> Este material é disponibilizado sob a licença <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.pt_BR">Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a>.</p>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.pt_BR" target="_blank"> <img alt="Licença Creative Commons" style="border-width:0; margin-top: 8px;" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"> </a></p>
+</div>
+</div>
+</div>
 <hr>
 <p>Para iniciar a leitura e interagir com os códigos em tempo real, utilize a barra de navegação lateral e avance para o <strong>Capítulo 1: Introdução ao método estatístico</strong>.</p>
 
