@@ -5,6 +5,9 @@ author: "Márcio Luís Moreira de Souza"
 institute: "UFJF · Campus Avançado Governador Valadares"
 date: "2026-10-07"
 date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
 ---
 
 ## A vida é probabilística
@@ -208,4 +211,5 @@ Para aprofundar a teoria, brincar com o **ProbMaster** e resolver as **50 quest�
 [Ir para o Livro Interativo: Capítulo 5](../../cap05_probabilidade.html){target="_blank"}
 :::
 
-<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com</p>
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

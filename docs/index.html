@@ -280,10 +280,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let infoDiv = document.createElement('div');
         infoDiv.style.cssText = 'margin-top: 5px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; font-size: 12px; color: #64748b; line-height: 1.6; text-align: left;';
-        
+
+        // ATENÇÃO: este arquivo é um include de HTML puro, então não passa pelos
+        // shortcodes do Quarto. Mantenha os dois valores abaixo iguais aos de
+        // _quarto.yml (book.isbn e book.doi) — é a única duplicação proposital.
+        const ISBN_LIVRO = '978-X-XXXX-XXXX-X';
+        const DOI_LIVRO = '10.5281/zenodo.23858966';
+
         infoDiv.innerHTML = `
-            <div style="font-family: monospace; font-size: 11px;"><strong>ISBN:</strong> 978-X-XXXX-XXXX-X</div>
-            <div style="font-family: monospace; font-size: 11px; margin-top: 2px;"><strong>DOI:</strong> <a href="#" style="color: #6A8A9F; text-decoration: none; transition: 0.2s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">10.XXXX/zenodo.XXXXX</a></div>
+            <div style="font-family: monospace; font-size: 11px;"><strong>ISBN:</strong> ${ISBN_LIVRO}</div>
+            <div style="font-family: monospace; font-size: 11px; margin-top: 2px;"><strong>DOI:</strong> <a href="https://doi.org/${DOI_LIVRO}" target="_blank" rel="noopener" style="color: #6A8A9F; text-decoration: none; transition: 0.2s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${DOI_LIVRO}</a></div>
         `;
         
         sidebarTitle.parentNode.insertBefore(infoDiv, sidebarTitle.nextSibling);
@@ -451,7 +457,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <div class="quarto-title-meta-heading">Doi</div>
     <div class="quarto-title-meta-contents">
       <p class="doi">
-        <a href="https://doi.org/10.5281/zenodo.23858967">10.5281/zenodo.23858967</a>
+        <a href="https://doi.org/10.5281/zenodo.23858966">10.5281/zenodo.23858966</a>
       </p>
     </div>
   </div>
@@ -473,18 +479,25 @@ document.addEventListener("DOMContentLoaded", function() {
 <h3 class="anchored" data-anchor-id="ficha-técnica">Ficha Técnica</h3>
 <ul>
 <li><strong>Autor:</strong> Márcio Luís Moreira de Souza</li>
-<li><strong>ISBN:</strong> <code>{r} meta('isbn')</code><br>
-</li>
-<li><strong>DOI:</strong> <a href="https://doi.org/%7Br%7D%20meta('doi')">{r} meta(‘doi’)</a></li>
+<li><strong>ISBN:</strong> 978-X-XXXX-XXXX-X</li>
+<li><strong>DOI:</strong> <a href="https://doi.org/10.5281/zenodo.23858966">10.5281/zenodo.23858966</a></li>
+<li><strong>Licença:</strong> Este material é disponibilizado sob a licença <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.pt_BR">Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a>.</li>
 </ul>
-<div class="callout callout-style-simple callout-note no-icon" style="font-size: 0.9em; color: #555;">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Licença:</strong> Este material é disponibilizado sob a licença <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.pt_BR">Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a>.</p>
 <p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.pt_BR" target="_blank"> <img alt="Licença Creative Commons" style="border-width:0; margin-top: 8px;" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"> </a></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Como citar este livro
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>SOUZA, Márcio Luís Moreira de. <strong>Análise de Dados para Biocientistas</strong>. Governador Valadares: UFJF, 2026. DOI: <a href="https://doi.org/10.5281/zenodo.23858966">10.5281/zenodo.23858966</a>.</p>
+<p>Se você precisar citar uma versão específica, o DOI da versão corrente está sempre listado no registro do Zenodo apontado acima.</p>
 </div>
 </div>
 </div>

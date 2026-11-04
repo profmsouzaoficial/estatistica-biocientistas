@@ -9,3 +9,5 @@ _book/
 docs/_book/
 
 /.quarto/
+index.tex
+index.log

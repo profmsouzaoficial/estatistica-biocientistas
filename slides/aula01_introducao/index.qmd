@@ -1,0 +1,289 @@
+---
+title: "Introdução ao Método Estatístico"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 1"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## Todo experimento começa com uma pergunta
+
+A resposta nunca vem de um único paciente, de uma única placa, de uma única medição.
+
+A estatística separa **sinal** de **ruído** — e diz **quanta confiança** você pode ter na resposta.
+
+:::: {.cards .cols-3}
+::: {.card}
+**💊 Farmácia**
+
+O extrato inibiu a bactéria — ou o experimento deu sorte?
+:::
+
+::: {.card}
+**🦷 Odontologia**
+
+O novo biomaterial resiste melhor à força mastigatória?
+:::
+
+::: {.card}
+**🏃 Fisioterapia**
+
+A melhora foi maior do que a variação natural do paciente?
+:::
+::::
+
+## A gramática da evidência {.divider}
+
+Bloco 1 · O vocabulário que vem antes da fórmula
+
+## O que é o método estatístico?
+
+Um conjunto de procedimentos para **recolher, organizar, analisar e interpretar** dados.
+
+::: {.incremental}
+- **Descrever** — resumir os dados de uma amostra (média de glicemia de 40 pacientes).
+- **Explicar** — identificar relações entre variáveis (dose do fármaco × resposta metabólica).
+- **Prever** — estimar valores futuros (tempo de cicatrização sob determinado tratamento).
+:::
+
+::: {.keybox}
+Sem estatística, o dado é uma anotação de caderno. Com estatística, ele vira **evidência**.
+:::
+
+## Dado não é informação
+
+O número medido só tem valor quando interpretado na pergunta certa.
+
+:::: {.cards .cols-2}
+::: {.card}
+**Dado**
+
+`120/80`
+
+Duas pressões medidas por um aparelho.
+:::
+
+::: {.card}
+**Informação**
+
+"O paciente está normotenso."
+
+O significado que orienta a conduta clínica.
+:::
+::::
+
+<p class="small">A mesma lógica vale para dados não estruturados: uma radiografia só vira informação quando alguém sabe o que procurar nela.</p>
+
+## População e amostra
+
+Quase nunca é possível medir todo mundo. Por isso trabalhamos com uma **amostra**.
+
+:::: {.cards .cols-2}
+::: {.card}
+**População · $N$**
+
+Todos os diabéticos do município.
+
+Resumida por um **parâmetro**: $\mu$, $\pi$.
+:::
+
+::: {.card}
+**Amostra · $n$**
+
+120 pacientes atendidos no ambulatório.
+
+Resumida por uma **estatística**: $\bar{x}$, $\hat{p}$.
+:::
+::::
+
+::: {.keybox}
+O parâmetro é **desconhecido**. A estatística é o que **estimamos** — e toda estimativa carrega incerteza.
+:::
+
+## Os dois caminhos
+
+:::: {.cards .cols-2}
+::: {.card}
+**Estatística descritiva**
+
+Organiza, resume e apresenta os dados observados.
+
+Média, desvio padrão, tabela de frequências, gráficos.
+
+*Não vai além dos dados.*
+:::
+
+::: {.card}
+**Estatística inferencial**
+
+Usa a amostra para concluir sobre a população.
+
+Intervalos de confiança, testes de hipóteses, regressão.
+
+*Sempre declara a margem de erro.*
+:::
+::::
+
+## O risco do salto
+
+::: {.keybox}
+Inferência não é prova — é uma **aposta informada**.
+
+"A média de 10 pacientes foi maior" **não** autoriza dizer que "o remédio funciona". Falta quantificar a incerteza.
+:::
+
+*Exemplo real de sala de aula:* um grupo testa um analgésico em 8 voluntários, a dor média cai 2 pontos na escala EVA, e conclui que o fármaco é eficaz.
+
+**O que falta perguntar?** A queda é maior do que a variação que existiria sem remédio algum?
+
+## De onde vêm os dados {.divider}
+
+Bloco 2 · Recolha, classificação e o primeiro código
+
+## Métodos de recolha
+
+Cada método autoriza um tipo de conclusão diferente.
+
+:::: {.cards .cols-3}
+::: {.card}
+**👀 Observação**
+
+Sem interferir no ambiente.
+
+*Marcha avaliada na clínica.*
+:::
+
+::: {.card}
+**🧪 Experimentação**
+
+Intervindo na amostra.
+
+*Extrato vegetal em placas de Petri.*
+:::
+
+::: {.card}
+**📋 Levantamento**
+
+Questionários e entrevistas.
+
+*Hábitos de higiene bucal na comunidade.*
+:::
+::::
+
+## Causalidade × associação
+
+::: {.keybox}
+Só a **experimentação com aleatorização** permite falar em causalidade.
+
+Observação e levantamento descrevem **associações** — e uma associação pode ser explicada por uma terceira variável que ninguém mediu.
+:::
+
+*Exemplo:* estudantes de Odontologia que fazem mais prática clínica relatam mais dor no punho. É a prática que causa a dor, ou quem já tem dor procura mais a clínica?
+
+## Tipos de variáveis
+
+O tipo da variável decide o gráfico, a medida de resumo e o teste.
+
+:::: {.cards .cols-2}
+::: {.card}
+**Qualitativa nominal**
+
+Categorias sem ordem.
+
+*Coloração de Gram, tipo sanguíneo.*
+:::
+
+::: {.card}
+**Qualitativa ordinal**
+
+Categorias com hierarquia.
+
+*Escala de dor (EVA), estágio da lesão.*
+:::
+
+::: {.card}
+**Quantitativa discreta**
+
+Contagens inteiras.
+
+*Índice CPO-D, colônias por placa.*
+:::
+
+::: {.card}
+**Quantitativa contínua**
+
+Medidas que admitem frações.
+
+*Glicemia, ângulo de flexão.*
+:::
+::::
+
+## Classificando variáveis no R
+
+**Pergunta:** como o R enxerga uma variável contínua e uma ordinal?
+
+```{webr-r}
+peso <- c(72.5, 58, 91.2,
+          64.8, 80.1)
+
+grav <- c("leve", "grave",
+          "moderada", "leve",
+          "grave")
+
+class(peso)   # numeric
+class(grav)   # character
+
+mean(peso)
+table(grav)   # ordem alfabética
+```
+
+## Aplicações na saúde
+
+:::: {.cards .cols-3}
+::: {.card}
+**Farmácia**
+
+Eficácia de compostos, curva de absorção, controle de qualidade.
+:::
+
+::: {.card}
+**Odontologia**
+
+Incidência de cáries, resistência de biomateriais, biossegurança.
+:::
+
+::: {.card}
+**Fisioterapia**
+
+Amplitude de movimento, comparação de recursos terapêuticos.
+:::
+::::
+
+<p class="small">A mesma estatística serve às três áreas. Muda o desfecho, não o raciocínio.</p>
+
+## O que levar daqui
+
+::: {.incremental}
+- **Dado não é informação** — o número só vale no contexto da pergunta.
+- **Amostra não é população** — toda conclusão sobre a população carrega incerteza.
+- **O tipo da variável manda no resto** — gráfico, resumo e teste vêm depois.
+- **O desenho limita a conclusão** — sem intervenção e sorteio, só há associação.
+:::
+
+## Próximos passos
+
+O próximo capítulo detalha o item mais esquecido do roteiro: **como o estudo foi desenhado**.
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria e resolver as **10 questões de fixação**, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 1](../../cap01_introducao.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

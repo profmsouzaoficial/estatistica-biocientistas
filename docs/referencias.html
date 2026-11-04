@@ -298,10 +298,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let infoDiv = document.createElement('div');
         infoDiv.style.cssText = 'margin-top: 5px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; font-size: 12px; color: #64748b; line-height: 1.6; text-align: left;';
-        
+
+        // ATENÇÃO: este arquivo é um include de HTML puro, então não passa pelos
+        // shortcodes do Quarto. Mantenha os dois valores abaixo iguais aos de
+        // _quarto.yml (book.isbn e book.doi) — é a única duplicação proposital.
+        const ISBN_LIVRO = '978-X-XXXX-XXXX-X';
+        const DOI_LIVRO = '10.5281/zenodo.23858966';
+
         infoDiv.innerHTML = `
-            <div style="font-family: monospace; font-size: 11px;"><strong>ISBN:</strong> 978-X-XXXX-XXXX-X</div>
-            <div style="font-family: monospace; font-size: 11px; margin-top: 2px;"><strong>DOI:</strong> <a href="#" style="color: #6A8A9F; text-decoration: none; transition: 0.2s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">10.XXXX/zenodo.XXXXX</a></div>
+            <div style="font-family: monospace; font-size: 11px;"><strong>ISBN:</strong> ${ISBN_LIVRO}</div>
+            <div style="font-family: monospace; font-size: 11px; margin-top: 2px;"><strong>DOI:</strong> <a href="https://doi.org/${DOI_LIVRO}" target="_blank" rel="noopener" style="color: #6A8A9F; text-decoration: none; transition: 0.2s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${DOI_LIVRO}</a></div>
         `;
         
         sidebarTitle.parentNode.insertBefore(infoDiv, sidebarTitle.nextSibling);

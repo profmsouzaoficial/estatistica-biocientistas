@@ -1,47 +1,94 @@
 # Introdução ao método estatístico
 
-Este capítulo fornece uma introdução ao método estatístico. Ele discute os conceitos básicos de estatística, incluindo o que é o método estatístico, os seus objetivos, tipos de dados, métodos de recolha de dados e aplicações [@vieira2008]. Nas biociências, compreender esses conceitos é o primeiro passo para transformar a teoria vista em laboratório e na clínica em evidências sólidas.
+[▶ Abrir apresentação](slides/aula01_introducao/index.html){.deck-btn target="_blank"}
+
+Todo experimento começa com uma pergunta. A bactéria cresceu mais na presença do extrato? O paciente que fez fisioterapia recuperou mais amplitude de movimento? O novo biomaterial resistiu à força mastigatória? Responder a essas perguntas parece simples — até percebermos que **a resposta varia**: de paciente para paciente, de placa para placa, de medição para medição.
+
+A estatística é o conjunto de métodos que permite tirar conclusões confiáveis *apesar* dessa variação. Ela é a ponte entre o número anotado no caderno de laboratório e a afirmação que você defende num artigo, num laudo ou numa decisão clínica [@vieira2008]. Este capítulo apresenta o vocabulário que sustenta todo o restante do livro.
 
 ## O que é o método estatístico?
 
-O método estatístico é um conjunto de procedimentos para recolher, organizar, analisar e interpretar dados [@pagano2004]. Ele é usado para descrever e tirar conclusões sobre uma população a partir de uma amostra.
+O método estatístico é um conjunto de procedimentos para **recolher, organizar, analisar e interpretar** dados [@pagano2004]. Ele permite descrever uma realidade e tirar conclusões sobre uma população a partir de uma amostra.
 
-Os objetivos do método estatístico são:
+De forma geral, o método persegue três objetivos [@triola2017]:
 
-* **Descrever dados:** pode ser usado para descrever os dados de uma população ou amostra, usando medidas de tendência central, dispersão e forma [@triola2017].
-* **Explicar dados:** usado para identificar padrões e relacionamentos entre variáveis, como a relação entre a dose de um fármaco e a sua resposta metabólica.
-* **Prever dados:** usado para prever valores futuros e tendências, como o tempo estimado de cicatrização de um tecido sob determinado tratamento.
+* **Descrever:** resumir os dados de uma população ou amostra usando medidas de tendência central, dispersão e forma. *Exemplo:* a média de glicemia de 40 pacientes, com o desvio padrão.
+* **Explicar:** identificar padrões e relações entre variáveis. *Exemplo:* verificar se a resposta metabólica muda com a dose de um fármaco.
+* **Prever:** estimar valores futuros ou tendências. *Exemplo:* projetar o tempo de cicatrização de um tecido sob determinado tratamento.
 
-O método estatístico permite-nos, a partir de um conjunto de símbolos que representam quantidades ou medidas, transformá-los em dados para extrair informações fundamentais para as atividades humanas. **Dados** são um conjunto de números ou outras informações que podem ser recolhidos, organizados e analisados. **Informação**, por sua vez, é um conjunto de dados que tem significado e pode ser usado para tomar decisões clínicas ou experimentais [@vieira2008].
+Vale distinguir dois termos que costumam ser confundidos. **Dados** são um conjunto de símbolos, números ou medidas recolhidos. **Informação** é esse conjunto de dados com significado, usado para tomar decisões [@vieira2008]. O número "120/80" é um dado; "o paciente está normotenso" é a informação que orienta a conduta.
 
-Dados podem ser estruturados ou não estruturados. Dados estruturados estão organizados num formato predefinido, como uma tabela com os ângulos de flexão articular de pacientes. Dados não estruturados não possuem um formato predefinido, como imagens de radiografias ou laudos em texto livre. A ciência de dados na saúde, a partir de métodos estatísticos, cria condições de inovação e avanço do conhecimento.
+Os dados também variam quanto à organização. **Dados estruturados** seguem um formato predefinido — uma planilha com o ângulo de flexão articular de cada paciente. **Dados não estruturados** não seguem esse formato — imagens de radiografia, laudos em texto livre, sinais de wearable. A maior parte deste livro trata dos primeiros, mas a lógica de análise se aplica aos dois.
+
+## População, amostra e os dois caminhos da estatística
+
+Quase sempre é impossível medir todo mundo: todos os pacientes com a doença, todas as placas de Petri, todos os dentes de um município. Por isso, trabalha-se com uma **amostra** — um subconjunto cuidadosamente selecionado da **população** (o conjunto completo de interesses).
+
+A medida que resume a amostra e a medida que descreveria a população têm nomes diferentes, e as letras que as representam também:
+
+| | **População** | **Amostra** |
+|---|---|---|
+| Definição | Todos os elementos de interesse | Subconjunto da população |
+| Tamanho | $N$ | $n$ |
+| Média | parâmetro $\mu$ | estatística $\bar{x}$ |
+| Proporção | parâmetro $\pi$ ou $p$ | estatística $\hat{p}$ |
+
+Dessa distinção nascem os dois grandes ramos:
+
+* **Estatística descritiva** — organiza, resume e apresenta os dados da amostra. É o que fazemos ao calcular uma média, uma tabela de frequências ou um gráfico de dispersão. Não há conclusão além dos dados observados.
+* **Estatística inferencial** — usa a amostra para tirar conclusões sobre a população, sempre com uma margem de erro declarada. É o terreno dos intervalos de confiança, dos testes de hipóteses e da regressão.
+
+::: {.callout-important}
+## O risco do salto
+A inferência nunca é "prova". Ela é uma aposta informada: dizemos *quão provável* é que a diferença observada na amostra também exista na população. Quando alguém afirma que "o remédio funciona" só porque a média de 10 pacientes foi maior, o salto inferencial foi dado sem rede de proteção — sem intervalo de confiança nem teste de hipóteses.
+:::
+
+O diagrama abaixo mostra o percurso que percorreremos ao longo do livro: da pergunta e da amostra até a decisão.
+
+```{mermaid}
+%%| fig-cap: "Do problema à decisão em uma análise de dados"
+flowchart LR
+  A["Pergunta<br>de pesquisa"] --> B["Desenho do estudo<br>(cap. 2)"]
+  B --> C["Amostragem<br>(cap. 3)"]
+  C --> D["Análise exploratória<br>(cap. 4)"]
+  D --> E["Modelagem estatística<br>(cap. 5–10)"]
+  E --> F["Conclusão +<br>incerteza declarada"]
+
+  style A fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:#ffffff
+  style F fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:#ffffff
+  style B fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style C fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style D fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+  style E fill:#B4C4C1,stroke:#6A8A9F,color:#000000
+```
 
 ## Métodos de recolha de dados
 
-Os dados podem ser recolhidos de várias maneiras, conectando-se diretamente com a sua vivência prática no ciclo básico:
+Os dados podem ser recolhidos de várias maneiras, e cada uma conecta-se com a sua vivência prática no ciclo básico:
 
 * **Observação:** recolha de dados sem interferir no ambiente. *Exemplo prático:* avaliar o nível de ansiedade dos pacientes na "Sala de espera do atendimento odontológico" ou analisar a marcha de um paciente na Fisioterapia.
 * **Experimentação:** recolha de dados intervindo na população ou amostra. *Exemplo prático:* testar a eficácia antimicrobiana de um extrato vegetal desenvolvido na "Botânica Farmacêutica" em placas de Petri durante as aulas de "Microbiologia Básica".
 * **Levantamento:** recolha de dados por meio de questionários ou entrevistas. *Exemplo prático:* aplicar questionários estruturados para mapear os hábitos de higiene bucal na comunidade, uma prática essencial nos "Fundamentos básicos da epidemiologia".
 
-## Aplicações da estatística nas Ciências da Saúde
+A escolha do método não é neutra: ela determina que tipo de conclusão é legítimo tirar. Só a **experimentação** com aleatorização permite falar em causalidade; observação e levantamento descrevem associações [@pagano2004].
 
-A estatística é a espinha dorsal de qualquer área clínica ou laboratorial:
+## Tipos de dados (variáveis)
 
-* **Farmácia:** analisar a eficácia de novos compostos sintetizados na "Química Orgânica", modelar a curva de absorção de medicamentos e garantir o controle de qualidade.
-* **Odontologia:** mapear a incidência de cáries (epidemiologia), testar a resistência de novos biomateriais e validar a segurança de protocolos de "Biossegurança".
-* **Fisioterapia:** mensurar estatisticamente a recuperação da amplitude de movimento após intervenções, validando quais recursos terapêuticos aceleram a reabilitação.
+Em estatística, chamamos os dados de **variáveis**, em alusão à variedade de informação inerente à medida. A classificação não é preciosismo: ela decide *qual* gráfico usar, *qual* medida de resumo calcular e *qual* teste aplicar mais adiante.
 
-## Tipos de dados (Variáveis)
+* **Qualitativas nominais:** categorias sem ordem entre si. *Exemplos:* coloração de Gram das bactérias (positivo/negativo), tipo de tecido epitelial ("Histologia e embriologia") ou desfecho do tratamento (sucesso/falha).
+* **Qualitativas ordinais:** categorias com hierarquia ou progressão clara. *Exemplos:* grau de dor na Escala Visual Analógica (EVA), utilizada na Fisioterapia, ou estágio de desenvolvimento de uma lesão.
+* **Quantitativas discretas:** contagens em números inteiros. *Exemplos:* índice CPO-D (dentes cariados, perdidos e obturados), contagem de colônias bacterianas numa placa ou frequência cardíaca em batimentos por minuto ("Fisiologia Humana").
+* **Quantitativas contínuas:** medições que admitem frações. *Exemplos:* concentração de glicose medida na "Bioquímica Estrutural", ângulo de flexão de uma articulação ou dose de um fármaco em miligramas.
 
-Convencionalmente, em estatística, chamamos aos dados "variáveis" em alusão à variedade de informação inerente à medida em questão. Em vez de exemplos genéricos, veja como as variáveis aparecem na sua rotina:
+| Classificação | Operação com os valores | Medida de resumo típica | Gráfico usual |
+|---|---|---|---|
+| Qualitativa nominal | comparar igualdade | frequência e porcentagem | barras |
+| Qualitativa ordinal | comparar ordem | mediana e amplitude | barras ordenadas |
+| Quantitativa discreta | contar e calcular | média, mediana, desvio | barras ou histograma |
+| Quantitativa contínua | medir e calcular | média, desvio padrão | histograma, boxplot |
 
-* **Qualitativos Nominais:** dados categóricos sem ordem de grandeza. *Exemplos:* coloração de Gram das bactérias (positivo/negativo), tipo de tecido epitelial ("Histologia e embriologia") ou o desfecho de um tratamento (sucesso/falha).
-* **Qualitativos Ordinais:** dados categóricos com uma hierarquia ou progressão clara. *Exemplos:* grau de dor na Escala Visual Analógica (EVA) utilizada na Fisioterapia, ou o estágio de desenvolvimento de uma lesão.
-* **Quantitativos Contínuos:** dados medidos em escala contínua, permitindo frações. *Exemplos:* concentração de glicose no sangue medida na "Bioquímica Estrutural", ângulo de flexão de uma articulação ou a dose exata de um fármaco em miligramas.
-* **Quantitativos Discretos:** dados baseados em contagens numéricas inteiras. *Exemplos:* índice CPO-D (número de dentes cariados, perdidos e obturados), contagem de colônias bacterianas numa placa ou frequência cardíaca (batimentos por minuto na "Fisiologia Humana").
-
-O diagrama abaixo ilustra a classificação completa das variáveis com os nossos exemplos aplicados à saúde.
+O diagrama abaixo ilustra a classificação completa das variáveis com exemplos aplicados à saúde.
 
 ```{mermaid}
 %%| fig-cap: "Classificação das Variáveis Estatísticas nas Biociências"
@@ -70,15 +117,66 @@ flowchart TD
   style I fill:#F2F4F4,stroke:#B4C4C1,color:#000000
 ```
 
+## Prática Interativa: classificando variáveis no R
+
+Antes de analisar, é preciso saber o que cada coluna representa. O R tem uma classe para cada tipo de variável — e a função `class()` mostra qual delas foi atribuída.
+
+No bloco abaixo há uma tabela com seis pacientes de um ambulatório fictício. Clique em **Run Code** e observe como o R classifica cada coluna. Depois, altere os valores e rode novamente.
+
+```{webr-r}
+# Seis pacientes — cada coluna é uma variável
+dados <- data.frame(
+  paciente  = 1:6,
+  peso      = c(72.5, 58.0, 91.2, 64.8, 80.1, 69.4),   # quantitativa contínua
+  gravidade = factor(c("leve", "moderada", "grave",
+                       "leve", "grave", "moderada"),
+                     levels = c("leve", "moderada", "grave"),
+                     ordered = TRUE),                     # qualitativa ordinal
+  grupo     = factor(c("Controle", "Tratamento", "Controle",
+                       "Tratamento", "Controle", "Tratamento"))  # nominal
+)
+
+# Como o R enxerga cada variável?
+sapply(dados, class)
+
+# Resumo de uma variável quantitativa: média e desvio padrão
+round(mean(dados$peso), 1)
+round(sd(dados$peso), 1)
+
+# Resumo de uma variável qualitativa: frequência de cada categoria
+table(dados$gravidade)
+```
+
+Repare em três detalhes que valem para o resto do livro:
+
+* `numeric` é contínua, `integer` é discreta, `factor` é qualitativa — e `ordered = TRUE` avisa ao R que a ordem importa.
+* Se a gravidade fosse tratada como texto comum, o R a ordenaria alfabeticamente (*grave*, *leve*, *moderada*), o que não faz sentido clínico.
+* A média só faz sentido para variáveis quantitativas. Para categorias, resumimos com `table()`.
+
+## Aplicações da estatística nas Ciências da Saúde
+
+A estatística é a espinha dorsal de qualquer área clínica ou laboratorial:
+
+* **Farmácia:** analisar a eficácia de novos compostos sintetizados na "Química Orgânica", modelar a curva de absorção de medicamentos e garantir o controle de qualidade.
+* **Odontologia:** mapear a incidência de cáries (epidemiologia), testar a resistência de novos biomateriais e validar a segurança de protocolos de "Biossegurança".
+* **Fisioterapia:** mensurar estatisticamente a recuperação da amplitude de movimento após intervenções, validando quais recursos terapêuticos aceleram a reabilitação.
+
+## O que levar deste capítulo
+
+::: {.callout-note icon="false"}
+## Resumo em quatro pontos
+
+1. **Dado não é informação.** O número medido só vira conhecimento quando interpretado no contexto da pergunta.
+2. **Amostra não é população.** Toda conclusão sobre a população carrega incerteza, e a estatística inferencial existe para quantificá-la.
+3. **O tipo da variável manda no resto.** Ele determina o gráfico, a medida de resumo e o teste que você poderá usar adiante.
+4. **O desenho do estudo limita a conclusão.** Sem intervenção e aleatorização, o máximo que se sustenta é associação, não causalidade.
+
+O próximo capítulo detalha justamente esse último ponto: os tipos de estudo que geram os dados que analisaremos.
+:::
+
 ## 🧠 Exercícios de fixação
 
 *A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
-
-::: {.callout-tip}
-## Deixe o seu feedback!
-[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
-[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
-:::
 
 ::: {.questao-banco}
 **Questão #CAP1-01**
@@ -143,4 +241,78 @@ flowchart TD
 - [ ] Avaliar o nível de ansiedade dos pacientes na sala de espera.
   > **Incorreto.** Isto é uma "Observação", pois não há intervenção no estado do paciente.
 ```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-06**
+```quizdown
+# Um pesquisador mede a glicemia de 120 pacientes atendidos no ambulatório e usa essa média para estimar a glicemia média de todos os diabéticos do município. Que ramo da estatística ele está praticando?
+- [ ] Estatística descritiva, porque começou calculando uma média.
+  > **Incorreto.** Calcular a média da amostra é descritivo, mas o objetivo aqui é concluir sobre a população — isso é inferência.
+- [x] Estatística inferencial, porque generaliza da amostra para a população.
+  > **Correto!** O salto da amostra (n = 120) para a população de diabéticos do município é exatamente o que define a inferência.
+- [ ] Amostragem, porque houve seleção de pacientes.
+  > **Incorreto.** A amostragem é a técnica de seleção (capítulo 3); o uso do resultado para concluir sobre a população é inferência.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-07**
+```quizdown
+# A média de peso de 30 recém-nascidos de uma maternidade foi de 3,2 kg. Nesse contexto, qual é o papel do valor 3,2 kg?
+- [ ] É um parâmetro populacional, simbolizado por mu.
+  > **Incorreto.** O parâmetro descreve a população inteira; aqui a medida veio de uma amostra de 30 recém-nascidos.
+- [x] É uma estatística amostral, simbolizada por x-barra, que estima o parâmetro populacional desconhecido.
+  > **Correto!** A média de uma amostra é uma estatística; ela serve de estimativa para o parâmetro populacional, que nunca observamos diretamente.
+- [ ] É uma variável qualitativa ordinal, pois o peso tem ordem crescente.
+  > **Incorreto.** Peso é uma variável quantitativa contínua. Ter ordem não faz dela qualitativa.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-08**
+```quizdown
+# Em um estudo, os pesquisadores apenas acompanharam pacientes fumantes e não fumantes por 10 anos, sem indicar tratamento a ninguém. Que tipo de conclusão esse desenho permite sustentar com mais segurança?
+- [ ] Causalidade: fumar provoca a doença estudada.
+  > **Incorreto.** Sem intervenção e aleatorização, não é possível isolar todos os fatores de confusão; a causalidade fica como hipótese.
+- [x] Associação: há relação entre fumar e a doença, mas outros fatores podem explicar parte do efeito.
+  > **Correto!** Estudos observacionais sustentam associação. A causalidade exige desenho experimental com aleatorização.
+- [ ] Nenhuma conclusão, pois não houve intervenção.
+  > **Incorreto.** Estudos observacionais bem desenhados geram evidência relevante, apenas de natureza associativa.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-09**
+```quizdown
+# Um questionário de pesquisa de satisfação usa as opções: "ruim", "regular", "bom" e "excelente". Como essa variável deve ser classificada?
+- [ ] Qualitativa nominal, pois são palavras e não números.
+  > **Incorreto.** As categorias têm ordem crescente de qualidade, o que caracteriza a escala ordinal, não a nominal.
+- [x] Qualitativa ordinal, pois as categorias têm uma hierarquia clara.
+  > **Correto!** Existe progressão evidente entre ruim, regular, bom e excelente, o mesmo que ocorre com a escala de dor.
+- [ ] Quantitativa discreta, pois pode ser convertida em notas de 1 a 4.
+  > **Incorreto.** Converter em notas é uma decisão do pesquisador; a variável original é uma categorização com ordem.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-10**
+```quizdown
+# No R, a coluna "gravidade" foi criada como factor com ordered = TRUE. Por que isso importa na análise?
+- [ ] Porque só assim o R consegue calcular a média da coluna.
+  > **Incorreto.** Média não faz sentido para categorias, com ou sem ordem definida.
+- [ ] Porque sem ordered o R não consegue exibir a tabela de frequências.
+  > **Incorreto.** O table() funciona com qualquer factor; a ordem não é exigida para contar.
+- [x] Porque sem ordered o R ordena as categorias alfabeticamente, e leve/grave/moderada perderia a ordem clínica.
+  > **Correto!** O R ordena níveis de um factor comum alfabeticamente. Usar ordered e declarar levels preserva a progressão clínica — essencial para gráficos e modelos.
+```
+:::
+
+## Deixe o seu feedback!
+
+::: {.callout-tip}
+## Deixe o seu feedback!
+
+[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
 :::

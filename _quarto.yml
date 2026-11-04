@@ -10,15 +10,16 @@ project:
 
 lang: pt-BR
 bibliography: referencias.bib
-
-metadata:
-  isbn: "978-85-XXXX-X"
-  doi: "10.5281/zenodo.23858967"
   
 book:
   title: "Análise de Dados para Biocientistas"
   author: "Márcio Souza"
   date: "2026-10-07"
+  isbn: "978-X-XXXX-XXXX-X"
+  # Concept DOI do Zenodo (recorde 23858966): resolve sempre para a versão
+  # mais recente. O DOI de cada versão muda (v1.1 = 10.5281/zenodo.23858967),
+  # por isso o livro cita o concept DOI.
+  doi: "10.5281/zenodo.23858966"
   cover-image: capa.png
   chapters:
     - index.qmd
