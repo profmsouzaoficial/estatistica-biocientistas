@@ -308,6 +308,280 @@ O próximo capítulo detalha justamente esse último ponto: os tipos de estudo q
 ```
 :::
 
+::: {.questao-banco}
+**Questão #CAP1-11**
+```quizdown
+# Uma equipe de Fisioterapia quer estimar em quantos dias um paciente com lesão ligamentar estará apto a retornar à marcha, usando o histórico de pacientes anteriores. Qual objetivo do método estatístico está em jogo?
+- [ ] Descrever.
+  > **Incorreto.** Descrever resume os dados já observados; aqui o interesse é estimar um valor que ainda não foi medido.
+- [ ] Explicar.
+  > **Incorreto.** Explicar busca relações entre variáveis (por exemplo, dose e resposta). O foco da situação é antecipar um valor futuro.
+- [x] Prever.
+  > **Correto!** Projetar o tempo de recuperação de um novo paciente a partir de dados anteriores é exatamente o objetivo de previsão.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-12**
+```quizdown
+# Em uma unidade de saúde, quatro conjuntos de dados foram reunidos. Qual deles é um exemplo de dado NÃO estruturado?
+- [x] Extratos de laudos de radiografia redigidos em texto livre no prontuário.
+  > **Correto!** Texto livre não segue um formato predefinido: cada profissional escreve de um jeito, e a informação precisa ser interpretada antes de virar planilha.
+- [ ] Planilha com a pressão arterial de cada paciente em consultas mensais.
+  > **Incorreto.** Aqui há colunas e unidades definidas — é dado estruturado.
+- [ ] Tabela com idade, sexo e diagnóstico de 200 pacientes.
+  > **Incorreto.** Formato predefinido, uma linha por paciente: dado estruturado.
+- [ ] Registro do número de dentes cariados por paciente em ficha padronizada.
+  > **Incorreto.** A ficha padronizada impõe o mesmo formato a todos — é dado estruturado.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-13**
+```quizdown
+# Segundo o capítulo, o método estatístico é um conjunto de procedimentos. Qual sequência descreve corretamente suas etapas?
+- [ ] Analisar, recolher, interpretar e organizar.
+  > **Incorreto.** Não se analisa o que ainda não foi recolhido e organizado.
+- [x] Recolher, organizar, analisar e interpretar.
+  > **Correto!** A ordem é a do próprio percurso do dado: sem organização não há análise confiável, e sem análise não há interpretação defensável.
+- [ ] Organizar, analisar, recolher e interpretar.
+  > **Incorreto.** Organizar pressupõe que os dados já existam — a recolha vem antes.
+- [ ] Interpretar, analisar, organizar e recolher.
+  > **Incorreto.** É a sequência invertida: interpretar é o último passo, não o primeiro.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-14**
+```quizdown
+# Qual das afirmações abaixo sobre o método estatístico é FALSA?
+- [ ] A estatística permite tirar conclusões confiáveis apesar da variação entre indivíduos.
+  > **Verdadeira.** É justamente para lidar com a variabilidade biológica que o método existe.
+- [ ] O tipo da variável determina o gráfico, a medida de resumo e o teste aplicável.
+  > **Verdadeira.** Classificar errado leva ao gráfico errado, à medida errada e ao teste errado.
+- [x] Um estudo observacional bem conduzido permite afirmar causalidade, desde que a amostra seja grande.
+  > **Correto: esta é a afirmação FALSA.** Tamanho de amostra reduz o erro aleatório, mas não substitui a aleatorização. Sem intervenção, o máximo que se sustenta é associação.
+- [ ] A estatística inferencial sempre declara uma margem de erro.
+  > **Verdadeira.** A inferência é uma aposta informada: sem intervalo de confiança ou teste, o salto para a população fica sem rede.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-15**
+```quizdown
+# Em uma clínica-escola com 300 pacientes cadastrados, um pesquisador mede a glicemia de TODOS os 300 e calcula a média. Se a pergunta é "qual a glicemia média dos pacientes desta clínica?", como se chama o valor obtido?
+- [x] Um parâmetro populacional (mu), pois todos os elementos da população de interesse foram medidos.
+  > **Correto!** Se a população de interesse é "os pacientes desta clínica" e todos foram medidos, o conjunto é a população e a média é um parâmetro. Não há inferência porque não houve salto.
+- [ ] Uma estatística amostral (x-barra), pois toda média é sempre uma estatística.
+  > **Incorreto.** O símbolo não depende do cálculo, mas da origem dos dados: em uma amostra é x-barra, na população é mu.
+- [ ] Uma estimativa que obrigatoriamente exigiria intervalo de confiança.
+  > **Incorreto.** Intervalo de confiança quantifica a incerteza do salto amostra-população. Sem amostra, não há salto a quantificar.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-16**
+```quizdown
+# Na notação apresentada no capítulo, qual símbolo representa a proporção observada em uma AMOSTRA?
+- [ ] pi (o parâmetro populacional).
+  > **Incorreto.** Pi descreve a população, não a amostra.
+- [x] p com chapéu (p-chapéu), a estatística amostral.
+  > **Correto!** O chapéu marca sempre a estimativa: aquilo que foi estimado a partir da amostra.
+- [ ] x-barra (a média amostral).
+  > **Incorreto.** X-barra representa uma média, não uma proporção.
+- [ ] N (o tamanho da população).
+  > **Incorreto.** N é o total de elementos da população — um tamanho, não uma proporção.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-17**
+```quizdown
+# Para determinar a concentração de uma solução, um analista mede a absorbância de cinco alíquotas retiradas do mesmo frasco e usa a média das cinco leituras como valor final. Qual é o papel dessa média?
+- [ ] É o valor exato da concentração, pois as cinco alíquotas vieram do mesmo frasco.
+  > **Incorreto.** Mesmo do mesmo frasco, cada leitura carrega erro de pipetagem, de aparelho e de temperatura — não existe leitura "exata".
+- [ ] É um parâmetro populacional, porque não houve sorteio de indivíduos.
+  > **Incorreto.** As cinco leituras são uma amostra das infinitas leituras possíveis daquele material; o parâmetro seria o valor verdadeiro, que não se observa.
+- [x] É uma estimativa: cada leitura é uma realização sujeita a erro, e a média carrega incerteza.
+  > **Correto!** A média é a melhor estimativa disponível, mas por isso mesmo deve ser reportada com o desvio padrão das leituras — não como se fosse o valor verdadeiro.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-18**
+```quizdown
+# Um resumo de artigo informa apenas: "a idade média dos pacientes foi de 54 anos". Qual informação está faltando para interpretar esse número?
+- [x] Uma medida de dispersão, que mostra o quanto as idades variam em torno da média.
+  > **Correto!** Média sem dispersão é meia informação: "54 anos" pode significar "todos entre 52 e 56" ou "metade com 20 e metade com 88".
+- [ ] O nome do teste estatístico utilizado na comparação.
+  > **Incorreto.** O teste vem depois; o problema aqui é que o próprio resumo descritivo está incompleto.
+- [ ] O valor de p associado ao estudo.
+  > **Incorreto.** O valor de p responde a outra pergunta e não corrigiria a ausência da dispersão.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-19**
+```quizdown
+# Qual das ações abaixo é um exemplo de estatística DESCRITIVA?
+- [ ] Estimar a prevalência de cárie do município a partir de 400 escolares.
+  > **Incorreto.** Ao generalizar dos escolares para o município, houve salto inferencial.
+- [x] Organizar em uma tabela a frequência de atendimentos por turno em uma clínica.
+  > **Correto!** Contar, organizar e apresentar os dados observados, sem extrapolar para além deles, é a definição de estatística descritiva.
+- [ ] Testar se dois protocolos diferem quanto ao tempo de internação.
+  > **Incorreto.** Comparar grupos e decidir sobre diferença é inferência.
+- [ ] Calcular o intervalo de confiança para a média de pressão arterial.
+  > **Incorreto.** O intervalo de confiança é a ferramenta central da inferência.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-20**
+```quizdown
+# A estatística descritiva, por definição, NÃO permite:
+- [x] Concluir sobre a população além dos dados observados.
+  > **Correto!** A descritiva para nos dados que se tem. O salto para a população é a inferência — e ele exige margem de erro declarada.
+- [ ] Resumir os dados em medidas de tendência central.
+  > **Incorreto.** Este é exatamente um dos papéis da descritiva.
+- [ ] Apresentar os dados em tabelas e gráficos.
+  > **Incorreto.** Organizar e apresentar é parte central da análise exploratória descritiva.
+- [ ] Descrever a dispersão dos valores observados.
+  > **Incorreto.** Descrever a variação dos dados observados é uma tarefa descritiva legítima.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-21**
+```quizdown
+# Um relatório afirma: "o novo anti-inflamatório é eficaz, pois a média de dor caiu em 10 pacientes". O que falta para essa inferência ser legítima?
+- [ ] Nada: uma queda de 10 pontos na média já demonstra eficácia.
+  > **Incorreto.** A queda pode vir do efeito do tempo, da variação individual ou da expectativa — nada disso foi controlado.
+- [ ] Apenas aumentar a amostra de 10 para 30 pacientes.
+  > **Incorreto.** Amostra maior reduz o erro aleatório, mas não resolve a ausência de grupo de comparação.
+- [x] Comparar com um grupo controle e declarar a incerteza, pois a queda pode dever-se ao acaso ou à história natural.
+  > **Correto!** É o "salto sem rede" descrito no capítulo: sem grupo de comparação e sem intervalo de confiança ou teste, a conclusão não se sustenta.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-22**
+```quizdown
+# Para mapear hábitos de higiene bucal em uma comunidade, uma equipe aplica questionários estruturados de porta em porta. Qual método de recolha foi utilizado?
+- [x] Levantamento.
+  > **Correto!** O levantamento recolhe dados por questionários ou entrevistas, sem manipular variáveis nem intervir no ambiente.
+- [ ] Observação.
+  > **Incorreto.** A observação registra o que acontece sem questionar diretamente as pessoas.
+- [ ] Experimentação.
+  > **Incorreto.** Na experimentação o pesquisador intervém e manipula uma variável — não é o caso de um questionário.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-23**
+```quizdown
+# Qual desenho autoriza, com mais segurança, a afirmação de que um tratamento CAUSOU a melhora observada?
+- [ ] Observar a rotina do serviço, sem interferir no atendimento.
+  > **Incorreto.** Sem intervenção não é possível separar o efeito do tratamento de outros fatores; o máximo é associação.
+- [ ] Aplicar 1.000 questionários sobre hábitos de vida.
+  > **Incorreto.** O levantamento descreve hábitos e associações; não testa a eficácia de uma intervenção.
+- [x] Sortear os pacientes para dois grupos, um com o tratamento e outro com placebo.
+  > **Correto!** A aleatorização distribui os fatores de confusão — inclusive os desconhecidos — entre os grupos, o que torna a comparação justa.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-24**
+```quizdown
+# O capítulo afirma que "a escolha do método não é neutra". Qual é o sentido dessa afirmação?
+- [ ] Que métodos observacionais são sempre inferiores aos experimentais.
+  > **Incorreto.** Não há hierarquia absoluta: o observacional pode ser a única opção ética e ainda assim produzir evidência valiosa.
+- [x] Que o método define o tipo de conclusão legítima — associação ou causalidade.
+  > **Correto!** O desenho limita o alcance da frase final. Escolher o método é escolher, de antemão, o que será possível afirmar.
+- [ ] Que dados obtidos por questionário são sempre inválidos.
+  > **Incorreto.** Questionários bem construídos geram dados válidos; o que eles não sustentam é uma conclusão causal.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-25**
+```quizdown
+# Em uma cultura bacteriana, o resultado é registrado como "Gram positivo" ou "Gram negativo". Como essa variável se classifica?
+- [x] Qualitativa nominal.
+  > **Correto!** São categorias sem hierarquia entre si: positivo não é "mais" que negativo, apenas diferente. Por isso, nominal.
+- [ ] Qualitativa ordinal.
+  > **Incorreto.** Não há progressão entre positivo e negativo, logo não há ordem a preservar.
+- [ ] Quantitativa discreta.
+  > **Incorreto.** Não é uma contagem: são rótulos de categoria.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-26**
+```quizdown
+# Um pesquisador converte a glicemia de cada paciente (em mg/dL) em três categorias: normal, pré-diabético e diabético. O que acontece com a variável?
+- [ ] Ela continua quantitativa contínua, apenas com outro nome.
+  > **Incorreto.** Ao virar categoria, os valores numéricos desaparecem — não há mais medida, apenas classificação.
+- [x] Ela passa a ser qualitativa ordinal: ganha leitura clínica e perde precisão numérica.
+  > **Correto!** A categorização é uma decisão clínica frequente e tem preço: 99 e 101 mg/dL caem na mesma caixa, e o gráfico e o teste aplicáveis mudam junto.
+- [ ] Ela se torna quantitativa discreta, pois passa a ter três valores possíveis.
+  > **Incorreto.** Discreta ainda é contagem numérica; aqui não há número, há categoria com ordem.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-27**
+```quizdown
+# Qual das variáveis abaixo é quantitativa CONTÍNUA?
+- [ ] Número de dentes perdidos por paciente.
+  > **Incorreto.** É uma contagem inteira: não existe "meio dente perdido".
+- [ ] Estágio da lesão (I, II ou III).
+  > **Incorreto.** É uma categoria com ordem — qualitativa ordinal.
+- [x] Concentração de hemoglobina em g/dL.
+  > **Correto!** Admite frações e resulta de uma medição em escala contínua.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-28**
+```quizdown
+# Em um prontuário constam: (i) o escore de dor na Escala Visual Analógica, de 0 a 10; (ii) a temperatura axilar em graus Celsius. Como essas variáveis se classificam, respectivamente?
+- [ ] Quantitativa discreta e qualitativa ordinal.
+  > **Incorreto.** A EVA não é contagem, e a temperatura não é categoria.
+- [x] Qualitativa ordinal e quantitativa contínua.
+  > **Correto!** A EVA mede uma gradação subjetiva com ordem clara (por isso ordinal); a temperatura admite frações e resulta de medição (por isso contínua).
+- [ ] Quantitativa contínua e quantitativa contínua.
+  > **Incorreto.** A temperatura sim; a EVA, no tratamento adotado neste livro, é uma escala ordinal.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-29**
+```quizdown
+# Para uma variável qualitativa nominal, qual é a forma adequada de resumo?
+- [ ] Média e desvio padrão.
+  > **Incorreto.** Não existe média de categorias: somar "Gram positivo" com "Gram negativo" não produz nada interpretável.
+- [ ] Mediana e intervalo interquartil.
+  > **Incorreto.** Mediana exige ordem entre os valores, e categorias nominais não têm ordem.
+- [x] Frequência e porcentagem de cada categoria.
+  > **Correto!** Para nominais, conta-se: quantos em cada categoria e qual a proporção do total. É o resumo coerente com o que a variável permite.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP1-30**
+```quizdown
+# Um estudante resumiu um estudo em quatro frases. Qual delas é uma conclusão estatisticamente legítima?
+- [x] "A amostra de 30 recém-nascidos teve média de 3,2 kg; o intervalo de confiança indicará a faixa plausível para a população."
+  > **Correto!** É a única frase que respeita os dois limites do capítulo: a amostra não é a população, e toda conclusão sobre a população exige incerteza declarada.
+- [ ] "A média de 30 recém-nascidos foi 3,2 kg; logo, todos os recém-nascidos do município pesam 3,2 kg."
+  > **Incorreto.** Generaliza a média da amostra como se fosse o valor exato de cada indivíduo da população.
+- [ ] "O grupo tratado teve média maior, então o tratamento funciona, sem necessidade de margem de erro."
+  > **Incorreto.** Comparar médias sem grupo controle adequado e sem declarar incerteza é o salto sem rede.
+- [ ] "O desvio padrão foi 0,4 kg, portanto o peso é uma variável qualitativa ordinal."
+  > **Incorreto.** Peso é quantitativo contínuo; o desvio padrão, aliás, só existe porque a variável é numérica.
+```
+:::
+
 ::: {.callout-tip}
 ## Deixe o seu feedback!
 
