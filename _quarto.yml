@@ -20,7 +20,6 @@ book:
   cover-image: capa.png
   chapters:
     - index.qmd
-    - apresentacoes.qmd
     - cap01_introducao.qmd
     - cap02_estudos.qmd
     - cap03_amostragem.qmd
