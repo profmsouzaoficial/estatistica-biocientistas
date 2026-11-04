@@ -1,0 +1,264 @@
+---
+title: "Testes Diagnósticos nas Ciências da Saúde"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 6"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## Febre, mialgia, dor retro-orbitária
+
+Uma Unidade Básica de Saúde, um paciente com suspeita de dengue, um teste rápido de antígeno NS1.
+
+O resultado chega: **positivo**.
+
+::: {.keybox}
+Qual a chance real de esse paciente estar infectado?
+
+E se o resultado tivesse vindo **negativo** — dá para mandá-lo para casa com segurança?
+:::
+
+<p class="small">Nenhum teste é 100% perfeito. A pergunta não é "confio ou não": é "quanto".</p>
+
+## A pergunta que o boletim não responde
+
+:::: {.cards .cols-2}
+::: {.card}
+**Se deu positivo**
+
+"Qual a probabilidade de eu **ter** a doença, dado que o teste deu positivo?"
+
+Essa é a pergunta do **paciente** — e ela depende da prevalência.
+:::
+
+::: {.card}
+**Se deu negativo**
+
+"Qual a probabilidade de eu **não ter** a doença, dado que o teste deu negativo?"
+
+É a pergunta que autoriza alta.
+:::
+::::
+
+## A verdade de referência {.divider}
+
+## Padrão-ouro e a matriz de confusão
+
+O teste novo é comparado com o **padrão-ouro** — o melhor exame disponível, mesmo que caro, lento ou invasivo (RT-PCR, cultura, biópsia).
+
+:::: {.cards .cols-2}
+::: {.card}
+**✅ Verdadeiro positivo (VP)**
+
+O doente que o teste acertou.
+
+:::
+
+::: {.card}
+**⚠️ Falso positivo (FP)**
+
+O saudável que o teste assustou.
+:::
+
+::: {.card}
+**✅ Verdadeiro negativo (VN)**
+
+O saudável que o teste tranquilizou.
+:::
+
+::: {.card}
+**🚨 Falso negativo (FN)**
+
+O doente que o teste mandou para casa.
+
+*O cenário clínico mais perigoso.*
+:::
+::::
+
+## Sensibilidade e especificidade
+
+São propriedades **intrínsecas** do teste: medem o desempenho **sabendo-se** o status real.
+
+::: {.formula}
+$$\text{Sensibilidade} = \frac{VP}{VP + FN} \qquad \text{Especificidade} = \frac{VN}{VN + FP}$$
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**Sensibilidade**
+
+Dos **doentes**, quantos o teste detectou?
+
+Teste sensível = poucos falsos negativos.
+:::
+
+::: {.card}
+**Especificidade**
+
+Dos **saudáveis**, quantos o teste poupou?
+
+Teste específico = poucos falsos positivos.
+:::
+::::
+
+## Dois mnemônicos que salvam plantão
+
+::: {.keybox}
+**SnNOut** — teste **S**ensível, com resultado **N**egativo, **Out** (descarta) a doença.
+
+**SpPIn** — teste **Sp**ecífico, com resultado **P**ositivo, **In** (confirma) a doença.
+:::
+
+<p class="small">Um teste sensível é bom para excluir. Um teste específico é bom para confirmar. Confundir os dois é o erro que mais custa caro.</p>
+
+## VPP e VPN: a visão de quem recebe o resultado
+
+Na vida real o médico não sabe o status real — tem apenas o resultado.
+
+:::: {.cards .cols-2}
+::: {.card}
+**VPP — valor preditivo positivo**
+
+Dado que o teste deu **positivo**, qual a chance de haver doença?
+
+$$\frac{VP}{VP + FP}$$
+:::
+
+::: {.card}
+**VPN — valor preditivo negativo**
+
+Dado que o teste deu **negativo**, qual a chance de estar saudável?
+
+$$\frac{VN}{VN + FN}$$
+:::
+::::
+
+::: {.keybox}
+**Sensibilidade não é VPP.** A sensibilidade é do teste; o VPP é do paciente — e muda com a prevalência.
+:::
+
+## O mesmo teste, dois VPPs
+
+Sensibilidade de 90%, especificidade de 90%. População de 10.000 pessoas.
+
+| | Prevalência **1%** | Prevalência **20%** |
+|---|---|---|
+| Doentes | 100 | 2.000 |
+| Verdadeiros positivos | 90 | 1.800 |
+| Falsos positivos | 990 | 800 |
+| **VPP** | **8,3%** | **69,2%** |
+
+::: {.keybox}
+O teste não mudou. O **cenário** mudou.
+
+Em doença rara, os falsos positivos dominam e derrubam o VPP. Numa epidemia, o mesmo teste vira confirmatório.
+:::
+
+## Calculando na mão
+
+```{webr-r}
+VP <- 80; FN <- 10
+VN <- 120; FP <- 15
+
+sens <- VP / (VP + FN)
+spec <- VN / (VN + FP)
+vpp  <- VP / (VP + FP)
+vpn  <- VN / (VN + FN)
+
+round(c(Sens = sens,
+        Espec = spec,
+        VPP = vpp,
+        VPN = vpn) * 100, 1)
+```
+
+<p class="small">Troque 15 por 150 e veja o VPP desabar: mais falsos positivos, mesma sensibilidade.</p>
+
+## A gangorra do ponto de corte
+
+Exames de verdade devolvem um **número**, não um "positivo". Transformá-lo em diagnóstico exige escolher um **ponto de corte**.
+
+::: {.keybox}
+Baixe o corte: sensibilidade sobe, especificidade cai.
+
+Suba o corte: especificidade sobe, sensibilidade cai.
+
+**É impossível maximizar as duas ao mesmo tempo.**
+:::
+
+<p class="small">A escolha do corte não é matemática — é clínica. Depende do que custa cada tipo de erro.</p>
+
+## Para que lado você inclina a gangorra?
+
+:::: {.cards .cols-2}
+::: {.card}
+**Priorize a sensibilidade**
+
+Quando perder um doente é catastrófico.
+
+Triagem em aeroporto na pandemia: corte de febre baixo. Muitos falsos positivos barrados — e nenhum infectado embarcando.
+:::
+
+::: {.card}
+**Priorize a especificidade**
+
+Quando tratar um saudável é grave.
+
+Marcador tumoral que leva a cirurgia e quimioterapia: corte alto. Só se declara positivo com valor inequívoco.
+:::
+::::
+
+<p class="small">A pergunta não é "qual teste é melhor", mas "qual erro eu não posso cometer neste paciente".</p>
+
+## A curva ROC resume a gangorra
+
+Em vez de testar corte por corte, a curva ROC calcula **todos** de uma vez: sensibilidade no eixo vertical, 1 − especificidade no horizontal.
+
+::: {.keybox}
+Quanto mais a curva se aproxima do **canto superior esquerdo**, melhor o teste.
+
+A diagonal é o teste inútil — acerta tanto quanto jogar moeda.
+:::
+
+<p class="small">A área sob a curva (AUC) vira um único número: 0,5 é moeda; 1,0 é teste perfeito.</p>
+
+## Pause e pense
+
+::: {.keybox}
+Teste A: sensibilidade 99%, especificidade 60%.
+
+Teste B: sensibilidade 70%, especificidade 99%.
+
+**Qual você usaria para triar uma doença grave e tratável? E para confirmar um câncer antes de cirurgia?**
+:::
+
+::: {.incremental}
+- **Triagem de doença grave e tratável → Teste A.** Perder um caso é inaceitável; aceita-se o excesso de falsos positivos, que serão reavaliados.
+- **Confirmação antes de cirurgia → Teste B.** Operar um saudável é irreversível; exige-se certeza antes do ato.
+:::
+
+## O que levar daqui
+
+::: {.incremental}
+- **Sensibilidade e especificidade descrevem o teste** — não dependem da prevalência.
+- **VPP e VPN descrevem o paciente** — e mudam radicalmente com a prevalência.
+- **SnNOut, SpPIn** — teste sensível exclui; teste específico confirma.
+- **O ponto de corte é uma escolha clínica**, não estatística: depende do custo de cada erro.
+:::
+
+## Próximos passos
+
+Sabemos medir um teste e quantificar sua incerteza. O próximo passo é o salto: **do dado observado para a conclusão sobre a população**.
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria, resolver as questões e brincar com o ponto de corte, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 6](../../cap06_diagnosticos.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

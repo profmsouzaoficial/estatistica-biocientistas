@@ -1,5 +1,7 @@
 # Correlação e Regressão
 
+[▶ Abrir apresentação](slides/aula10_correlacao/index.html){.deck-btn target="_blank"}
+
 "Essas duas variáveis estão correlacionadas" é provavelmente a frase mais repetida — e mais mal usada — da análise de dados em saúde. Ela costuma vir acompanhada de gráficos, de um número entre -1 e 1 e, com frequência, de uma conclusão causal que os dados não sustentam.
 
 Este capítulo apresenta as duas ferramentas que medem relação entre variáveis: a **correlação**, que quantifica o quanto duas variáveis caminham juntas, e a **regressão**, que descreve como uma variável muda em função da outra. Elas respondem perguntas diferentes, e confundi-las é a origem de boa parte dos erros de interpretação [@triola2017].

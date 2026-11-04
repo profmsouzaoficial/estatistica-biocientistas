@@ -1,5 +1,7 @@
 # Modelos Estatísticos
 
+[▶ Abrir apresentação](slides/aula07_modelos/index.html){.deck-btn target="_blank"}
+
 Até aqui descrevemos dados, calculamos probabilidades e avaliamos testes diagnósticos. Mas as perguntas mais interessantes das biociências raramente são sobre uma variável isolada — são sobre como uma coisa depende de outra. A dose muda a resposta? A idade explica o tempo de internação? O tratamento reduz a pressão?
 
 Um **modelo estatístico** é a resposta formal a esse tipo de pergunta. Este capítulo apresenta o vocabulário da modelagem — o que é um modelo, o que ele promete, o que ele não promete e como saber se ele está funcionando. Os detalhes de dois modelos específicos, a correlação e a regressão, ficam para o capítulo 10.

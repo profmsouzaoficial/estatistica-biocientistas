@@ -1,5 +1,7 @@
 # Intervalos de Confiança
 
+[▶ Abrir apresentação](slides/aula09_intervalos/index.html){.deck-btn target="_blank"}
+
 O capítulo anterior mostrou como decidir se uma diferença é compatível com o acaso. Mas há uma pergunta anterior, mais fundamental: **quanto vale a estimativa que eu calculei?**
 
 Uma média de 142,4 mmHg obtida em oito pacientes não é "a" pressão média da população. É uma estimativa — e toda estimativa calculada a partir de uma amostra carrega incerteza. O intervalo de confiança é a forma padrão de declarar essa incerteza junto com o valor [@triola2017].

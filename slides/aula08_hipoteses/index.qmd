@@ -1,0 +1,197 @@
+---
+title: "Testes de Hipóteses"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 8"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## 12 mmHg: efeito ou sorte?
+
+Um novo anti-hipertensivo baixou a pressão média do grupo tratado em 12 mmHg.
+
+::: {.keybox}
+O medicamento funciona — **ou** a diferença apareceu por acaso porque oito pacientes não são oito mil?
+:::
+
+<p class="small">O teste de hipóteses não diz se o fármaco é bom. Diz a probabilidade de uma diferença desse tamanho aparecer **se não houver efeito nenhum**.</p>
+
+## Presunção de inocência
+
+O raciocínio é o mesmo do tribunal: presume-se a inocência e só se abandona essa presunção com evidência forte.
+
+:::: {.cards .cols-2}
+::: {.card}
+**$H_0$ — a hipótese nula**
+
+"Nada aconteceu."
+
+Não há diferença entre os grupos.
+
+*É o que se assume até prova em contrário.*
+:::
+
+::: {.card}
+**$H_1$ — a alternativa**
+
+"Há diferença."
+
+*É o que se quer sustentar.*
+
+Escolhida **antes** de ver os dados.
+:::
+::::
+
+::: {.keybox}
+O teste **nunca prova** $H_0$. "Não rejeitar" significa apenas que a amostra não trouxe evidência suficiente — não que a nula seja verdadeira.
+:::
+
+## Duas formas de errar
+
+| Decisão | $H_0$ é verdadeira | $H_0$ é falsa |
+|---|---|---|
+| **Não rejeitar** | ✅ correto — confiança $1-\alpha$ | ⚠️ **erro tipo II** — $\beta$ |
+| **Rejeitar** | ⚠️ **erro tipo I** — $\alpha$ | ✅ correto — **poder** $1-\beta$ |
+
+:::: {.cards .cols-2}
+::: {.card}
+**Erro tipo I = falso positivo**
+
+Dizer que há efeito quando não há.
+
+Convenção: $\alpha = 0{,}05$.
+:::
+
+::: {.card}
+**Erro tipo II = falso negativo**
+
+Não detectar um efeito que existe.
+
+Convenção de poder: 80%.
+:::
+::::
+
+<p class="small">Baixar α reduz falsos positivos e aumenta falsos negativos. O equilíbrio é uma decisão clínica, não estatística.</p>
+
+## O p-valor
+
+::: {.formula}
+$$p = P\left(\text{dados tão extremos quanto os observados} \mid H_0 \text{ verdadeira}\right)$$
+:::
+
+::: {.keybox}
+Ele responde: **se não houvesse efeito**, qual a chance de eu observar algo tão ou mais extremo do que observei?
+
+Ele **supõe** $H_0$. Não a avalia.
+:::
+
+<p class="small">A definição é curta. Quase todo erro de interpretação em pesquisa vem de trocar o que está antes e depois do sinal "|".</p>
+
+## O que o p-valor não é
+
+:::: {.cards .cols-3}
+::: {.card}
+**❌ Não é a probabilidade de $H_0$ ser verdadeira**
+
+Ele é calculado **supondo** $H_0$. Não pode, portanto, medi-la.
+:::
+
+::: {.card}
+**❌ Não é a probabilidade de "ter sido acaso"**
+
+Ele mede compatibilidade com $H_0$ — não a origem do resultado.
+:::
+
+::: {.card}
+**❌ Não mede o tamanho do efeito**
+
+Com amostra grande, qualquer diferença minúscula cruza o 0,05.
+:::
+::::
+
+## A regra de decisão
+
+Definido $\alpha$ **antes** do estudo:
+
+::: {.keybox}
+$p \leq \alpha$ → rejeita-se $H_0$. O resultado é **estatisticamente significativo**.
+
+$p > \alpha$ → não se rejeita $H_0$. Não há evidência suficiente.
+:::
+
+O relato científico completo inclui, sempre:
+
+::: {.incremental}
+- **A estimativa do efeito** — quanto, em unidades que importam.
+- **O intervalo de confiança** — a faixa de valores plausíveis.
+- **O p-valor** — a compatibilidade com a hipótese nula.
+:::
+
+## Rodando o teste no R
+
+```{webr-r}
+controle <- c(142, 138, 145, 139,
+              150, 136, 148, 141)
+tratamento <- c(130, 128, 135, 129,
+                132, 126, 134, 131)
+
+mean(controle)
+mean(tratamento)
+
+t.test(tratamento, controle)
+```
+
+<p class="small">A saída traz as médias, a diferença, o intervalo de confiança e o p-valor. Leia os quatro — nunca só o último.</p>
+
+## Significância não é relevância
+
+Num estudo com **100.000** pacientes, um fármaco que reduz a pressão em **0,2 mmHg** produz $p < 0{,}001$.
+
+::: {.keybox}
+Estatisticamente significativo. Clinicamente irrelevante.
+
+O contrário também acontece: um efeito grande e importante pode não atingir significância num estudo pequeno — não porque não exista, mas porque o estudo não tinha **poder** para vê-lo.
+:::
+
+<p class="small">A pergunta certa: qual o tamanho do efeito, qual a precisão da estimativa, e isso muda a conduta do paciente?</p>
+
+## Pause e pense
+
+::: {.keybox}
+Uma manchete: **"Estudo prova que o café combate o Alzheimer — p < 0,05"**.
+
+Que **três perguntas** você faz antes de acreditar?
+:::
+
+::: {.incremental}
+- **Qual o tamanho do efeito?** Reduziu o risco de 12% para 11,8%? Significativo e irrelevante.
+- **Qual o desenho e quantos pacientes?** Observacional com 40 pessoas não sustenta "prova".
+- **Quantas hipóteses foram testadas?** Com 20 testes, um cruza o 0,05 só por sorte — é o *p-hacking*.
+:::
+
+## O que levar daqui
+
+::: {.incremental}
+- **O teste parte da inocência** — assume-se $H_0$; nunca se "prova" a nula.
+- **O p-valor não responde a pergunta que parece responder** — ele supõe $H_0$, não a mede.
+- **Dois erros, dois custos** — $\alpha$ controla o falso positivo; o poder controla o falso negativo.
+- **Significância não é importância** — reporte sempre efeito, intervalo e p.
+:::
+
+## Próximos passos
+
+O intervalo de confiança é a peça que transforma um teste em uma estimativa com margem de erro declarada. É o capítulo seguinte.
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria, resolver as questões e rodar o teste t, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 8](../../cap08_hipoteses.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

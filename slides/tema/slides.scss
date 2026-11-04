@@ -504,6 +504,13 @@
   text-align: left;
 }
 
+/* `.reveal strong` pinta o texto com a cor de tinta; dentro do cabeçalho
+   escuro isso apagaria o negrito. Herda a cor branca do th. */
+.reveal table thead th strong,
+.reveal table thead th b {
+  color: inherit;
+}
+
 .reveal table tbody td {
   border: 0 !important;
   border-top: 1px solid var(--bc-line) !important;

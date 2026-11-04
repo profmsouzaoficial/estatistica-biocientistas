@@ -1,0 +1,265 @@
+---
+title: "Tipos de Estudos na Área da Saúde"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 2"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## A pergunta vem antes do método
+
+"O novo biomaterial funciona melhor?" é uma pergunta sem resposta até você decidir **a quem vai perguntar e o que vai fazer com essas pessoas**.
+
+O desenho do estudo é essa decisão — e ele define, antes de qualquer número, **o que a conclusão pode afirmar**.
+
+:::: {.cards .cols-3}
+::: {.card}
+**💊 Farmácia**
+
+Um extrato isolado inibe a bactéria?
+
+*Posso testar em placas.*
+:::
+
+::: {.card}
+**🦷 Odontologia**
+
+O bruxismo se associa à disfunção da ATM?
+
+*Não posso induzir bruxismo em ninguém.*
+:::
+
+::: {.card}
+**🏃 Fisioterapia**
+
+O novo equipamento acelera a recuperação?
+
+*Posso comparar dois grupos.*
+:::
+::::
+
+## Observar ou intervir {.divider}
+
+## Duas famílias de estudos
+
+:::: {.cards .cols-2}
+::: {.card}
+**Observacional**
+
+O pesquisador **mede** o que já acontece.
+
+Nenhuma variável é imposta.
+
+*Exemplos:* prevalência de cárie, coorte de Framingham, caso-controle de insuficiência hepática.
+:::
+
+::: {.card}
+**Experimental**
+
+O pesquisador **manipula** uma variável e observa o efeito.
+
+O ensaio clínico com sorteio é o padrão.
+:::
+::::
+
+::: {.keybox}
+Só o **experimento com aleatorização** autoriza a palavra "causa". Todo o resto descreve **associação**.
+:::
+
+## O que a sua pergunta pede
+
+:::: {.cards .cols-3}
+::: {.card}
+**Descrever**
+
+"Qual a prevalência de hipertensão em Governador Valadares?"
+
+Relato de caso, série de casos, inquérito.
+:::
+
+::: {.card}
+**Associar**
+
+"Tabagismo se associa à doença periodontal?"
+
+Coorte, caso-controle, ecológico.
+:::
+
+::: {.card}
+**Causar**
+
+"O novo fármaco reduz a pressão?"
+
+Ensaio clínico randomizado.
+:::
+::::
+
+<p class="small">Subir de nível custa caro: dinheiro, tempo e — no caso do experimental — implicações éticas.</p>
+
+## Descritivo não é analítico
+
+:::: {.cards .cols-2}
+::: {.card}
+**Descritivo**
+
+Organiza e apresenta o que existe.
+
+*Uma variação anatômica rara encontrada na aula de Anatomia Sistêmica.*
+
+Gera hipótese.
+:::
+
+::: {.card}
+**Analítico**
+
+Testa uma relação entre variáveis.
+
+*Bruxismo × disfunção temporomandibular.*
+
+Testa hipótese.
+:::
+::::
+
+::: {.keybox}
+Um relato de caso pode ser o **início** de uma linha de pesquisa — nunca a prova dela.
+:::
+
+## Os três observacionais analíticos
+
+:::: {.cards .cols-3}
+::: {.card}
+**Ecológico**
+
+Compara **populações**, não pessoas.
+
+Fluoretação da água × taxa de cárie do município.
+
+*Rápido e barato. Não controla confundidores individuais.*
+:::
+
+::: {.card}
+**Coorte**
+
+Parte da **exposição** e segue até o desfecho.
+
+Estudantes de Odontologia acompanhados até o fim da graduação para ver LER/DORT.
+:::
+
+::: {.card}
+**Caso-controle**
+
+Parte do **desfecho** e olha para trás.
+
+Compara quem tem insuficiência hepática com quem não tem, investigando o uso passado de analgésico.
+:::
+::::
+
+<p class="small">Os três respondem a perguntas diferentes — o que os separa é **quando o pesquisador entra na história**.</p>
+
+## O relógio de cada um
+
+**Coorte** — você começa no presente e caminha para o futuro:
+
+> Expostos e não expostos → **acompanhamento por anos** → quem adoeceu?
+
+**Caso-controle** — você começa no desfecho e caminha para o passado:
+
+> Doentes e saudáveis → **entrevista sobre o passado** → quem foi exposto?
+
+::: {.keybox}
+A coorte sabe **quantos adoeceram**. O caso-controle só sabe **quantos já estavam doentes** — por isso ele estima razão de chances, e não risco.
+:::
+
+## Extraindo um número da tabela 2x2
+
+| | Expostos | Não expostos |
+|---|---|---|
+| **Casos** | A = 45 | B = 15 |
+| **Controles** | C = 20 | D = 60 |
+
+::: {.formula}
+$$\text{OR} = \frac{A \times D}{B \times C} = \frac{45 \times 60}{15 \times 20} = 9{,}0$$
+:::
+
+::: {.keybox}
+**Leitura:** a chance de ter sido exposto é **9 vezes maior** entre os casos do que entre os controles.
+:::
+
+## Calculando no R
+
+```{webr-r}
+dados <- matrix(c(45, 15,
+                  20, 60),
+                nrow = 2,
+                byrow = TRUE)
+dados
+
+OR <- (dados[1, 1] * dados[2, 2]) /
+      (dados[1, 2] * dados[2, 1])
+round(OR, 2)
+```
+
+<p class="small">Troque os números e rode de novo: o que acontece com o OR se a exposição dobra entre os controles?</p>
+
+## A força da evidência causal
+
+::: {.incremental}
+- **Relato de caso** — descreve o inesperado; não compara.
+- **Ecológico** — associa grupos; vulnerable ao confundidor populacional.
+- **Caso-controle** — rápido, barato; sujeito a viés de memória.
+- **Coorte** — segue o tempo; mais caro e mais lento.
+- **Ensaio clínico randomizado** — a única estrutura que neutraliza os confundidores conhecidos **e os desconhecidos**.
+:::
+
+<p class="small">A escada não mede a qualidade do estudo — mede a força que ele tem para sustentar uma afirmação causal.</p>
+
+## Pause e pense
+
+::: {.keybox}
+Para cada pergunta, qual desenho você escolheria?
+
+**1.** O uso de protetor solar reduz o câncer de pele?
+
+**2.** Quem já teve dengue grave usou mais repelente na infância?
+
+**3.** O exercício supervisionado melhora a marcha em pacientes com Parkinson?
+:::
+
+<p class="small">Decida antes de virar a página. Reconhecer o desenho a partir da pergunta é a habilidade central deste capítulo.</p>
+
+## Respostas — e por quê
+
+::: {.incremental}
+- **1. Coorte prospectiva.** Induzir ou proibir o uso de protetor seria eticamente inaceitável; acompanha-se quem já usa.
+- **2. Caso-controle.** O desfecho já ocorreu; interroga-se o passado. Risco alto de **viés de memória** — quem teve dengue grave lembra melhor do repelente.
+- **3. Ensaio clínico randomizado.** Há intervenção plausível, desfecho mensurável e sorteio eticamente viável.
+:::
+
+<p class="small">Note o padrão: só se escolhe o desenho depois de responder "o que eu posso fazer com essas pessoas?".</p>
+
+## O que levar daqui
+
+::: {.incremental}
+- **A pergunta define o desenho** — não o contrário.
+- **Observacional mede, experimental manipula** — e só o segundo sustenta causalidade.
+- **Coorte parte da exposição; caso-controle parte do desfecho** — daí decorrem custo, tempo e vieses.
+- **Todo desenho tem um preço** — o ecológico é barato e grosseiro; o ensaio é caro e definitivo.
+:::
+
+## Próximos passos
+
+O próximo capítulo responde a pergunta que vem logo depois do desenho: **quem exatamente vai entrar na amostra?**
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria, resolver as questões de fixação e rodar o cálculo do OR, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 2](../../cap02_estudos.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

@@ -1,5 +1,7 @@
 # Testes de Hipóteses
 
+[▶ Abrir apresentação](slides/aula08_hipoteses/index.html){.deck-btn target="_blank"}
+
 Um novo anti-hipertensivo baixou a pressão média de 12 mmHg num grupo de pacientes. O medicamento funciona ou foi sorte? A diferença é grande o bastante para vencer a variabilidade natural de qualquer medida biológica?
 
 Essa é a pergunta que o teste de hipóteses responde. Ele não diz se o fármaco é bom; diz **qual a probabilidade de uma diferença desse tamanho aparecer por acaso**, se não houver efeito nenhum. É a ferramenta mais usada — e mais mal interpretada — da estatística aplicada à saúde [@triola2017].

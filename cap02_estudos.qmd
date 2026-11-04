@@ -1,5 +1,7 @@
 # Tipos de estudos na área da saúde
 
+[▶ Abrir apresentação](slides/aula02_estudos/index.html){.deck-btn target="_blank"}
+
 A área da saúde é um campo de pesquisa muito amplo, que abrange uma variedade de tópicos, desde a prevenção de doenças até o tratamento de doenças crônicas. Para entender como a saúde humana funciona e como as doenças se desenvolvem, os pesquisadores usam uma variedade de métodos de estudo [@pagano2004]. 
 
 Seja para investigar a eficácia de um novo fármaco, a durabilidade de um biomaterial odontológico ou a recuperação motora de um paciente, a escolha do desenho de estudo correto é o que garante a validade da sua descoberta. O diagrama abaixo apresenta a classificação principal das metodologias de pesquisa abordadas neste capítulo.

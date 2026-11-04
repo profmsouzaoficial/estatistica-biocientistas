@@ -1,0 +1,226 @@
+---
+title: "Modelos Estatísticos"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 7"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## Toda resposta tem duas partes
+
+A pressão de um paciente depois do fármaco caiu 12 mmHg. Quanto disso é o remédio — e quanto é a biologia de cada pessoa?
+
+::: {.keybox}
+O que todo modelo faz é separar o **sinal** (o que a variável explica) do **ruído** (o que sobra, e que nunca será explicado por completo).
+:::
+
+<p class="small">Modelar não é encontrar a verdade. É decidir, com método, o que conta como estrutura.</p>
+
+## Sinal e ruído {.divider}
+
+## A equação que sustenta tudo
+
+::: {.formula}
+$$Y = f(X_1, X_2, \dots, X_p) + \varepsilon$$
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**A parte sistemática** — $f(X)$
+
+A forma que você **assume** para a relação.
+
+Reta, curva, exponencial.
+
+*É o que se estima.*
+:::
+
+::: {.card}
+**O termo de erro** — $\varepsilon$
+
+Tudo o que ficou de fora: variáveis não medidas, variação biológica, imprecisão do aparelho.
+
+*É o que nunca se elimina.*
+:::
+::::
+
+## Quatro motivos para modelar
+
+:::: {.cards .cols-2}
+::: {.card}
+**Descrever**
+
+"1,5 mmHg a menos por mg."
+
+Resume a relação em um número.
+:::
+
+::: {.card}
+**Explicar**
+
+"O efeito persiste depois de ajustar por idade?"
+
+Avalia o efeito de um preditor controlando os demais.
+:::
+
+::: {.card}
+**Prever**
+
+"Qual o risco deste paciente?"
+
+Estima o desfecho de quem ainda não foi observado.
+:::
+
+::: {.card}
+**Decidir**
+
+"O programa de triagem vale o custo?"
+
+Transforma estimativa em política.
+:::
+::::
+
+## A família se escolhe pelo desfecho
+
+:::: {.cards .cols-2}
+::: {.card}
+**Resposta contínua** → regressão linear
+
+Pressão arterial, glicemia, distância no TC6.
+:::
+
+::: {.card}
+**Resposta binária** → regressão logística
+
+Cura ou não cura, óbito, reinternação.
+:::
+
+::: {.card}
+**Contagem** → regressão de Poisson
+
+Número de casos por semana, de efeitos adversos.
+:::
+
+::: {.card}
+**Tempo até o evento** → análise de sobrevivência
+
+Tempo até a falha do implante, até o óbito.
+:::
+::::
+
+<p class="small">Escolher a família errada não gera erro de sintaxe: gera conclusão errada.</p>
+
+## O inimigo invisível {.divider}
+
+## Decorar não é aprender
+
+Um aluno que memoriza o gabarito tira 10 na prova antiga — e fracassa na nova.
+
+Um modelo flexível demais faz o mesmo: **decorou o ruído** da amostra.
+
+::: {.keybox}
+O nome disso é **sobreajuste** (*overfitting*).
+
+Ele nunca aparece nos dados de treino. Só aparece nos dados que o modelo não viu.
+:::
+
+## Vendo o sobreajuste acontecer
+
+```{webr-r}
+idade <- c(22,25,31,34,38,41,
+           45,49,53,57,61,65)
+dias  <- c(3,4,3,5,4,6,
+           5,7,6,8,7,9)
+tr <- 1:10; te <- 11:12
+
+reta <- lm(dias ~ idade,
+           subset = tr)
+pol8 <- lm(dias ~ poly(idade, 8),
+           subset = tr)
+
+novo <- data.frame(idade = idade[te])
+predict(reta, novo)
+predict(pol8, novo)
+```
+
+<p class="small">Nos 2 pacientes guardados: a reta prevê ~8 dias; o polinômio prevê 56 e 299.</p>
+
+## O número que engana
+
+O $R^2$ mede a proporção da variação explicada e **sempre aumenta** quando o modelo ganha flexibilidade.
+
+::: {.keybox}
+$R^2$ alto **não prova** que o modelo está correto.
+
+$R^2$ baixo **não prova** que ele é inútil.
+
+Em dados biológicos, valores entre 0,3 e 0,7 são comuns e respeitáveis.
+:::
+
+<p class="small">Uma regressão biológica com R² = 0,35 pode ser um achado importante. Um R² = 0,99 quase sempre esconde alguma coisa.</p>
+
+## Quatro pressupostos a conferir
+
+:::: {.cards .cols-2}
+::: {.card}
+**Linearidade**
+
+A relação tem mesmo a forma que você assumiu?
+:::
+
+::: {.card}
+**Independência**
+
+As observações não se influenciam — o que quebra em medidas repetidas do mesmo paciente.
+:::
+
+::: {.card}
+**Homocedasticidade**
+
+A variância do erro é constante em todo o intervalo?
+:::
+
+::: {.card}
+**Normalidade dos resíduos**
+
+Necessária para os testes e intervalos de confiança do modelo.
+:::
+::::
+
+<p class="small">Nenhum deles se verifica olhando o R². Todos se verificam olhando os resíduos.</p>
+
+## Parcimônia: o simples que funciona
+
+::: {.incremental}
+- **Mais variáveis não é mais ciência.** Cada preditor a mais precisa se justificar com compreensão.
+- **Modelos simples são mais estáveis.** Pequenas mudanças nos dados não viram grandes mudanças no resultado.
+- **AIC e BIC formalizam o compromisso**, penalizando o número de parâmetros.
+- **A pergunta certa:** este preditor muda a interpretação clínica, ou só infla o R²?
+:::
+
+## O que levar daqui
+
+::: {.incremental}
+- **Modelo é simplificação**, não verdade — destaca uma parte e descarta o resto.
+- **Sempre há termo de erro** — em seres vivos, a parte sistemática nunca explica tudo.
+- **O objetivo define o critério** — explicar e prever se avaliam de formas diferentes.
+- **Sobreajuste só aparece fora da amostra** — valide sempre em dados que o modelo não viu.
+:::
+
+## Próximos passos
+
+Modelo ajustado, efeito estimado. Falta responder à pergunta que decide tudo: **esse efeito é real ou é sorte?**
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria, resolver as questões e rodar a demonstração de sobreajuste, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 7](../../cap07_modelos.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

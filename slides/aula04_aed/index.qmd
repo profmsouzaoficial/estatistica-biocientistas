@@ -1,0 +1,203 @@
+---
+title: "Análise Exploratória de Dados"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 4"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## O baú trancado
+
+Você tem uma planilha com 4.000 pacientes e não faz ideia do que há dentro.
+
+A **Análise Exploratória de Dados** é a chave: não é o teste que prova, é o mapa que diz **por onde começar** — e onde pode haver armadilha.
+
+<p class="small">Pular essa etapa é a causa mais comum de uma análise inteira ter de ser refeita.</p>
+
+## AED não é olhar, é investigar
+
+:::: {.cards .cols-3}
+::: {.card}
+**Explorar**
+
+Entender estrutura, distribuição e qualidade antes de qualquer modelo.
+
+:::
+
+::: {.card}
+**Detectar**
+
+Achar o improvável: frequência cardíaca de 800 bpm, glicemia negativa, idade de 250 anos.
+
+:::
+
+::: {.card}
+**Formular**
+
+Gerar hipóteses que os testes formais vão avaliar depois.
+:::
+::::
+
+## O centro e a dispersão {.divider}
+
+## Duas perguntas, duas medidas
+
+:::: {.cards .cols-2}
+::: {.card}
+**Onde fica o centro?**
+
+Média — usa todos os valores; é arrastada pelos extremos.
+
+Mediana — o valor do meio; quase imune a extremos.
+
+*Relate a mediana quando a distribuição é assimétrica.*
+:::
+
+::: {.card}
+**Quanto os dados se espalham?**
+
+Desvio padrão — na mesma unidade da variável.
+
+IIQ (intervalo interquartil) — distância entre o 1º e o 3º quartil.
+
+*Variância fica em unidade ao quadrado: raramente se reporta.*
+:::
+::::
+
+## A média mente
+
+Glicemia de seis pacientes (mg/dL): **90 · 95 · 100 · 105 · 110 · 800**
+
+::: {.formula}
+$$\text{média} = 216{,}7 \qquad \text{mediana} = 102{,}5$$
+:::
+
+::: {.keybox}
+O valor **800** é um erro de digitação — mas já arrastou a média de 100 para 216,7.
+
+A mediana praticamente não se moveu. **Um único ponto pode destruir a média.**
+:::
+
+<p class="small">Primeiro encontre o erro. Depois escolha a medida. Nunca o contrário.</p>
+
+## O boxplot em cinco números
+
+O diagrama de caixa resume uma distribuição em cinco posições:
+
+::: {.incremental}
+- **Mínimo** e **máximo** — até onde os dados vão (excluindo outliers).
+- **Q1** — 25% dos dados ficam abaixo dele.
+- **Mediana** — o centro de verdade.
+- **Q3** — 75% ficam abaixo dele.
+- **Outliers** — pontos além de 1,5 vez o IIQ; desenhados como pontos soltos.
+:::
+
+<p class="small">Se o outlier é erro, corrija. Se é paciente de verdade, ele é o achado mais importante do estudo.</p>
+
+## O gráfico certo para o dado certo
+
+:::: {.cards .cols-3}
+::: {.card}
+**Histograma**
+
+Distribuição de uma variável **contínua**.
+
+*Hemoglobina de 300 pacientes.*
+:::
+
+::: {.card}
+**Boxplot**
+
+Comparar a distribuição entre **grupos**.
+
+*Glicemia em jejum por grupo de tratamento.*
+:::
+
+::: {.card}
+**Dispersão**
+
+Relação entre **duas quantitativas**.
+
+*Pressão sistólica × idade.*
+:::
+::::
+
+<p class="small">Gráfico de pizza com 12 categorias não é visualização: é decoração.</p>
+
+## Vendo o estrago no R
+
+```{webr-r}
+glicemia <- c(90, 95, 100,
+              105, 110, 800)
+
+# media e mediana lado a lado
+mean(glicemia)
+median(glicemia)
+
+# o outlier aparece solto
+boxplot(glicemia,
+        col = "#0d9488")
+```
+
+<p class="small">Rode também com 130 no lugar de 800: o que muda mais, a média ou a mediana?</p>
+
+## Tabela 1: o resumo que vai para o artigo
+
+Na prática, a descritiva vira uma tabela — e o R faz isso em poucas linhas com o pacote `gtsummary`:
+
+```r
+dados |>
+  select(idade, tratamento, resposta) |>
+  tbl_summary(by = tratamento) |>
+  add_p()
+```
+
+::: {.keybox}
+A **Tabela 1** é o retrato do estudo: quem são os pacientes, como os grupos se comparam e se o sorteio funcionou.
+
+Se os grupos já diferem na Tabela 1, qualquer comparação posterior nasce suspeita.
+:::
+
+## Pause e pense
+
+::: {.keybox}
+**1.** Um colega relata "tempo médio de internação de 6 dias". Que informação essencial está faltando?
+
+**2.** Na glicemia com o valor 800, você reporta a média ou a mediana? E o que faz com o 800?
+:::
+
+## Respostas
+
+::: {.incremental}
+- **1. A dispersão.** "6 dias" pode significar "todo mundo ficou entre 5 e 7" ou "metade ficou 1 dia e metade ficou 11". Sem desvio padrão ou IIQ, o número não informa.
+- **2. A mediana** — e investigue o 800 antes de qualquer coisa: erro de digitação se corrige na fonte; paciente real merece uma nota no relatório.
+:::
+
+<p class="small">A pergunta que sempre fecha a AED: os dados que eu tenho são capazes de responder à pergunta que eu fiz?</p>
+
+## O que levar daqui
+
+::: {.incremental}
+- **Explore antes de testar** — o teste aplicado sobre dado sujo produz erro com aparência de rigor.
+- **Centro e dispersão andam juntos** — média sem desvio padrão é meia informação.
+- **Outlier é uma pergunta, não um incômodo** — erro ou descoberta, decida com critério.
+- **O gráfico certo depende do tipo do dado** — histograma, boxplot ou dispersão, nunca por hábito.
+:::
+
+## Próximos passos
+
+Com os dados descritos, começa a parte que separa a descrição da decisão: **quantificar a incerteza**. É o caminho da probabilidade ao teste de hipóteses.
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria e resolver as questões de fixação, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 4](../../cap04_aed.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

@@ -1,5 +1,7 @@
 # Amostragem nas Ciências da Saúde
 
+[▶ Abrir apresentação](slides/aula03_amostragem/index.html){.deck-btn target="_blank"}
+
 Em pesquisas biocientíficas, a coleta de dados para responder a perguntas importantes e gerar conhecimento é fundamental. No entanto, nem sempre é viável ou necessário estudar toda a população de interesse. É nesse contexto que as técnicas de amostragem assumem um papel crucial, permitindo aos pesquisadores obter inferências precisas sobre a população a partir de um subconjunto cuidadosamente selecionado [@pagano2004].
 
 Este livro, "Análise de Dados para Biocientistas", dedica um capítulo completo às técnicas de amostragem, reconhecendo sua relevância para o sucesso de qualquer pesquisa nas clínicas, bancadas e análises epidemiológicas. A introdução deste capítulo irá fornecer uma visão abrangente do que você encontrará nas próximas páginas, despertando sua curiosidade e preparando-o para dominar essa área essencial da estatística.

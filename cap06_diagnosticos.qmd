@@ -6,6 +6,8 @@ webr:
 
 # Testes Diagnósticos nas Ciências da Saúde
 
+[▶ Abrir apresentação](slides/aula06_diagnosticos/index.html){.deck-btn target="_blank"}
+
 ```{r}
 #| include: false
 #| message: false

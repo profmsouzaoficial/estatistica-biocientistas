@@ -1,0 +1,217 @@
+---
+title: "Amostragem nas Ciências da Saúde"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 3"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## Ninguém estuda todo mundo
+
+"Todos os hipertensos do Brasil" não é uma amostra: é uma impossibilidade.
+
+Toda conclusão que você vai ler neste livro depende de um ato silencioso e decisivo: **como as pessoas entraram no estudo**.
+
+:::: {.cards .cols-3}
+::: {.card}
+**Custo**
+
+Medir toda a população é caro e demora anos.
+
+:::
+
+::: {.card}
+**Viabilidade**
+
+Populações muito grandes ou sigilosas tornam o censo impossível — e, às vezes, antiético.
+:::
+
+::: {.card}
+**Precisão**
+
+Bem sorteada e estratificada, a amostra reduz a variabilidade da estimativa.
+:::
+::::
+
+## Sorteio ou conveniência {.divider}
+
+## A regra de ouro
+
+::: {.keybox}
+**Probabilística** = todo indivíduo tem uma chance **conhecida e diferente de zero** de ser sorteado.
+
+É essa chance conhecida que permite calcular o erro da estimativa. Sem ela, não existe margem de erro — existe apenas opinião sobre os dados.
+:::
+
+<p class="small">Toda a inferência estatística do livro repousa nessa frase.</p>
+
+## As quatro técnicas probabilísticas
+
+:::: {.cards .cols-2}
+::: {.card}
+**Aleatória simples (AAS)**
+
+Sorteio puro, como tirar bilhetes de uma urna.
+
+*Exige a lista completa da população. Funciona melhor em populações homogêneas.*
+:::
+
+::: {.card}
+**Sistemática**
+
+Sorteia o primeiro e depois salta de $k$ em $k$.
+
+*Rápida em listas grandes. Quebra se a lista tiver um ciclo oculto — 1 a cada 7 dias pega sempre a mesma segunda-feira.*
+:::
+
+::: {.card}
+**Estratificada**
+
+Divide a população em grupos homogêneos e sorteia **dentro** de cada um.
+
+*Se 20% dos pacientes da clínica são idosos, a amostra terá 20% de idosos.*
+:::
+
+::: {.card}
+**Conglomerados**
+
+Sorteia **grupos inteiros**, não indivíduos.
+
+*Cinco UBS sorteadas; entrevista-se todos que estiverem lá.*
+:::
+::::
+
+## A confusão clássica
+
+:::: {.cards .cols-2}
+::: {.card}
+**Estratificada**
+
+Objetivo: **garantir proporção**.
+
+Você conhece os estratos e sorteia dentro de cada.
+
+*Ganha precisão.*
+:::
+
+::: {.card}
+**Conglomerados**
+
+Objetivo: **reduzir custo logístico**.
+
+Você sorteia blocos e examina todos os de dentro.
+
+*Perde precisão se o bloco for parecido demais por dentro.*
+:::
+::::
+
+::: {.keybox}
+**Estratificar divide para garantir. Conglomerar sorteia blocos por praticidade.** A primeira aumenta a precisão; a segunda a sacrifica em troca de logística.
+:::
+
+## Quando não há sorteio
+
+:::: {.cards .cols-3}
+::: {.card}
+**Conveniência**
+
+Quem está à mão.
+
+Aplicar o questionário só na própria turma.
+
+*Rápido, barato e enviesado.*
+:::
+
+::: {.card}
+**Bola de neve**
+
+Um participante indica outro.
+
+A única saída para populações escondidas — usuários de substâncias ilícitas, por exemplo.
+
+*Vicia-se no círculo de quem começou.*
+:::
+
+::: {.card}
+**Quotas**
+
+Metas por subgrupo, sem sorteio final.
+
+50 mulheres e 50 homens, abordando quem passa.
+
+*Parece estratificada. Não é.*
+:::
+::::
+
+## Sorteando no R
+
+```{webr-r}
+populacao <- paste("Paciente", 1:50)
+
+# sorteia 5, sem reposicao
+amostra <- sample(populacao, 5)
+print(amostra)
+```
+
+<p class="small">Rode várias vezes. Cada execução sorteia um grupo diferente — e é essa variabilidade que o capítulo 9 vai transformar em intervalo de confiança.</p>
+
+## O viés não se corrige com mais gente
+
+Imagine medir a flexibilidade cervical de 500 pessoas — **todas alunas do primeiro período de Fisioterapia**.
+
+A amostra é grande. E continua errada: ninguém ali representa a flexibilidade de uma pessoa de 70 anos.
+
+::: {.keybox}
+O tamanho da amostra reduz o **erro aleatório**.
+
+Jamais corrige o **erro sistemático**. Uma amostra enviesada de um milhão de pessoas continua enviesada.
+:::
+
+## Pause e pense
+
+::: {.keybox}
+Identifique a técnica:
+
+**1.** Sortear 5 Unidades Básicas de Saúde e entrevistar todos os pacientes presentes em cada uma.
+
+**2.** Selecionar 1 a cada 10 fichas do arquivo clínico da faculdade.
+
+**3.** Abordar pessoas no corredor até completar 50 mulheres e 50 homens.
+:::
+
+## Respostas
+
+::: {.incremental}
+- **1. Conglomerados.** O sorteio foi de grupos, e todos os indivíduos do grupo entram.
+- **2. Sistemática.** Há um intervalo fixo entre os selecionados — e um risco oculto se o arquivo estiver ordenado por data.
+- **3. Quotas.** Há metas por subgrupo, mas nenhum sorteio: quem é abordado depende de quem passa.
+:::
+
+<p class="small">Nenhuma das três é probabilística nas duas últimas — e isso muda o que se pode afirmar.</p>
+
+## O que levar daqui
+
+::: {.incremental}
+- **Amostra é o elo mais frágil do estudo** — um erro de sorteio não se conserta depois.
+- **Probabilística exige chance conhecida** — é o que autoriza margem de erro.
+- **Estratificada garante proporção; conglomerados economizam logística** — não são sinônimos.
+- **Viés não se resolve com tamanho** — amostra grande e torta continua torta.
+:::
+
+## Próximos passos
+
+Com o desenho escolhido e a amostra sorteada, é hora de **olhar os dados**. O próximo capítulo é a Análise Exploratória.
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria, resolver as questões e simular sorteios, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 3](../../cap03_amostragem.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

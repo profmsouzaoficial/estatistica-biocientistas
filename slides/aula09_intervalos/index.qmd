@@ -1,0 +1,210 @@
+---
+title: "Intervalos de Confiança"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 9"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## A média de 8 pacientes não é a verdade
+
+Pressão sistólica média de 142,4 mmHg, medida em oito pacientes.
+
+::: {.keybox}
+Outro pesquisador, com outros oito pacientes da mesma população, acharia 139,8. Um terceiro, 145,1.
+
+Todas essas médias são plausíveis. **Nenhuma é o valor da população.**
+:::
+
+<p class="small">A estimativa pontual esconde a variação que existe entre uma amostra e outra.</p>
+
+## O que "95%" significa
+
+::: {.keybox}
+Se o estudo fosse **repetido infinitas vezes**, em **95%** dessas repetições o intervalo construído conteria o parâmetro verdadeiro.
+
+A garantia é do **método**, não deste intervalo específico.
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**✅ Correto**
+
+"Os dados são compatíveis com valores entre 138,3 e 146,5."
+:::
+
+::: {.card}
+**❌ Errado**
+
+"Há 95% de probabilidade de a média estar entre 138,3 e 146,5."
+
+Isso é uma leitura **bayesiana** — o parâmetro é fixo, não tem distribuição.
+:::
+::::
+
+## A conta é sempre a mesma
+
+::: {.formula}
+$$\text{IC}_{95\%} = \text{estimativa} \pm \left(z \times EP\right)$$
+:::
+
+:::: {.cards .cols-3}
+::: {.card}
+**A estimativa**
+
+O valor pontual: média, proporção, diferença entre médias.
+:::
+
+::: {.card}
+**O erro padrão**
+
+O quanto a estimativa varia de amostra para amostra.
+:::
+
+::: {.card}
+**O multiplicador**
+
+1,96 para 95%. 2,58 para 99%. A distribuição $t$ quando $n$ é pequeno.
+:::
+::::
+
+## Para uma média
+
+::: {.formula}
+$$\text{IC}_{95\%} = \bar{x} \pm t_{0{,}975;\, n-1} \times \frac{s}{\sqrt{n}}$$
+:::
+
+Com o nosso grupo de oito pacientes: $\bar{x} = 142{,}4$, $s = 4{,}93$, $\frac{s}{\sqrt{n}} = 1{,}74$ e $t = 2{,}365$.
+
+::: {.keybox}
+$$142{,}4 \pm 2{,}365 \times 1{,}74 = [138{,}3;\; 146{,}5]\ \text{mmHg}$$
+:::
+
+<p class="small">Para uma proporção, troca-se a média por $\hat{p}$ e a conta vira $\hat{p} \pm 1{,}96\sqrt{\hat{p}(1-\hat{p})/n}$.</p>
+
+## O que alarga e o que estreita
+
+| Fator | Efeito | Por quê |
+|---|---|---|
+| Aumentar $n$ | **estreita** | o erro padrão cai com $\sqrt{n}$ |
+| Aumentar a confiança | **alarga** | exige-se mais do método |
+| Maior variabilidade | **alarga** | o desvio padrão entra na conta |
+| Amostra pareada | **estreita** | elimina a variação entre indivíduos |
+
+::: {.keybox}
+Precisão custa caro: **quadruplicar a amostra apenas divide a margem de erro por dois**.
+:::
+
+## Mesma conta, dois olhares
+
+O intervalo de 95% para uma diferença **equivale** a um teste bilateral com $\alpha = 0{,}05$.
+
+:::: {.cards .cols-2}
+::: {.card}
+**Intervalo exclui o zero**
+
+→ o teste **rejeita** $H_0$.
+
+No estudo do capítulo 8: $[-16{,}2;\; -7{,}3]$ não inclui zero.
+:::
+
+::: {.card}
+**Intervalo inclui o zero**
+
+→ o teste **não rejeita** $H_0$.
+
+Aí não há evidência de efeito.
+:::
+::::
+
+<p class="small">O intervalo é mais informativo que o p-valor: mostra **onde** o efeito provavelmente está.</p>
+
+## Calculando à mão no R
+
+```{webr-r}
+pressao <- c(142, 138, 145, 139,
+             150, 136, 148, 141)
+
+n     <- length(pressao)
+media <- mean(pressao)
+dp    <- sd(pressao)
+ep    <- dp / sqrt(n)
+
+tcrit <- qt(0.975, df = n - 1)
+tcrit
+
+media + c(-1, 1) * tcrit * ep
+
+t.test(pressao)$conf.int
+```
+
+<p class="small">Troque 0.975 por 0.995: o intervalo alarga. Por quê?</p>
+
+## Três erros comuns
+
+:::: {.cards .cols-3}
+::: {.card}
+**1. Ler como probabilidade**
+
+"95% de chance de o parâmetro estar aí."
+
+O parâmetro é fixo. A probabilidade é do método.
+:::
+
+::: {.card}
+**2. Confundir estreito com bom**
+
+Intervalo estreito pode vir de estudo enviesado.
+
+**Precisão não corrige viés.**
+:::
+
+::: {.card}
+**3. Ignorar a clínica**
+
+$[0{,}1;\; 0{,}3]$ mmHg é estreito — e irrelevante.
+
+Estreito não é o mesmo que importante.
+:::
+::::
+
+## Pause e pense
+
+::: {.keybox}
+Um estudo com 30 pacientes encontrou IC de 95% para a diferença de médias igual a $[-0{,}5;\; 8{,}5]$ dias de internação.
+
+**O tratamento funciona? O que você reportaria como conclusão?**
+:::
+
+::: {.incremental}
+- **O intervalo inclui o zero** → não há evidência de efeito ao nível de 5%.
+- **Mas ele também inclui 8 dias** → o estudo não descarta um efeito clinicamente relevante.
+- **Conclusão honesta:** "inconclusivo" — falta poder amostral, e a estimativa ainda é compatível com benefício importante.
+:::
+
+## O que levar daqui
+
+::: {.incremental}
+- **Toda estimativa tem incerteza** — o intervalo é a forma padrão de declará-la.
+- **95% descreve o método**, não este intervalo.
+- **Precisão custa caro** — quadruplicar $n$ só metade a margem.
+- **O intervalo é mais informativo que o p-valor** — mostra o tamanho e a faixa plausível do efeito.
+:::
+
+## Próximos passos
+
+Falta a dupla mais usada — e mais confundida — da estatística aplicada: **correlação e regressão**.
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria, resolver as questões e calcular o intervalo de confiança, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 9](../../cap09_intervalos.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>

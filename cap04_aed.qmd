@@ -2,6 +2,8 @@
 title: "Análise Exploratória de Dados"
 ---
 
+[▶ Abrir apresentação](slides/aula04_aed/index.html){.deck-btn target="_blank"}
+
 Imagine que você está diante de um baú misterioso, trancado por enigmas e segredos. Dentro dele, um universo de informações à espera para ser descoberto. A chave para abrir este baú e revelar seus tesouros é a **Análise Exploratória de Dados (AED)**.
 
 A AED é como um mapa que o guia por este universo, ajudando a:

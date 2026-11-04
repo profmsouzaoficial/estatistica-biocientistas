@@ -1,0 +1,197 @@
+---
+title: "Correlação e Regressão"
+subtitle: "Análise de Dados para Biocientistas — Capítulo 10"
+author: "Márcio Luís Moreira de Souza"
+institute: "UFJF · Campus Avançado Governador Valadares"
+date: "2026-10-07"
+date-format: "MMMM [de] YYYY"
+isbn: "978-X-XXXX-XXXX-X"
+# Concept DOI (sempre a versão mais recente) — igual ao book.doi do _quarto.yml
+doi: "10.5281/zenodo.23858966"
+---
+
+## Quatro gráficos, um único número
+
+Em 1973, Francis Anscombe montou quatro conjuntos de dados com médias, variâncias e correlações **praticamente idênticas**.
+
+Um era uma reta limpa. Outro, uma curva evidente. Outro, um único ponto sustentando tudo.
+
+::: {.keybox}
+O coeficiente de correlação é **cego para a forma** da relação.
+
+Plotar primeiro não é preciosismo: é a única forma de saber se o número significa algo.
+:::
+
+## O que o $r$ mede
+
+::: {.formula}
+$$r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i-\bar{x})^2}\sqrt{\sum (y_i-\bar{y})^2}}$$
+:::
+
+::: {.incremental}
+- **$r = 1$** — relação linear positiva perfeita.
+- **$r > 0$** — as duas variáveis crescem juntas.
+- **$r = 0$** — nenhuma relação **linear** (pode haver, e forte).
+- **$r < 0$** — quando uma cresce, a outra cai.
+- **$r = -1$** — relação linear negativa perfeita.
+:::
+
+## Três limites do $r$
+
+:::: {.cards .cols-3}
+::: {.card}
+**Só vê o linear**
+
+Uma relação em U perfeita pode ter $r \approx 0$.
+
+Não é ausência de relação: é ausência de **reta**.
+:::
+
+::: {.card}
+**Um ponto manda**
+
+Um único valor extremo pode levar $r$ de 0,2 para 0,9.
+
+Sempre confira o gráfico.
+:::
+
+::: {.card}
+**É simétrico**
+
+A correlação de $X$ com $Y$ é igual à de $Y$ com $X$.
+
+Ele não diz **quem causa quem**.
+:::
+::::
+
+## Relação não é causa {.divider}
+
+## Quatro explicações para o mesmo $r$
+
+:::: {.cards .cols-2}
+::: {.card}
+**1. $X$ causa $Y$**
+
+A dose causa a queda da pressão.
+
+*A única que permite a palavra "causa".*
+:::
+
+::: {.card}
+**2. $Y$ causa $X$**
+
+A causalidade corre no sentido inverso ao que se imaginou.
+:::
+
+::: {.card}
+**3. Uma terceira variável**
+
+O tabagismo causa tanto o consumo de café quanto o câncer de pulmão.
+
+*Confundimento.*
+:::
+
+::: {.card}
+**4. Coincidência**
+
+Com variáveis suficientes, sempre há alguma correlação alta por acaso.
+:::
+::::
+
+<p class="small">Um $r$ alto nunca distingue esses quatro cenários. Só o desenho do estudo distingue.</p>
+
+## Da força à forma {.divider}
+
+## A reta descreve a forma
+
+::: {.formula}
+$$y = \beta_0 + \beta_1 x + \varepsilon$$
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**$\beta_0$ — o intercepto**
+
+Valor previsto de $y$ quando $x = 0$.
+
+*Só interprete se $x = 0$ existir na realidade.*
+:::
+
+::: {.card}
+**$\beta_1$ — a inclinação**
+
+Quanto $y$ muda, em média, para cada unidade a mais em $x$.
+
+*"6,46 metros por semana" é uma afirmação clínica.*
+:::
+::::
+
+## Correlação e regressão: a mesma informação?
+
+Na regressão linear simples:
+
+::: {.formula}
+$$R^2 = r^2$$
+:::
+
+::: {.keybox}
+$r = 0{,}943$ → $R^2 = 0{,}890$: 89% da variação do desfecho é explicada pela reta.
+
+Mas as perguntas são diferentes: a correlação mede **força** e é simétrica; a regressão impõe uma **direção** e permite prever.
+:::
+
+## Correlação e reta no R
+
+```{webr-r}
+semana <- c(1, 2, 3, 4, 5, 6, 7, 8)
+metros <- c(295, 308, 302, 321,
+            318, 334, 328, 345)
+
+plot(semana, metros, pch = 19)
+
+cor(semana, metros)
+cor.test(semana, metros)
+
+ajuste <- lm(metros ~ semana)
+coef(ajuste)
+summary(ajuste)$r.squared
+```
+
+<p class="small">A saída: $r = 0{,}943$, p $\approx 0{,}0004$, reta $289{,}79 + 6{,}46 \times semana$ e $R^2 = 0{,}890$.</p>
+
+## O limite de toda previsão
+
+A reta permite prever $y$ **dentro** da faixa de $x$ observada. Fora dela, é extrapolação.
+
+::: {.keybox}
+No capítulo 7, um modelo "superior" dentro da amostra previu **299 dias de internação** para um paciente que ficou 9.
+
+Nenhum modelo avisa quando você saiu da região em que ele foi treinado.
+:::
+
+<p class="small">A pergunta que sempre se faz antes de prever: esse valor de $x$ existe nos meus dados?</p>
+
+## O que levar daqui
+
+::: {.incremental}
+- **Gráfico antes do número** — $r$ é cego para curvatura, agrupamentos e outliers.
+- **$r$ mede relação linear**, de $-1$ a $1$, e é simétrico.
+- **Correlação não é causalidade** — confundimento e coincidência produzem o mesmo coeficiente.
+- **Regressão impõe direção e permite prever** — só dentro da faixa que a sustentou.
+:::
+
+## Próximos passos
+
+Este é o último capítulo da formação. O caminho completo — dado, desenho, amostra, descrição, probabilidade, estimativa, teste e modelo — está percorrido.
+
+A estatística não elimina a dúvida. Ela a torna **mensurável**.
+
+::: {.callout-note icon="false"}
+## 📚 Material de apoio
+Para revisar a teoria, resolver as questões e rodar a correlação, acesse o capítulo no livro interativo.
+
+[Ir para o Livro Interativo: Capítulo 10](../../cap10_correlacao.html){target="_blank"}
+:::
+
+<p class="small">Dúvidas: marcio.souza@ufjf.br · souza.mlm@gmail.com<br>
+DOI: <a href="https://doi.org/10.5281/zenodo.23858966" target="_blank">10.5281/zenodo.23858966</a></p>
