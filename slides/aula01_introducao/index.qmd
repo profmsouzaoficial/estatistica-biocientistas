@@ -78,6 +78,248 @@ O significado que orienta a conduta clínica.
 
 <p class="small">A mesma lógica vale para dados não estruturados: uma radiografia só vira informação quando alguém sabe o que procurar nela.</p>
 
+## Meça a sua pulsação
+
+::: {.incremental}
+1. **Silêncio total.** Um minuto, sentados, sem conversar — a pulsação sobe quando você fala.
+2. **Dedos no pulso.** Indicador e médio logo abaixo do polegar, até sentir a onda.
+3. **Conte 30 segundos.** Multiplique por 2. Esse é o seu número em bpm.
+:::
+
+::: {.keybox}
+Antes de contar, **aponte o dedo**: em qual faixa você acha que vai cair?
+:::
+
+<p class="small">A previsão vem antes do dado. Em seguida, cada um diz a sua faixa — e a turma vira um gráfico.</p>
+
+## Onde cai a sua turma?
+
+Cada **+** é um aluno. A barra cresce e o percentual se recalcula na hora.
+
+```{=html}
+<div class="pulso" id="pulso-app">
+  <div class="pulso-topo">
+    <span class="ref">População adulta · referência</span>
+    <span class="meio">bpm</span>
+    <span class="turma">A nossa turma</span>
+  </div>
+  <div id="pulso-grade"></div>
+  <div class="pulso-rodape">
+    <span>n = <b id="pulso-total">0</b> alunos</span>
+    <span id="pulso-info">clique em <b>+</b> na faixa de cada aluno</span>
+    <button type="button" class="zerar" id="pulso-zerar">Zerar</button>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var FAIXAS = [
+    { rot: "100+",  ref: 0.7 },
+    { rot: "90\u201399", ref: 5.1 },
+    { rot: "80\u201389", ref: 18.5 },
+    { rot: "70\u201379", ref: 32.6 },
+    { rot: "60\u201369", ref: 28.3 },
+    { rot: "50\u201359", ref: 12.0 },
+    { rot: "40\u201349", ref: 2.8 }
+  ];
+  var ESCALA = 60;
+  var grade = document.getElementById("pulso-grade");
+  if (!grade) return;
+  var cont = FAIXAS.map(function () { return 0; });
+
+  function umDecimal(x) { return x.toFixed(1).replace(".", ","); }
+  function pct(p) { return p === 0 ? "0%" : umDecimal(p) + "%"; }
+
+  grade.innerHTML = FAIXAS.map(function (f, i) {
+    var largura = Math.min(f.ref / ESCALA * 100, 100).toFixed(2);
+    return '<div class="pulso-linha">' +
+        '<div class="pulso-esq">' +
+          '<div class="pulso-track">' +
+            '<span class="pulso-pct">' + umDecimal(f.ref) + '%</span>' +
+            '<div class="pulso-barra ref" style="width:' + largura + '%"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pulso-meio">' +
+          '<span class="pulso-faixa">' + f.rot + '</span>' +
+          '<span class="pulso-ctrl">' +
+            '<button type="button" data-i="' + i + '" data-d="-1" aria-label="um aluno menos">\u2212</button>' +
+            '<b id="pulso-n-' + i + '">0</b>' +
+            '<button type="button" data-i="' + i + '" data-d="1" aria-label="um aluno mais">+</button>' +
+          '</span>' +
+        '</div>' +
+        '<div class="pulso-dir">' +
+          '<div class="pulso-track">' +
+            '<div class="pulso-barra turma" id="pulso-b-' + i + '" style="width:0%"></div>' +
+            '<span class="pulso-pct" id="pulso-p-' + i + '">0%</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }).join("");
+
+  function atualizar() {
+    var total = 0, i;
+    for (i = 0; i < cont.length; i++) { total += cont[i]; }
+    for (i = 0; i < cont.length; i++) {
+      var p = total ? cont[i] / total * 100 : 0;
+      document.getElementById("pulso-b-" + i).style.width =
+        Math.min(p / ESCALA * 100, 100).toFixed(2) + "%";
+      document.getElementById("pulso-p-" + i).textContent = pct(p);
+      document.getElementById("pulso-n-" + i).textContent = cont[i];
+    }
+    document.getElementById("pulso-total").textContent = total;
+    document.getElementById("pulso-info").innerHTML = total
+      ? "cada aluno \u2248 <b>" + umDecimal(100 / total) + "%</b> da turma"
+      : "clique em <b>+</b> na faixa de cada aluno";
+  }
+
+  grade.addEventListener("click", function (e) {
+    var botao = e.target.closest("button");
+    if (!botao || !botao.dataset.i) return;
+    var i = parseInt(botao.dataset.i, 10);
+    var d = parseInt(botao.dataset.d, 10);
+    cont[i] = Math.max(0, cont[i] + d);
+    atualizar();
+  });
+
+  var zerar = document.getElementById("pulso-zerar");
+  if (zerar) {
+    zerar.addEventListener("click", function () {
+      for (var i = 0; i < cont.length; i++) { cont[i] = 0; }
+      atualizar();
+    });
+  }
+
+  atualizar();
+})();
+</script>
+```
+
+<p class="small">Azul: referência de adultos em repouso. Laranja: a nossa turma, contada agora.</p>
+
+::: {.notes}
+Clique em + na faixa de cada aluno conforme ele responde. O percentual é calculado sobre o total já contado: cada novo aluno mexe em todas as barras e o desenho só estabiliza no fim — é a deixa para falar de tamanho de amostra.
+
+A escala é fixa em 60% para os dois lados. Se uma faixa passar disso (turma muito pequena), a barra encosta no fim da pista; o número ao lado continua correto.
+
+"Zerar" limpa tudo para a próxima turma.
+:::
+
+## O que o gráfico acabou de mostrar
+
+:::: {.cards .cols-3}
+::: {.card}
+**A forma se repete**
+
+Quase toda a turma cai entre 60 e 89 bpm — o mesmo morro da referência.
+:::
+
+::: {.card}
+**n pequeno, salto grande**
+
+Com 20 alunos, cada um move a barra em **5%**. Com 40, em 2,5%.
+:::
+
+::: {.card}
+**Turma ≠ população**
+
+A altura de cada barra muda de turma para turma. É essa diferença que a inferência tenta medir.
+:::
+::::
+
+::: {.keybox}
+Guarde esse gráfico: no capítulo 3 ele volta como **amostragem**; no capítulo 9, como **intervalo de confiança**.
+:::
+
+<p class="small">Antes de retomá-lo, uma pergunta incômoda: todo dado em saúde cabe numa planilha?</p>
+
+## Dois jeitos de guardar o mesmo paciente
+
+Não é papel × digital: é o **contrato** — a posição da célula significa algo.
+
+:::: {.cards .cols-2}
+::: {.card}
+**Estruturado**
+
+<table class="mock-tabela">
+  <tr><th>id</th><th>idade</th><th>PAS</th><th>diag</th></tr>
+  <tr><td>01</td><td>54</td><td>138</td><td>HAS</td></tr>
+  <tr><td>02</td><td>61</td><td>126</td><td>DM2</td></tr>
+</table>
+
+Cada célula tem nome, tipo e unidade.
+
+Uma linha = um paciente. Uma coluna = uma variável.
+:::
+
+::: {.card}
+**Não estruturado**
+
+<div class="mock-laudo">"Paciente de 54 anos, hipertenso, refere <span class="destaque">cefaleia occipital</span> há dois dias, sem melhora com analgésico comum."</div>
+
+O significado está no texto — e na imagem que ele descreve.
+
+Sem posição fixa: cada médico escreve de um jeito.
+:::
+::::
+
+## Nem todo dado cabe numa coluna
+
+Quatro famílias — e só a primeira nasce pronta para a estatística.
+
+:::: {.cards .cols-2}
+::: {.card}
+**📋 Tabela**
+
+Sinais vitais, exames laboratoriais, prescrições.
+
+<p><span class="chip estr">estruturado</span></p>
+:::
+
+::: {.card}
+**📄 Texto**
+
+Anamnese, evolução, laudo, receita.
+
+<p><span class="chip nao">não estruturado</span></p>
+:::
+
+::: {.card}
+**🖼️ Imagem**
+
+Radiografia, tomografia, ressonância, lâmina.
+
+<p><span class="chip nao">não estruturado</span></p>
+:::
+
+::: {.card}
+**📈 Sinal**
+
+ECG, EEG, monitor, relógio de pulso.
+
+<p><span class="chip semi">semi-estruturado</span></p>
+:::
+::::
+
+<p class="small">A maior parte do que se produz hoje em saúde não está na tabela.</p>
+
+## O que a IA faz que a planilha não fazia
+
+<div class="fluxo">
+  <div class="fluxo-item"><span class="ico">🗂️</span><b>Dado bruto</b>imagem, texto, sinal</div>
+  <div class="fluxo-seta">→</div>
+  <div class="fluxo-item"><span class="ico">🧩</span><b>Representação</b>o modelo aprende o que olhar</div>
+  <div class="fluxo-seta">→</div>
+  <div class="fluxo-item"><span class="ico">📊</span><b>Escore</b>probabilidade, não veredito</div>
+  <div class="fluxo-seta">→</div>
+  <div class="fluxo-item"><span class="ico">🩺</span><b>Decisão</b>o clínico decide</div>
+</div>
+
+**Estatística clássica** começa na tabela pronta. **Aprendizado de máquina** aprende a construir a tabela a partir do dado bruto.
+
+::: {.keybox}
+Nada disso dispensa o método: um modelo que só viu um serviço aprende **o serviço**, não a doença — e precisa ser validado fora de casa.
+:::
+
 ## População e amostra
 
 Quase nunca é possível medir todo mundo. Por isso trabalhamos com uma **amostra**.

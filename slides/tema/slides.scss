@@ -881,6 +881,261 @@
 .reveal .center { text-align: center; }
 .reveal .mt-0 { margin-top: 0; }
 
+/* --------------------------------------------------------------------------
+   6. Widgets de sala
+   -------------------------------------------------------------------------- */
+
+/* Dinâmica da pulsação (aula 1) ------------------------------------------
+   Gráfico espelhado: referência populacional à esquerda (azul), contagem
+   da turma à direita (laranja). O JS da própria aula escreve as linhas.    */
+
+.reveal .pulso {
+  --pulso-ref: #5b7cfa;
+  --pulso-turma: #e0594a;
+  font-size: 0.74em;
+  margin-top: 0.4em;
+}
+
+.reveal .pulso-topo {
+  display: grid;
+  grid-template-columns: 1fr 150px 1fr;
+  align-items: end;
+  border-bottom: 2px solid var(--bc-line);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.2em;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bc-muted);
+}
+
+.reveal .pulso-topo .ref { text-align: right; color: var(--pulso-ref); }
+.reveal .pulso-topo .meio { text-align: center; }
+.reveal .pulso-topo .turma { color: var(--pulso-turma); }
+
+.reveal .pulso-linha {
+  display: grid;
+  grid-template-columns: 1fr 150px 1fr;
+  align-items: center;
+  height: 43px;
+}
+
+.reveal .pulso-esq,
+.reveal .pulso-dir { display: flex; align-items: center; }
+.reveal .pulso-esq { justify-content: flex-end; }
+
+.reveal .pulso-track {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.reveal .pulso-esq .pulso-track { justify-content: flex-end; }
+
+.reveal .pulso-barra {
+  height: 19px;
+  transition: width 0.3s ease;
+}
+
+.reveal .pulso-barra.ref {
+  border-radius: 4px 0 0 4px;
+  background: linear-gradient(90deg, #93a9fc, var(--pulso-ref));
+}
+
+.reveal .pulso-barra.turma {
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(90deg, var(--pulso-turma), #f0947f);
+}
+
+.reveal .pulso-pct {
+  font-size: 0.76em;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--bc-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.reveal .pulso-esq .pulso-pct { text-align: right; }
+.reveal .pulso-dir .pulso-pct { text-align: left; }
+
+.reveal .pulso-meio { text-align: center; line-height: 1; }
+
+.reveal .pulso-faixa {
+  display: block;
+  font-weight: 700;
+  font-size: 0.78em;
+  color: var(--bc-ink);
+}
+
+.reveal .pulso-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.reveal .pulso-ctrl button {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid var(--bc-line);
+  border-radius: 5px;
+  background: #fff;
+  color: var(--bc-body);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.reveal .pulso-ctrl button:hover {
+  border-color: var(--pulso-turma);
+  color: var(--pulso-turma);
+  background: #fdeceb;
+}
+
+.reveal .pulso-ctrl b {
+  min-width: 15px;
+  font-size: 0.8em;
+  color: var(--bc-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.reveal .pulso-rodape {
+  display: flex;
+  align-items: center;
+  gap: 1.1em;
+  margin-top: 0.4em;
+  padding-top: 0.35em;
+  border-top: 2px solid var(--bc-line);
+  font-size: 0.72em;
+  color: var(--bc-muted);
+}
+
+.reveal .pulso-rodape b { color: var(--bc-ink); font-size: 1.15em; }
+
+.reveal .pulso-rodape .zerar {
+  margin-left: auto;
+  border: 1px solid var(--bc-line);
+  border-radius: 6px;
+  background: #fff;
+  padding: 3px 12px;
+  font-size: 0.95em;
+  color: var(--bc-muted);
+  cursor: pointer;
+}
+
+.reveal .pulso-rodape .zerar:hover {
+  color: var(--pulso-turma);
+  border-color: var(--pulso-turma);
+}
+
+/* Etiquetas de tipo de dado --------------------------------------------- */
+
+.reveal .chip {
+  display: inline-block;
+  padding: 0.22em 0.7em;
+  border-radius: 99px;
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.reveal .chip.estr { background: var(--bc-teal-soft); color: var(--bc-teal); }
+.reveal .chip.semi { background: #fef3c7; color: #b45309; }
+.reveal .chip.nao { background: #fee2e2; color: #b91c1c; }
+
+/* Mini-planilha e laudo (estruturado × não estruturado) ----------------- */
+
+.reveal .mock-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
+}
+
+.reveal .mock-tabela th,
+.reveal .mock-tabela td {
+  border: 1px solid #dbe3ee;
+  padding: 0.3em 0.45em;
+  text-align: left;
+}
+
+.reveal .mock-tabela th {
+  background: #eef2f7;
+  color: var(--bc-ink-soft);
+  font-weight: 700;
+}
+
+.reveal .mock-tabela td { color: var(--bc-body); }
+
+.reveal .mock-laudo {
+  border: 1px solid #dbe3ee;
+  border-radius: 8px;
+  background: #fbfcfe;
+  padding: 0.7em 0.8em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.85em;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--bc-ink-soft);
+}
+
+.reveal .mock-laudo .destaque {
+  background: #fef3c7;
+  font-style: normal;
+  padding: 0 2px;
+}
+
+/* Fluxo do pipeline de IA ------------------------------------------------ */
+
+.reveal .fluxo {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5em;
+  margin: 0.9em 0 0.7em;
+}
+
+.reveal .fluxo-item {
+  flex: 1;
+  border: 1px solid var(--bc-line);
+  border-radius: var(--bc-radius-sm);
+  background: var(--bc-surface);
+  box-shadow: var(--bc-shadow-sm);
+  padding: 0.6em 0.45em;
+  text-align: center;
+  font-size: 0.72em;
+  line-height: 1.4;
+  color: var(--bc-muted);
+}
+
+.reveal .fluxo-item .ico {
+  display: block;
+  font-size: 1.7em;
+  line-height: 1.1;
+  margin-bottom: 0.15em;
+}
+
+.reveal .fluxo-item b {
+  display: block;
+  font-size: 1.05em;
+  color: var(--bc-ink);
+}
+
+.reveal .fluxo-seta {
+  align-self: center;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--bc-teal-bright);
+}
+
 @media print {
   .reveal .slides section { padding: 0 1.2em; }
 }
