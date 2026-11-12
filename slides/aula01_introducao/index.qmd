@@ -522,7 +522,7 @@ O próximo capítulo detalha o item mais esquecido do roteiro: **como o estudo f
 
 ::: {.callout-note icon="false"}
 ## 📚 Material de apoio
-Para revisar a teoria e resolver as **10 questões de fixação**, acesse o capítulo no livro interativo.
+Para revisar a teoria e resolver as **30 questões de fixação**, acesse o capítulo no livro interativo.
 
 [Ir para o Livro Interativo: Capítulo 1](../../cap01_introducao.html){target="_blank"}
 :::
