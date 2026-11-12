@@ -164,7 +164,9 @@ Cada **+** é um aluno. A barra cresce e o percentual se recalcula na hora.
       document.getElementById("pulso-b-" + i).style.width =
         Math.min(p / ESCALA * 100, 100).toFixed(2) + "%";
       document.getElementById("pulso-p-" + i).textContent = pct(p);
-      document.getElementById("pulso-n-" + i).textContent = cont[i];
+      var numero = document.getElementById("pulso-n-" + i);
+      numero.textContent = cont[i];
+      numero.parentNode.classList.toggle("ativo", cont[i] > 0);
     }
     document.getElementById("pulso-total").textContent = total;
     document.getElementById("pulso-info").innerHTML = total

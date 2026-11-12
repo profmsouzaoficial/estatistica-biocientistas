@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-4bef0251c46b5307cb2f20a124e2a912.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-8a247c311c94d26ff520ece3d22445c9.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -2122,7 +2122,9 @@ A previsão vem antes do dado. Em seguida, cada um diz a sua faixa — e a turma
       document.getElementById("pulso-b-" + i).style.width =
         Math.min(p / ESCALA * 100, 100).toFixed(2) + "%";
       document.getElementById("pulso-p-" + i).textContent = pct(p);
-      document.getElementById("pulso-n-" + i).textContent = cont[i];
+      var numero = document.getElementById("pulso-n-" + i);
+      numero.textContent = cont[i];
+      numero.parentNode.classList.toggle("ativo", cont[i] > 0);
     }
     document.getElementById("pulso-total").textContent = total;
     document.getElementById("pulso-info").innerHTML = total
