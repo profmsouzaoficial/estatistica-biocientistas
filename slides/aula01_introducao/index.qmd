@@ -83,7 +83,7 @@ O significado que orienta a conduta clínica.
 ::: {.incremental}
 1. **Silêncio total.** Um minuto, sentados, sem conversar — a pulsação sobe quando você fala.
 2. **Dedos no pulso.** Indicador e médio logo abaixo do polegar, até sentir a onda.
-3. **Conte 30 segundos.** Multiplique por 2. Esse é o seu número em bpm.
+3. **Durante 30 segundos.** Conte as pulsações. Multiplique por 2. Esse é o seu número em bpm.
 :::
 
 ::: {.keybox}
