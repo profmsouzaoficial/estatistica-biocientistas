@@ -131,21 +131,535 @@ O relato científico completo inclui, sempre:
 - **O p-valor** — a compatibilidade com a hipótese nula.
 :::
 
-## Rodando o teste no R
+## De qual teste estamos falando? {.divider}
+
+Bloco 2 · Da lógica à escolha do teste
+
+## Três perguntas definem o teste
+
+:::: {.cards .cols-3}
+::: {.card}
+**Quantos grupos?**
+
+Um grupo contra um valor de referência, dois grupos, ou três ou mais.
+:::
+
+::: {.card}
+**Pareado ou independente?**
+
+Pessoas diferentes em cada grupo — ou as mesmas pessoas medidas duas vezes.
+:::
+
+::: {.card}
+**Os pressupostos valem?**
+
+Normalidade, variâncias parecidas, observações independentes.
+:::
+::::
+
+::: {.keybox}
+Responda às três **antes** de rodar qualquer coisa. O p-valor não avisa quando o teste está errado — ele só responde o que foi perguntado.
+:::
+
+## O mapa dos testes
+
+| A pergunta | O teste | No R |
+|---|---|---|
+| 1 grupo vs. valor de referência | t de uma amostra | `t.test(x, mu = 500)` |
+| 2 grupos independentes | t de Welch | `t.test(y ~ g)` |
+| 2 grupos pareados | t pareado | `t.test(a, d, paired = TRUE)` |
+| 3 ou mais grupos | ANOVA + Tukey | `aov()` + `TukeyHSD()` |
+| 2 grupos, escala ordinal | Mann-Whitney | `wilcox.test(y ~ g)` |
+| 2 pareados, escala ordinal | Wilcoxon | `wilcox.test(a, d, paired = TRUE)` |
+
+<p class="small">Não existe "qui-quadrado para comparar médias" nem "ANOVA para dois grupos". Cada linha responde a uma pergunta diferente — trocar a pergunta invalida o resultado.</p>
+
+## Paramétrico ou não paramétrico?
+
+:::: {.cards .cols-2}
+::: {.card}
+**Paramétrico — a balança**
+
+Usa o **valor exato** de cada medida e resume em média e desvio padrão.
+
+Detecta efeitos menores. Em troca, exige normalidade, variâncias parecidas e independência.
+:::
+
+::: {.card}
+**Não paramétrico — a classificação**
+
+Usa apenas a **ordem** dos valores.
+
+Sobrevive a escala ordinal, valor extremo e amostra minúscula. Custa um pouco de poder.
+:::
+::::
+
+::: {.keybox}
+Nenhum dos dois é "melhor". Uma balança precisa de pista limpa; uma classificação de corrida continua válida mesmo se o cronômetro falhar.
+:::
+
+## O comprimido está conforme?
+
+<p><span class="pill">Farmácia · um grupo</span></p>
+
+Doze comprimidos de paracetamol — especificação **500 mg** — foram pesados:
+
+497 · 502 · 499 · 503 · 496 · 501 · 498 · 504 · 500 · 497 · 502 · 499
+
+::: {.formula}
+$$H_0: \mu = 500 \text{ mg} \qquad H_1: \mu \neq 500 \text{ mg}$$
+:::
+
+<p class="small">Média 499,83 mg · desvio padrão 2,59 mg · erro padrão 0,75 mg</p>
+
+## Farmácia · a conta é uma razão
+
+::: {.formula}
+$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} = \frac{499{,}83 - 500}{0{,}75} = -0{,}22$$
+:::
 
 ```{webr-r}
-controle <- c(142, 138, 145, 139,
-              150, 136, 148, 141)
-tratamento <- c(130, 128, 135, 129,
-                132, 126, 134, 131)
+teor <- c(497, 502, 499, 503,
+          496, 501, 498, 504,
+          500, 497, 502, 499)
 
-mean(controle)
-mean(tratamento)
-
-t.test(tratamento, controle)
+t.test(teor, mu = 500)
 ```
 
-<p class="small">A saída traz as médias, a diferença, o intervalo de confiança e o p-valor. Leia os quatro — nunca só o último.</p>
+## Farmácia · o que o p não disse
+
+:::: {.cards .cols-2}
+::: {.card}
+**Não rejeitar não é aprovar**
+
+$p = 0{,}83$: doze comprimidos não distinguiram o lote de um lote perfeito.
+
+Isso não é atestado de conformidade.
+:::
+
+::: {.card}
+**Quem mede a incerteza é o intervalo**
+
+IC 95% = **[498,19; 501,48]** mg.
+
+Os dados aceitam um lote até 1,8 mg abaixo da especificação.
+:::
+::::
+
+::: {.keybox}
+Um lote de fato desviado produziria um p bem pequeno — o teste tem poder para achar o problema, desde que o problema seja grande.
+:::
+
+## Dois dentifrícios
+
+<p><span class="pill">Odontologia · dois grupos independentes</span></p>
+
+Redução do índice de biofilme, em pontos percentuais, após 30 dias:
+
+* **A · convencional** — 62, 58, 71, 65, 55, 68, 60, 74, 63 → média 64,0 · DP 6,2
+* **B · formulação nova** — 70, 75, 66, 79, 72, 68, 81, 74, 77 → média 73,6 · DP 5,0
+
+::: {.keybox}
+Os grupos são **independentes**: são pessoas diferentes. A pergunta é se 9,6 pontos percentuais sobrevivem ao sorteio de nove voluntários por grupo.
+:::
+
+## Odontologia · por que Welch
+
+:::: {.cards .cols-2}
+::: {.card}
+**O t clássico supõe variâncias iguais**
+
+Quando isso não vale, ele fica **otimista**: o p sai menor do que deveria e o intervalo, mais estreito.
+:::
+
+::: {.card}
+**Welch ajusta os graus de liberdade**
+
+Não supõe variâncias iguais. É o padrão do R — e dá praticamente o mesmo resultado quando elas são iguais.
+:::
+::::
+
+::: {.formula}
+$$t = \frac{\bar{x}_B - \bar{x}_A}{\sqrt{\dfrac{s_B^2}{n_B} + \dfrac{s_A^2}{n_A}}}$$
+:::
+
+<p class="small">Daí vêm os 15,4 graus de liberdade — fracionários, e é assim mesmo que funciona.</p>
+
+## Odontologia · o R responde
+
+```{webr-r}
+A <- c(62, 58, 71, 65, 55,
+       68, 60, 74, 63)
+B <- c(70, 75, 66, 79, 72,
+       68, 81, 74, 77)
+
+t.test(B, A)
+```
+
+## Odontologia · 9,6 pontos e a margem
+
+::: {.keybox}
+$t = 3{,}60$ · 15,4 gl · **p = 0,0025** · IC 95% da diferença: **[3,9; 15,2]**
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**O que o intervalo garante**
+
+O zero está fora: há evidência de que B reduz mais biofilme que A.
+:::
+
+::: {.card}
+**O que o intervalo confessa**
+
+O ganho real pode ser de 4 **ou** de 15 pontos percentuais. Nove por grupo não compram precisão.
+:::
+::::
+
+<p class="small">"Deu significativo" e "sei o tamanho do efeito" são frases diferentes. A segunda vem do intervalo.</p>
+
+## O mesmo paciente, duas vezes
+
+<p><span class="pill">Fisioterapia · dois grupos pareados</span></p>
+
+Dor lombar crônica (escala 0–10) em dez pacientes, antes e após três sessões:
+
+| Paciente | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Antes | 8 | 7 | 9 | 6 | 8 | 7 | 9 | 8 | 7 | 6 |
+| Depois | 7 | 4 | 8 | 1 | 6 | 4 | 6 | 7 | 3 | 2 |
+
+::: {.keybox}
+Não se compara as duas colunas. Comparam-se as **dez diferenças**: 1, 3, 1, 5, 2, 3, 3, 1, 4, 4 — média 2,7 e desvio 1,42.
+:::
+
+## Fisioterapia · a conta sobre as diferenças
+
+É o desvio **das diferenças** (1,42) que entra na conta — não o desvio de cada coluna.
+
+```{webr-r}
+antes  <- c(8, 7, 9, 6, 8,
+            7, 9, 8, 7, 6)
+depois <- c(7, 4, 8, 1, 6,
+            4, 6, 7, 3, 2)
+
+t.test(antes, depois,
+       paired = TRUE)
+```
+
+<p class="small">t = 6,02 · 9 gl · p = 0,0002 · IC 95% da diferença: [1,69; 3,71] pontos.</p>
+
+## Por que parear ganha poder
+
+Os **mesmos 20 números**, analisados de duas formas:
+
+| Análise | p-valor | IC 95% |
+|---|---|---|
+| Pareado (correto para este desenho) | 0,0002 | [1,69; 3,71] |
+| Dois grupos independentes | 0,006 | [0,93; 4,47] |
+
+::: {.keybox}
+Cada paciente vira seu próprio controle: a variação entre pessoas — quem chega com dor 9 e quem chega com 6 — **desaparece** da conta.
+:::
+
+<p class="small">O pareamento é decisão de desenho, não de software. Se os dez do "depois" fossem outras pessoas, o teste pareado seria inválido.</p>
+
+## Três protocolos, 24 pacientes
+
+<p><span class="pill">Fisioterapia · três grupos</span></p>
+
+Ganho de amplitude de flexão do joelho, em graus (oito pacientes por protocolo):
+
+* **A · convencional:** 12, 15, 11, 14, 13, 16, 12, 15 — média 13,50
+* **B · biofeedback:** 18, 21, 17, 20, 19, 22, 18, 20 — média 19,38
+* **C · eletroestimulação:** 20, 24, 19, 23, 21, 25, 22, 21 — média 21,88
+
+::: {.keybox}
+A tentação é comparar aos pares: A×B, A×C, B×C. Três testes t, três p-valores — e um problema que quase ninguém percebe.
+:::
+
+## Por que não três testes t
+
+Cada teste a 5% carrega 5% de chance de falso positivo — e as chances **se acumulam**:
+
+::: {.formula}
+$$P(\text{ao menos um falso positivo}) = 1 - 0{,}95^3 = 14{,}3\%$$
+:::
+
+:::: {.cards .cols-3}
+::: {.card}
+**2 comparações**
+
+9,8% de chance de um falso positivo.
+:::
+
+::: {.card}
+**3 comparações**
+
+14,3% — e é o nosso caso.
+:::
+
+::: {.card}
+**6 comparações**
+
+26,5%. Um em cada quatro estudos "acharia" algo.
+:::
+::::
+
+<p class="small">O α de 5% que você julgava controlar já não é 5%. É para isso que existe a ANOVA.</p>
+
+## A ideia da ANOVA
+
+::: {.formula}
+$$F = \frac{\text{variância entre os grupos}}{\text{variância dentro dos grupos}}$$
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**Entre grupos**
+
+O quanto as médias dos protocolos se afastam umas das outras.
+
+Se os protocolos fossem iguais, esse afastamento seria só sorteio.
+:::
+
+::: {.card}
+**Dentro dos grupos**
+
+O quanto os pacientes variam em torno da média do próprio grupo.
+
+É o ruído de fundo, que existe sempre.
+:::
+::::
+
+::: {.keybox}
+F perto de 1: as médias se afastam só o que o ruído explica. F grande: sobrou diferença de verdade.
+:::
+
+## A ANOVA no R
+
+```{webr-r}
+ganho <- c(12, 15, 11, 14,
+           13, 16, 12, 15,
+           18, 21, 17, 20,
+           19, 22, 18, 20,
+           20, 24, 19, 23,
+           21, 25, 22, 21)
+
+grupo <- factor(rep(c("A","B","C"),
+                    each = 8))
+
+summary(aov(ganho ~ grupo))
+```
+
+## A ANOVA respondeu — e agora?
+
+| Fonte | Soma de quadrados | gl | Quadrado médio | F | p |
+|---|---|---|---|---|---|
+| Entre grupos | 295,75 | 2 | 147,88 | 43,89 | 3,2 × 10⁻⁸ |
+| Dentro | 70,75 | 21 | 3,37 | | |
+
+::: {.keybox}
+A ANOVA diz **que existe diferença**. Não diz **onde**. Quem responde isso é o pós-teste.
+:::
+
+<p class="small">F = 43,89 com 2 e 21 graus de liberdade: se os três protocolos fossem iguais, um F desse tamanho apareceria em 3,2 de cada 100 milhões de estudos.</p>
+
+## Tukey · entre quais grupos?
+
+```{webr-r}
+ganho <- c(12,15,11,14,13,16,12,15,
+           18,21,17,20,19,22,18,20,
+           20,24,19,23,21,25,22,21)
+grupo <- factor(rep(c("A","B","C"),
+                    each = 8))
+
+TukeyHSD(aov(ganho ~ grupo))
+```
+
+## Tukey · o preço da comparação múltipla
+
+| Comparação | Diferença | IC 95% | p ajustado |
+|---|---|---|---|
+| B − A | 5,88 | [3,56; 8,19] | < 0,001 |
+| C − A | 8,38 | [6,06; 10,69] | < 0,001 |
+| C − B | 2,50 | [0,19; 4,81] | 0,033 |
+
+::: {.keybox}
+B e C mal se distinguem: o intervalo **quase encosta no zero**. Um ganho de 0,2 grau não muda conduta.
+:::
+
+<p class="small">Estatisticamente significativo (p = 0,033) e clinicamente duvidoso, ao mesmo tempo. O intervalo mostra o que o p esconde.</p>
+
+## Os pressupostos do teste paramétrico
+
+:::: {.cards .cols-3}
+::: {.card}
+**Independência**
+
+A mais importante — e a única que **nenhum teste corrige**.
+
+Depende do desenho do estudo.
+:::
+
+::: {.card}
+**Normalidade**
+
+Shapiro-Wilk. A ANOVA tolera desvios razoáveis com 30 ou mais por grupo.
+:::
+
+::: {.card}
+**Variâncias parecidas**
+
+Levene. Com dois grupos, o t de Welch já resolve.
+:::
+::::
+
+::: {.keybox}
+Nos nossos exemplos os pressupostos se sustentam: Shapiro p = 0,75 (teor), Levene p = 0,62 (dentifrícios) e p = 0,86 (protocolos).
+:::
+
+## Quando os pressupostos falham
+
+::: {.incremental}
+- **Trocar o teste** pelo equivalente não paramétrico — o caminho mais comum.
+- **Transformar a variável** — logaritmo para dados assimétricos e positivos (dosagens, contagens).
+- **Reconhecer o limite** — independência quebrada não tem conserto estatístico: o problema está no dado.
+:::
+
+<p class="small">Existem ainda modelos robustos e modelos lineares generalizados, assunto de cursos mais avançados. Para o dia a dia, as três saídas acima resolvem quase tudo.</p>
+
+## Quando a média não significa nada
+
+<p><span class="pill">Odontologia · escala ordinal</span></p>
+
+Índice de placa (escala **0 a 3**) em 24 crianças:
+
+| Grupo | Valores | Mediana |
+|---|---|---|
+| Escova manual | 2, 3, 3, 2, 3, 2, 3, 3, 2, 2, 3, 3 | 3 |
+| Escova elétrica | 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2 | 1 |
+
+::: {.keybox}
+A distância entre "placa leve" e "moderada" não é igual à distância entre "moderada" e "intensa". Calcular média aqui é inventar uma escala que o dado não tem.
+:::
+
+## Mann-Whitney · trocar o valor pelo posto
+
+::: {.fluxo}
+::: {.fluxo-item}
+<span class="ico">🔢</span>
+<b>Juntar</b>
+os 24 valores numa lista só
+:::
+
+<span class="fluxo-seta">→</span>
+
+::: {.fluxo-item}
+<span class="ico">📊</span>
+<b>Ordenar</b>
+do menor ao maior
+:::
+
+<span class="fluxo-seta">→</span>
+
+::: {.fluxo-item}
+<span class="ico">🏷️</span>
+<b>Ranquear</b>
+cada valor ganha sua posição
+:::
+
+<span class="fluxo-seta">→</span>
+
+::: {.fluxo-item}
+<span class="ico">⚖️</span>
+<b>Comparar</b>
+a soma dos postos de cada grupo
+:::
+:::
+
+::: {.keybox}
+Com os 24 valores ranqueados: **W = 131,5**, p = 0,0003, deslocamento de 1 ponto [1,0; 2,0].
+:::
+
+<p class="small">A pergunta muda: de "as médias são iguais?" para "os postos de um grupo tendem a ser maiores que os do outro?"</p>
+
+## O não paramétrico no R
+
+```{webr-r}
+manual <- c(2,3,3,2,3,2,
+            3,3,2,2,3,3)
+eletrica <- c(1,2,1,2,1,1,
+              2,1,2,1,1,2)
+
+wilcox.test(manual, eletrica,
+            conf.int = TRUE)
+```
+
+## Wilcoxon · o pareado sem normalidade
+
+A mesma dor lombar, agora sem supor normalidade:
+
+| Teste | p-valor | Estimativa do efeito |
+|---|---|---|
+| t pareado | 0,0002 | média das diferenças: 2,7 pontos |
+| Wilcoxon | 0,0056 | mediana das diferenças: 2,5 pontos |
+
+::: {.keybox}
+Os dois concordam na direção e na magnitude. O não paramétrico é mais **conservador** — exige menos dos dados e, por isso, entrega menos precisão.
+:::
+
+## O preço de abandonar o paramétrico
+
+:::: {.cards .cols-2}
+::: {.card}
+**Quando a normalidade vale**
+
+O teste por postos aproveita cerca de **95%** da informação que o t aproveitaria.
+
+Perde pouco — mas perde.
+:::
+
+::: {.card}
+**Quando ela não vale**
+
+Aí é o t que está perdendo: o p e o intervalo saem errados.
+
+O não paramétrico é a escolha honesta.
+:::
+::::
+
+::: {.keybox}
+Use-o quando a variável é **ordinal**, quando há **valores extremos** que você não pode remover ou quando a amostra é **muito pequena**. Não o use para fugir de um resultado que não agradou.
+:::
+
+## ProbMaster · sem tabela na mão
+
+:::: {.cards .cols-3}
+::: {.card}
+**1 · Escolha a distribuição**
+
+Normal para proporções. t de Student para médias com $n$ pequeno. F de Fisher para a ANOVA.
+:::
+
+::: {.card}
+**2 · Ajuste o parâmetro**
+
+Os graus de liberdade: $n - 1$ para o t; 2 e 21 na nossa ANOVA.
+:::
+
+::: {.card}
+**3 · Leia a área**
+
+**Modo Inverso (Quantil)** devolve o valor crítico. A região **bicaudal (extremos)** devolve o p-valor.
+:::
+::::
+
+::: {.keybox}
+Para o teor dos comprimidos o t crítico é **2,20** (11 gl). Para a dor lombar, **2,26** (9 gl). O app desenha a curva e calcula a área; você continua escolhendo o teste.
+:::
+
+<p class="small">[probmaster-pi.vercel.app](https://probmaster-pi.vercel.app/){target="_blank"} — o mesmo app do capítulo 5.</p>
 
 ## Significância não é relevância
 
@@ -178,7 +692,8 @@ Que **três perguntas** você faz antes de acreditar?
 ::: {.incremental}
 - **O teste parte da inocência** — assume-se $H_0$; nunca se "prova" a nula.
 - **O p-valor não responde a pergunta que parece responder** — ele supõe $H_0$, não a mede.
-- **Dois erros, dois custos** — $\alpha$ controla o falso positivo; o poder controla o falso negativo.
+- **O teste é escolhido pelo desenho** — quantos grupos, pareado ou não, pressupostos válidos.
+- **Três grupos não são três testes t** — a ANOVA controla o erro; o Tukey diz onde está a diferença.
 - **Significância não é importância** — reporte sempre efeito, intervalo e p.
 :::
 
@@ -188,7 +703,7 @@ O intervalo de confiança é a peça que transforma um teste em uma estimativa c
 
 ::: {.callout-note icon="false"}
 ## 📚 Material de apoio
-Para revisar a teoria, resolver as questões e rodar o teste t, acesse o capítulo no livro interativo.
+Para revisar a teoria, resolver as questões e rodar os cinco testes, acesse o capítulo no livro interativo.
 
 [Ir para o Livro Interativo: Capítulo 8](../../cap08_hipoteses.html){target="_blank"}
 :::

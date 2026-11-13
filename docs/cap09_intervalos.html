@@ -616,7 +616,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"pressao <- c(142, 138, 145, 139, 150, 136, 148, 141)\n\nn     <- length(pressao)\nmedia <- mean(pressao)\ndp    <- sd(pressao)\nep    <- dp / sqrt(n)\n\n# Multiplicador t para 95% de confiança\ntcrit <- qt(0.975, df = n - 1)\ntcrit\n\n# Intervalo calculado à mão\nmedia + c(-1, 1) * tcrit * ep\n\n# Conferindo com a função do R\nt.test(pressao)$conf.int","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"A <- c(62, 58, 71, 65, 55, 68, 60, 74, 63)\nB <- c(70, 75, 66, 79, 72, 68, 81, 74, 77)\n\nt.test(B, A)$conf.int","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"antes  <- c(8, 7, 9, 6, 8, 7, 9, 8, 7, 6)\ndepois <- c(7, 4, 8, 1, 6, 4, 6, 7, 3, 2)\n\nt.test(antes, depois, paired = TRUE)$conf.int","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prop.test(c(45, 55), c(120, 120))$conf.int","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ganho <- c(12, 15, 11, 14, 13, 16, 12, 15,\n           18, 21, 17, 20, 19, 22, 18, 20,\n           20, 24, 19, 23, 21, 25, 22, 21)\ngrupo <- factor(rep(c(\"A\", \"B\", \"C\"), each = 8))\n\nTukeyHSD(aov(ganho ~ grupo))","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"manual   <- c(2, 3, 3, 2, 3, 2, 3, 3, 2, 2, 3, 3)\neletrica <- c(1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2)\n\nwilcox.test(manual, eletrica, conf.int = TRUE)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"pressao <- c(142, 138, 145, 139, 150, 136, 148, 141)\n\nn     <- length(pressao)\nmedia <- mean(pressao)\ndp    <- sd(pressao)\nep    <- dp / sqrt(n)\n\n# Multiplicador t para 95% de confiança\ntcrit <- qt(0.975, df = n - 1)\ntcrit\n\n# Intervalo calculado à mão\nmedia + c(-1, 1) * tcrit * ep\n\n# Conferindo com a função do R\nt.test(pressao)$conf.int","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Um grupo: teor de paracetamol em 12 comprimidos\nteor <- c(497, 502, 499, 503, 496, 501,\n          498, 504, 500, 497, 502, 499)\nt.test(teor, mu = 500)$conf.int","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Dois grupos independentes: dois dentifricios\nA <- c(62, 58, 71, 65, 55, 68, 60, 74, 63)\nB <- c(70, 75, 66, 79, 72, 68, 81, 74, 77)\nt.test(B, A)$conf.int\n\n# Dois grupos pareados: dor antes e depois\nantes  <- c(8, 7, 9, 6, 8, 7, 9, 8, 7, 6)\ndepois <- c(7, 4, 8, 1, 6, 4, 6, 7, 3, 2)\nt.test(antes, depois, paired = TRUE)$conf.int","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Duas proporcoes: 45/120 contra 55/120\nprop.test(c(45, 55), c(120, 120))$conf.int\n\n# Tres grupos: intervalos ajustados pelo Tukey\nganho <- c(12, 15, 11, 14, 13, 16, 12, 15,\n           18, 21, 17, 20, 19, 22, 18, 20,\n           20, 24, 19, 23, 21, 25, 22, 21)\ngrupo <- factor(rep(c(\"A\", \"B\", \"C\"), each = 8))\n\nTukeyHSD(aov(ganho ~ grupo))$grupo","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -2025,13 +2025,20 @@ window.Quarto = {
   <li><a href="#o-que-é-um-intervalo-de-confiança" id="toc-o-que-é-um-intervalo-de-confiança" class="nav-link" data-scroll-target="#o-que-é-um-intervalo-de-confiança"><span class="header-section-number">9.2</span> O que é um intervalo de confiança</a></li>
   <li><a href="#a-anatomia-do-intervalo" id="toc-a-anatomia-do-intervalo" class="nav-link" data-scroll-target="#a-anatomia-do-intervalo"><span class="header-section-number">9.3</span> A anatomia do intervalo</a></li>
   <li><a href="#intervalo-de-confiança-para-uma-média" id="toc-intervalo-de-confiança-para-uma-média" class="nav-link" data-scroll-target="#intervalo-de-confiança-para-uma-média"><span class="header-section-number">9.4</span> Intervalo de confiança para uma média</a></li>
-  <li><a href="#intervalo-de-confiança-para-uma-proporção" id="toc-intervalo-de-confiança-para-uma-proporção" class="nav-link" data-scroll-target="#intervalo-de-confiança-para-uma-proporção"><span class="header-section-number">9.5</span> Intervalo de confiança para uma proporção</a></li>
-  <li><a href="#o-que-alarga-e-o-que-estreita-o-intervalo" id="toc-o-que-alarga-e-o-que-estreita-o-intervalo" class="nav-link" data-scroll-target="#o-que-alarga-e-o-que-estreita-o-intervalo"><span class="header-section-number">9.6</span> O que alarga e o que estreita o intervalo</a></li>
-  <li><a href="#o-intervalo-de-confiança-e-o-teste-de-hipóteses" id="toc-o-intervalo-de-confiança-e-o-teste-de-hipóteses" class="nav-link" data-scroll-target="#o-intervalo-de-confiança-e-o-teste-de-hipóteses"><span class="header-section-number">9.7</span> O intervalo de confiança e o teste de hipóteses</a></li>
-  <li><a href="#três-erros-comuns" id="toc-três-erros-comuns" class="nav-link" data-scroll-target="#três-erros-comuns"><span class="header-section-number">9.8</span> Três erros comuns</a></li>
-  <li><a href="#prática-interativa-do-cálculo-à-mão-ao-t.test" id="toc-prática-interativa-do-cálculo-à-mão-ao-t.test" class="nav-link" data-scroll-target="#prática-interativa-do-cálculo-à-mão-ao-t.test"><span class="header-section-number">9.9</span> Prática Interativa: do cálculo à mão ao <code>t.test()</code></a></li>
-  <li><a href="#o-que-levar-deste-capítulo" id="toc-o-que-levar-deste-capítulo" class="nav-link" data-scroll-target="#o-que-levar-deste-capítulo"><span class="header-section-number">9.10</span> O que levar deste capítulo</a></li>
-  <li><a href="#exercícios-de-fixação" id="toc-exercícios-de-fixação" class="nav-link" data-scroll-target="#exercícios-de-fixação"><span class="header-section-number">9.11</span> 🧠 Exercícios de fixação</a></li>
+  <li><a href="#intervalo-para-a-diferença-entre-duas-médias" id="toc-intervalo-para-a-diferença-entre-duas-médias" class="nav-link" data-scroll-target="#intervalo-para-a-diferença-entre-duas-médias"><span class="header-section-number">9.5</span> Intervalo para a diferença entre duas médias</a></li>
+  <li><a href="#intervalo-para-dados-pareados" id="toc-intervalo-para-dados-pareados" class="nav-link" data-scroll-target="#intervalo-para-dados-pareados"><span class="header-section-number">9.6</span> Intervalo para dados pareados</a></li>
+  <li><a href="#intervalo-de-confiança-para-uma-proporção" id="toc-intervalo-de-confiança-para-uma-proporção" class="nav-link" data-scroll-target="#intervalo-de-confiança-para-uma-proporção"><span class="header-section-number">9.7</span> Intervalo de confiança para uma proporção</a></li>
+  <li><a href="#intervalo-para-a-diferença-entre-duas-proporções" id="toc-intervalo-para-a-diferença-entre-duas-proporções" class="nav-link" data-scroll-target="#intervalo-para-a-diferença-entre-duas-proporções"><span class="header-section-number">9.8</span> Intervalo para a diferença entre duas proporções</a></li>
+  <li><a href="#três-grupos-por-que-um-intervalo-por-vez-engana" id="toc-três-grupos-por-que-um-intervalo-por-vez-engana" class="nav-link" data-scroll-target="#três-grupos-por-que-um-intervalo-por-vez-engana"><span class="header-section-number">9.9</span> Três grupos: por que um intervalo por vez engana</a></li>
+  <li><a href="#intervalo-quando-o-teste-é-não-paramétrico" id="toc-intervalo-quando-o-teste-é-não-paramétrico" class="nav-link" data-scroll-target="#intervalo-quando-o-teste-é-não-paramétrico"><span class="header-section-number">9.10</span> Intervalo quando o teste é não paramétrico</a></li>
+  <li><a href="#o-que-alarga-e-o-que-estreita-o-intervalo" id="toc-o-que-alarga-e-o-que-estreita-o-intervalo" class="nav-link" data-scroll-target="#o-que-alarga-e-o-que-estreita-o-intervalo"><span class="header-section-number">9.11</span> O que alarga e o que estreita o intervalo</a></li>
+  <li><a href="#o-intervalo-de-confiança-e-o-teste-de-hipóteses" id="toc-o-intervalo-de-confiança-e-o-teste-de-hipóteses" class="nav-link" data-scroll-target="#o-intervalo-de-confiança-e-o-teste-de-hipóteses"><span class="header-section-number">9.12</span> O intervalo de confiança e o teste de hipóteses</a></li>
+  <li><a href="#probmaster-o-multiplicador-em-segundos" id="toc-probmaster-o-multiplicador-em-segundos" class="nav-link" data-scroll-target="#probmaster-o-multiplicador-em-segundos"><span class="header-section-number">9.13</span> ProbMaster: o multiplicador em segundos</a></li>
+  <li><a href="#três-erros-comuns" id="toc-três-erros-comuns" class="nav-link" data-scroll-target="#três-erros-comuns"><span class="header-section-number">9.14</span> Três erros comuns</a></li>
+  <li><a href="#prática-interativa-do-cálculo-à-mão-ao-t.test" id="toc-prática-interativa-do-cálculo-à-mão-ao-t.test" class="nav-link" data-scroll-target="#prática-interativa-do-cálculo-à-mão-ao-t.test"><span class="header-section-number">9.15</span> Prática Interativa: do cálculo à mão ao <code>t.test()</code></a></li>
+  <li><a href="#prática-interativa-os-intervalos-dos-outros-desenhos" id="toc-prática-interativa-os-intervalos-dos-outros-desenhos" class="nav-link" data-scroll-target="#prática-interativa-os-intervalos-dos-outros-desenhos"><span class="header-section-number">9.16</span> Prática Interativa: os intervalos dos outros desenhos</a></li>
+  <li><a href="#o-que-levar-deste-capítulo" id="toc-o-que-levar-deste-capítulo" class="nav-link" data-scroll-target="#o-que-levar-deste-capítulo"><span class="header-section-number">9.17</span> O que levar deste capítulo</a></li>
+  <li><a href="#exercícios-de-fixação" id="toc-exercícios-de-fixação" class="nav-link" data-scroll-target="#exercícios-de-fixação"><span class="header-section-number">9.18</span> 🧠 Exercícios de fixação</a></li>
   </ul>
 </nav>
     </div>
@@ -2392,8 +2399,40 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p><em>Exemplo:</em> com <span class="math inline">\(n = 8\)</span>, <span class="math inline">\(\bar{x} = 142{,}4\)</span> mmHg e <span class="math inline">\(s = 4{,}93\)</span> mmHg, o erro padrão é <span class="math inline">\(4{,}93/\sqrt{8} = 1{,}74\)</span> mmHg e <span class="math inline">\(t = 2{,}365\)</span>. O intervalo é:</p>
 <p><span class="math display">\[142{,}4 \pm 2{,}365 \times 1{,}74 = [138{,}3;\; 146{,}5] \text{ mmHg}\]</span></p>
 </section>
-<section id="intervalo-de-confiança-para-uma-proporção" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="intervalo-de-confiança-para-uma-proporção"><span class="header-section-number">9.5</span> Intervalo de confiança para uma proporção</h2>
+<section id="intervalo-para-a-diferença-entre-duas-médias" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="intervalo-para-a-diferença-entre-duas-médias"><span class="header-section-number">9.5</span> Intervalo para a diferença entre duas médias</h2>
+<p>Volte ao estudo odontológico do capítulo anterior: o dentifrício B reduziu o biofilme em 64,0% (desvio 6,2; <span class="math inline">\(n = 9\)</span>) e o A em 73,6% (desvio 5,0; <span class="math inline">\(n = 9\)</span>). A diferença observada é de 9,6 pontos percentuais.</p>
+<p>Para construir o intervalo dessa <strong>diferença</strong>, a estrutura é a mesma de sempre — estimativa mais ou menos um múltiplo do erro padrão. O que muda é que o erro padrão agora é o da diferença, e ele combina a incerteza dos dois grupos:</p>
+<p><span class="math display">\[EP_{\text{dif}} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} = \sqrt{\frac{6{,}16^2}{9} + \frac{5{,}03^2}{9}} = 2{,}65\]</span></p>
+<p>Com 15,4 graus de liberdade (o ajuste de Welch), <span class="math inline">\(t = 2{,}13\)</span>, e a margem de erro é <span class="math inline">\(2{,}13 \times 2{,}65 = 5{,}64\)</span>:</p>
+<p><span class="math display">\[IC_{95\%}(\mu_B - \mu_A) = 9{,}56 \pm 5{,}64 = [3{,}92;\; 15{,}20] \text{ pontos percentuais}\]</span></p>
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Repare no significado: o intervalo <strong>não inclui o zero</strong>, mas é largo. O ganho real pode ser de 4 ou de 15 pontos percentuais. Numa decisão clínica, essa diferença importa: quatro pontos podem não justificar a troca de produto; quinze, sim.</p>
+</section>
+<section id="intervalo-para-dados-pareados" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="intervalo-para-dados-pareados"><span class="header-section-number">9.6</span> Intervalo para dados pareados</h2>
+<p>No estudo de fisioterapia, dez pacientes avaliaram a dor antes e depois de três sessões. As dez diferenças têm média 2,7 e desvio padrão 1,42. O erro padrão que entra na conta é o da <strong>média das diferenças</strong>:</p>
+<p><span class="math display">\[EP = \frac{1{,}42}{\sqrt{10}} = 0{,}45\]</span></p>
+<p><span class="math display">\[IC_{95\%} = 2{,}7 \pm 2{,}262 \times 0{,}45 = [1{,}69;\; 3{,}71] \text{ pontos}\]</span></p>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>O detalhe que muda tudo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No desenho pareado, o desvio padrão que entra na conta é o <strong>das diferenças</strong> (1,42), e não o desvio de cada coluna (1,08 e 2,35). Como as duas medidas vêm da mesma pessoa, elas se movem juntas, e a diferença entre elas varia muito menos do que a variável original. É por isso que o mesmo experimento, quando pareado, produz um intervalo mais estreito.</p>
+</div>
+</div>
+</section>
+<section id="intervalo-de-confiança-para-uma-proporção" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="intervalo-de-confiança-para-uma-proporção"><span class="header-section-number">9.7</span> Intervalo de confiança para uma proporção</h2>
 <p>Para proporções, a aproximação normal dá:</p>
 <p><span class="math display">\[\text{IC}_{95\%} = \hat{p} \pm 1{,}96\sqrt{\frac{\hat{p}\,(1-\hat{p})}{n}}\]</span></p>
 <p><em>Exemplo:</em> se 45 de 120 pacientes apresentaram melhora, <span class="math inline">\(\hat{p} = 0{,}375\)</span> e o intervalo é <span class="math inline">\([0{,}288;\; 0{,}462]\)</span> — ou seja, de 28,8% a 46,2%.</p>
@@ -2411,8 +2450,87 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </section>
-<section id="o-que-alarga-e-o-que-estreita-o-intervalo" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="o-que-alarga-e-o-que-estreita-o-intervalo"><span class="header-section-number">9.6</span> O que alarga e o que estreita o intervalo</h2>
+<section id="intervalo-para-a-diferença-entre-duas-proporções" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="intervalo-para-a-diferença-entre-duas-proporções"><span class="header-section-number">9.8</span> Intervalo para a diferença entre duas proporções</h2>
+<p>O mesmo raciocínio vale para proporções. Num ensaio clínico, 45 de 120 pacientes do grupo controle melhoraram (37,5%) e 55 de 120 do grupo tratado também (45,8%). A diferença é de <span class="math inline">\(-8{,}3\)</span> pontos percentuais.</p>
+<p><span class="math display">\[EP_{\text{dif}} = \sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}} = \sqrt{\frac{0{,}375 \times 0{,}625}{120} + \frac{0{,}458 \times 0{,}542}{120}} = 0{,}063\]</span></p>
+<p><span class="math display">\[IC_{95\%} = -0{,}083 \pm 1{,}96 \times 0{,}063 = [-0{,}208;\; 0{,}041]\]</span></p>
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Aqui o intervalo <strong>inclui o zero</strong>: os dados são compatíveis tanto com uma redução de 21 pontos percentuais quanto com um aumento de 4. O teste correspondente tem <span class="math inline">\(p = 0{,}19\)</span> e não rejeita a igualdade — as duas leituras contam a mesma história.</p>
+<p>E note o tamanho da amostra: 240 pacientes produziram uma margem de erro de 12 pontos percentuais. Para estimar uma proporção com precisão de 5 pontos, seriam necessários cerca de 380 pacientes por grupo.</p>
+</section>
+<section id="três-grupos-por-que-um-intervalo-por-vez-engana" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="três-grupos-por-que-um-intervalo-por-vez-engana"><span class="header-section-number">9.9</span> Três grupos: por que um intervalo por vez engana</h2>
+<p>No estudo de fisioterapia com três protocolos, cada média tem o seu intervalo de 95%:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Protocolo</th>
+<th>Média (graus)</th>
+<th>IC 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A — convencional</td>
+<td>13,50</td>
+<td>[12,02; 14,98]</td>
+</tr>
+<tr class="even">
+<td>B — biofeedback</td>
+<td>19,38</td>
+<td>[17,97; 20,78]</td>
+</tr>
+<tr class="odd">
+<td>C — eletroestimulação</td>
+<td>21,88</td>
+<td>[20,18; 23,57]</td>
+</tr>
+</tbody>
+</table>
+<p>Compare B e C: os intervalos <strong>se sobrepõem</strong> (a faixa de B vai até 20,78; a de C começa em 20,18). Pela lógica ingênua, isso sugeriria “sem diferença”. Mas o pós-teste de Tukey encontrou diferença de 2,50 graus, com <span class="math inline">\(p = 0{,}033\)</span> e intervalo <span class="math inline">\([0{,}19;\; 4{,}81]\)</span> — que exclui o zero.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>A sobreposição de intervalos não é um teste
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dois intervalos de confiança individuais que se sobrepõem <strong>não</strong> provam ausência de diferença. Cada um deles carrega a incerteza do seu próprio grupo; o intervalo da <em>diferença</em> é mais estreito que a comparação ingênua sugere, porque parte da incerteza é comum aos dois lados.</p>
+<p>A regra que vale é a inversa, e só ela: se dois intervalos <strong>não</strong> se sobrepõem, a diferença é significativa. O contrário não se pode concluir.</p>
+</div>
+</div>
+<p>Para julgar os três grupos de uma vez, o correto é usar os intervalos <strong>ajustados</strong> para comparações múltiplas — os que o <code>TukeyHSD()</code> devolve. Eles são mais largos que os intervalos individuais, porque pagam o preço de estar fazendo três comparações ao mesmo tempo.</p>
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="intervalo-quando-o-teste-é-não-paramétrico" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="intervalo-quando-o-teste-é-não-paramétrico"><span class="header-section-number">9.10</span> Intervalo quando o teste é não paramétrico</h2>
+<p>Se a variável é ordinal, o intervalo de confiança da média não faz sentido — e o do teste por postos responde outra pergunta: <strong>qual o deslocamento típico entre os grupos</strong>, medido em postos.</p>
+<p>No exemplo do índice de placa (escala de 0 a 3), o teste de Mann-Whitney estima que a escova elétrica reduz o índice em 1 ponto, com intervalo de <span class="math inline">\([1{,}0;\; 2{,}0]\)</span>. O estimador usado é o de <strong>Hodges-Lehmann</strong>: a mediana de todas as diferenças possíveis entre um valor de um grupo e um valor do outro.</p>
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Para o caso pareado, o mesmo comando com <code>paired = TRUE</code> devolve o intervalo da mediana das diferenças. No estudo da dor lombar, ele dá mediana 2,5 pontos, com intervalo de <span class="math inline">\([1{,}5;\; 4{,}0]\)</span> — praticamente o mesmo veredito do intervalo paramétrico, mas sem supor normalidade.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Um aviso que assusta e não deveria
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Com dados discretos (escalas de 0 a 3, contagens pequenas), o R às vezes avisa que “o nível de confiança pedido não é atingível”. Isso não é erro: com poucos valores possíveis, não existe um intervalo que deixe exatamente 2,5% em cada cauda. O intervalo devolvido é o mais próximo, e costuma ser conservador.</p>
+</div>
+</div>
+</section>
+<section id="o-que-alarga-e-o-que-estreita-o-intervalo" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="o-que-alarga-e-o-que-estreita-o-intervalo"><span class="header-section-number">9.11</span> O que alarga e o que estreita o intervalo</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -2450,41 +2568,124 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </tbody>
 </table>
 </section>
-<section id="o-intervalo-de-confiança-e-o-teste-de-hipóteses" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="o-intervalo-de-confiança-e-o-teste-de-hipóteses"><span class="header-section-number">9.7</span> O intervalo de confiança e o teste de hipóteses</h2>
+<section id="o-intervalo-de-confiança-e-o-teste-de-hipóteses" class="level2" data-number="9.12">
+<h2 data-number="9.12" class="anchored" data-anchor-id="o-intervalo-de-confiança-e-o-teste-de-hipóteses"><span class="header-section-number">9.12</span> O intervalo de confiança e o teste de hipóteses</h2>
 <p>Os dois são a mesma conta vista de ângulos diferentes. Um intervalo de 95% para uma diferença <strong>equivale</strong> a um teste bilateral com <span class="math inline">\(\alpha = 0{,}05\)</span>:</p>
 <ul>
 <li>Se o intervalo <strong>não inclui o zero</strong>, o teste rejeita <span class="math inline">\(H_0\)</span>.</li>
 <li>Se o intervalo <strong>inclui o zero</strong>, o teste não rejeita <span class="math inline">\(H_0\)</span>.</li>
 </ul>
 <p>No exemplo do capítulo 8, a diferença de pressão entre os grupos foi de <span class="math inline">\(-11{,}75\)</span> mmHg, com intervalo de <span class="math inline">\([-16{,}2;\; -7{,}3]\)</span>. Como o zero está fora, o teste também rejeitou a nula.</p>
-<p>O intervalo é mais informativo que o p-valor porque mostra <strong>onde</strong> o efeito provavelmente está — e não apenas se ele é diferente de zero.</p>
+<p>A correspondência vale para todos os desenhos que vimos:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Desenho</th>
+<th>Estimativa</th>
+<th>IC 95%</th>
+<th>O zero está dentro?</th>
+<th>Teste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Um grupo</td>
+<td>499,83 mg</td>
+<td>[498,19; 501,48]</td>
+<td>sim (o valor de referência)</td>
+<td>não rejeita, <span class="math inline">\(p = 0{,}83\)</span></td>
+</tr>
+<tr class="even">
+<td>Dois grupos independentes</td>
+<td>+9,56 p.p.</td>
+<td>[3,92; 15,20]</td>
+<td>não</td>
+<td>rejeita, <span class="math inline">\(p = 0{,}0025\)</span></td>
+</tr>
+<tr class="odd">
+<td>Dois grupos pareados</td>
+<td>+2,70 pontos</td>
+<td>[1,69; 3,71]</td>
+<td>não</td>
+<td>rejeita, <span class="math inline">\(p = 0{,}0002\)</span></td>
+</tr>
+<tr class="even">
+<td>Três grupos (C − B)</td>
+<td>+2,50 graus</td>
+<td>[0,19; 4,81]</td>
+<td>não</td>
+<td>rejeita, <span class="math inline">\(p = 0{,}033\)</span></td>
+</tr>
+<tr class="odd">
+<td>Duas proporções</td>
+<td>−8,3 p.p.</td>
+<td>[−20,8; 4,1]</td>
+<td>sim</td>
+<td>não rejeita, <span class="math inline">\(p = 0{,}19\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>O intervalo é mais informativo que o p-valor porque mostra <strong>onde</strong> o efeito provavelmente está — e não apenas se ele é diferente de zero. Um p-valor de 0,03 e outro de 0,03 podem esconder um efeito de 15 pontos percentuais ou de 0,2 grau; o intervalo distingue os dois casos.</p>
 </section>
-<section id="três-erros-comuns" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="três-erros-comuns"><span class="header-section-number">9.8</span> Três erros comuns</h2>
+<section id="probmaster-o-multiplicador-em-segundos" class="level2" data-number="9.13">
+<h2 data-number="9.13" class="anchored" data-anchor-id="probmaster-o-multiplicador-em-segundos"><span class="header-section-number">9.13</span> ProbMaster: o multiplicador em segundos</h2>
+<p>Toda a conta do intervalo depende de um único número: o <strong>multiplicador crítico</strong>. Para 95% e amostras grandes, ele é 1,96; para <span class="math inline">\(n\)</span> pequeno, é o <span class="math inline">\(t\)</span> de Student com <span class="math inline">\(n - 1\)</span> graus de liberdade; para proporções, volta a ser o <span class="math inline">\(z\)</span> da normal.</p>
+<p>É esse número que o <strong>ProbMaster</strong> entrega em dois toques, sem tabela:</p>
+<ol type="1">
+<li>Abra o app e escolha a distribuição — <strong>Normal</strong> para proporções e amostras grandes, <strong>t-Student</strong> para médias com <span class="math inline">\(n\)</span> pequeno.</li>
+<li>Ajuste o parâmetro: os graus de liberdade, no caso da <span class="math inline">\(t\)</span> (<span class="math inline">\(n - 1\)</span>).</li>
+<li>Ative o <strong>Modo Inverso (Quantil)</strong> e peça a região <strong>bicaudal</strong>, com 5% repartidos em duas caudas de 2,5%. O app devolve o valor de corte.</li>
+</ol>
+<p>Para o teor dos comprimidos (<span class="math inline">\(n = 12\)</span>, 11 graus de liberdade), o valor é <strong>2,20</strong>. Para a dor lombar (<span class="math inline">\(n = 10\)</span>, 9 graus), é <strong>2,26</strong>. Para a diferença entre os dentifrícios, com os 15,4 graus de liberdade do ajuste de Welch, é <strong>2,13</strong>.</p>
+<p>Com o multiplicador em mãos, o intervalo é o que sempre foi: estimativa mais ou menos o multiplicador vezes o erro padrão. O aplicativo não substitui a fórmula — ele só elimina a parte chata.</p>
+</section>
+<section id="três-erros-comuns" class="level2" data-number="9.14">
+<h2 data-number="9.14" class="anchored" data-anchor-id="três-erros-comuns"><span class="header-section-number">9.14</span> Três erros comuns</h2>
 <ol type="1">
 <li><strong>“95% de chance de o parâmetro estar no intervalo.”</strong> Não é isso: o parâmetro é fixo. A probabilidade descreve o método, não este intervalo específico.</li>
 <li><strong>Tratar a margem de erro como um selo de qualidade.</strong> Um intervalo estreito pode vir de um estudo enviesado — precisão não corrige viés.</li>
 <li><strong>Ignorar o que o intervalo significa clinicamente.</strong> Um intervalo de <span class="math inline">\([0{,}1;\; 0{,}3]\)</span> mmHg para a diferença de pressão é estreito e irrelevante.</li>
 </ol>
 </section>
-<section id="prática-interativa-do-cálculo-à-mão-ao-t.test" class="level2" data-number="9.9">
-<h2 data-number="9.9" class="anchored" data-anchor-id="prática-interativa-do-cálculo-à-mão-ao-t.test"><span class="header-section-number">9.9</span> Prática Interativa: do cálculo à mão ao <code>t.test()</code></h2>
+<section id="prática-interativa-do-cálculo-à-mão-ao-t.test" class="level2" data-number="9.15">
+<h2 data-number="9.15" class="anchored" data-anchor-id="prática-interativa-do-cálculo-à-mão-ao-t.test"><span class="header-section-number">9.15</span> Prática Interativa: do cálculo à mão ao <code>t.test()</code></h2>
 <p>Vamos reconstruir, linha por linha, o intervalo de confiança da média daquele grupo de pressão sistólica — e depois conferir com a função pronta do R.</p>
-<div id="qwebr-insertion-location-1"></div>
+<div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>O resultado é o mesmo: <span class="math inline">\([138{,}3;\; 146{,}5]\)</span> mmHg. Repare que o <code>t.test()</code> devolve o intervalo pronto no objeto <code>$conf.int</code> — mas agora você sabe exatamente o que ele fez por dentro.</p>
 <p><strong>Exercício rápido:</strong> troque <code>0.975</code> por <code>0.995</code> e rode novamente. O intervalo fica mais largo ou mais estreito? Por quê?</p>
 </section>
-<section id="o-que-levar-deste-capítulo" class="level2" data-number="9.10">
-<h2 data-number="9.10" class="anchored" data-anchor-id="o-que-levar-deste-capítulo"><span class="header-section-number">9.10</span> O que levar deste capítulo</h2>
+<section id="prática-interativa-os-intervalos-dos-outros-desenhos" class="level2" data-number="9.16">
+<h2 data-number="9.16" class="anchored" data-anchor-id="prática-interativa-os-intervalos-dos-outros-desenhos"><span class="header-section-number">9.16</span> Prática Interativa: os intervalos dos outros desenhos</h2>
+<p>O mesmo esqueleto — estimativa, erro padrão, multiplicador — resolve todos os desenhos. Rode os quatro e compare a largura dos intervalos:</p>
+<div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Duas observações para guardar:</p>
+<ul>
+<li>o intervalo do desenho <strong>pareado</strong> é mais estreito que o do desenho independente com o mesmo número de pacientes — é o efeito de eliminar a variabilidade entre indivíduos;</li>
+<li>os intervalos do <strong>Tukey</strong> são mais largos que os intervalos individuais de cada média, porque já pagam o preço das três comparações.</li>
+</ul>
+</section>
+<section id="o-que-levar-deste-capítulo" class="level2" data-number="9.17">
+<h2 data-number="9.17" class="anchored" data-anchor-id="o-que-levar-deste-capítulo"><span class="header-section-number">9.17</span> O que levar deste capítulo</h2>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Resumo em quatro pontos
+<span class="screen-reader-only">Nota</span>Resumo em cinco pontos
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2492,14 +2693,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li><strong>Toda estimativa tem incerteza.</strong> O intervalo de confiança é a forma padrão de declará-la.</li>
 <li><strong>95% descreve o método, não o intervalo.</strong> É a proporção de intervalos que conteriam o parâmetro se o estudo se repetisse.</li>
 <li><strong>Precisão custa caro.</strong> Quadruplicar a amostra apenas divide a margem de erro por dois.</li>
-<li><strong>O intervalo é mais informativo que o p-valor.</strong> Ele mostra o tamanho do efeito e a faixa de valores plausíveis.</li>
+<li><strong>A fórmula é a mesma para todo desenho.</strong> Estimativa mais ou menos multiplicador crítico vezes erro padrão — o que muda é qual erro padrão usar, e o pareamento é o que mais estreita o intervalo.</li>
+<li><strong>O intervalo é mais informativo que o p-valor.</strong> Ele mostra o tamanho do efeito e a faixa de valores plausíveis; e, em comparações múltiplas, só os intervalos ajustados valem.</li>
 </ol>
 <p>O capítulo 10 fecha a parte de modelagem com as duas ferramentas mais usadas — e mais confundidas — da estatística aplicada: a correlação e a regressão.</p>
 </div>
 </div>
 </section>
-<section id="exercícios-de-fixação" class="level2" data-number="9.11">
-<h2 data-number="9.11" class="anchored" data-anchor-id="exercícios-de-fixação"><span class="header-section-number">9.11</span> 🧠 Exercícios de fixação</h2>
+<section id="exercícios-de-fixação" class="level2" data-number="9.18">
+<h2 data-number="9.18" class="anchored" data-anchor-id="exercícios-de-fixação"><span class="header-section-number">9.18</span> 🧠 Exercícios de fixação</h2>
 <p><em>A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!</em></p>
 <div class="questao-banco">
 <p><strong>Questão #CAP9-01</strong></p>
@@ -2540,6 +2742,66 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   &gt; **Correto!** É exatamente o que o intervalo informa. Ele não invalida o estudo, mas limita o que se pode afirmar.
 - [ ] O intervalo deveria ter sido de 99% para ficar mais estreito.
   &gt; **Incorreto.** Aumentar o nível de confiança só alarga ainda mais o intervalo.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP9-05</strong></p>
+<pre class="quizdown"><code># Dois pesquisadores mediram a mesma variável em grupos de tamanhos parecidos. O primeiro usou o desenho pareado; o segundo, grupos independentes. Qual tende a ter intervalo mais estreito, e por quê?
+- [ ] O independente, porque tem mais pacientes no total.
+  &gt; **Incorreto.** O total de medidas pode ser o mesmo; o que muda é quanto da variabilidade entra na conta do erro padrão.
+- [x] O pareado, porque trabalha com a diferença dentro de cada indivíduo e elimina a variabilidade entre pessoas.
+  &gt; **Correto!** No pareado, o desvio usado é o das diferenças, que é menor que o desvio da variável original.
+- [ ] Os dois, obrigatoriamente, porque a fórmula do intervalo é a mesma.
+  &gt; **Incorreto.** A estrutura da fórmula é a mesma, mas o erro padrão é diferente: no pareado usa-se o desvio das diferenças.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP9-06</strong></p>
+<pre class="quizdown"><code># Num estudo com três grupos, os intervalos de 95% das médias de B e C se sobrepõem. O que se pode concluir?
+- [ ] Que B e C são estatisticamente equivalentes.
+  &gt; **Incorreto.** Sobreposição de intervalos individuais não é teste de equivalência nem garante ausência de diferença.
+- [x] Nada se conclui diretamente: é preciso comparar com intervalos ajustados para comparações múltiplas, como os do Tukey.
+  &gt; **Correto!** Os intervalos individuais carregam a incerteza de cada grupo; o intervalo da diferença é outro cálculo.
+- [ ] Que o estudo é inválido, pois intervalos de grupos diferentes nunca devem se sobrepor.
+  &gt; **Incorreto.** A sobreposição é comum e esperada; ela apenas não permite concluir equivalência.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP9-07</strong></p>
+<pre class="quizdown"><code># Para estimar a proporção de pacientes que respondem a um tratamento com margem de erro de 5 pontos percentuais, um pesquisador dobrou o tamanho da amostra. O que aconteceu com a margem?
+- [ ] Caiu à metade, de 5 para 2,5 pontos percentuais.
+  &gt; **Incorreto.** A margem cai com a raiz de n: dobrar a amostra não divide a margem por dois.
+- [x] Caiu por um fator de aproximadamente 1,41, de 5 para cerca de 3,5 pontos percentuais.
+  &gt; **Correto!** Como o erro padrão é proporcional a 1/√n, dobrar n reduz a margem por um fator de 1,41.
+- [ ] Não mudou, porque a margem depende apenas do nível de confiança.
+  &gt; **Incorreto.** O nível de confiança define o multiplicador, mas o erro padrão depende de n.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP9-08</strong></p>
+<pre class="quizdown"><code># Num ensaio, 45 de 120 pacientes melhoraram no grupo controle e 55 de 120 no grupo tratado. O intervalo de 95% para a diferença foi [-20,8; 4,1] pontos percentuais. Como interpretar?
+- [ ] O tratamento é prejudicial, pois o intervalo contém valores negativos.
+  &gt; **Incorreto.** Um intervalo é uma faixa de valores plausíveis, não uma lista de resultados possíveis a serem escolhidos.
+- [x] Não há evidência de diferença: o intervalo inclui o zero e vai de uma redução de 21 a um aumento de 4 pontos percentuais.
+  &gt; **Correto!** O zero está dentro do intervalo, e o estudo não descarta efeitos clinicamente relevantes em nenhuma direção.
+- [ ] O estudo prova que os dois tratamentos são equivalentes.
+  &gt; **Incorreto.** Não rejeitar não prova equivalência; o intervalo ainda é compatível com diferenças importantes.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP9-09</strong></p>
+<pre class="quizdown"><code># O índice de placa é medido numa escala ordinal de 0 a 3. Qual intervalo de confiança faz sentido nesse caso?
+- [ ] O intervalo da média, calculado com o t de Student.
+  &gt; **Incorreto.** Numa escala ordinal, a média não tem significado: as distâncias entre os pontos não são iguais.
+- [x] O intervalo do deslocamento estimado pelo teste de Mann-Whitney, baseado no estimador de Hodges-Lehmann.
+  &gt; **Correto!** O intervalo por postos descreve o deslocamento típico entre os grupos sem exigir normalidade nem média.
+- [ ] Nenhum: variáveis ordinais não admitem intervalo de confiança.
+  &gt; **Incorreto.** Elas admitem, mas o parâmetro estimado é outro: o deslocamento de posição, não a média.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP9-10</strong></p>
+<pre class="quizdown"><code># Um pesquisador quer o valor crítico t para n = 12 e 95% de confiança. No ProbMaster, qual caminho resolve?
+- [ ] Distribuição normal, com média 0 e desvio 1, lendo o ponto de corte 1,96.
+  &gt; **Incorreto.** A normal serve para amostras grandes; com n = 12 é preciso a distribuição t, com 11 graus de liberdade.
+- [x] Distribuição t-Student com 11 graus de liberdade, no Modo Inverso (Quantil), com 5% repartidos nas duas caudas.
+  &gt; **Correto!** O Modo Inverso devolve o valor de corte a partir da área; com 11 graus de liberdade o resultado é 2,20.
+- [ ] Distribuição F de Fisher com 2 e 11 graus de liberdade.
+  &gt; **Incorreto.** A distribuição F é usada na ANOVA, para comparar três ou mais grupos; não é a do intervalo de uma média.</code></pre>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">

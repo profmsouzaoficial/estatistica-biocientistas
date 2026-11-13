@@ -425,7 +425,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"controle <- c(142, 138, 145, 139,\n              150, 136, 148, 141)\ntratamento <- c(130, 128, 135, 129,\n                132, 126, 134, 131)\n\nmean(controle)\nmean(tratamento)\n\nt.test(tratamento, controle)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"teor <- c(497, 502, 499, 503,\n          496, 501, 498, 504,\n          500, 497, 502, 499)\n\nt.test(teor, mu = 500)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"A <- c(62, 58, 71, 65, 55,\n       68, 60, 74, 63)\nB <- c(70, 75, 66, 79, 72,\n       68, 81, 74, 77)\n\nt.test(B, A)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"antes  <- c(8, 7, 9, 6, 8,\n            7, 9, 8, 7, 6)\ndepois <- c(7, 4, 8, 1, 6,\n            4, 6, 7, 3, 2)\n\nt.test(antes, depois,\n       paired = TRUE)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ganho <- c(12, 15, 11, 14,\n           13, 16, 12, 15,\n           18, 21, 17, 20,\n           19, 22, 18, 20,\n           20, 24, 19, 23,\n           21, 25, 22, 21)\n\ngrupo <- factor(rep(c(\"A\",\"B\",\"C\"),\n                    each = 8))\n\nsummary(aov(ganho ~ grupo))","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ganho <- c(12,15,11,14,13,16,12,15,\n           18,21,17,20,19,22,18,20,\n           20,24,19,23,21,25,22,21)\ngrupo <- factor(rep(c(\"A\",\"B\",\"C\"),\n                    each = 8))\n\nTukeyHSD(aov(ganho ~ grupo))","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"manual <- c(2,3,3,2,3,2,\n            3,3,2,2,3,3)\neletrica <- c(1,2,1,2,1,1,\n              2,1,2,1,1,2)\n\nwilcox.test(manual, eletrica,\n            conf.int = TRUE)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -2103,12 +2103,601 @@ A definição é curta. Quase todo erro de interpretação em pesquisa vem de tr
 <li class="fragment"><strong>O p-valor</strong> — a compatibilidade com a hipótese nula.</li>
 </ul>
 </section>
-<section id="rodando-o-teste-no-r" class="slide level2">
-<h2>Rodando o teste no R</h2>
+<section id="de-qual-teste-estamos-falando" class="slide level2 divider">
+<h2>De qual teste estamos falando?</h2>
+<p>Bloco 2 · Da lógica à escolha do teste</p>
+</section>
+<section id="três-perguntas-definem-o-teste" class="slide level2">
+<h2>Três perguntas definem o teste</h2>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>Quantos grupos?</strong></p>
+<p>Um grupo contra um valor de referência, dois grupos, ou três ou mais.</p>
+</div>
+<div class="card">
+<p><strong>Pareado ou independente?</strong></p>
+<p>Pessoas diferentes em cada grupo — ou as mesmas pessoas medidas duas vezes.</p>
+</div>
+<div class="card">
+<p><strong>Os pressupostos valem?</strong></p>
+<p>Normalidade, variâncias parecidas, observações independentes.</p>
+</div>
+</div>
+<div class="keybox">
+<p>Responda às três <strong>antes</strong> de rodar qualquer coisa. O p-valor não avisa quando o teste está errado — ele só responde o que foi perguntado.</p>
+</div>
+</section>
+<section id="o-mapa-dos-testes" class="slide level2">
+<h2>O mapa dos testes</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>A pergunta</th>
+<th>O teste</th>
+<th>No R</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 grupo vs.&nbsp;valor de referência</td>
+<td>t de uma amostra</td>
+<td><code>t.test(x, mu = 500)</code></td>
+</tr>
+<tr class="even">
+<td>2 grupos independentes</td>
+<td>t de Welch</td>
+<td><code>t.test(y ~ g)</code></td>
+</tr>
+<tr class="odd">
+<td>2 grupos pareados</td>
+<td>t pareado</td>
+<td><code>t.test(a, d, paired = TRUE)</code></td>
+</tr>
+<tr class="even">
+<td>3 ou mais grupos</td>
+<td>ANOVA + Tukey</td>
+<td><code>aov()</code> + <code>TukeyHSD()</code></td>
+</tr>
+<tr class="odd">
+<td>2 grupos, escala ordinal</td>
+<td>Mann-Whitney</td>
+<td><code>wilcox.test(y ~ g)</code></td>
+</tr>
+<tr class="even">
+<td>2 pareados, escala ordinal</td>
+<td>Wilcoxon</td>
+<td><code>wilcox.test(a, d, paired = TRUE)</code></td>
+</tr>
+</tbody>
+</table>
+<p class="small">
+Não existe “qui-quadrado para comparar médias” nem “ANOVA para dois grupos”. Cada linha responde a uma pergunta diferente — trocar a pergunta invalida o resultado.
+</p>
+</section>
+<section id="paramétrico-ou-não-paramétrico" class="slide level2">
+<h2>Paramétrico ou não paramétrico?</h2>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Paramétrico — a balança</strong></p>
+<p>Usa o <strong>valor exato</strong> de cada medida e resume em média e desvio padrão.</p>
+<p>Detecta efeitos menores. Em troca, exige normalidade, variâncias parecidas e independência.</p>
+</div>
+<div class="card">
+<p><strong>Não paramétrico — a classificação</strong></p>
+<p>Usa apenas a <strong>ordem</strong> dos valores.</p>
+<p>Sobrevive a escala ordinal, valor extremo e amostra minúscula. Custa um pouco de poder.</p>
+</div>
+</div>
+<div class="keybox">
+<p>Nenhum dos dois é “melhor”. Uma balança precisa de pista limpa; uma classificação de corrida continua válida mesmo se o cronômetro falhar.</p>
+</div>
+</section>
+<section id="o-comprimido-está-conforme" class="slide level2">
+<h2>O comprimido está conforme?</h2>
+<p>
+<span class="pill">Farmácia · um grupo</span>
+</p>
+<p>Doze comprimidos de paracetamol — especificação <strong>500 mg</strong> — foram pesados:</p>
+<p>497 · 502 · 499 · 503 · 496 · 501 · 498 · 504 · 500 · 497 · 502 · 499</p>
+<div class="formula">
+<p><span class="math display">\[H_0: \mu = 500 \text{ mg} \qquad H_1: \mu \neq 500 \text{ mg}\]</span></p>
+</div>
+<p class="small">
+Média 499,83 mg · desvio padrão 2,59 mg · erro padrão 0,75 mg
+</p>
+</section>
+<section id="farmácia-a-conta-é-uma-razão" class="slide level2">
+<h2>Farmácia · a conta é uma razão</h2>
+<div class="formula">
+<p><span class="math display">\[t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} = \frac{499{,}83 - 500}{0{,}75} = -0{,}22\]</span></p>
+</div>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="farmácia-o-que-o-p-não-disse" class="slide level2">
+<h2>Farmácia · o que o p não disse</h2>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Não rejeitar não é aprovar</strong></p>
+<p><span class="math inline">\(p = 0{,}83\)</span>: doze comprimidos não distinguiram o lote de um lote perfeito.</p>
+<p>Isso não é atestado de conformidade.</p>
+</div>
+<div class="card">
+<p><strong>Quem mede a incerteza é o intervalo</strong></p>
+<p>IC 95% = <strong>[498,19; 501,48]</strong> mg.</p>
+<p>Os dados aceitam um lote até 1,8 mg abaixo da especificação.</p>
+</div>
+</div>
+<div class="keybox">
+<p>Um lote de fato desviado produziria um p bem pequeno — o teste tem poder para achar o problema, desde que o problema seja grande.</p>
+</div>
+</section>
+<section id="dois-dentifrícios" class="slide level2">
+<h2>Dois dentifrícios</h2>
+<p>
+<span class="pill">Odontologia · dois grupos independentes</span>
+</p>
+<p>Redução do índice de biofilme, em pontos percentuais, após 30 dias:</p>
+<ul>
+<li><strong>A · convencional</strong> — 62, 58, 71, 65, 55, 68, 60, 74, 63 → média 64,0 · DP 6,2</li>
+<li><strong>B · formulação nova</strong> — 70, 75, 66, 79, 72, 68, 81, 74, 77 → média 73,6 · DP 5,0</li>
+</ul>
+<div class="keybox">
+<p>Os grupos são <strong>independentes</strong>: são pessoas diferentes. A pergunta é se 9,6 pontos percentuais sobrevivem ao sorteio de nove voluntários por grupo.</p>
+</div>
+</section>
+<section id="odontologia-por-que-welch" class="slide level2">
+<h2>Odontologia · por que Welch</h2>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>O t clássico supõe variâncias iguais</strong></p>
+<p>Quando isso não vale, ele fica <strong>otimista</strong>: o p sai menor do que deveria e o intervalo, mais estreito.</p>
+</div>
+<div class="card">
+<p><strong>Welch ajusta os graus de liberdade</strong></p>
+<p>Não supõe variâncias iguais. É o padrão do R — e dá praticamente o mesmo resultado quando elas são iguais.</p>
+</div>
+</div>
+<div class="formula">
+<p><span class="math display">\[t = \frac{\bar{x}_B - \bar{x}_A}{\sqrt{\dfrac{s_B^2}{n_B} + \dfrac{s_A^2}{n_A}}}\]</span></p>
+</div>
 <p class="small">
-A saída traz as médias, a diferença, o intervalo de confiança e o p-valor. Leia os quatro — nunca só o último.
+Daí vêm os 15,4 graus de liberdade — fracionários, e é assim mesmo que funciona.
+</p>
+</section>
+<section id="odontologia-o-r-responde" class="slide level2">
+<h2>Odontologia · o R responde</h2>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="odontologia-96-pontos-e-a-margem" class="slide level2">
+<h2>Odontologia · 9,6 pontos e a margem</h2>
+<div class="keybox">
+<p><span class="math inline">\(t = 3{,}60\)</span> · 15,4 gl · <strong>p = 0,0025</strong> · IC 95% da diferença: <strong>[3,9; 15,2]</strong></p>
+</div>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>O que o intervalo garante</strong></p>
+<p>O zero está fora: há evidência de que B reduz mais biofilme que A.</p>
+</div>
+<div class="card">
+<p><strong>O que o intervalo confessa</strong></p>
+<p>O ganho real pode ser de 4 <strong>ou</strong> de 15 pontos percentuais. Nove por grupo não compram precisão.</p>
+</div>
+</div>
+<p class="small">
+“Deu significativo” e “sei o tamanho do efeito” são frases diferentes. A segunda vem do intervalo.
+</p>
+</section>
+<section id="o-mesmo-paciente-duas-vezes" class="slide level2">
+<h2>O mesmo paciente, duas vezes</h2>
+<p>
+<span class="pill">Fisioterapia · dois grupos pareados</span>
+</p>
+<p>Dor lombar crônica (escala 0–10) em dez pacientes, antes e após três sessões:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Paciente</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Antes</td>
+<td>8</td>
+<td>7</td>
+<td>9</td>
+<td>6</td>
+<td>8</td>
+<td>7</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>Depois</td>
+<td>7</td>
+<td>4</td>
+<td>8</td>
+<td>1</td>
+<td>6</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>Não se compara as duas colunas. Comparam-se as <strong>dez diferenças</strong>: 1, 3, 1, 5, 2, 3, 3, 1, 4, 4 — média 2,7 e desvio 1,42.</p>
+</div>
+</section>
+<section id="fisioterapia-a-conta-sobre-as-diferenças" class="slide level2">
+<h2>Fisioterapia · a conta sobre as diferenças</h2>
+<p>É o desvio <strong>das diferenças</strong> (1,42) que entra na conta — não o desvio de cada coluna.</p>
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p class="small">
+t = 6,02 · 9 gl · p = 0,0002 · IC 95% da diferença: [1,69; 3,71] pontos.
+</p>
+</section>
+<section id="por-que-parear-ganha-poder" class="slide level2">
+<h2>Por que parear ganha poder</h2>
+<p>Os <strong>mesmos 20 números</strong>, analisados de duas formas:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Análise</th>
+<th>p-valor</th>
+<th>IC 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pareado (correto para este desenho)</td>
+<td>0,0002</td>
+<td>[1,69; 3,71]</td>
+</tr>
+<tr class="even">
+<td>Dois grupos independentes</td>
+<td>0,006</td>
+<td>[0,93; 4,47]</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>Cada paciente vira seu próprio controle: a variação entre pessoas — quem chega com dor 9 e quem chega com 6 — <strong>desaparece</strong> da conta.</p>
+</div>
+<p class="small">
+O pareamento é decisão de desenho, não de software. Se os dez do “depois” fossem outras pessoas, o teste pareado seria inválido.
+</p>
+</section>
+<section id="três-protocolos-24-pacientes" class="slide level2">
+<h2>Três protocolos, 24 pacientes</h2>
+<p>
+<span class="pill">Fisioterapia · três grupos</span>
+</p>
+<p>Ganho de amplitude de flexão do joelho, em graus (oito pacientes por protocolo):</p>
+<ul>
+<li><strong>A · convencional:</strong> 12, 15, 11, 14, 13, 16, 12, 15 — média 13,50</li>
+<li><strong>B · biofeedback:</strong> 18, 21, 17, 20, 19, 22, 18, 20 — média 19,38</li>
+<li><strong>C · eletroestimulação:</strong> 20, 24, 19, 23, 21, 25, 22, 21 — média 21,88</li>
+</ul>
+<div class="keybox">
+<p>A tentação é comparar aos pares: A×B, A×C, B×C. Três testes t, três p-valores — e um problema que quase ninguém percebe.</p>
+</div>
+</section>
+<section id="por-que-não-três-testes-t" class="slide level2">
+<h2>Por que não três testes t</h2>
+<p>Cada teste a 5% carrega 5% de chance de falso positivo — e as chances <strong>se acumulam</strong>:</p>
+<div class="formula">
+<p><span class="math display">\[P(\text{ao menos um falso positivo}) = 1 - 0{,}95^3 = 14{,}3\%\]</span></p>
+</div>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>2 comparações</strong></p>
+<p>9,8% de chance de um falso positivo.</p>
+</div>
+<div class="card">
+<p><strong>3 comparações</strong></p>
+<p>14,3% — e é o nosso caso.</p>
+</div>
+<div class="card">
+<p><strong>6 comparações</strong></p>
+<p>26,5%. Um em cada quatro estudos “acharia” algo.</p>
+</div>
+</div>
+<p class="small">
+O α de 5% que você julgava controlar já não é 5%. É para isso que existe a ANOVA.
+</p>
+</section>
+<section id="a-ideia-da-anova" class="slide level2">
+<h2>A ideia da ANOVA</h2>
+<div class="formula">
+<p><span class="math display">\[F = \frac{\text{variância entre os grupos}}{\text{variância dentro dos grupos}}\]</span></p>
+</div>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Entre grupos</strong></p>
+<p>O quanto as médias dos protocolos se afastam umas das outras.</p>
+<p>Se os protocolos fossem iguais, esse afastamento seria só sorteio.</p>
+</div>
+<div class="card">
+<p><strong>Dentro dos grupos</strong></p>
+<p>O quanto os pacientes variam em torno da média do próprio grupo.</p>
+<p>É o ruído de fundo, que existe sempre.</p>
+</div>
+</div>
+<div class="keybox">
+<p>F perto de 1: as médias se afastam só o que o ruído explica. F grande: sobrou diferença de verdade.</p>
+</div>
+</section>
+<section id="a-anova-no-r" class="slide level2">
+<h2>A ANOVA no R</h2>
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="a-anova-respondeu-e-agora" class="slide level2">
+<h2>A ANOVA respondeu — e agora?</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Fonte</th>
+<th>Soma de quadrados</th>
+<th>gl</th>
+<th>Quadrado médio</th>
+<th>F</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Entre grupos</td>
+<td>295,75</td>
+<td>2</td>
+<td>147,88</td>
+<td>43,89</td>
+<td>3,2 × 10⁻⁸</td>
+</tr>
+<tr class="even">
+<td>Dentro</td>
+<td>70,75</td>
+<td>21</td>
+<td>3,37</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>A ANOVA diz <strong>que existe diferença</strong>. Não diz <strong>onde</strong>. Quem responde isso é o pós-teste.</p>
+</div>
+<p class="small">
+F = 43,89 com 2 e 21 graus de liberdade: se os três protocolos fossem iguais, um F desse tamanho apareceria em 3,2 de cada 100 milhões de estudos.
+</p>
+</section>
+<section id="tukey-entre-quais-grupos" class="slide level2">
+<h2>Tukey · entre quais grupos?</h2>
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="tukey-o-preço-da-comparação-múltipla" class="slide level2">
+<h2>Tukey · o preço da comparação múltipla</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Comparação</th>
+<th>Diferença</th>
+<th>IC 95%</th>
+<th>p ajustado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>B − A</td>
+<td>5,88</td>
+<td>[3,56; 8,19]</td>
+<td>&lt; 0,001</td>
+</tr>
+<tr class="even">
+<td>C − A</td>
+<td>8,38</td>
+<td>[6,06; 10,69]</td>
+<td>&lt; 0,001</td>
+</tr>
+<tr class="odd">
+<td>C − B</td>
+<td>2,50</td>
+<td>[0,19; 4,81]</td>
+<td>0,033</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>B e C mal se distinguem: o intervalo <strong>quase encosta no zero</strong>. Um ganho de 0,2 grau não muda conduta.</p>
+</div>
+<p class="small">
+Estatisticamente significativo (p = 0,033) e clinicamente duvidoso, ao mesmo tempo. O intervalo mostra o que o p esconde.
+</p>
+</section>
+<section id="os-pressupostos-do-teste-paramétrico" class="slide level2">
+<h2>Os pressupostos do teste paramétrico</h2>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>Independência</strong></p>
+<p>A mais importante — e a única que <strong>nenhum teste corrige</strong>.</p>
+<p>Depende do desenho do estudo.</p>
+</div>
+<div class="card">
+<p><strong>Normalidade</strong></p>
+<p>Shapiro-Wilk. A ANOVA tolera desvios razoáveis com 30 ou mais por grupo.</p>
+</div>
+<div class="card">
+<p><strong>Variâncias parecidas</strong></p>
+<p>Levene. Com dois grupos, o t de Welch já resolve.</p>
+</div>
+</div>
+<div class="keybox">
+<p>Nos nossos exemplos os pressupostos se sustentam: Shapiro p = 0,75 (teor), Levene p = 0,62 (dentifrícios) e p = 0,86 (protocolos).</p>
+</div>
+</section>
+<section id="quando-os-pressupostos-falham" class="slide level2">
+<h2>Quando os pressupostos falham</h2>
+<ul>
+<li class="fragment"><strong>Trocar o teste</strong> pelo equivalente não paramétrico — o caminho mais comum.</li>
+<li class="fragment"><strong>Transformar a variável</strong> — logaritmo para dados assimétricos e positivos (dosagens, contagens).</li>
+<li class="fragment"><strong>Reconhecer o limite</strong> — independência quebrada não tem conserto estatístico: o problema está no dado.</li>
+</ul>
+<p class="small">
+Existem ainda modelos robustos e modelos lineares generalizados, assunto de cursos mais avançados. Para o dia a dia, as três saídas acima resolvem quase tudo.
+</p>
+</section>
+<section id="quando-a-média-não-significa-nada" class="slide level2">
+<h2>Quando a média não significa nada</h2>
+<p>
+<span class="pill">Odontologia · escala ordinal</span>
+</p>
+<p>Índice de placa (escala <strong>0 a 3</strong>) em 24 crianças:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Grupo</th>
+<th>Valores</th>
+<th>Mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Escova manual</td>
+<td>2, 3, 3, 2, 3, 2, 3, 3, 2, 2, 3, 3</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Escova elétrica</td>
+<td>1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>A distância entre “placa leve” e “moderada” não é igual à distância entre “moderada” e “intensa”. Calcular média aqui é inventar uma escala que o dado não tem.</p>
+</div>
+</section>
+<section id="mann-whitney-trocar-o-valor-pelo-posto" class="slide level2">
+<h2>Mann-Whitney · trocar o valor pelo posto</h2>
+<div class="fluxo">
+<div class="fluxo-item">
+<p><span class="ico">🔢</span> <b>Juntar</b> os 24 valores numa lista só</p>
+</div>
+<p><span class="fluxo-seta">→</span></p>
+<div class="fluxo-item">
+<p><span class="ico">📊</span> <b>Ordenar</b> do menor ao maior</p>
+</div>
+<p><span class="fluxo-seta">→</span></p>
+<div class="fluxo-item">
+<p><span class="ico">🏷️</span> <b>Ranquear</b> cada valor ganha sua posição</p>
+</div>
+<p><span class="fluxo-seta">→</span></p>
+<div class="fluxo-item">
+<p><span class="ico">⚖️</span> <b>Comparar</b> a soma dos postos de cada grupo</p>
+</div>
+</div>
+<div class="keybox">
+<p>Com os 24 valores ranqueados: <strong>W = 131,5</strong>, p = 0,0003, deslocamento de 1 ponto [1,0; 2,0].</p>
+</div>
+<p class="small">
+A pergunta muda: de “as médias são iguais?” para “os postos de um grupo tendem a ser maiores que os do outro?”
+</p>
+</section>
+<section id="o-não-paramétrico-no-r" class="slide level2">
+<h2>O não paramétrico no R</h2>
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="wilcoxon-o-pareado-sem-normalidade" class="slide level2">
+<h2>Wilcoxon · o pareado sem normalidade</h2>
+<p>A mesma dor lombar, agora sem supor normalidade:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Teste</th>
+<th>p-valor</th>
+<th>Estimativa do efeito</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>t pareado</td>
+<td>0,0002</td>
+<td>média das diferenças: 2,7 pontos</td>
+</tr>
+<tr class="even">
+<td>Wilcoxon</td>
+<td>0,0056</td>
+<td>mediana das diferenças: 2,5 pontos</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>Os dois concordam na direção e na magnitude. O não paramétrico é mais <strong>conservador</strong> — exige menos dos dados e, por isso, entrega menos precisão.</p>
+</div>
+</section>
+<section id="o-preço-de-abandonar-o-paramétrico" class="slide level2">
+<h2>O preço de abandonar o paramétrico</h2>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Quando a normalidade vale</strong></p>
+<p>O teste por postos aproveita cerca de <strong>95%</strong> da informação que o t aproveitaria.</p>
+<p>Perde pouco — mas perde.</p>
+</div>
+<div class="card">
+<p><strong>Quando ela não vale</strong></p>
+<p>Aí é o t que está perdendo: o p e o intervalo saem errados.</p>
+<p>O não paramétrico é a escolha honesta.</p>
+</div>
+</div>
+<div class="keybox">
+<p>Use-o quando a variável é <strong>ordinal</strong>, quando há <strong>valores extremos</strong> que você não pode remover ou quando a amostra é <strong>muito pequena</strong>. Não o use para fugir de um resultado que não agradou.</p>
+</div>
+</section>
+<section id="probmaster-sem-tabela-na-mão" class="slide level2">
+<h2>ProbMaster · sem tabela na mão</h2>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>1 · Escolha a distribuição</strong></p>
+<p>Normal para proporções. t de Student para médias com <span class="math inline">\(n\)</span> pequeno. F de Fisher para a ANOVA.</p>
+</div>
+<div class="card">
+<p><strong>2 · Ajuste o parâmetro</strong></p>
+<p>Os graus de liberdade: <span class="math inline">\(n - 1\)</span> para o t; 2 e 21 na nossa ANOVA.</p>
+</div>
+<div class="card">
+<p><strong>3 · Leia a área</strong></p>
+<p><strong>Modo Inverso (Quantil)</strong> devolve o valor crítico. A região <strong>bicaudal (extremos)</strong> devolve o p-valor.</p>
+</div>
+</div>
+<div class="keybox">
+<p>Para o teor dos comprimidos o t crítico é <strong>2,20</strong> (11 gl). Para a dor lombar, <strong>2,26</strong> (9 gl). O app desenha a curva e calcula a área; você continua escolhendo o teste.</p>
+</div>
+<p class="small">
+<a href="https://probmaster-pi.vercel.app/" target="_blank">probmaster-pi.vercel.app</a> — o mesmo app do capítulo 5.
 </p>
 </section>
 <section id="significância-não-é-relevância" class="slide level2">
@@ -2139,7 +2728,8 @@ A pergunta certa: qual o tamanho do efeito, qual a precisão da estimativa, e is
 <ul>
 <li class="fragment"><strong>O teste parte da inocência</strong> — assume-se <span class="math inline">\(H_0\)</span>; nunca se “prova” a nula.</li>
 <li class="fragment"><strong>O p-valor não responde a pergunta que parece responder</strong> — ele supõe <span class="math inline">\(H_0\)</span>, não a mede.</li>
-<li class="fragment"><strong>Dois erros, dois custos</strong> — <span class="math inline">\(\alpha\)</span> controla o falso positivo; o poder controla o falso negativo.</li>
+<li class="fragment"><strong>O teste é escolhido pelo desenho</strong> — quantos grupos, pareado ou não, pressupostos válidos.</li>
+<li class="fragment"><strong>Três grupos não são três testes t</strong> — a ANOVA controla o erro; o Tukey diz onde está a diferença.</li>
 <li class="fragment"><strong>Significância não é importância</strong> — reporte sempre efeito, intervalo e p.</li>
 </ul>
 </section>
@@ -2152,7 +2742,7 @@ A pergunta certa: qual o tamanho do efeito, qual a precisão da estimativa, e is
 <p><strong>📚 Material de apoio</strong></p>
 </div>
 <div class="callout-content">
-<p>Para revisar a teoria, resolver as questões e rodar o teste t, acesse o capítulo no livro interativo.</p>
+<p>Para revisar a teoria, resolver as questões e rodar os cinco testes, acesse o capítulo no livro interativo.</p>
 <p><a href="../../cap08_hipoteses.html" target="_blank">Ir para o Livro Interativo: Capítulo 8</a></p>
 </div>
 </div>

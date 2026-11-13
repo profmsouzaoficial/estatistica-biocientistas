@@ -6,6 +6,8 @@ Um novo anti-hipertensivo baixou a pressão média de 12 mmHg num grupo de pacie
 
 Essa é a pergunta que o teste de hipóteses responde. Ele não diz se o fármaco é bom; diz **qual a probabilidade de uma diferença desse tamanho aparecer por acaso**, se não houver efeito nenhum. É a ferramenta mais usada — e mais mal interpretada — da estatística aplicada à saúde [@triola2017].
 
+O capítulo começa pela lógica comum a todos os testes e depois percorre as famílias que você vai encontrar na prática: **um grupo**, **dois grupos independentes**, **dois grupos pareados**, **três ou mais grupos** e os **testes não paramétricos**. Cada família vem com um exemplo de farmácia, odontologia ou fisioterapia — a ideia é que, ao final, você olhe para um desenho de estudo e saiba qual teste pedir.
+
 ## A lógica do teste
 
 O raciocínio do teste de hipóteses é o mesmo da presunção de inocência no direito. Começa-se supondo que **não há efeito**, e só se abandona essa suposição quando a evidência é forte demais para ser explicada pelo acaso.
@@ -74,18 +76,279 @@ Essa regra é apenas um resumo. O relato científico completo inclui sempre: a e
 
 Escolher a direção depois de olhar o resultado é uma forma de manipulação: dobra-se artificialmente a chance de achar significância.
 
-## Os testes mais usados
+## Qual teste eu uso?
 
-| Situação | Teste | No R |
-|---|---|---|
-| Média de um grupo contra um valor de referência | t de uma amostra | `t.test(x, mu = 120)` |
-| Médias de dois grupos independentes | t de duas amostras | `t.test(y ~ grupo)` |
-| Médias de três ou mais grupos | ANOVA | `aov(y ~ grupo)` |
-| Associação entre variáveis categóricas | qui-quadrado | `chisq.test(tabela)` |
-| Duas amostras pareadas (antes e depois) | t pareado | `t.test(antes, depois, paired = TRUE)` |
-| Medianas, sem pressuposto de normalidade | Mann-Whitney / Wilcoxon | `wilcox.test(y ~ grupo)` |
+Existe uma dezena de testes com nome próprio, e a lista intimida. Mas a escolha não depende de decorar nomes: depende de responder a **três perguntas sobre o desenho do estudo**.
 
-A escolha depende de três perguntas: quantos grupos, os dados são pareados e os pressupostos de normalidade se sustentam.
+1. **Quantos grupos estou comparando?** Um grupo contra um valor de referência, dois grupos, ou três ou mais.
+2. **Os grupos são independentes ou pareados?** Pacientes diferentes em cada grupo, ou os mesmos pacientes medidos duas vezes.
+3. **Os dados sustentam os pressupostos do teste paramétrico?** Normalidade, variâncias semelhantes e observações independentes.
+
+As respostas levam ao mapa abaixo. Ele não substitui o raciocínio, mas resolve a maior parte das dúvidas práticas:
+
+| Grupos | Desenho | Teste | No R |
+|---|---|---|---|
+| 1 | compara com um valor de referência | t de uma amostra | `t.test(x, mu = 500)` |
+| 2 | independentes | t de duas amostras (Welch) | `t.test(y ~ grupo)` |
+| 2 | pareados | t pareado | `t.test(antes, depois, paired = TRUE)` |
+| 3 ou mais | independentes | ANOVA + pós-teste de Tukey | `aov(y ~ grupo)` / `TukeyHSD()` |
+| 2 | independentes, sem normalidade | Mann-Whitney | `wilcox.test(y ~ grupo)` |
+| 2 | pareados, sem normalidade | Wilcoxon pareado | `wilcox.test(antes, depois, paired = TRUE)` |
+| qualquer | duas variáveis categóricas | qui-quadrado | `chisq.test(tabela)` |
+
+Repare no que **não** está na tabela: não existe "o teste do qui-quadrado para comparar médias" nem "ANOVA para dois grupos". Cada linha corresponde a uma pergunta diferente sobre os dados, e trocar a pergunta invalida o resultado — não importa quão pequeno seja o p-valor.
+
+## Paramétrico e não paramétrico: dois mundos, dois preços
+
+A palavra **paramétrico** não é um selo de qualidade. Ela descreve uma aposta: a de que os dados vêm de uma distribuição com forma conhecida — em geral a normal — e que, por isso, podem ser resumidos por dois números, a média e o desvio padrão.
+
+**Testes paramétricos** usam o valor exato de cada medida. Isso lhes dá mais poder: com o mesmo número de pacientes, eles detectam efeitos menores. Em troca, exigem que a pista esteja limpa — normalidade, variâncias parecidas e observações independentes.
+
+**Testes não paramétricos** usam apenas a **ordem** dos valores. Em vez de "8, 5, 9, 3", trabalham com "o segundo maior, o terceiro menor, o maior". Perdem informação — e por isso um pouco de poder —, mas não desmoronam quando um valor é absurdo, quando a variável é ordinal ou quando a amostra é minúscula [@vieira2008].
+
+::: {.callout-note}
+## Duas analogias que ajudam
+Uma **balança de precisão** e uma **classificação de corrida** medem coisas diferentes. A balança usa o valor exato e produz uma medida mais informativa — desde que calibrada. A classificação guarda apenas a ordem de chegada: é menos informativa, mas continua válida mesmo se um cronômetro falhar.
+
+Teste paramétrico é a balança; não paramétrico, a classificação. A pergunta "qual é melhor?" está mal formulada: a resposta depende do que você tem em mãos.
+:::
+
+Adiante veremos os dois mundos em três cenários clínicos — um comprimido, dois dentifrícios e três protocolos de reabilitação.
+
+## Um grupo: o comprimido está dentro da especificação?
+
+Uma indústria farmacêutica precisa verificar se um lote de paracetamol 500 mg está de acordo com a especificação. Doze comprimidos são pesados e o teor medido, em mg:
+
+$$497,\; 502,\; 499,\; 503,\; 496,\; 501,\; 498,\; 504,\; 500,\; 497,\; 502,\; 499$$
+
+Aqui há **um único grupo**, comparado a um valor de referência fixo: os 500 mg declarados na embalagem. As hipóteses são $H_0: \mu = 500$ e $H_1: \mu \neq 500$.
+
+O **teste t de uma amostra** compara a média observada com esse valor, usando o erro padrão da média como régua:
+
+$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} = \frac{499{,}83 - 500}{2{,}59/\sqrt{12}} = -0{,}22$$
+
+Com $n - 1 = 11$ graus de liberdade, esse t produz $p = 0{,}83$.
+
+```{webr-r}
+teor <- c(497, 502, 499, 503, 496, 501,
+          498, 504, 500, 497, 502, 499)
+
+t.test(teor, mu = 500)
+```
+
+**Como ler.** O p-valor de 0,83 está muito acima de 0,05: não há evidência de que o lote se afaste dos 500 mg. Mas atenção ao que isso **não** significa. Não rejeitar $H_0$ não atesta conformidade — significa apenas que esta amostra de doze comprimidos não conseguiu distinguir o lote de um lote perfeito.
+
+Quem dá a medida da incerteza é o intervalo de confiança: $[498{,}19;\; 501{,}48]$ mg. Ou seja, os dados são compatíveis com um lote até 1,8 mg abaixo da especificação. Para um critério farmacopeico de $\pm 5\%$ (475 a 525 mg), a margem é confortável — mas essa conclusão vem do intervalo, não do p-valor.
+
+::: {.callout-tip}
+## O hábito que vale a pena criar
+Sempre que um teste não rejeitar $H_0$, faça a pergunta seguinte: **o estudo tinha poder para detectar uma diferença clinicamente importante?** Se a resposta for não, o resultado é inconclusivo — e não "prova de igualdade".
+:::
+
+## Dois grupos independentes: dois dentifrícios
+
+Um estudo odontológico compara um dentifrício convencional (A) com uma formulação nova (B). Nove voluntários usam cada produto por 30 dias, e o desfecho é a **redução do índice de biofilme**, em pontos percentuais:
+
+* **A:** 62, 58, 71, 65, 55, 68, 60, 74, 63 — média 64,0; desvio padrão 6,2
+* **B:** 70, 75, 66, 79, 72, 68, 81, 74, 77 — média 73,6; desvio padrão 5,0
+
+Os grupos são **independentes**: são pessoas diferentes. O teste indicado é o **t de duas amostras**, e a versão moderna dele — que o R usa por padrão — é o **t de Welch**, que não exige variâncias iguais nos dois grupos.
+
+```{webr-r}
+A <- c(62, 58, 71, 65, 55, 68, 60, 74, 63)
+B <- c(70, 75, 66, 79, 72, 68, 81, 74, 77)
+
+t.test(B, A)
+```
+
+O resultado:
+
+* a diferença entre as médias é de **9,6 pontos percentuais** a favor de B;
+* $t = 3{,}60$, com $15{,}4$ graus de liberdade (fracionários — é assim que Welch funciona);
+* $p = 0{,}0025$;
+* o intervalo de confiança de 95% para a diferença é $[3{,}9;\; 15{,}2]$ pontos percentuais.
+
+**Como ler.** O intervalo não inclui o zero, então há evidência de que B reduz mais biofilme que A. Mas ele é largo: o ganho real pode ser de 4 ou de 15 pontos percentuais. Um estudo com nove voluntários por grupo não compra precisão — e a conclusão honesta informa a faixa, não apenas o "deu significativo".
+
+::: {.callout-note}
+## Por que Welch e não o t "clássico"
+O t de Student tradicional supõe que os dois grupos têm a mesma variabilidade. Quando isso não vale, ele fica otimista: o p-valor sai menor do que deveria. Welch corrige esse ponto ajustando os graus de liberdade — e, quando as variâncias são de fato iguais, ele dá praticamente o mesmo resultado. Por isso virou o padrão dos softwares.
+:::
+
+## Dois grupos pareados: o mesmo paciente antes e depois
+
+Agora o desenho muda. Numa clínica de fisioterapia, dez pacientes com dor lombar crônica avaliam a dor numa escala de 0 a 10 antes e depois de três sessões:
+
+| Paciente | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Antes | 8 | 7 | 9 | 6 | 8 | 7 | 9 | 8 | 7 | 6 |
+| Depois | 7 | 4 | 8 | 1 | 6 | 4 | 6 | 7 | 3 | 2 |
+
+O que se compara aqui não são as duas colunas de números, e sim **as dez diferenças**:
+
+$$1,\; 3,\; 1,\; 5,\; 2,\; 3,\; 3,\; 1,\; 4,\; 4$$
+
+Média 2,7 pontos; desvio padrão 1,42; erro padrão $1{,}42/\sqrt{10} = 0{,}45$.
+
+```{webr-r}
+antes  <- c(8, 7, 9, 6, 8, 7, 9, 8, 7, 6)
+depois <- c(7, 4, 8, 1, 6, 4, 6, 7, 3, 2)
+
+t.test(antes, depois, paired = TRUE)
+```
+
+Resultado: $t = 6{,}02$ com 9 graus de liberdade, $p = 0{,}0002$ e intervalo de confiança de 95% igual a $[1{,}69;\; 3{,}71]$ pontos.
+
+**Por que o pareamento importa tanto.** Cada paciente é seu próprio controle. A variabilidade entre pessoas — quem chega com dor 9 e quem chega com dor 6 — desaparece da conta, porque estamos olhando para a mudança dentro de cada um. O efeito disso é enorme: os **mesmos 20 números**, analisados como dois grupos independentes, dariam $p = 0{,}006$ e um intervalo de $[0{,}9;\; 4{,}5]$ — mais largo e menos conclusivo.
+
+::: {.callout-important}
+## Parear é desenhar, não calcular
+O teste pareado não é uma versão "melhor" do teste independente: ele responde a outra pergunta. Se os dez pacientes do "depois" fossem pessoas diferentes das do "antes", o teste pareado seria simplesmente inválido. O que autoriza o pareamento é o desenho do estudo, não a vontade do analista.
+:::
+
+## Três ou mais grupos: por que não fazer três testes t
+
+Um serviço de fisioterapia comparou três protocolos de reabilitação de joelho — convencional (A), com biofeedback (B) e com eletroestimulação (C) — em 24 pacientes, oito por grupo. O desfecho é o ganho de amplitude de flexão, em graus:
+
+* **A:** 12, 15, 11, 14, 13, 16, 12, 15 — média 13,50
+* **B:** 18, 21, 17, 20, 19, 22, 18, 20 — média 19,38
+* **C:** 20, 24, 19, 23, 21, 25, 22, 21 — média 21,88
+
+A tentação é comparar aos pares: A com B, A com C, B com C. Três testes t, três p-valores, pronto. O problema é que **cada teste carrega 5% de chance de falso positivo**, e as chances se acumulam:
+
+$$P(\text{ao menos um falso positivo}) = 1 - (1 - 0{,}05)^3 = 14{,}3\%$$
+
+Com seis comparações — o caso de quatro grupos — o risco sobe para 26,5%. O $\alpha$ de 5% que você julgava controlar já não é 5%.
+
+A solução é testar todas as médias **de uma vez**, com uma única hipótese:
+
+$$H_0: \mu_A = \mu_B = \mu_C \qquad H_1: \text{pelo menos uma é diferente}$$
+
+Esse é o papel da **análise de variância (ANOVA)**.
+
+## A ANOVA por dentro
+
+A ideia da ANOVA é uma razão entre duas variabilidades:
+
+* a variação **entre** os grupos — o quanto as médias dos protocolos se afastam umas das outras;
+* a variação **dentro** dos grupos — o quanto os pacientes variam em torno da própria média do seu grupo.
+
+Se os três protocolos fossem equivalentes, as médias se afastariam apenas por sorteio, e a razão entre as duas quantidades ficaria perto de 1. Quanto maior a razão, mais improvável que a diferença seja ruído. Essa razão é a estatística **F**.
+
+| Fonte | Somas de quadrados | gl | Quadrados médios | F | p |
+|---|---|---|---|---|---|
+| Entre grupos | 295,75 | 2 | 147,88 | 43,89 | $3{,}2 \times 10^{-8}$ |
+| Dentro dos grupos | 70,75 | 21 | 3,37 | | |
+| Total | 366,50 | 23 | | | |
+
+```{webr-r}
+A <- c(12, 15, 11, 14, 13, 16, 12, 15)
+B <- c(18, 21, 17, 20, 19, 22, 18, 20)
+C <- c(20, 24, 19, 23, 21, 25, 22, 21)
+
+ganho  <- c(A, B, C)
+grupo  <- factor(rep(c("A", "B", "C"), each = 8))
+
+summary(aov(ganho ~ grupo))
+```
+
+**Como ler.** $F = 43{,}89$ com 2 e 21 graus de liberdade. Se $H_0$ fosse verdadeira, um F desse tamanho apareceria em $3{,}2$ a cada 100 milhões de estudos. Rejeita-se $H_0$: os protocolos não são todos equivalentes.
+
+Mas essa frase é frustrantemente vaga — e é aqui que quase todo mundo se perde. **A ANOVA não diz qual protocolo é diferente de qual.** Ela apenas autoriza a pergunta seguinte.
+
+## Depois da ANOVA: o teste de Tukey
+
+A resposta vem dos **testes de comparação múltipla**, e o mais usado é o de **Tukey**. Ele faz todos os pares de comparações, mas ajusta cada p-valor e cada intervalo para o fato de que várias comparações estão sendo feitas ao mesmo tempo.
+
+```{webr-r}
+modelo <- aov(ganho ~ grupo)
+
+TukeyHSD(modelo)
+```
+
+| Comparação | Diferença | IC 95% | p ajustado |
+|---|---|---|---|
+| B − A | 5,88 | [3,56; 8,19] | $< 0{,}001$ |
+| C − A | 8,38 | [6,06; 10,69] | $< 0{,}001$ |
+| C − B | 2,50 | [0,19; 4,81] | 0,033 |
+
+A leitura clínica fica clara:
+
+* os dois protocolos novos superam o convencional, com folga — de 3,6 a 10,7 graus de ganho;
+* entre B e C a diferença é pequena, mal significativa, e o intervalo **quase encosta no zero**: 0,19 grau é clinicamente irrelevante.
+
+::: {.callout-tip}
+## O que o Tukey ensina sobre "significativo"
+A comparação C − B tem $p = 0{,}033$: significativa. E o intervalo mostra que a diferença real pode ser de 0,2 grau. Num relatório honesto, isso se escreve assim: *"B e C não se distinguem de forma clinicamente importante"*. O p-valor sozinho sugeriria o contrário.
+:::
+
+## Os pressupostos (e o que fazer quando eles falham)
+
+Todo teste paramétrico apoia-se em três suposições. Vale conhecê-las na ordem em que costumam falhar:
+
+* **Independência das observações.** É a mais importante e a única que nenhum teste corrige: se as medidas de um paciente influenciam as de outro, ou se o mesmo paciente aparece duas vezes como se fosse dois, o resultado é inválido. Depende do desenho, não do software.
+* **Normalidade.** Os dados de cada grupo vêm de uma distribuição normal. Testa-se com **Shapiro-Wilk**; a ANOVA é bastante tolerante a desvios quando há pelo menos 30 pacientes por grupo.
+* **Homocedasticidade.** As variâncias dos grupos são semelhantes. Testa-se com **Levene**. Para dois grupos, o t de Welch já resolve; para três ou mais, existem correções (Welch ANOVA).
+
+```{webr-r}
+shapiro.test(ganho[grupo == "A"])
+shapiro.test(ganho[grupo == "B"])
+shapiro.test(ganho[grupo == "C"])
+
+# Levene exige o pacote car
+car::leveneTest(ganho ~ grupo)
+```
+
+Nos nossos três exemplos os pressupostos se sustentam: Shapiro-Wilk dá $p = 0{,}75$ para o teor dos comprimidos, e os resíduos da ANOVA têm $p = 0{,}47$; Levene dá $p = 0{,}62$ entre os dentifrícios e $p = 0{,}86$ entre os protocolos. Ou seja: aqui o caminho paramétrico é legítimo.
+
+Quando não for, há três saídas honestas:
+
+1. **Trocar o teste** pelo equivalente não paramétrico — o mais comum.
+2. **Transformar a variável** (logaritmo para dados assimétricos e positivos, como contagens e dosagens).
+3. **Modelar de outro jeito**, com métodos robustos ou modelos lineares generalizados — assunto de cursos mais avançados.
+
+## Testes não paramétricos: quando a média não é o resumo
+
+Volte ao estudo odontológico, mas troque o desfecho. Em vez de redução percentual, o pesquisador registra o **índice de placa**, uma escala ordinal de 0 a 3, em 24 crianças — doze escovaram com escova manual e doze com escova elétrica:
+
+* **Manual:** 2, 3, 3, 2, 3, 2, 3, 3, 2, 2, 3, 3 — mediana 3
+* **Elétrica:** 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2 — mediana 1
+
+Uma escala de 0 a 3 não tem média com significado: a distância entre "placa leve" e "placa moderada" não é a mesma que entre "moderada" e "intensa". Aqui o teste paramétrico seria uma ficção numérica.
+
+O **teste de Mann-Whitney** resolve o problema trocando os valores por **postos**. Junta-se os 24 valores, ordena-se do menor ao maior, e cada valor recebe a sua posição. A pergunta deixa de ser "as médias são iguais?" e passa a ser "os postos de um grupo tendem a ser maiores que os do outro?".
+
+```{webr-r}
+manual  <- c(2, 3, 3, 2, 3, 2, 3, 3, 2, 2, 3, 3)
+eletrica <- c(1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2)
+
+wilcox.test(manual, eletrica, conf.int = TRUE)
+```
+
+Resultado: $W = 131{,}5$, $p = 0{,}0003$, com diferença de localização estimada em 1 ponto e intervalo de confiança de 95% igual a $[1{,}0;\; 2{,}0]$. A escova elétrica reduz o índice de placa em cerca de um ponto na escala.
+
+Para o caso **pareado**, o equivalente é o **teste de Wilcoxon dos postos sinalizados**, aplicado às diferenças. Se você rodar o exemplo da dor lombar com ele, obtém $p = 0{,}0056$ e mediana das diferenças de 2,5 pontos — os mesmos dados, com um teste que não supõe normalidade.
+
+::: {.callout-warning}
+## O preço de abandonar o paramétrico
+Quando a normalidade de fato vale, o teste por postos desperdiça informação: ele aproveita cerca de **95%** do que o teste t aproveitaria com a mesma amostra. Não é pouco — mas também não é de graça. A regra prática é: use o não paramétrico quando a variável é ordinal, quando há valores extremos que não pode remover ou quando a amostra é muito pequena. Não o use para "fugir" de um resultado que não agradou.
+:::
+
+## ProbMaster: onde ficam os valores críticos
+
+Antes dos computadores, cada teste exigia uma tabela impressa: linhas de graus de liberdade, colunas de níveis de confiança, e o risco permanente de ler a célula errada. Hoje essas tabelas são desenhadas na tela pelo **ProbMaster**, o mesmo aplicativo do capítulo 5.
+
+O app serve para duas perguntas complementares:
+
+* **Qual é o valor crítico?** Ative o **Modo Inverso (Quantil)**: informe a confiança (95%) e os graus de liberdade, e o app devolve o valor que deixa 2,5% nas duas caudas. Para o teor dos comprimidos, $t_{0{,}975;\,11} = 2{,}20$; para a dor lombar, $t_{0{,}975;\,9} = 2{,}26$.
+* **Qual é o p-valor?** Informe a estatística calculada e peça a área **bicaudal (extremos)**: para $t = -0{,}22$ com 11 graus de liberdade, o app mostra os 83% de área que correspondem a $p = 0{,}83$.
+
+Para a ANOVA, o raciocínio é o mesmo, com a distribuição **F de Fisher**: com 2 e 21 graus de liberdade, o valor que deixa 5% na cauda direita é $F = 3{,}47$ — bem abaixo do nosso $F = 43{,}89$, que deixa $3{,}2 \times 10^{-8}$.
+
+::: {.callout-note}
+## Por que ainda vale entender a tabela
+O app responde em segundos, mas ele não escolhe o teste, não confere pressupostos e não interpreta o resultado. A calculadora tira o trabalho braçal; o raciocínio continua sendo seu.
+:::
 
 ## Significância estatística não é relevância clínica
 
@@ -100,7 +363,7 @@ O contrário também acontece: um efeito grande e clinicamente importante pode n
 A pergunta certa nunca é só "deu significativo?". É: **qual o tamanho do efeito, qual a precisão da estimativa e isso muda a conduta do paciente?**
 :::
 
-## Prática Interativa: um teste t no R
+## Um caso completo, do dado ao parágrafo
 
 Um ensaio compara um novo anti-hipertensivo com o tratamento padrão. A pressão sistólica final (mmHg) de oito pacientes de cada grupo está abaixo.
 
@@ -127,15 +390,62 @@ Leitura do resultado:
 
 A conclusão honesta não é "o fármaco funciona", mas sim: *neste ensaio de 16 pacientes, o novo anti-hipertensivo reduziu a pressão sistólica em cerca de 12 mmHg, com intervalo de confiança entre 7 e 16 mmHg*. O tamanho do efeito está dito, e a incerteza também.
 
+## Prática Interativa: os cinco desenhos no R
+
+Os exemplos do capítulo, em sequência, para você rodar e comparar as saídas. Repare que o formato do resultado é sempre o mesmo — estatística, graus de liberdade, p-valor, intervalo — e que o que muda é a pergunta que cada teste faz.
+
+```{webr-r}
+# 1) Um grupo contra um valor de referencia
+teor <- c(497, 502, 499, 503, 496, 501,
+          498, 504, 500, 497, 502, 499)
+t.test(teor, mu = 500)
+
+# 2) Dois grupos independentes
+A <- c(62, 58, 71, 65, 55, 68, 60, 74, 63)
+B <- c(70, 75, 66, 79, 72, 68, 81, 74, 77)
+t.test(B, A)
+```
+
+```{webr-r}
+# 3) Dois grupos pareados
+antes  <- c(8, 7, 9, 6, 8, 7, 9, 8, 7, 6)
+depois <- c(7, 4, 8, 1, 6, 4, 6, 7, 3, 2)
+t.test(antes, depois, paired = TRUE)
+
+# 4) Tres ou mais grupos: ANOVA e pos-teste
+ganho <- c(12, 15, 11, 14, 13, 16, 12, 15,
+           18, 21, 17, 20, 19, 22, 18, 20,
+           20, 24, 19, 23, 21, 25, 22, 21)
+grupo <- factor(rep(c("A", "B", "C"), each = 8))
+
+TukeyHSD(aov(ganho ~ grupo))
+```
+
+```{webr-r}
+# 5) Nao parametrico: escala ordinal
+manual   <- c(2, 3, 3, 2, 3, 2, 3, 3, 2, 2, 3, 3)
+eletrica <- c(1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2)
+
+wilcox.test(manual, eletrica, conf.int = TRUE)
+```
+
+Três coisas para observar enquanto roda:
+
+* no caso **pareado**, o resultado não muda se você inverter a ordem dos vetores — o que importa é a diferença, não o grupo;
+* na **ANOVA**, `summary()` mostra o teste global e `TukeyHSD()` mostra os pares: são duas perguntas diferentes, e as duas precisam ser respondidas;
+* no **Wilcoxon**, o R avisa que não conseguiu o p-valor exato por causa dos empates. É esperado numa escala com poucos valores possíveis, e a correção aplicada é adequada.
+
 ## O que levar deste capítulo
 
 ::: {.callout-note icon="false"}
-## Resumo em quatro pontos
+## Resumo em seis pontos
 
 1. **O teste parte da inocência.** Assume-se $H_0$ e só se abandona com evidência forte; nunca se "prova" a nula.
 2. **O p-valor não responde a pergunta que parece responder.** Ele supõe $H_0$, não mede a probabilidade dela.
 3. **Existem dois jeitos de errar.** $\alpha$ controla o falso positivo; o poder controla o falso negativo.
-4. **Significância não é importância.** Sempre reporte o tamanho do efeito e o intervalo de confiança.
+4. **O teste é escolhido pelo desenho, não pelo resultado.** Quantos grupos, independentes ou pareados, e os pressupostos se sustentam — é isso que define o comando.
+5. **Três grupos não são três testes t.** Comparações múltiplas inflam o erro tipo I; a ANOVA testa tudo de uma vez e o Tukey diz onde está a diferença.
+6. **Significância não é importância.** Sempre reporte o tamanho do efeito e o intervalo de confiança.
 
 O capítulo 9 aprofunda justamente o intervalo de confiança — a peça que transforma um teste em uma estimativa com margem de erro declarada.
 :::
@@ -193,6 +503,84 @@ O capítulo 9 aprofunda justamente o intervalo de confiança — a peça que tra
   > **Incorreto.** Poder não é uma taxa de rejeição sobre todas as hipóteses, e sim sobre as que realmente têm efeito.
 - [x] Que, se o efeito realmente existir, o estudo tem 80% de chance de detectá-lo.
   > **Correto!** Poder é 1 menos beta, a probabilidade de rejeitar a nula quando ela é de fato falsa.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-05**
+```quizdown
+# Um fisioterapeuta mede a dor (escala 0-10) de 12 pacientes antes e depois de um tratamento. Qual teste é o indicado?
+- [ ] t de duas amostras independentes, porque há dois grupos.
+  > **Incorreto.** Os dois "grupos" são os mesmos pacientes medidos duas vezes; trata-los como independentes ignora o pareamento e infla o erro.
+- [x] t pareado, porque cada paciente é seu próprio controle.
+  > **Correto!** O teste pareado trabalha com as diferenças dentro de cada paciente, o que remove a variabilidade entre indivíduos.
+- [ ] ANOVA de uma via, porque existem duas medidas por paciente.
+  > **Incorreto.** A ANOVA compara três ou mais grupos independentes; não é o caso.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-06**
+```quizdown
+# Por que não se recomenda comparar três grupos com três testes t, cada um a 5%?
+- [ ] Porque o teste t só funciona com dois grupos de tamanhos iguais.
+  > **Incorreto.** O teste t não exige tamanhos iguais.
+- [x] Porque a chance de ao menos um falso positivo sobe para cerca de 14%, e o nível de 5% deixa de ser controlado.
+  > **Correto!** 1 − 0,95³ = 14,3%. A ANOVA controla esse risco testando as três médias com uma única hipótese.
+- [ ] Porque três testes t sempre produzem p-valores contraditórios entre si.
+  > **Incorreto.** Eles podem ser coerentes; o problema é a inflação do erro tipo I, não a contradição.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-07**
+```quizdown
+# Numa ANOVA com três protocolos, o p-valor foi 0,001. O que exatamente esse resultado autoriza afirmar?
+- [ ] Que o protocolo A é diferente do B e do C.
+  > **Incorreto.** A ANOVA não identifica quais pares diferem; ela apenas rejeita a igualdade entre todos.
+- [x] Que nem todas as médias são iguais, mas ainda é preciso um pós-teste para saber quais diferem.
+  > **Correto!** O teste global responde "existe diferença em algum lugar"; o Tukey responde "entre quais grupos".
+- [ ] Que os três protocolos são equivalentes, pois o p-valor é pequeno.
+  > **Incorreto.** p pequeno indica evidência contra a igualdade das médias, não a favor dela.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-08**
+```quizdown
+# Um estudo compara o índice de placa (escala ordinal de 0 a 3) entre dois grupos de crianças. Qual é a escolha mais adequada?
+- [ ] t de duas amostras, porque o desfecho é numérico.
+  > **Incorreto.** A escala é ordinal: as distâncias entre 0 e 1 e entre 2 e 3 não são equivalentes, o que invalida a média.
+- [x] Mann-Whitney, porque a variável é ordinal e o teste por postos não exige normalidade.
+  > **Correto!** O teste por postos usa a ordem dos valores e é o adequado para escalas ordinais.
+- [ ] qui-quadrado, porque o índice tem apenas quatro valores possíveis.
+  > **Incorreto.** O qui-quadrado testa associação entre variáveis categóricas nominais, não a diferença de posição entre dois grupos.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-09**
+```quizdown
+# O teste de Levene, aplicado a dois grupos antes de um teste t, deu p = 0,01. O que isso indica?
+- [ ] Que as médias dos grupos são diferentes.
+  > **Incorreto.** Levene não compara médias; ele compara a dispersão dos grupos.
+- [x] Que as variâncias diferem, o que reforça o uso do t de Welch em vez do t clássico.
+  > **Correto!** Variâncias desiguais violam o pressuposto do t de Student tradicional; Welch ajusta os graus de liberdade e corrige isso.
+- [ ] Que os dados não são normais e o teste t está inválido.
+  > **Incorreto.** Normalidade se avalia com Shapiro-Wilk; Levene trata da homogeneidade das variâncias.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP8-10**
+```quizdown
+# No pós-teste de Tukey, a comparação entre os protocolos B e C deu diferença de 2,5 graus, p = 0,033 e intervalo de 95% igual a [0,19; 4,81]. Como interpretar?
+- [ ] Como prova de que C é superior a B, pois p é menor que 0,05.
+  > **Incorreto.** p abaixo de 0,05 indica incompatibilidade com a nula, não prova de superioridade nem de relevância clínica.
+- [x] Como uma diferença estatisticamente significativa, mas de magnitude possivelmente irrelevante: o intervalo quase encosta no zero.
+  > **Correto!** 0,19 grau de ganho é clinicamente desprezível; o intervalo mostra que o efeito pode ser praticamente nulo.
+- [ ] Como um erro, pois intervalos de confiança não devem ser usados em comparações múltiplas.
+  > **Incorreto.** Ao contrário: o Tukey produz justamente intervalos ajustados para comparações múltiplas.
 ```
 :::
 

@@ -425,7 +425,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"pressao <- c(142, 138, 145, 139,\n             150, 136, 148, 141)\n\nn     <- length(pressao)\nmedia <- mean(pressao)\ndp    <- sd(pressao)\nep    <- dp / sqrt(n)\n\ntcrit <- qt(0.975, df = n - 1)\ntcrit\n\nmedia + c(-1, 1) * tcrit * ep\n\nt.test(pressao)$conf.int","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"A <- c(62, 58, 71, 65, 55,\n       68, 60, 74, 63)\nB <- c(70, 75, 66, 79, 72,\n       68, 81, 74, 77)\n\nt.test(B, A)$conf.int","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ganho <- c(12,15,11,14,13,16,12,15,\n           18,21,17,20,19,22,18,20,\n           20,24,19,23,21,25,22,21)\ngrupo <- factor(rep(c(\"A\",\"B\",\"C\"),\n                    each = 8))\n\nTukeyHSD(aov(ganho ~ grupo))$grupo","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"manual <- c(2,3,3,2,3,2,\n            3,3,2,2,3,3)\neletrica <- c(1,2,1,2,1,1,\n              2,1,2,1,1,2)\n\nwilcox.test(manual, eletrica,\n            conf.int = TRUE)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"pressao <- c(142, 138, 145,\n             139, 150, 136,\n             148, 141)\n\nn     <- length(pressao)\nmedia <- mean(pressao)\nep    <- sd(pressao) / sqrt(n)\ntcrit <- qt(0.975, df = n - 1)\n\nmedia + c(-1, 1) * tcrit * ep","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -2009,42 +2009,238 @@ A estimativa pontual esconde a variação que existe entre uma amostra e outra.
 <div class="card">
 <p><strong>❌ Errado</strong></p>
 <p>“Há 95% de probabilidade de a média estar entre 138,3 e 146,5.”</p>
-<p>Isso é uma leitura <strong>bayesiana</strong> — o parâmetro é fixo, não tem distribuição.</p>
+<p>O parâmetro é fixo: quem tem probabilidade é o método.</p>
 </div>
 </div>
 </section>
 <section id="a-conta-é-sempre-a-mesma" class="slide level2">
 <h2>A conta é sempre a mesma</h2>
 <div class="formula">
-<p><span class="math display">\[\text{IC}_{95\%} = \text{estimativa} \pm \left(z \times EP\right)\]</span></p>
+<p><span class="math display">\[\text{IC}_{95\%} = \text{estimativa} \pm \left(\text{multiplicador} \times EP\right)\]</span></p>
 </div>
 <div class="cards cols-3">
 <div class="card">
 <p><strong>A estimativa</strong></p>
-<p>O valor pontual: média, proporção, diferença entre médias.</p>
+<p>O valor pontual: uma média, uma proporção, uma diferença entre médias.</p>
 </div>
 <div class="card">
 <p><strong>O erro padrão</strong></p>
-<p>O quanto a estimativa varia de amostra para amostra.</p>
+<p>O quanto a estimativa varia de amostra para amostra. Muda com <span class="math inline">\(n\)</span> e com o desenho.</p>
 </div>
 <div class="card">
 <p><strong>O multiplicador</strong></p>
 <p>1,96 para 95%. 2,58 para 99%. A distribuição <span class="math inline">\(t\)</span> quando <span class="math inline">\(n\)</span> é pequeno.</p>
 </div>
 </div>
+<p class="small">
+Decorar a fórmula não resolve o problema: o que muda de um desenho para outro é <strong>qual</strong> erro padrão entra na conta.
+</p>
 </section>
-<section id="para-uma-média" class="slide level2">
-<h2>Para uma média</h2>
+<section id="farmácia-o-intervalo-do-teor" class="slide level2">
+<h2>Farmácia · o intervalo do teor</h2>
+<p>
+<span class="pill">um grupo</span>
+</p>
+<p>Doze comprimidos de paracetamol 500 mg: <span class="math inline">\(\bar{x} = 499{,}83\)</span> e <span class="math inline">\(s = 2{,}59\)</span>.</p>
 <div class="formula">
-<p><span class="math display">\[\text{IC}_{95\%} = \bar{x} \pm t_{0{,}975;\, n-1} \times \frac{s}{\sqrt{n}}\]</span></p>
+<p><span class="math display">\[EP = \tfrac{2{,}59}{\sqrt{12}} = 0{,}75 \qquad t_{0{,}975;\,11} = 2{,}20\]</span></p>
 </div>
-<p>Com o nosso grupo de oito pacientes: <span class="math inline">\(\bar{x} = 142{,}4\)</span>, <span class="math inline">\(s = 4{,}93\)</span>, <span class="math inline">\(\frac{s}{\sqrt{n}} = 1{,}74\)</span> e <span class="math inline">\(t = 2{,}365\)</span>.</p>
 <div class="keybox">
-<p><span class="math display">\[142{,}4 \pm 2{,}365 \times 1{,}74 = [138{,}3;\; 146{,}5]\ \text{mmHg}\]</span></p>
+<p><span class="math display">\[499{,}83 \pm 2{,}20 \times 0{,}75 = [498{,}19;\; 501{,}48] \text{ mg}\]</span></p>
+<p>Margem de erro de 1,64 mg — para os dois lados.</p>
+</div>
+</section>
+<section id="farmácia-o-que-o-lote-pode-ser" class="slide level2">
+<h2>Farmácia · o que o lote pode ser</h2>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>O intervalo responde</strong></p>
+<p>O lote pode estar 1,8 mg abaixo ou 1,5 mg acima da especificação.</p>
+<p>Para um critério de <span class="math inline">\(\pm 5\%\)</span> (475 a 525 mg), a margem é confortável.</p>
+</div>
+<div class="card">
+<p><strong>O teste não respondeu isso</strong></p>
+<p>O <span class="math inline">\(p = 0{,}83\)</span> só disse “não distingui de um lote perfeito”.</p>
+<p>Conformidade é uma afirmação sobre a <strong>faixa</strong>, não sobre o p.</p>
+</div>
 </div>
 <p class="small">
-Para uma proporção, troca-se a média por <span class="math inline">\(\hat{p}\)</span> e a conta vira <span class="math inline">\(\hat{p} \pm 1{,}96\sqrt{\hat{p}(1-\hat{p})/n}\)</span>.
+Para reduzir essa margem à metade, seriam precisos 48 comprimidos — quatro vezes mais. Precisão custa caro.
 </p>
+</section>
+<section id="odontologia-a-diferença-também-tem-intervalo" class="slide level2">
+<h2>Odontologia · a diferença também tem intervalo</h2>
+<p>
+<span class="pill">dois grupos independentes</span>
+</p>
+<p>Diferença observada: 9,6 pontos percentuais (nove voluntários por grupo).</p>
+<div class="formula">
+<p><span class="math display">\[EP_{\text{dif}} = \sqrt{\tfrac{6{,}16^2}{9} + \tfrac{5{,}03^2}{9}} = 2{,}65\]</span></p>
+</div>
+<div class="keybox">
+<p><span class="math display">\[9{,}56 \pm 2{,}13 \times 2{,}65 = [3{,}92;\; 15{,}20] \text{ pontos percentuais}\]</span></p>
+<p>O erro padrão combina a incerteza dos <strong>dois</strong> grupos.</p>
+</div>
+</section>
+<section id="odontologia-o-intervalo-no-r" class="slide level2">
+<h2>Odontologia · o intervalo no R</h2>
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p class="small">
+O objeto <code>conf.int</code> traz só o intervalo: [3,92; 15,20]. O teste completo está no capítulo 8.
+</p>
+</section>
+<section id="odontologia-o-que-o-intervalo-acrescenta" class="slide level2">
+<h2>Odontologia · o que o intervalo acrescenta</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Leitura</th>
+<th>O que informa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(p = 0{,}0025\)</span></td>
+<td>há evidência de diferença</td>
+</tr>
+<tr class="even">
+<td>IC 95% = [3,9; 15,2]</td>
+<td>a diferença está <strong>nessa faixa</strong></td>
+</tr>
+<tr class="odd">
+<td>9,6 pontos</td>
+<td>o tamanho estimado do efeito</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>Quatro pontos podem não justificar a troca de produto. Quinze, sim. <strong>O p-valor não distingue os dois casos — o intervalo distingue.</strong></p>
+</div>
+</section>
+<section id="fisioterapia-o-pareado-muda-o-desvio" class="slide level2">
+<h2>Fisioterapia · o pareado muda o desvio</h2>
+<p>
+<span class="pill">dois grupos pareados</span>
+</p>
+<p>As dez diferenças têm média 2,7 e desvio <strong>1,42</strong>.</p>
+<div class="formula">
+<p><span class="math display">\[EP = \tfrac{1{,}42}{\sqrt{10}} = 0{,}45 \qquad \text{IC}_{95\%} = 2{,}7 \pm 2{,}262 \times 0{,}45\]</span></p>
+</div>
+<div class="keybox">
+<p><span class="math display">\[[1{,}69;\; 3{,}71] \text{ pontos}\]</span></p>
+<p>Não é o desvio de cada coluna (1,08 e 2,35): é o desvio <strong>das diferenças</strong>.</p>
+</div>
+</section>
+<section id="fisioterapia-o-mesmo-dado-dois-desenhos" class="slide level2">
+<h2>Fisioterapia · o mesmo dado, dois desenhos</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Análise</th>
+<th>Estimativa</th>
+<th>IC 95%</th>
+<th>Largura</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pareado (correto)</td>
+<td>+2,70 pontos</td>
+<td>[1,69; 3,71]</td>
+<td>2,02</td>
+</tr>
+<tr class="even">
+<td>Dois grupos independentes</td>
+<td>+2,70 pontos</td>
+<td>[0,93; 4,47]</td>
+<td>3,54</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>A estimativa é a mesma. O intervalo pareado é <strong>43% mais estreito</strong> — e isso veio do desenho, não do acaso.</p>
+</div>
+<p class="small">
+Dentro de cada paciente, a variação entre pessoas desaparece. É o mesmo motivo pelo qual um ensaio cruzado precisa de menos voluntários.
+</p>
+</section>
+<section id="para-uma-proporção" class="slide level2">
+<h2>Para uma proporção</h2>
+<div class="formula">
+<p><span class="math display">\[\text{IC}_{95\%} = \hat{p} \pm 1{,}96\sqrt{\frac{\hat{p}\,(1-\hat{p})}{n}}\]</span></p>
+</div>
+<p>45 de 120 pacientes melhoraram: <span class="math inline">\(\hat{p} = 0{,}375\)</span>.</p>
+<div class="keybox">
+<p><span class="math display">\[0{,}375 \pm 1{,}96 \times 0{,}044 = [0{,}288;\; 0{,}462] \rightarrow 28{,}8\% \text{ a } 46{,}2\%\]</span></p>
+</div>
+<p class="small">
+A aproximação normal exige <span class="math inline">\(n\hat{p} &gt; 5\)</span> e <span class="math inline">\(n(1-\hat{p}) &gt; 5\)</span>. Com Wilson, o intervalo vira [29,4%; 46,4%].
+</p>
+</section>
+<section id="duas-proporções-a-diferença-de-novo" class="slide level2">
+<h2>Duas proporções · a diferença de novo</h2>
+<p>
+<span class="pill">dois grupos independentes</span>
+</p>
+<p>45 de 120 no controle (37,5%) e 55 de 120 no tratado (45,8%).</p>
+<div class="formula">
+<p><span class="math display">\[EP_{\text{dif}} = \sqrt{\tfrac{0{,}375 \times 0{,}625}{120} + \tfrac{0{,}458 \times 0{,}542}{120}} = 0{,}063\]</span></p>
+</div>
+<div class="keybox">
+<p><span class="math display">\[-0{,}083 \pm 1{,}96 \times 0{,}063 = [-0{,}208;\; 0{,}041]\]</span></p>
+<p>O zero está dentro: os dados aceitam de −21 a +4 pontos, e o teste dá <span class="math inline">\(p = 0{,}19\)</span>.</p>
+</div>
+</section>
+<section id="três-grupos-um-intervalo-por-vez-engana" class="slide level2">
+<h2>Três grupos · um intervalo por vez engana</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Protocolo</th>
+<th>Média</th>
+<th>IC 95%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A · convencional</td>
+<td>13,50</td>
+<td>[12,02; 14,98]</td>
+</tr>
+<tr class="even">
+<td>B · biofeedback</td>
+<td>19,38</td>
+<td>[17,97; 20,78]</td>
+</tr>
+<tr class="odd">
+<td>C · eletroestimulação</td>
+<td>21,88</td>
+<td>[20,18; 23,57]</td>
+</tr>
+</tbody>
+</table>
+<p>Os intervalos de B e C <strong>se sobrepõem</strong> (20,18 a 20,78) — e ainda assim o Tukey encontra diferença: 2,50 graus, <span class="math inline">\(p = 0{,}033\)</span>, IC [0,19; 4,81].</p>
+<div class="keybox">
+<p>Sobreposição de intervalos <strong>não é</strong> teste de equivalência. A regra só vale na direção inversa: se não se sobrepõem, a diferença é significativa.</p>
+</div>
+</section>
+<section id="três-grupos-os-intervalos-ajustados" class="slide level2">
+<h2>Três grupos · os intervalos ajustados</h2>
+<p>Os intervalos do Tukey são mais largos que os individuais: eles pagam o preço das três comparações ao mesmo tempo.</p>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="não-paramétrico-o-intervalo-da-mediana" class="slide level2">
+<h2>Não paramétrico · o intervalo da mediana</h2>
+<p>
+<span class="pill">escala ordinal</span>
+</p>
+<div class="keybox">
+<p>Escala 0–3: a média engana, e o teste por postos compara <strong>ordens</strong>. Deslocamento estimado <strong>1,0 ponto</strong>, IC 95% <strong>[1,0; 2,0]</strong> — sem o zero.</p>
+</div>
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="o-que-alarga-e-o-que-estreita" class="slide level2">
 <h2>O que alarga e o que estreita</h2>
@@ -2085,26 +2281,71 @@ Para uma proporção, troca-se a média por <span class="math inline">\(\hat{p}\
 </section>
 <section id="mesma-conta-dois-olhares" class="slide level2">
 <h2>Mesma conta, dois olhares</h2>
-<p>O intervalo de 95% para uma diferença <strong>equivale</strong> a um teste bilateral com <span class="math inline">\(\alpha = 0{,}05\)</span>.</p>
-<div class="cards cols-2">
-<div class="card">
-<p><strong>Intervalo exclui o zero</strong></p>
-<p>→ o teste <strong>rejeita</strong> <span class="math inline">\(H_0\)</span>.</p>
-<p>No estudo do capítulo 8: <span class="math inline">\([-16{,}2;\; -7{,}3]\)</span> não inclui zero.</p>
-</div>
-<div class="card">
-<p><strong>Intervalo inclui o zero</strong></p>
-<p>→ o teste <strong>não rejeita</strong> <span class="math inline">\(H_0\)</span>.</p>
-<p>Aí não há evidência de efeito.</p>
-</div>
-</div>
+<p>O IC de 95% <strong>equivale</strong> a um teste bilateral com <span class="math inline">\(\alpha = 0{,}05\)</span>.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Desenho</th>
+<th>IC 95%</th>
+<th>Zero dentro?</th>
+<th>Teste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Um grupo (teor)</td>
+<td>[498,19; 501,48]</td>
+<td>sim</td>
+<td>não rejeita, p = 0,83</td>
+</tr>
+<tr class="even">
+<td>Dois grupos</td>
+<td>[3,92; 15,20]</td>
+<td>não</td>
+<td>rejeita, p = 0,0025</td>
+</tr>
+<tr class="odd">
+<td>Pareado</td>
+<td>[1,69; 3,71]</td>
+<td>não</td>
+<td>rejeita, p = 0,0002</td>
+</tr>
+<tr class="even">
+<td>Duas proporções</td>
+<td>[−0,208; 0,041]</td>
+<td>sim</td>
+<td>não rejeita, p = 0,19</td>
+</tr>
+</tbody>
+</table>
 <p class="small">
-O intervalo é mais informativo que o p-valor: mostra <strong>onde</strong> o efeito provavelmente está.
+O intervalo é mais informativo: mostra <strong>onde</strong> o efeito provavelmente está, e não apenas se ele difere de zero.
 </p>
+</section>
+<section id="probmaster-o-multiplicador-em-segundos" class="slide level2">
+<h2>ProbMaster · o multiplicador em segundos</h2>
+<p>Toda a conta depende de um número: o multiplicador crítico.</p>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>1 · Distribuição</strong></p>
+<p>Normal para proporções e amostras grandes. t de Student para médias com <span class="math inline">\(n\)</span> pequeno.</p>
+</div>
+<div class="card">
+<p><strong>2 · Graus de liberdade</strong></p>
+<p><span class="math inline">\(n - 1\)</span>: 11 para os comprimidos, 9 para a dor lombar, 15 para os dentifrícios.</p>
+</div>
+<div class="card">
+<p><strong>3 · Modo Inverso (Quantil)</strong></p>
+<p>Região bicaudal, 5% repartidos em duas caudas. O app devolve o valor de corte.</p>
+</div>
+</div>
+<div class="keybox">
+<p>Teor: <strong>2,20</strong>. Dor lombar: <strong>2,26</strong>. Dentifrícios: <strong>2,13</strong>. O app tira o trabalho da tabela; a fórmula continua sendo sua.</p>
+</div>
 </section>
 <section id="calculando-à-mão-no-r" class="slide level2">
 <h2>Calculando à mão no R</h2>
-<div id="qwebr-insertion-location-1"></div>
+<div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p class="small">
 Troque 0.975 por 0.995: o intervalo alarga. Por quê?
@@ -2146,9 +2387,10 @@ Troque 0.975 por 0.995: o intervalo alarga. Por quê?
 <h2>O que levar daqui</h2>
 <ul>
 <li class="fragment"><strong>Toda estimativa tem incerteza</strong> — o intervalo é a forma padrão de declará-la.</li>
-<li class="fragment"><strong>95% descreve o método</strong>, não este intervalo.</li>
-<li class="fragment"><strong>Precisão custa caro</strong> — quadruplicar <span class="math inline">\(n\)</span> só metade a margem.</li>
-<li class="fragment"><strong>O intervalo é mais informativo que o p-valor</strong> — mostra o tamanho e a faixa plausível do efeito.</li>
+<li class="fragment"><strong>95% descreve o método</strong> — não este intervalo.</li>
+<li class="fragment"><strong>A fórmula é sempre a mesma</strong> — estimativa ± multiplicador × erro padrão.</li>
+<li class="fragment"><strong>O erro padrão muda com o desenho</strong> — pareado estreita; três grupos exigem ajuste.</li>
+<li class="fragment"><strong>O intervalo é mais informativo que o p-valor</strong> — mostra o tamanho e a faixa plausível.</li>
 </ul>
 </section>
 <section id="próximos-passos" class="slide level2">
@@ -2160,7 +2402,7 @@ Troque 0.975 por 0.995: o intervalo alarga. Por quê?
 <p><strong>📚 Material de apoio</strong></p>
 </div>
 <div class="callout-content">
-<p>Para revisar a teoria, resolver as questões e calcular o intervalo de confiança, acesse o capítulo no livro interativo.</p>
+<p>Para revisar a teoria, resolver as questões e calcular os intervalos de cada desenho, acesse o capítulo no livro interativo.</p>
 <p><a href="../../cap09_intervalos.html" target="_blank">Ir para o Livro Interativo: Capítulo 9</a></p>
 </div>
 </div>

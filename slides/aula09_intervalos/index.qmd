@@ -42,27 +42,27 @@ A garantia é do **método**, não deste intervalo específico.
 
 "Há 95% de probabilidade de a média estar entre 138,3 e 146,5."
 
-Isso é uma leitura **bayesiana** — o parâmetro é fixo, não tem distribuição.
+O parâmetro é fixo: quem tem probabilidade é o método.
 :::
 ::::
 
 ## A conta é sempre a mesma
 
 ::: {.formula}
-$$\text{IC}_{95\%} = \text{estimativa} \pm \left(z \times EP\right)$$
+$$\text{IC}_{95\%} = \text{estimativa} \pm \left(\text{multiplicador} \times EP\right)$$
 :::
 
 :::: {.cards .cols-3}
 ::: {.card}
 **A estimativa**
 
-O valor pontual: média, proporção, diferença entre médias.
+O valor pontual: uma média, uma proporção, uma diferença entre médias.
 :::
 
 ::: {.card}
 **O erro padrão**
 
-O quanto a estimativa varia de amostra para amostra.
+O quanto a estimativa varia de amostra para amostra. Muda com $n$ e com o desenho.
 :::
 
 ::: {.card}
@@ -72,19 +72,191 @@ O quanto a estimativa varia de amostra para amostra.
 :::
 ::::
 
-## Para uma média
+<p class="small">Decorar a fórmula não resolve o problema: o que muda de um desenho para outro é **qual** erro padrão entra na conta.</p>
+
+## Farmácia · o intervalo do teor
+
+<p><span class="pill">um grupo</span></p>
+
+Doze comprimidos de paracetamol 500 mg: $\bar{x} = 499{,}83$ e $s = 2{,}59$.
 
 ::: {.formula}
-$$\text{IC}_{95\%} = \bar{x} \pm t_{0{,}975;\, n-1} \times \frac{s}{\sqrt{n}}$$
+$$EP = \tfrac{2{,}59}{\sqrt{12}} = 0{,}75 \qquad t_{0{,}975;\,11} = 2{,}20$$
 :::
-
-Com o nosso grupo de oito pacientes: $\bar{x} = 142{,}4$, $s = 4{,}93$, $\frac{s}{\sqrt{n}} = 1{,}74$ e $t = 2{,}365$.
 
 ::: {.keybox}
-$$142{,}4 \pm 2{,}365 \times 1{,}74 = [138{,}3;\; 146{,}5]\ \text{mmHg}$$
+$$499{,}83 \pm 2{,}20 \times 0{,}75 = [498{,}19;\; 501{,}48] \text{ mg}$$
+
+Margem de erro de 1,64 mg — para os dois lados.
 :::
 
-<p class="small">Para uma proporção, troca-se a média por $\hat{p}$ e a conta vira $\hat{p} \pm 1{,}96\sqrt{\hat{p}(1-\hat{p})/n}$.</p>
+## Farmácia · o que o lote pode ser
+
+:::: {.cards .cols-2}
+::: {.card}
+**O intervalo responde**
+
+O lote pode estar 1,8 mg abaixo ou 1,5 mg acima da especificação.
+
+Para um critério de $\pm 5\%$ (475 a 525 mg), a margem é confortável.
+:::
+
+::: {.card}
+**O teste não respondeu isso**
+
+O $p = 0{,}83$ só disse "não distingui de um lote perfeito".
+
+Conformidade é uma afirmação sobre a **faixa**, não sobre o p.
+:::
+::::
+
+<p class="small">Para reduzir essa margem à metade, seriam precisos 48 comprimidos — quatro vezes mais. Precisão custa caro.</p>
+
+## Odontologia · a diferença também tem intervalo
+
+<p><span class="pill">dois grupos independentes</span></p>
+
+Diferença observada: 9,6 pontos percentuais (nove voluntários por grupo).
+
+::: {.formula}
+$$EP_{\text{dif}} = \sqrt{\tfrac{6{,}16^2}{9} + \tfrac{5{,}03^2}{9}} = 2{,}65$$
+:::
+
+::: {.keybox}
+$$9{,}56 \pm 2{,}13 \times 2{,}65 = [3{,}92;\; 15{,}20] \text{ pontos percentuais}$$
+
+O erro padrão combina a incerteza dos **dois** grupos.
+:::
+
+## Odontologia · o intervalo no R
+
+```{webr-r}
+A <- c(62, 58, 71, 65, 55,
+       68, 60, 74, 63)
+B <- c(70, 75, 66, 79, 72,
+       68, 81, 74, 77)
+
+t.test(B, A)$conf.int
+```
+
+<p class="small">O objeto `conf.int` traz só o intervalo: [3,92; 15,20]. O teste completo está no capítulo 8.</p>
+
+## Odontologia · o que o intervalo acrescenta
+
+| Leitura | O que informa |
+|---|---|
+| $p = 0{,}0025$ | há evidência de diferença |
+| IC 95% = [3,9; 15,2] | a diferença está **nessa faixa** |
+| 9,6 pontos | o tamanho estimado do efeito |
+
+::: {.keybox}
+Quatro pontos podem não justificar a troca de produto. Quinze, sim. **O p-valor não distingue os dois casos — o intervalo distingue.**
+:::
+
+## Fisioterapia · o pareado muda o desvio
+
+<p><span class="pill">dois grupos pareados</span></p>
+
+As dez diferenças têm média 2,7 e desvio **1,42**.
+
+::: {.formula}
+$$EP = \tfrac{1{,}42}{\sqrt{10}} = 0{,}45 \qquad \text{IC}_{95\%} = 2{,}7 \pm 2{,}262 \times 0{,}45$$
+:::
+
+::: {.keybox}
+$$[1{,}69;\; 3{,}71] \text{ pontos}$$
+
+Não é o desvio de cada coluna (1,08 e 2,35): é o desvio **das diferenças**.
+:::
+
+## Fisioterapia · o mesmo dado, dois desenhos
+
+| Análise | Estimativa | IC 95% | Largura |
+|---|---|---|---|
+| Pareado (correto) | +2,70 pontos | [1,69; 3,71] | 2,02 |
+| Dois grupos independentes | +2,70 pontos | [0,93; 4,47] | 3,54 |
+
+::: {.keybox}
+A estimativa é a mesma. O intervalo pareado é **43% mais estreito** — e isso veio do desenho, não do acaso.
+:::
+
+<p class="small">Dentro de cada paciente, a variação entre pessoas desaparece. É o mesmo motivo pelo qual um ensaio cruzado precisa de menos voluntários.</p>
+
+## Para uma proporção
+
+::: {.formula}
+$$\text{IC}_{95\%} = \hat{p} \pm 1{,}96\sqrt{\frac{\hat{p}\,(1-\hat{p})}{n}}$$
+:::
+
+45 de 120 pacientes melhoraram: $\hat{p} = 0{,}375$.
+
+::: {.keybox}
+$$0{,}375 \pm 1{,}96 \times 0{,}044 = [0{,}288;\; 0{,}462] \rightarrow 28{,}8\% \text{ a } 46{,}2\%$$
+:::
+
+<p class="small">A aproximação normal exige $n\hat{p} > 5$ e $n(1-\hat{p}) > 5$. Com Wilson, o intervalo vira [29,4%; 46,4%].</p>
+
+## Duas proporções · a diferença de novo
+
+<p><span class="pill">dois grupos independentes</span></p>
+
+45 de 120 no controle (37,5%) e 55 de 120 no tratado (45,8%).
+
+::: {.formula}
+$$EP_{\text{dif}} = \sqrt{\tfrac{0{,}375 \times 0{,}625}{120} + \tfrac{0{,}458 \times 0{,}542}{120}} = 0{,}063$$
+:::
+
+::: {.keybox}
+$$-0{,}083 \pm 1{,}96 \times 0{,}063 = [-0{,}208;\; 0{,}041]$$
+
+O zero está dentro: os dados aceitam de −21 a +4 pontos, e o teste dá $p = 0{,}19$.
+:::
+
+## Três grupos · um intervalo por vez engana
+
+| Protocolo | Média | IC 95% |
+|---|---|---|
+| A · convencional | 13,50 | [12,02; 14,98] |
+| B · biofeedback | 19,38 | [17,97; 20,78] |
+| C · eletroestimulação | 21,88 | [20,18; 23,57] |
+
+Os intervalos de B e C **se sobrepõem** (20,18 a 20,78) — e ainda assim o Tukey encontra diferença: 2,50 graus, $p = 0{,}033$, IC [0,19; 4,81].
+
+::: {.keybox}
+Sobreposição de intervalos **não é** teste de equivalência. A regra só vale na direção inversa: se não se sobrepõem, a diferença é significativa.
+:::
+
+## Três grupos · os intervalos ajustados
+
+Os intervalos do Tukey são mais largos que os individuais: eles pagam o preço das três comparações ao mesmo tempo.
+
+```{webr-r}
+ganho <- c(12,15,11,14,13,16,12,15,
+           18,21,17,20,19,22,18,20,
+           20,24,19,23,21,25,22,21)
+grupo <- factor(rep(c("A","B","C"),
+                    each = 8))
+
+TukeyHSD(aov(ganho ~ grupo))$grupo
+```
+
+## Não paramétrico · o intervalo da mediana
+
+<p><span class="pill">escala ordinal</span></p>
+
+::: {.keybox}
+Escala 0–3: a média engana, e o teste por postos compara **ordens**. Deslocamento estimado **1,0 ponto**, IC 95% **[1,0; 2,0]** — sem o zero.
+:::
+
+```{webr-r}
+manual <- c(2,3,3,2,3,2,
+            3,3,2,2,3,3)
+eletrica <- c(1,2,1,2,1,1,
+              2,1,2,1,1,2)
+
+wilcox.test(manual, eletrica,
+            conf.int = TRUE)
+```
 
 ## O que alarga e o que estreita
 
@@ -101,45 +273,58 @@ Precisão custa caro: **quadruplicar a amostra apenas divide a margem de erro po
 
 ## Mesma conta, dois olhares
 
-O intervalo de 95% para uma diferença **equivale** a um teste bilateral com $\alpha = 0{,}05$.
+O IC de 95% **equivale** a um teste bilateral com $\alpha = 0{,}05$.
 
-:::: {.cards .cols-2}
+| Desenho | IC 95% | Zero dentro? | Teste |
+|---|---|---|---|
+| Um grupo (teor) | [498,19; 501,48] | sim | não rejeita, p = 0,83 |
+| Dois grupos | [3,92; 15,20] | não | rejeita, p = 0,0025 |
+| Pareado | [1,69; 3,71] | não | rejeita, p = 0,0002 |
+| Duas proporções | [−0,208; 0,041] | sim | não rejeita, p = 0,19 |
+
+<p class="small">O intervalo é mais informativo: mostra **onde** o efeito provavelmente está, e não apenas se ele difere de zero.</p>
+
+## ProbMaster · o multiplicador em segundos
+
+Toda a conta depende de um número: o multiplicador crítico.
+
+:::: {.cards .cols-3}
 ::: {.card}
-**Intervalo exclui o zero**
+**1 · Distribuição**
 
-→ o teste **rejeita** $H_0$.
-
-No estudo do capítulo 8: $[-16{,}2;\; -7{,}3]$ não inclui zero.
+Normal para proporções e amostras grandes. t de Student para médias com $n$ pequeno.
 :::
 
 ::: {.card}
-**Intervalo inclui o zero**
+**2 · Graus de liberdade**
 
-→ o teste **não rejeita** $H_0$.
+$n - 1$: 11 para os comprimidos, 9 para a dor lombar, 15 para os dentifrícios.
+:::
 
-Aí não há evidência de efeito.
+::: {.card}
+**3 · Modo Inverso (Quantil)**
+
+Região bicaudal, 5% repartidos em duas caudas. O app devolve o valor de corte.
 :::
 ::::
 
-<p class="small">O intervalo é mais informativo que o p-valor: mostra **onde** o efeito provavelmente está.</p>
+::: {.keybox}
+Teor: **2,20**. Dor lombar: **2,26**. Dentifrícios: **2,13**. O app tira o trabalho da tabela; a fórmula continua sendo sua.
+:::
 
 ## Calculando à mão no R
 
 ```{webr-r}
-pressao <- c(142, 138, 145, 139,
-             150, 136, 148, 141)
+pressao <- c(142, 138, 145,
+             139, 150, 136,
+             148, 141)
 
 n     <- length(pressao)
 media <- mean(pressao)
-dp    <- sd(pressao)
-ep    <- dp / sqrt(n)
-
+ep    <- sd(pressao) / sqrt(n)
 tcrit <- qt(0.975, df = n - 1)
-tcrit
 
 media + c(-1, 1) * tcrit * ep
-
-t.test(pressao)$conf.int
 ```
 
 <p class="small">Troque 0.975 por 0.995: o intervalo alarga. Por quê?</p>
@@ -190,9 +375,10 @@ Um estudo com 30 pacientes encontrou IC de 95% para a diferença de médias igua
 
 ::: {.incremental}
 - **Toda estimativa tem incerteza** — o intervalo é a forma padrão de declará-la.
-- **95% descreve o método**, não este intervalo.
-- **Precisão custa caro** — quadruplicar $n$ só metade a margem.
-- **O intervalo é mais informativo que o p-valor** — mostra o tamanho e a faixa plausível do efeito.
+- **95% descreve o método** — não este intervalo.
+- **A fórmula é sempre a mesma** — estimativa ± multiplicador × erro padrão.
+- **O erro padrão muda com o desenho** — pareado estreita; três grupos exigem ajuste.
+- **O intervalo é mais informativo que o p-valor** — mostra o tamanho e a faixa plausível.
 :::
 
 ## Próximos passos
@@ -201,7 +387,7 @@ Falta a dupla mais usada — e mais confundida — da estatística aplicada: **c
 
 ::: {.callout-note icon="false"}
 ## 📚 Material de apoio
-Para revisar a teoria, resolver as questões e calcular o intervalo de confiança, acesse o capítulo no livro interativo.
+Para revisar a teoria, resolver as questões e calcular os intervalos de cada desenho, acesse o capítulo no livro interativo.
 
 [Ir para o Livro Interativo: Capítulo 9](../../cap09_intervalos.html){target="_blank"}
 :::
