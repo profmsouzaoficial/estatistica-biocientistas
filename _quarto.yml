@@ -4,6 +4,7 @@ project:
   resources:
     - "eu-lattes.jpg"
     - "avatar.png"
+    - "widgets"
   # Compila também as apresentações (slides/) depois do livro
   post-render:
     - ./build-slides.sh

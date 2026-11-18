@@ -1156,6 +1156,19 @@
   color: var(--bc-teal-bright);
 }
 
+
+/* Widgets interativos (cap. 3) — HTML autônomo em widgets/, via iframe */
+.reveal iframe.w-frame {
+  display: block;
+  width: 100%;
+  height: 470px;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, .09);
+  background: #fff;
+  margin: 0.2em 0 0.3em;
+}
+
 @media print {
   .reveal .slides section { padding: 0 1.2em; }
 }

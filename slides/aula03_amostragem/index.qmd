@@ -14,40 +14,663 @@ doi: "10.5281/zenodo.23858966"
 
 "Todos os hipertensos do Brasil" não é uma amostra: é uma impossibilidade.
 
-Toda conclusão que você vai ler neste livro depende de um ato silencioso e decisivo: **como as pessoas entraram no estudo**.
+Toda conclusão deste livro depende de um ato silencioso e decisivo: **como as pessoas entraram no estudo**.
 
 :::: {.cards .cols-3}
 ::: {.card}
 **Custo**
 
 Medir toda a população é caro e demora anos.
-
 :::
 
 ::: {.card}
 **Viabilidade**
 
-Populações muito grandes ou sigilosas tornam o censo impossível — e, às vezes, antiético.
+Populações muito grandes ou sigilosas tornam o censo impossível.
 :::
 
 ::: {.card}
-**Precisão**
+**Ética**
 
-Bem sorteada e estratificada, a amostra reduz a variabilidade da estimativa.
+Expor 100 mil pessoas para responder o que 1.000 responderiam não se justifica.
 :::
 ::::
 
-## Sorteio ou conveniência {.divider}
+<p class="small">A pergunta que sobra: <b>quantos são suficientes?</b> A resposta não é um número mágico — é uma conta com seis ingredientes.</p>
+
+## Três perguntas antes do primeiro dado
+
+Três decisões vêm antes da primeira medida:
+
+:::: {.cards .cols-3}
+::: {.card}
+**Quem?**
+
+Todos os cadastrados? Só os que fazem acompanhamento? Só os adultos?
+
+*Define a população — e o que fica de fora.*
+:::
+
+::: {.card}
+**Quantos?**
+
+30 bastam? 300 são necessários? 3.000 valem o custo?
+
+*Define a precisão que você pode prometer.*
+:::
+
+::: {.card}
+**Como?**
+
+Sorteio? Fila de espera? Prontuário? Quem aparecer no dia?
+
+*Define se há margem de erro ou apenas opinião.*
+:::
+::::
+
+::: {.keybox}
+As três respostas estão **ligadas**: um sorteio ruim não se compensa com número maior — nem o contrário.
+:::
+
+## A panela de sopa
+
+::: {.keybox}
+Se a sopa está bem mexida, **uma colher prova a panela**.
+
+Se o feijão acabou de ser posto e ainda não foi mexido, a mesma colher pode trazer só caldo — e você concluirá, com toda a confiança, que a comida está sem sal.
+:::
+
+**Misturar é a versão culinária de sortear.**
+
+É por isso que a amostra funciona: ela garante que cada pedaço da população tenha chance de cair na colher.
+
+<p class="small">Guarde a imagem. Voltaremos a ela quando a sopa for sangue, urina ou uma suspensão de antibiótico.</p>
+
+## População, amostra, parâmetro, estimador
+
+| Termo | O que é | Exemplo |
+|:--|:--|:--|
+| **População** ($N$) | Todos sobre quem você quer concluir | Todos os hipertensos cadastrados na UBS |
+| **Amostra** ($n$) | O subconjunto que você mediu | 120 prontuários sorteados |
+| **Parâmetro** | O número verdadeiro — você nunca o vê | Pressão média real de todos eles |
+| **Estimador** | A conta feita com os dados | Média dos 120 medidos |
+| **Erro amostral** | A distância entre os dois | $\bar{x} - \mu$ |
+| **Viés** | A distância que o método impõe | Medir só quem está sentado há 2 min |
+
+## A notação que você vai ver nos artigos
+
+::: {.formula}
+$$\underbrace{\mu,\ \sigma,\ \pi}_{\text{parâmetros — invisíveis}}\qquad\text{vs.}\qquad\underbrace{\bar{x},\ s,\ \hat{p}}_{\text{estimadores — medidos}}$$
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**Gregas: o mundo que você não vê**
+
+$\mu$ = média populacional
+
+$\sigma$ = desvio padrão populacional
+
+$\pi$ = proporção populacional
+:::
+
+::: {.card}
+**Latinas: o mundo que você mediu**
+
+$\bar{x}$ = média da amostra
+
+$s$ = desvio padrão da amostra
+
+$\hat{p}$ = proporção da amostra
+:::
+::::
+
+<p class="small">O capítulo inteiro usa o segundo grupo para falar do primeiro — e declara a confiança.</p>
+
+## Erro aleatório × erro sistemático
+
+:::: {.cards .cols-2}
+::: {.card}
+**Erro aleatório (amostral)**
+
+Vem do sorteio. Muda de direção a cada amostra.
+
+**Solução:** aumentar $n$, melhorar o desenho, parear.
+
+*Some quando $n \to \infty$.*
+:::
+
+::: {.card}
+**Erro sistemático (viés)**
+
+Vem do método. Aponta sempre para o mesmo lado.
+
+**Solução:** corrigir a seleção, a aferição ou a análise.
+
+*Nenhum $n$ o elimina.*
+:::
+::::
+
+::: {.keybox}
+**Farmácia, dois exemplos:** pesar 12 comprimidos e achar 499,8 mg (especificação 500 mg) é erro **aleatório** — outro sorteio daria 500,3. Calibrar a balança com um padrão de 505 mg produz **viés**: todos os resultados saem 5 mg abaixo.
+:::
+
+## O que "representativa" quer dizer
+
+::: {.keybox}
+Uma amostra é representativa quando o processo dá a **cada membro da população uma chance conhecida** de entrar — e quando essa chance **não depende do desfecho** que você vai medir.
+:::
+
+::: {.incremental}
+- **"Amostra grande é representativa."** Não. 500 alunos do 1º período são grandes e não representam idosos.
+- **"Aleatória é qualquer amostra."** Não. Aleatório é o *processo*; sortear 5 pessoas e só vir mulheres é variação amostral, não viés.
+- **"População homogênea dispensa sorteio."** Não. Alguém sempre fica de fora — e você precisa saber dizer quem.
+:::
+
+## A lei dos grandes números {.divider}
+
+<p class="small">Por que raios a média de 100 pessoas deveria se parecer com a de um milhão?</p>
+
+## O que a lei diz
+
+::: {.formula}
+$$\bar{X}_n \xrightarrow{\;n \to \infty\;} \mu$$
+:::
+
+Com observações independentes da mesma população, a média amostral se aproxima de $\mu$.
+
+:::: {.cards .cols-3}
+::: {.card}
+**Independentes**
+
+Uma pessoa não pode influenciar a outra. Irmãos tratados como independentes são erro comum.
+:::
+
+::: {.card}
+**Mesma população**
+
+Mudar de turno ou de aparelho no meio da coleta é trocar de população.
+:::
+
+::: {.card}
+**Média finita**
+
+Valores extremos pesados (renda, internação) convergem devagar.
+:::
+::::
+
+## Convergência ao vivo
+
+<iframe class="w-frame" src="../../widgets/lln.html" title="Lei dos grandes números — simulação ao vivo"></iframe>
+
+<p class="small">Clique em <b>Executar</b>: verde = média acumulada · faixa clara = margem de erro · tracejada = $\mu$.</p>
+
+## O que a animação mostra
+
+::: {.incremental}
+- **No começo, tudo oscila.** As primeiras observações são indivíduos, não tendências: uma pessoa com 118 mmHg puxa a média para cima; com $n=5$ a estimativa fica a 1,6 mmHg do alvo.
+- **A oscilação diminui — mas não na proporção de $n$.** De 10 para 100 observações a média sai de 99,87 para 98,14; de 100 para 500, vai a 99,75. O padrão é o da **raiz quadrada**.
+- **A faixa clara se aperta.** Ela não é decoração: é a incerteza da estimativa — o que o capítulo 9 chamará de intervalo de confiança.
+:::
+
+<p class="small">A lei garante a convergência <b>do processo</b>. Não promete que a sua amostra específica será boa.</p>
+
+## Por que converge: o erro padrão
+
+::: {.formula}
+$$EP(\bar{x}) = \frac{\sigma}{\sqrt{n}}$$
+:::
+
+O erro típico da sua média é o desvio padrão da população dividido pela **raiz** do tamanho da amostra.
+
+:::: {.cards .cols-2}
+::: {.card}
+**$\sigma$ é do mundo**
+
+Você não escolhe o desvio padrão do paciente, do tecido ou do lote. Ele é uma propriedade do material.
+:::
+
+::: {.card}
+**$n$ é seu**
+
+É o único botão que o pesquisador controla — e ele está **dentro de uma raiz**. É aí que nasce o retorno decrescente.
+:::
+::::
+
+## A tabela que explica tudo
+
+| $n$ | Erro padrão ($\sigma = 15$) | Margem de erro ($1{,}96 \times EP$) |
+|--:|--:|--:|
+| 10 | 4,74 | ± 9,30 |
+| 25 | 3,00 | ± 5,88 |
+| 100 | 1,50 | ± 2,94 |
+| 400 | 0,75 | ± 1,47 |
+| 1.600 | 0,375 | ± 0,74 |
+| 6.400 | 0,188 | ± 0,37 |
+
+::: {.keybox}
+Para passar de **± 2,94 para ± 1,47** — metade da margem — o $n$ foi de 100 para **400**.
+:::
+
+## Cada dado novo vale menos
+
+Quando você já tem $n$ observações, a próxima vale $\frac{1}{n+1}$ do total.
+
+:::: {.cards .cols-3}
+::: {.card}
+**10ª observação**
+
+Responde por **10%** da sua estimativa.
+:::
+
+::: {.card}
+**100ª observação**
+
+Responde por **1%**.
+:::
+
+::: {.card}
+**1.000ª observação**
+
+Responde por **0,1%**.
+:::
+::::
+
+::: {.keybox}
+Não porque o dado seja pior — ele é tão bom quanto os outros. Mas porque entra numa média que **já tem muita gente**.
+
+É isso que impede um único valor extremo de determinar a conclusão — e é isso que faz 10.000 pessoas melhorarem tão pouco em relação a 5.000.
+:::
+
+## O erro cai com a raiz de n {.divider}
+
+<p class="small">Dobrar a amostra reduz o erro por um fator de $\sqrt{2} \approx 1{,}41$ — cerca de 29%, não 50%.</p>
+
+## Retorno decrescente
+
+<iframe class="w-frame" src="../../widgets/erro-n.html" title="Margem de erro em função do tamanho da amostra"></iframe>
+
+<p class="small">Clique em <b>Executar</b>: a curva desaba e se arrasta; o custo, no rodapé, cresce em linha reta.</p>
+
+## O que a curva está dizendo
+
+| $n$ | Margem | Custo (R\$ 50/exame) | Ganho |
+|--:|--:|--:|:--|
+| 100 | ± 2,94 | R\$ 5.000 | — |
+| 400 | ± 1,47 | R\$ 20.000 | metade da margem, **4× o custo** |
+| 1.600 | ± 0,74 | R\$ 80.000 | metade da margem, **4× o custo** |
+| 6.400 | ± 0,37 | R\$ 320.000 | metade da margem, **4× o custo** |
+
+::: {.keybox}
+Cada linha custa o **quádruplo** da anterior e entrega a **metade** do ganho. Existe um ponto em que a resposta honesta é: *mais amostra não muda a conclusão — o que falta é desenho*.
+:::
+
+## Onde parar de coletar
+
+::: {.keybox}
+O ponto de parada **não é matemático, é de decisão**: você para quando a margem ficou pequena o bastante para responder à **pergunta clínica** — não quando ela ficou pequena em termos absolutos.
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**± 0,7 mmHg**
+
+Ótimo para um estudo de hipertensão.
+
+R\$ 80.000 bem gastos.
+:::
+
+::: {.card}
+**± 0,7 ponto de dor**
+
+Desperdício: a escala vai de 0 a 10 e a diferença mínima perceptível é ~2.
+
+R\$ 80.000 para nada.
+:::
+::::
+
+<p class="small">A margem aceitável se define em <b>unidades clínicas</b>, não em casas decimais.</p>
+
+## Amostra não é fração da população
+
+::: {.formula}
+$$EP = \frac{\sigma}{\sqrt{n}} \times \sqrt{\frac{N - n}{N - 1}}$$
+:::
+
+| População $N$ | Amostra $n$ | Fração | Fator | $EP$ ($\sigma=15$) |
+|--:|--:|--:|--:|--:|
+| 200 | 20 | 10% | 0,951 | 3,19 |
+| 1.000 | 100 | 10% | 0,949 | 1,42 |
+| 10.000 | 1.000 | 10% | 0,949 | 0,45 |
+| 1.000.000 | 1.000 | 0,1% | 0,9995 | 0,47 |
+
+## A intuição correta
+
+::: {.keybox}
+O tamanho da amostra responde a *"quanta variabilidade eu preciso domar?"* — **não** a *"que pedaço da população eu preciso cobrir?"*.
+:::
+
+:::: {.cards .cols-2}
+::: {.card}
+**1.000 pessoas numa cidade de 10 mil**
+
+Fator 0,95. Praticamente a mesma precisão de um país inteiro.
+:::
+
+::: {.card}
+**1.000 pessoas num país de 200 milhões**
+
+Fator 0,9995. Ser grande não torna o estudo "mais difícil".
+:::
+::::
+
+<p class="small">Quando $N$ importa de verdade: no <b>censo quase total</b> — 150 de 200 pessoas (75%) derruba o erro pela metade.</p>
+
+## Fluidos homogêneos e heterogêneos {.divider}
+
+<p class="small">$\sigma$ não é um número dado: é uma propriedade do material que você estuda.</p>
+
+## Dois frascos na bancada
+
+:::: {.cards .cols-2}
+::: {.card}
+**Frasco A — soro glicosado 5%**
+
+Preparado, agitado, estabilizado. A concentração é a mesma em qualquer ponto.
+
+**Uma alíquota de 1 mL representa o frasco inteiro.**
+
+*O erro vem quase todo do instrumento.*
+:::
+
+::: {.card}
+**Frasco B — suspensão de antibiótico**
+
+Partículas sedimentam. A concentração varia de ponto a ponto — e com o tempo.
+
+**Duas alíquotas do mesmo frasco podem diferir mais que dois frascos diferentes.**
+
+*O erro vem do material.*
+:::
+::::
+
+## O mesmo método, dois materiais
+
+<iframe class="w-frame" src="../../widgets/dispersao.html" title="Material homogêneo e heterogêneo com o mesmo n"></iframe>
+
+<p class="small">Mesmo método, mesmo $n=10$, <b>mesmo valor verdadeiro</b> — só o desvio padrão do material muda.</p>
+
+## Os números por trás da figura
+
+| | Homogêneo | Heterogêneo |
+|:--|--:|--:|
+| Desvio padrão $\sigma$ | 2,0 | **8,0** |
+| Erro padrão | 0,63 | **2,53** |
+| Intervalo de 95% | 98,6 – 101,4 | 94,3 – 105,7 |
+| Margem | ± 1,42 | **± 5,73** |
+
+::: {.keybox}
+O intervalo do material heterogêneo é **quatro vezes mais largo** com o mesmo número de alíquotas. Como $n$ entra ao quadrado nessa relação, igualar a precisão exigiria $4^2 = 16$ vezes mais amostras.
+:::
+
+## Quatro vezes mais variabilidade
+
+::: {.formula}
+$$\text{margem} = \frac{1{,}96\,\sigma}{\sqrt{n}} \;\Longrightarrow\; \text{margem} \propto \sigma \quad\text{e}\quad n \propto \sigma^2$$
+:::
+
+:::: {.cards .cols-3}
+::: {.card}
+**$\sigma$ 4× maior**
+
+Margem 4× maior com o mesmo $n$.
+
+*2,0 → 8,0 dá ±1,42 → ±5,73.*
+:::
+
+::: {.card}
+**Margem igual**
+
+Exige $n$ **16× maior**.
+
+*10 alíquotas viram 160.*
+:::
+
+::: {.card}
+**Consequência**
+
+Homogeneizar, estratificar ou parear é mais barato que multiplicar coletas.
+:::
+::::
+
+## O que fazer com a heterogeneidade
+
+| Estratégia | O que faz | Efeito no $n$ |
+|:--|:--|:--|
+| **Homogeneizar** | Reduz $\sigma$ antes de amostrar | cai muito |
+| **Estratificar** | Separa em grupos internamente homogêneos | cai |
+| **Parear** | Mede o mesmo indivíduo duas vezes | cai muito |
+| **Aumentar $n$** | Compra precisão com dinheiro | aumenta |
+| **Medir melhor** | Reduz a variância analítica | cai |
+
+<p class="small">A quarta opção é a mais usada e quase sempre a pior: as três primeiras atacam a <b>causa</b> da heterogeneidade; ela apenas paga por ela.</p>
+
+## De onde vem a variabilidade
+
+::: {.formula}
+$$\sigma^2_{\text{total}} = \sigma^2_{\text{entre indivíduos}} + \sigma^2_{\text{dentro do indivíduo}} + \sigma^2_{\text{medida}}$$
+:::
+
+:::: {.cards .cols-3}
+::: {.card}
+**Glicemia capilar**
+
+Varia ao longo do dia na mesma pessoa.
+:::
+
+::: {.card}
+**Hematócrito**
+
+Posição e hidratação mudam o resultado.
+:::
+
+::: {.card}
+**Ovos nas fezes**
+
+Variam de dia para dia: daí as múltiplas amostras em dias alternados.
+:::
+::::
+
+::: {.keybox}
+Se a variância é sobretudo **analítica**, mais pacientes não melhoram nada.
+:::
+
+## Na bancada e no ambulatório
+
+:::: {.cards .cols-2}
+::: {.card}
+**Bioquímica**
+
+Homogeneizar o tecido; *pools*; réplicas **técnicas** (variância analítica) × **biológicas** (variância entre amostras). Confundir as duas é o erro clássico de bancada.
+:::
+
+::: {.card}
+**Farmácia**
+
+Amostragem de lote, uniformidade de conteúdo, dissolução. "Quantas unidades?" é normativo e depende da variabilidade do processo.
+:::
+
+::: {.card}
+**Odontologia**
+
+A unidade pode ser o paciente, o dente ou o sítio — e os três não são independentes. Seis sítios do mesmo dente se parecem mais entre si.
+:::
+
+::: {.card}
+**Fisioterapia**
+
+Pacientes variam muito entre si; medidas repetidas variam pouco. Por isso 15 pacientes pareados podem ser mais conclusivos que 60 independentes.
+:::
+::::
+
+## De que depende o tamanho da amostra {.divider}
+
+<p class="small">Seis fatores, uma conta — e uma distinção que evita metade dos erros de projeto.</p>
+
+## Seis fatores
+
+::: {.incremental}
+- **Variabilidade ($\sigma$) maior** → $n$ **aumenta**. Mais ruído exige mais sinal.
+- **Erro tolerado ($E$) menor** → $n$ **aumenta**. ± 0,5 custa 4× mais que ± 1.
+- **Efeito ($\Delta$) menor** → $n$ **aumenta**. Provar 8 ≠ 0 é fácil; 1 ≠ 0, não.
+- **Significância ($\alpha$) mais exigente** → $n$ **aumenta**. p < 0,01 custa mais dados.
+- **Poder ($1-\beta$) maior** → $n$ **aumenta**. 90% de chance custa mais que 80%.
+- **Desenho**: pareado e estratificado **reduzem** o $n$; conglomerado **aumenta**.
+:::
+
+<p class="small">A discrepância entre médias <b>é</b> o tamanho do efeito ($\Delta$). O erro padrão não é um fator de escolha: é o <b>resultado</b> da conta.</p>
+
+## Causas e consequências
+
+::: {.keybox}
+**Entram na conta (você decide ou mede antes):** $\sigma$, $E$, $\Delta$, $\alpha$, $1-\beta$ e o desenho.
+
+**São consequência:** o erro padrão, a margem de erro e o valor de $p$.
+:::
+
+O erro padrão não é uma escolha: é $\sigma/\sqrt{n}$. Dizer "quero um erro padrão de 2" é apenas outra forma de dizer "quero uma margem de 3,9". E a discrepância entre médias **é** o tamanho do efeito $\Delta$ — outro nome para a mesma coisa.
+
+::: {.keybox}
+A pergunta certa não é **"quantos?"**, é **"quanto de erro eu tolero?"**. Definida a margem em unidades clínicas, o $n$ é consequência aritmética.
+:::
+
+## A fórmula para uma média
+
+::: {.formula}
+$$n = \left( \frac{z_{1-\alpha/2}\ \sigma}{E} \right)^2 \qquad z_{0{,}975} = 1{,}96$$
+:::
+
+**Exemplo:** paracetamol 500 mg, $\sigma = 2{,}59$ mg, erro tolerado de 1 mg.
+
+$$n = \left( \frac{1{,}96 \times 2{,}59}{1} \right)^2 = 25{,}8 \;\rightarrow\; \mathbf{26}\ \text{comprimidos}$$
+
+<p class="small">$\sigma$ e $E$ entram <b>ao quadrado</b>. E o $N$ da população não aparece — só entra na correção de população finita.</p>
+
+## Metade da margem, quatro vezes a amostra
+
+Querendo apertar o erro de 1 mg para **0,5 mg**:
+
+$$n = \left( \frac{1{,}96 \times 2{,}59}{0{,}5} \right)^2 = 103{,}1 \;\rightarrow\; \mathbf{104}\ \text{comprimidos}$$
+
+:::: {.cards .cols-3}
+::: {.card}
+**26 → 104**
+
+Amostra **4× maior**.
+:::
+
+::: {.card}
+**± 1,0 → ± 0,5**
+
+Margem **2× menor**.
+:::
+
+::: {.card}
+**Regra geral**
+
+$k$ vezes menos erro custa $k^2$ vezes mais amostra.
+:::
+::::
+
+## A fórmula para uma proporção
+
+::: {.formula}
+$$n = \frac{z^2\ p(1-p)}{E^2}$$
+:::
+
+| Proporção esperada | $p(1-p)$ | $n$ ($E=5\%$) | $n$ ($E=3\%$) |
+|:--|--:|--:|--:|
+| 50% | 0,250 | 385 | 1.068 |
+| 37,5% | 0,234 | 361 | 1.001 |
+| 10% | 0,090 | 139 | 385 |
+
+::: {.keybox}
+Sem ideia da proporção? Use **$p = 0{,}5$**: é o pior caso e nunca subestima o esforço.
+:::
+
+## Duas médias: o erro que ninguém vê
+
+:::: {.cards .cols-2}
+::: {.card}
+**Erro tipo I ($\alpha$)**
+
+Dizer que há diferença quando **não há**.
+
+É o $p < 0{,}05$. Todo mundo vigia.
+:::
+
+::: {.card}
+**Erro tipo II ($\beta$)**
+
+**Não** detectar a diferença quando ela **existe**.
+
+É o erro silencioso — o estudo "não encontra nada" e é publicado assim.
+:::
+::::
+
+::: {.formula}
+$$n_{\text{por grupo}} = \frac{2\,(z_{1-\alpha/2} + z_{1-\beta})^2\,\sigma^2}{\Delta^2} \approx \frac{15{,}7}{d^2},\qquad d = \frac{\Delta}{\sigma}$$
+:::
+
+<p class="small">Poder $= 1-\beta$: a chance de achar o efeito se ele for real. O padrão é 80% — ou 90% quando o erro tipo II é caro.</p>
+
+## O tamanho do efeito decide
+
+| $d = \Delta/\sigma$ | Interpretação | $n$ por grupo (poder 80%) | (poder 90%) |
+|:--|:--|--:|--:|
+| 0,2 | pequeno | **394** | 527 |
+| 0,5 | médio | **64** | 86 |
+| 0,8 | grande | **26** | 34 |
+
+::: {.keybox}
+Um efeito **pequeno** exige um estudo **enorme**: $d=0{,}2$ pede quase 400 pacientes por grupo para 80% de poder — e mais de 500 para 90%.
+:::
+
+## "Não significativo" não é "sem diferença"
+
+::: {.keybox}
+Um estudo com 20 pacientes por grupo e $d = 0{,}2$ tem menos de **20% de chance** de detectar o efeito.
+
+Se ele conclui "não houve diferença", a conclusão correta é: **"o estudo não tinha poder para detectá-la"**.
+:::
+
+É por isso que o cálculo amostral aparece no projeto **antes** da coleta: ele é a promessa de que o estudo será capaz de responder à pergunta que se propõe.
+
+<p class="small">Leia "não significativo" como <b>"inconclusivo"</b> até ver o intervalo de confiança — capítulo 9.</p>
+
+## Calculando no R
+
+```{webr-r}
+# detectar d = 0,5 com 80% de poder
+power.t.test(delta = 5, sd = 10,
+             power = 0.80, sig.level = 0.05)
+```
+
+<p class="small">Resultado: <b>63,8</b> → 64 por grupo. A fórmula com $z$ dá 63; a diferença é que o R usa a distribuição $t$, correta para amostras finitas.</p>
+
+## Como sortear: as técnicas {.divider}
+
+<p class="small">Até aqui, o <b>quanto</b>. Agora, o <b>como</b> — e ele decide se a margem de erro significa alguma coisa.</p>
 
 ## A regra de ouro
 
 ::: {.keybox}
 **Probabilística** = todo indivíduo tem uma chance **conhecida e diferente de zero** de ser sorteado.
-
-É essa chance conhecida que permite calcular o erro da estimativa. Sem ela, não existe margem de erro — existe apenas opinião sobre os dados.
 :::
 
-<p class="small">Toda a inferência estatística do livro repousa nessa frase.</p>
+É essa chance conhecida que permite calcular o erro da estimativa. Sem ela, não existe margem de erro — existe apenas opinião sobre os dados.
+
+<p class="small">Toda a inferência estatística do livro repousa nessa frase. As técnicas não probabilísticas descrevem; não inferem.</p>
 
 ## As quatro técnicas probabilísticas
 
@@ -57,7 +680,7 @@ Bem sorteada e estratificada, a amostra reduz a variabilidade da estimativa.
 
 Sorteio puro, como tirar bilhetes de uma urna.
 
-*Exige a lista completa da população. Funciona melhor em populações homogêneas.*
+*Exige a lista completa. Funciona melhor em populações homogêneas.*
 :::
 
 ::: {.card}
@@ -65,15 +688,15 @@ Sorteio puro, como tirar bilhetes de uma urna.
 
 Sorteia o primeiro e depois salta de $k$ em $k$.
 
-*Rápida em listas grandes. Quebra se a lista tiver um ciclo oculto — 1 a cada 7 dias pega sempre a mesma segunda-feira.*
+*Rápida em listas grandes. Quebra se houver ciclo oculto — 1 a cada 7 dias pega sempre a mesma segunda.*
 :::
 
 ::: {.card}
 **Estratificada**
 
-Divide a população em grupos homogêneos e sorteia **dentro** de cada um.
+Divide em grupos homogêneos e sorteia **dentro** de cada um.
 
-*Se 20% dos pacientes da clínica são idosos, a amostra terá 20% de idosos.*
+*Se 20% dos pacientes são idosos, a amostra terá 20% de idosos.*
 :::
 
 ::: {.card}
@@ -93,7 +716,7 @@ Sorteia **grupos inteiros**, não indivíduos.
 
 Objetivo: **garantir proporção**.
 
-Você conhece os estratos e sorteia dentro de cada.
+Sorteia dentro de cada estrato.
 
 *Ganha precisão.*
 :::
@@ -103,7 +726,7 @@ Você conhece os estratos e sorteia dentro de cada.
 
 Objetivo: **reduzir custo logístico**.
 
-Você sorteia blocos e examina todos os de dentro.
+Sorteia blocos e examina todos os de dentro.
 
 *Perde precisão se o bloco for parecido demais por dentro.*
 :::
@@ -131,7 +754,7 @@ Aplicar o questionário só na própria turma.
 
 Um participante indica outro.
 
-A única saída para populações escondidas — usuários de substâncias ilícitas, por exemplo.
+A única saída para populações escondidas.
 
 *Vicia-se no círculo de quem começou.*
 :::
@@ -157,7 +780,7 @@ amostra <- sample(populacao, 5)
 print(amostra)
 ```
 
-<p class="small">Rode várias vezes. Cada execução sorteia um grupo diferente — e é essa variabilidade que o capítulo 9 vai transformar em intervalo de confiança.</p>
+<p class="small">Rode várias vezes. Cada execução sorteia um grupo diferente — e é essa variabilidade que o capítulo 9 transforma em intervalo de confiança.</p>
 
 ## O viés não se corrige com mais gente
 
@@ -166,17 +789,29 @@ Imagine medir a flexibilidade cervical de 500 pessoas — **todas alunas do prim
 A amostra é grande. E continua errada: ninguém ali representa a flexibilidade de uma pessoa de 70 anos.
 
 ::: {.keybox}
-O tamanho da amostra reduz o **erro aleatório**.
+O tamanho da amostra reduz o **erro aleatório**. Jamais corrige o **erro sistemático**.
 
-Jamais corrige o **erro sistemático**. Uma amostra enviesada de um milhão de pessoas continua enviesada.
+Uma amostra enviesada de um milhão de pessoas continua enviesada — e com intervalo de confiança estreito, o que é pior: a precisão falsa dá credibilidade ao erro.
 :::
+
+## Os cinco suspeitos
+
+| Viés | Exemplo em saúde | Como se combate |
+|:--|:--|:--|
+| **Seleção** | Estudar flexibilidade só com jovens | Sorteio, critérios claros |
+| **Não resposta** | Questionário com 20% de retorno | Busca ativa, comparar não respondentes |
+| **Cobertura** | Sortear do cadastro da UBS, ignorando quem nunca foi | Comparar com censo |
+| **Sobrevivência** | Avaliar o tratamento só em quem completou | Intenção de tratar |
+| **Aferição** | Aparelho descalibrado num dos centros | Calibração, cegamento |
+
+<p class="small">Nenhum deles se resolve aumentando $n$. Todos se resolvem <b>antes</b> da coleta — ou não se resolvem.</p>
 
 ## Pause e pense
 
 ::: {.keybox}
 Identifique a técnica:
 
-**1.** Sortear 5 Unidades Básicas de Saúde e entrevistar todos os pacientes presentes em cada uma.
+**1.** Sortear 5 Unidades Básicas de Saúde e entrevistar todos os presentes em cada uma.
 
 **2.** Selecionar 1 a cada 10 fichas do arquivo clínico da faculdade.
 
@@ -191,14 +826,17 @@ Identifique a técnica:
 - **3. Quotas.** Há metas por subgrupo, mas nenhum sorteio: quem é abordado depende de quem passa.
 :::
 
-<p class="small">Nenhuma das três é probabilística nas duas últimas — e isso muda o que se pode afirmar.</p>
+<p class="small">Nenhuma das duas últimas é probabilística — e isso muda o que se pode afirmar ao final.</p>
 
 ## O que levar daqui
 
 ::: {.incremental}
-- **Amostra é o elo mais frágil do estudo** — um erro de sorteio não se conserta depois.
+- **Amostra é o elo mais frágil do estudo** — um erro de seleção não se conserta na análise.
 - **Probabilística exige chance conhecida** — é o que autoriza margem de erro.
-- **Estratificada garante proporção; conglomerados economizam logística** — não são sinônimos.
+- **A LGN garante convergência do processo**, não a bondade de uma amostra específica.
+- **O erro cai com $\sqrt{n}$** — metade da margem custa 4× a amostra.
+- **O $n$ não é fração da população** — depende de $\sigma$, $\Delta$, $E$, poder e desenho.
+- **Homogêneo dispensa alíquotas; heterogêneo exige mais ou homogeneização.**
 - **Viés não se resolve com tamanho** — amostra grande e torta continua torta.
 :::
 
@@ -208,7 +846,7 @@ Com o desenho escolhido e a amostra sorteada, é hora de **olhar os dados**. O p
 
 ::: {.callout-note icon="false"}
 ## 📚 Material de apoio
-Para revisar a teoria, resolver as questões e simular sorteios, acesse o capítulo no livro interativo.
+Para revisar a teoria, resolver as questões e rodar as simulações, acesse o capítulo no livro interativo.
 
 [Ir para o Livro Interativo: Capítulo 3](../../cap03_amostragem.html){target="_blank"}
 :::

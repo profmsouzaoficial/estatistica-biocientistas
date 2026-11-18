@@ -619,7 +619,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"# 1. Criando uma população simulada de 50 pacientes\npopulacao <- paste(\"Paciente\", 1:50)\n\n# 2. Definindo o tamanho da amostra (ex: 5 pacientes)\ntamanho_amostra <- 5\n\n# 3. Realizando o sorteio aleatório simples (AAS)\n# A função sample() faz o sorteio sem reposição por padrão\namostra_sorteada <- sample(populacao, size = tamanho_amostra)\n\ncat(\"Os pacientes sorteados para o ensaio clínico foram:\\n\")\nprint(amostra_sorteada)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"n <- c(10, 100, 400, 1600)\ndata.frame(n = n,\n           erro_padrao = round(15 / sqrt(n), 2),\n           margem = round(1.96 * 15 / sqrt(n), 2))","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# quantos por grupo para detectar d = 0,5 com 80% de poder?\npower.t.test(delta = 5, sd = 10,      # efeito de 5 unidades, desvio 10 -> d = 0,5\n             power = 0.80, sig.level = 0.05)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"populacao <- paste(\"Paciente\", 1:50)\n\n# sorteia 5, sem reposicao\namostra <- sample(populacao, 5)\nprint(amostra)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"set.seed(2026)\nfor (n in c(10, 100, 1000, 10000)) {\n  x <- rnorm(n, mean = 100, sd = 15)\n  cat(\"n =\", format(n, width = 6), \"| media =\", round(mean(x), 2), \"\\n\")\n}","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# 1.000 pessoas de uma cidade de 10 mil e de um pais de 200 milhoes\nep_cidade <- 15 / sqrt(1000) * sqrt((10000 - 1000) / (10000 - 1))\nep_pais   <- 15 / sqrt(1000) * sqrt((200000000 - 1000) / (200000000 - 1))\nround(c(cidade = ep_cidade, pais = ep_pais), 3)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1873,6 +1873,35 @@ globalThis.qwebrExecuteCode = async function (
 
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -1995,14 +2024,68 @@ globalThis.qwebrExecuteCode = async function (
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#o-que-é-amostragem" id="toc-o-que-é-amostragem" class="nav-link active" data-scroll-target="#o-que-é-amostragem"><span class="header-section-number">3.1</span> O que é Amostragem?</a></li>
-  <li><a href="#tipos-de-amostragem" id="toc-tipos-de-amostragem" class="nav-link" data-scroll-target="#tipos-de-amostragem"><span class="header-section-number">3.2</span> Tipos de Amostragem</a>
+  <li><a href="#a-pergunta-que-este-capítulo-responde" id="toc-a-pergunta-que-este-capítulo-responde" class="nav-link active" data-scroll-target="#a-pergunta-que-este-capítulo-responde"><span class="header-section-number">3.1</span> A pergunta que este capítulo responde</a></li>
+  <li><a href="#vocabulário-mínimo" id="toc-vocabulário-mínimo" class="nav-link" data-scroll-target="#vocabulário-mínimo"><span class="header-section-number">3.2</span> Vocabulário mínimo</a></li>
+  <li><a href="#por-que-não-estudar-todo-mundo" id="toc-por-que-não-estudar-todo-mundo" class="nav-link" data-scroll-target="#por-que-não-estudar-todo-mundo"><span class="header-section-number">3.3</span> Por que não estudar todo mundo</a></li>
+  <li><a href="#o-que-representativa-quer-dizer" id="toc-o-que-representativa-quer-dizer" class="nav-link" data-scroll-target="#o-que-representativa-quer-dizer"><span class="header-section-number">3.4</span> O que “representativa” quer dizer</a>
   <ul class="collapse">
-  <li><a href="#amostragem-probabilística" id="toc-amostragem-probabilística" class="nav-link" data-scroll-target="#amostragem-probabilística"><span class="header-section-number">3.2.1</span> Amostragem Probabilística</a></li>
-  <li><a href="#prática-interativa-simulando-sorteios-no-r" id="toc-prática-interativa-simulando-sorteios-no-r" class="nav-link" data-scroll-target="#prática-interativa-simulando-sorteios-no-r"><span class="header-section-number">3.2.2</span> Prática Interativa: Simulando Sorteios no R</a></li>
-  <li><a href="#amostragem-não-probabilística" id="toc-amostragem-não-probabilística" class="nav-link" data-scroll-target="#amostragem-não-probabilística"><span class="header-section-number">3.2.3</span> Amostragem Não Probabilística</a></li>
+  <li><a href="#erro-aleatório-e-viés" id="toc-erro-aleatório-e-viés" class="nav-link" data-scroll-target="#erro-aleatório-e-viés"><span class="header-section-number">3.4.1</span> Erro aleatório e viés</a></li>
   </ul></li>
-  <li><a href="#considerações-essenciais-e-aplicações" id="toc-considerações-essenciais-e-aplicações" class="nav-link" data-scroll-target="#considerações-essenciais-e-aplicações"><span class="header-section-number">3.3</span> Considerações Essenciais e Aplicações</a></li>
+  <li><a href="#a-lei-dos-grandes-números" id="toc-a-lei-dos-grandes-números" class="nav-link" data-scroll-target="#a-lei-dos-grandes-números"><span class="header-section-number">3.5</span> A lei dos grandes números</a>
+  <ul class="collapse">
+  <li><a href="#o-que-a-lei-diz" id="toc-o-que-a-lei-diz" class="nav-link" data-scroll-target="#o-que-a-lei-diz"><span class="header-section-number">3.5.1</span> O que a lei diz</a></li>
+  <li><a href="#enxergando-a-convergência" id="toc-enxergando-a-convergência" class="nav-link" data-scroll-target="#enxergando-a-convergência"><span class="header-section-number">3.5.2</span> Enxergando a convergência</a></li>
+  <li><a href="#por-que-converge-o-erro-padrão" id="toc-por-que-converge-o-erro-padrão" class="nav-link" data-scroll-target="#por-que-converge-o-erro-padrão"><span class="header-section-number">3.5.3</span> Por que converge: o erro padrão</a></li>
+  <li><a href="#o-dado-que-vale-cada-vez-menos" id="toc-o-dado-que-vale-cada-vez-menos" class="nav-link" data-scroll-target="#o-dado-que-vale-cada-vez-menos"><span class="header-section-number">3.5.4</span> O dado que vale cada vez menos</a></li>
+  </ul></li>
+  <li><a href="#o-erro-cai-com-a-raiz-de-n" id="toc-o-erro-cai-com-a-raiz-de-n" class="nav-link" data-scroll-target="#o-erro-cai-com-a-raiz-de-n"><span class="header-section-number">3.6</span> O erro cai com a raiz de n</a>
+  <ul class="collapse">
+  <li><a href="#a-curva-do-retorno-decrescente" id="toc-a-curva-do-retorno-decrescente" class="nav-link" data-scroll-target="#a-curva-do-retorno-decrescente"><span class="header-section-number">3.6.1</span> A curva do retorno decrescente</a></li>
+  <li><a href="#precisão-custa-caro" id="toc-precisão-custa-caro" class="nav-link" data-scroll-target="#precisão-custa-caro"><span class="header-section-number">3.6.2</span> Precisão custa caro</a></li>
+  <li><a href="#amostra-não-é-fração-da-população" id="toc-amostra-não-é-fração-da-população" class="nav-link" data-scroll-target="#amostra-não-é-fração-da-população"><span class="header-section-number">3.6.3</span> Amostra não é fração da população</a></li>
+  </ul></li>
+  <li><a href="#fluidos-homogêneos-e-heterogêneos" id="toc-fluidos-homogêneos-e-heterogêneos" class="nav-link" data-scroll-target="#fluidos-homogêneos-e-heterogêneos"><span class="header-section-number">3.7</span> Fluidos homogêneos e heterogêneos</a>
+  <ul class="collapse">
+  <li><a href="#a-metáfora-da-panela-de-novo" id="toc-a-metáfora-da-panela-de-novo" class="nav-link" data-scroll-target="#a-metáfora-da-panela-de-novo"><span class="header-section-number">3.7.1</span> A metáfora da panela, de novo</a></li>
+  <li><a href="#o-mesmo-método-dois-materiais" id="toc-o-mesmo-método-dois-materiais" class="nav-link" data-scroll-target="#o-mesmo-método-dois-materiais"><span class="header-section-number">3.7.2</span> O mesmo método, dois materiais</a></li>
+  <li><a href="#o-que-fazer-com-a-heterogeneidade" id="toc-o-que-fazer-com-a-heterogeneidade" class="nav-link" data-scroll-target="#o-que-fazer-com-a-heterogeneidade"><span class="header-section-number">3.7.3</span> O que fazer com a heterogeneidade</a></li>
+  <li><a href="#de-onde-vem-a-variabilidade" id="toc-de-onde-vem-a-variabilidade" class="nav-link" data-scroll-target="#de-onde-vem-a-variabilidade"><span class="header-section-number">3.7.4</span> De onde vem a variabilidade</a></li>
+  <li><a href="#ligações-com-outras-disciplinas" id="toc-ligações-com-outras-disciplinas" class="nav-link" data-scroll-target="#ligações-com-outras-disciplinas"><span class="header-section-number">3.7.5</span> Ligações com outras disciplinas</a></li>
+  </ul></li>
+  <li><a href="#de-que-depende-o-tamanho-da-amostra" id="toc-de-que-depende-o-tamanho-da-amostra" class="nav-link" data-scroll-target="#de-que-depende-o-tamanho-da-amostra"><span class="header-section-number">3.8</span> De que depende o tamanho da amostra</a>
+  <ul class="collapse">
+  <li><a href="#os-seis-fatores" id="toc-os-seis-fatores" class="nav-link" data-scroll-target="#os-seis-fatores"><span class="header-section-number">3.8.1</span> Os seis fatores</a></li>
+  <li><a href="#cuidado-causas-e-consequências" id="toc-cuidado-causas-e-consequências" class="nav-link" data-scroll-target="#cuidado-causas-e-consequências"><span class="header-section-number">3.8.2</span> Cuidado: causas e consequências</a></li>
+  <li><a href="#a-fórmula-para-uma-média" id="toc-a-fórmula-para-uma-média" class="nav-link" data-scroll-target="#a-fórmula-para-uma-média"><span class="header-section-number">3.8.3</span> A fórmula para uma média</a></li>
+  <li><a href="#exemplo-o-teor-do-comprimido" id="toc-exemplo-o-teor-do-comprimido" class="nav-link" data-scroll-target="#exemplo-o-teor-do-comprimido"><span class="header-section-number">3.8.4</span> Exemplo: o teor do comprimido</a></li>
+  <li><a href="#a-fórmula-para-uma-proporção" id="toc-a-fórmula-para-uma-proporção" class="nav-link" data-scroll-target="#a-fórmula-para-uma-proporção"><span class="header-section-number">3.8.5</span> A fórmula para uma proporção</a></li>
+  <li><a href="#duas-médias-poder-e-erro-tipo-ii" id="toc-duas-médias-poder-e-erro-tipo-ii" class="nav-link" data-scroll-target="#duas-médias-poder-e-erro-tipo-ii"><span class="header-section-number">3.8.6</span> Duas médias: poder e erro tipo II</a></li>
+  <li><a href="#o-efeito-do-efeito" id="toc-o-efeito-do-efeito" class="nav-link" data-scroll-target="#o-efeito-do-efeito"><span class="header-section-number">3.8.7</span> O efeito do efeito</a></li>
+  <li><a href="#os-fatores-na-prática" id="toc-os-fatores-na-prática" class="nav-link" data-scroll-target="#os-fatores-na-prática"><span class="header-section-number">3.8.8</span> Os fatores na prática</a></li>
+  </ul></li>
+  <li><a href="#como-sortear-as-técnicas" id="toc-como-sortear-as-técnicas" class="nav-link" data-scroll-target="#como-sortear-as-técnicas"><span class="header-section-number">3.9</span> Como sortear: as técnicas</a>
+  <ul class="collapse">
+  <li><a href="#a-regra-de-ouro" id="toc-a-regra-de-ouro" class="nav-link" data-scroll-target="#a-regra-de-ouro"><span class="header-section-number">3.9.1</span> A regra de ouro</a></li>
+  <li><a href="#amostragem-aleatória-simples-aas" id="toc-amostragem-aleatória-simples-aas" class="nav-link" data-scroll-target="#amostragem-aleatória-simples-aas"><span class="header-section-number">3.9.2</span> Amostragem Aleatória Simples (AAS)</a></li>
+  <li><a href="#amostragem-sistemática" id="toc-amostragem-sistemática" class="nav-link" data-scroll-target="#amostragem-sistemática"><span class="header-section-number">3.9.3</span> Amostragem Sistemática</a></li>
+  <li><a href="#amostragem-estratificada" id="toc-amostragem-estratificada" class="nav-link" data-scroll-target="#amostragem-estratificada"><span class="header-section-number">3.9.4</span> Amostragem Estratificada</a></li>
+  <li><a href="#amostragem-por-conglomerados" id="toc-amostragem-por-conglomerados" class="nav-link" data-scroll-target="#amostragem-por-conglomerados"><span class="header-section-number">3.9.5</span> Amostragem por Conglomerados</a></li>
+  <li><a href="#a-confusão-clássica" id="toc-a-confusão-clássica" class="nav-link" data-scroll-target="#a-confusão-clássica"><span class="header-section-number">3.9.6</span> A confusão clássica</a></li>
+  <li><a href="#amostragem-não-probabilística" id="toc-amostragem-não-probabilística" class="nav-link" data-scroll-target="#amostragem-não-probabilística"><span class="header-section-number">3.9.7</span> Amostragem não probabilística</a></li>
+  <li><a href="#sorteando-no-r" id="toc-sorteando-no-r" class="nav-link" data-scroll-target="#sorteando-no-r"><span class="header-section-number">3.9.8</span> Sorteando no R</a></li>
+  </ul></li>
+  <li><a href="#erros-que-não-se-corrigem-com-mais-gente" id="toc-erros-que-não-se-corrigem-com-mais-gente" class="nav-link" data-scroll-target="#erros-que-não-se-corrigem-com-mais-gente"><span class="header-section-number">3.10</span> Erros que não se corrigem com mais gente</a>
+  <ul class="collapse">
+  <li><a href="#o-caso-das-500-alunas" id="toc-o-caso-das-500-alunas" class="nav-link" data-scroll-target="#o-caso-das-500-alunas"><span class="header-section-number">3.10.1</span> O caso das 500 alunas</a></li>
+  </ul></li>
+  <li><a href="#prática-interativa-vendo-a-lgn-e-o-n-no-r" id="toc-prática-interativa-vendo-a-lgn-e-o-n-no-r" class="nav-link" data-scroll-target="#prática-interativa-vendo-a-lgn-e-o-n-no-r"><span class="header-section-number">3.11</span> Prática Interativa: vendo a LGN e o n no R</a>
+  <ul class="collapse">
+  <li><a href="#a-média-convergindo" id="toc-a-média-convergindo" class="nav-link" data-scroll-target="#a-média-convergindo"><span class="header-section-number">3.11.1</span> A média convergindo</a></li>
+  <li><a href="#o-n-não-é-fração-da-população" id="toc-o-n-não-é-fração-da-população" class="nav-link" data-scroll-target="#o-n-não-é-fração-da-população"><span class="header-section-number">3.11.2</span> O n não é fração da população</a></li>
+  </ul></li>
+  <li><a href="#o-que-levar-deste-capítulo" id="toc-o-que-levar-deste-capítulo" class="nav-link" data-scroll-target="#o-que-levar-deste-capítulo"><span class="header-section-number">3.12</span> O que levar deste capítulo</a></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">3.13</span> Exercícios</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">3.14</span> Referências</a></li>
   </ul>
 </nav>
     </div>
@@ -2314,16 +2397,745 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 <p><a href="slides/aula03_amostragem/index.html" class="deck-btn" target="_blank">▶ Abrir apresentação</a></p>
 <p>Em pesquisas biocientíficas, a coleta de dados para responder a perguntas importantes e gerar conhecimento é fundamental. No entanto, nem sempre é viável ou necessário estudar toda a população de interesse. É nesse contexto que as técnicas de amostragem assumem um papel crucial, permitindo aos pesquisadores obter inferências precisas sobre a população a partir de um subconjunto cuidadosamente selecionado <span class="citation" data-cites="pagano2004">(<a href="referencias.html#ref-pagano2004" role="doc-biblioref">Pagano e Gauvreau 2004</a>)</span>.</p>
-<p>Este livro, “Análise de Dados para Biocientistas”, dedica um capítulo completo às técnicas de amostragem, reconhecendo sua relevância para o sucesso de qualquer pesquisa nas clínicas, bancadas e análises epidemiológicas. A introdução deste capítulo irá fornecer uma visão abrangente do que você encontrará nas próximas páginas, despertando sua curiosidade e preparando-o para dominar essa área essencial da estatística.</p>
-<section id="o-que-é-amostragem" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="o-que-é-amostragem"><span class="header-section-number">3.1</span> O que é Amostragem?</h2>
-<p>Em termos simples, amostragem é o processo de selecionar um subconjunto da população de interesse para representá-la em um estudo <span class="citation" data-cites="vieira2008">(<a href="referencias.html#ref-vieira2008" role="doc-biblioref">Vieira 2008</a>)</span>. Através da escolha criteriosa de uma amostra adequada, os pesquisadores podem:</p>
+<p>Este capítulo é o alicerce de todo o resto do livro. Toda estatística inferencial — o intervalo de confiança do capítulo 9, o valor de <em>p</em> do capítulo 8, o teste de hipóteses que você vai usar no TCC — parte de uma pergunta que quase nunca aparece na seção de métodos: <strong>como esses sujeitos entraram no estudo?</strong> Se a resposta for “os que apareceram na clínica naquela semana”, nenhum cálculo posterior conserta o problema. A amostragem é o elo entre a pergunta científica e os dados que você realmente conseguiu coletar.</p>
+<section id="a-pergunta-que-este-capítulo-responde" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="a-pergunta-que-este-capítulo-responde"><span class="header-section-number">3.1</span> A pergunta que este capítulo responde</h2>
+<p>Imagine que você quer saber a pressão arterial média dos hipertensos atendidos numa Unidade Básica de Saúde. Três decisões precisam ser tomadas <strong>antes</strong> de medir a primeira pessoa:</p>
 <ul>
-<li><strong>Reduzir custos e tempo:</strong> Coletar dados de toda a população pode ser extremamente dispendioso e demorado. Uma amostra bem planejada pode fornecer resultados precisos com recursos significativamente menores.</li>
-<li><strong>Aumentar a viabilidade:</strong> Em alguns casos, como estudos com animais selvagens ou populações muito grandes (ex: todos os hipertensos do Brasil), pode ser impossível ou antiético coletar dados de todos os indivíduos. A amostragem torna esses estudos viáveis.</li>
-<li><strong>Melhorar a precisão:</strong> Em populações heterogêneas, a análise de uma amostra pode ser mais precisa do que a análise da população completa, especialmente quando técnicas de estratificação são utilizadas <span class="citation" data-cites="triola2017">(<a href="referencias.html#ref-triola2017" role="doc-biblioref">Triola 2017</a>)</span>.</li>
+<li><strong>Quem?</strong> — qual é exatamente a população de interesse: todos os hipertensos cadastrados? Só os que fazem acompanhamento? Só os adultos?</li>
+<li><strong>Quantos?</strong> — 30 pacientes bastam? 300 são necessários? 3.000 valem o custo?</li>
+<li><strong>Como?</strong> — sorteio, fila de espera, prontuário, quem aparecer no dia?</li>
 </ul>
-<p>O diagrama abaixo apresenta o fluxo das principais metodologias de amostragem.</p>
+<p>As três respostas estão ligadas. Um sorteio ruim não se compensa com um número maior; um número insuficiente não se compensa com um sorteio impecável. Este capítulo trata das três, começando pela intuição mais importante de todas — a que explica por que uma amostra <strong>funciona</strong>.</p>
+<div class="keybox">
+<p><strong>A metáfora que vale o capítulo inteiro:</strong> se a sopa está bem mexida, uma colher prova a panela. Se o feijão acabou de ser colocado e ainda não foi mexido, a mesma colher pode trazer só caldo — e você concluirá, com toda a confiança do mundo, que a comida está sem sal.</p>
+<p><strong>Misturar é a versão culinária de sortear.</strong> E é por isso que a amostragem funciona: ela garante que cada pedaço da população tenha chance de cair na colher.</p>
+</div>
+</section>
+<section id="vocabulário-mínimo" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="vocabulário-mínimo"><span class="header-section-number">3.2</span> Vocabulário mínimo</h2>
+<p>Antes de qualquer fórmula, é preciso fixar os nomes. A confusão entre eles é responsável por boa parte dos erros de interpretação em artigos científicos.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Termo</th>
+<th style="text-align: left;">O que é</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Símbolo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>População</strong></td>
+<td style="text-align: left;">Todos os indivíduos sobre os quais você quer concluir</td>
+<td style="text-align: left;">Todos os hipertensos cadastrados na UBS</td>
+<td style="text-align: left;"><span class="math inline">\(N\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Amostra</strong></td>
+<td style="text-align: left;">O subconjunto que você realmente mediu</td>
+<td style="text-align: left;">120 prontuários sorteados</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Unidade amostral</strong></td>
+<td style="text-align: left;">O “tijolo” que é sorteado e medido</td>
+<td style="text-align: left;">O paciente (ou o dente, ou o sítio)</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Parâmetro</strong></td>
+<td style="text-align: left;">O número verdadeiro da população — você nunca o vê</td>
+<td style="text-align: left;">Pressão média real de todos eles</td>
+<td style="text-align: left;"><span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\pi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Estimador</strong></td>
+<td style="text-align: left;">A conta feita com os dados da amostra</td>
+<td style="text-align: left;">Média dos 120 medidos</td>
+<td style="text-align: left;"><span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(\hat{p}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Erro amostral</strong></td>
+<td style="text-align: left;">A diferença entre estimador e parâmetro, por azar do sorteio</td>
+<td style="text-align: left;"><span class="math inline">\(\bar{x} - \mu\)</span></td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Viés</strong></td>
+<td style="text-align: left;">A diferença que o método introduz, sempre na mesma direção</td>
+<td style="text-align: left;">Medir só quem está sentado há 2 minutos</td>
+<td style="text-align: left;">—</td>
+</tr>
+</tbody>
+</table>
+<p>A regra de notação é simples e vale para o livro inteiro: <strong>letras gregas são do mundo que você não vê</strong> (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\pi\)</span>); <strong>letras latinas ou com chapéu são do mundo que você mediu</strong> (<span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(\hat{p}\)</span>). O capítulo inteiro é, no fundo, uma tentativa de usar o segundo grupo para falar do primeiro.</p>
+<p class="small">
+Na prática clínica, essa distinção aparece na bula e no laudo: “valor de referência” é parâmetro; “resultado do seu exame” é estimativa — e vem sempre com uma incerteza embutida.
+</p>
+</section>
+<section id="por-que-não-estudar-todo-mundo" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="por-que-não-estudar-todo-mundo"><span class="header-section-number">3.3</span> Por que não estudar todo mundo</h2>
+<p>Há quatro razões clássicas, e nenhuma delas é “porque é mais fácil”:</p>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Custo e tempo</strong></p>
+<p>Um censo de todos os hipertensos do Brasil levaria anos e custaria o orçamento de vários estudos. A amostra entrega a mesma conclusão com uma fração do gasto.</p>
+</div>
+<div class="card">
+<p><strong>Viabilidade</strong></p>
+<p>Populações muito grandes, móveis ou sigilosas tornam o censo impossível. Não existe lista completa de usuários de substâncias ilícitas — e, ainda assim, é preciso estudá-los.</p>
+</div>
+<div class="card">
+<p><strong>Ética</strong></p>
+<p>Expor 100.000 pessoas a uma coleta invasiva para responder a uma pergunta que 1.000 responderiam com precisão suficiente não é apenas caro: é eticamente condenável.</p>
+</div>
+<div class="card">
+<p><strong>Qualidade do dado</strong></p>
+<p>Equipes grandes erram mais. Em estudos multicêntricos, medir menos pessoas com treinamento e supervisão é frequentemente mais confiável do que medir muitas às pressas <span class="citation" data-cites="triola2017">(<a href="referencias.html#ref-triola2017" role="doc-biblioref">Triola 2017</a>)</span>.</p>
+</div>
+</div>
+<p>A pergunta que sobra é: <strong>quantos são suficientes?</strong> A resposta não é um número mágico — e este capítulo vai mostrar de que ela depende.</p>
+</section>
+<section id="o-que-representativa-quer-dizer" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="o-que-representativa-quer-dizer"><span class="header-section-number">3.4</span> O que “representativa” quer dizer</h2>
+<p>A palavra aparece em todo projeto, quase sempre sem definição. Ela não significa “parecida em tudo”. Significa uma coisa bem mais precisa:</p>
+<div class="keybox">
+<p>Uma amostra é <strong>representativa</strong> quando o processo que a selecionou dá a <strong>cada membro da população uma chance conhecida</strong> de entrar — e quando essa chance não depende do desfecho que você vai medir.</p>
+<p>“Chance conhecida” é o que permite calcular o erro. “Não depender do desfecho” é o que evita o viés.</p>
+</div>
+<p>Três mal-entendidos comuns, todos com consequências práticas:</p>
+<ol type="1">
+<li><strong>“Amostra grande é representativa.”</strong> Não. Uma amostra de 500 alunos do primeiro período de Fisioterapia é grande e não representa idosos. Tamanho reduz o erro aleatório; não corrige erro sistemático.</li>
+<li><strong>“Amostra aleatória é qualquer amostra.”</strong> Não. Aleatório é o <em>processo</em> de seleção, não o resultado. Sortear cinco pessoas pode, por azar, trazer só mulheres — isso é variação amostral, não viés. Viés é quando o processo sistematicamente exclui alguém.</li>
+<li><strong>“População homogênea dispensa sorteio.”</strong> Não. A homogeneidade reduz o erro do mesmo jeito, mas continua havendo uma população definida por trás — e você ainda precisa saber dizer quem ficou de fora.</li>
+</ol>
+<section id="erro-aleatório-e-viés" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="erro-aleatório-e-viés"><span class="header-section-number">3.4.1</span> Erro aleatório e viés</h3>
+<p>A distinção mais importante do capítulo, e a que mais aparece em prova:</p>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Erro aleatório (amostral)</strong></p>
+<p>Vem do sorteio. Muda de direção a cada amostra.</p>
+<p><strong>Solução:</strong> aumentar <span class="math inline">\(n\)</span>, melhorar o desenho, parear.</p>
+<p><strong>Some com <span class="math inline">\(n \to \infty\)</span>.</strong></p>
+</div>
+<div class="card">
+<p><strong>Erro sistemático (viés)</strong></p>
+<p>Vem do método. Aponta sempre para o mesmo lado.</p>
+<p><strong>Solução:</strong> corrigir o processo de seleção, a aferição ou a análise.</p>
+<p><strong>Nenhum <span class="math inline">\(n\)</span> o elimina.</strong></p>
+</div>
+</div>
+<p>Um exemplo concreto de cada, na farmácia: pesar 12 comprimidos de um lote e encontrar uma média de 499,8 mg quando a especificação é 500 mg é <strong>erro aleatório</strong> — outro sorteio de 12 comprimidos daria 500,3 mg. Já calibrar a balança com um peso padrão de 505 mg produz <strong>viés</strong>: todos os resultados saem 5 mg abaixo, e medir um milhão de comprimidos não corrige nada.</p>
+</section>
+</section>
+<section id="a-lei-dos-grandes-números" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="a-lei-dos-grandes-números"><span class="header-section-number">3.5</span> A lei dos grandes números</h2>
+<p>Chegamos ao coração teórico do capítulo. A pergunta é simples: <strong>por que raios uma média de 100 pessoas deveria se parecer com a média de um milhão?</strong></p>
+<p>A resposta é um teorema — a <strong>Lei dos Grandes Números</strong> (LGN) — e ele é a razão pela qual a estatística inferencial existe.</p>
+<section id="o-que-a-lei-diz" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="o-que-a-lei-diz"><span class="header-section-number">3.5.1</span> O que a lei diz</h3>
+<p>Em palavras: <em>quando o número de observações independentes cresce, a média da amostra se aproxima da média da população.</em> Não “tende a ficar parecida”: se aproxima, e a probabilidade de estar longe de <span class="math inline">\(\mu\)</span> vai a zero.</p>
+<p><span class="math display">\[\bar{X}_n \xrightarrow{\;n \to \infty\;} \mu\]</span></p>
+<p>Três condições embutidas, e é nelas que os estudos falham na prática:</p>
+<ul>
+<li><strong>Observações independentes</strong> — uma pessoa não pode influenciar a outra. Amostrar irmãos e tratá-los como independentes é um erro comum em estudos de família.</li>
+<li><strong>Mesma população, mesmo processo</strong> — se a partir da metade da coleta você começa a medir em outro turno, com outro aparelho, você trocou de população no meio do caminho.</li>
+<li><strong>Média finita</strong> — parece um detalhe matemático até você lembrar que dados com valores extremos muito pesados (renda, tempo de internação) convergem muito mais devagar.</li>
+</ul>
+<div class="keybox">
+<p>A LGN não diz que <strong>cada</strong> amostra é boa. Diz que, à medida que <span class="math inline">\(n\)</span> cresce, a média amostral fica cada vez mais próxima de <span class="math inline">\(\mu\)</span> — e que a chance de um desvio grande desaparece.</p>
+<p>É uma garantia <strong>do processo</strong>, não do resultado de um estudo específico.</p>
+</div>
+</section>
+<section id="enxergando-a-convergência" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="enxergando-a-convergência"><span class="header-section-number">3.5.2</span> Enxergando a convergência</h3>
+<p>A figura abaixo simula exatamente isso. A população é invisível (<span class="math inline">\(\mu = 100\)</span> mmHg, <span class="math inline">\(\sigma = 15\)</span>), como na vida real. A linha colorida é a média das observações já sorteadas: começa instável — com 5 observações chega a 98,4; com 10, a 99,9; com 25, cai para 97,3 — e vai se acomodando em torno de 100. A faixa clara ao redor da linha tracejada é a margem de erro da estimativa naquele instante: ela <strong>encolhe</strong> conforme <span class="math inline">\(n\)</span> cresce.</p>
+<div id="fig-lln" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lln-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<iframe class="w-frame" src="widgets/lln.html" title="Simulação da lei dos grandes números" loading="lazy">
+</iframe>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lln-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.1: A lei dos grandes números em ação. Cada ponto é a média acumulada das observações até ali; o eixo horizontal cresce junto com a amostra. Ao final de 500 observações a média é 99,75 — a 0,25 mmHg do parâmetro.
+</figcaption>
+</figure>
+</div>
+<p>Clique em <strong>Executar</strong> e observe três coisas, nesta ordem:</p>
+<ol type="1">
+<li><strong>No começo, tudo oscila.</strong> As primeiras observações são indivíduos, não tendências: uma pessoa com 118 mmHg puxa a média para cima, a próxima com 85 puxa para baixo. Com <span class="math inline">\(n = 5\)</span> a estimativa está a 1,6 mmHg do alvo; com <span class="math inline">\(n = 10\)</span>, a 0,13.</li>
+<li><strong>A oscilação diminui — mas não proporcionalmente.</strong> Entre a observação 10 e a 100, o erro cai de 0,13 para 1,86 (nessa simulação específica, subiu: azar do sorteio). Entre a 100 e a 500, cai para 0,25. O padrão é o da raiz quadrada, não o da linha reta.</li>
+<li><strong>A faixa clara se aperta.</strong> Aquela faixa é o que o capítulo 9 chamará de intervalo de confiança. Ela não é decoração: é a incerteza da estimativa, visível.</li>
+</ol>
+</section>
+<section id="por-que-converge-o-erro-padrão" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="por-que-converge-o-erro-padrão"><span class="header-section-number">3.5.3</span> Por que converge: o erro padrão</h3>
+<p>A LGN explica <em>que</em> a média converge. Falta saber <em>a que velocidade</em>. A resposta está no <strong>erro padrão</strong> da média:</p>
+<p><span class="math display">\[EP(\bar{x}) = \frac{\sigma}{\sqrt{n}}\]</span></p>
+<p>Lê-se assim: o erro típico da sua média é o desvio padrão da população dividido pela raiz do tamanho da amostra. Como <span class="math inline">\(\sigma\)</span> é do mundo (não se escolhe), o único botão que o pesquisador controla é <span class="math inline">\(n\)</span> — e ele está <strong>dentro de uma raiz</strong>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(n\)</span></th>
+<th style="text-align: right;">Erro padrão (com <span class="math inline">\(\sigma = 15\)</span>)</th>
+<th style="text-align: right;">Margem de erro (<span class="math inline">\(1{,}96 \times EP\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">4,74</td>
+<td style="text-align: right;">± 9,30</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">3,00</td>
+<td style="text-align: right;">± 5,88</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">2,12</td>
+<td style="text-align: right;">± 4,16</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">1,50</td>
+<td style="text-align: right;">± 2,94</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">0,75</td>
+<td style="text-align: right;">± 1,47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.600</td>
+<td style="text-align: right;">0,375</td>
+<td style="text-align: right;">± 0,74</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6.400</td>
+<td style="text-align: right;">0,188</td>
+<td style="text-align: right;">± 0,37</td>
+</tr>
+</tbody>
+</table>
+<p>A tabela merece ser lida em voz alta: <strong>para passar de ± 2,94 para ± 1,47 — metade da margem — o <span class="math inline">\(n\)</span> foi de 100 para 400.</strong> Quatro vezes mais exames para ganhar um dígito de precisão. Para chegar a ± 0,74, foram 1.600: dezesseis vezes mais.</p>
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="o-dado-que-vale-cada-vez-menos" class="level3" data-number="3.5.4">
+<h3 data-number="3.5.4" class="anchored" data-anchor-id="o-dado-que-vale-cada-vez-menos"><span class="header-section-number">3.5.4</span> O dado que vale cada vez menos</h3>
+<p>Há uma forma intuitiva de entender a raiz: quando você já tem <span class="math inline">\(n\)</span> observações, a próxima vale <span class="math inline">\(\frac{1}{n+1}\)</span> do total. A décima observação responde por 10% da sua estimativa; a centésima, por 1%; a milésima, por 0,1%.</p>
+<div class="keybox">
+<p><strong>Cada dado novo vale menos que o anterior.</strong> Não porque seja pior — ele é tão bom quanto os outros — mas porque entra numa média que já tem muita gente.</p>
+<p>Isso não é um defeito do método: é o que impede que um único valor extremo determine a conclusão. É também o que explica por que estudar 10.000 pessoas em vez de 5.000 melhora tão pouco a estimativa.</p>
+</div>
+</section>
+</section>
+<section id="o-erro-cai-com-a-raiz-de-n" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="o-erro-cai-com-a-raiz-de-n"><span class="header-section-number">3.6</span> O erro cai com a raiz de n</h2>
+<p>A consequência prática da seção anterior é desconfortável e precisa ser dita com clareza: <strong>a relação entre tamanho de amostra e precisão não é linear, é de raiz quadrada.</strong> Dobrar a amostra reduz o erro por um fator de <span class="math inline">\(\sqrt{2} \approx 1{,}41\)</span> — ou seja, cerca de 29%, não 50%.</p>
+<section id="a-curva-do-retorno-decrescente" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="a-curva-do-retorno-decrescente"><span class="header-section-number">3.6.1</span> A curva do retorno decrescente</h3>
+<div id="fig-erro-n" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-erro-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<iframe class="w-frame" src="widgets/erro-n.html" title="Margem de erro em função do tamanho da amostra" loading="lazy">
+</iframe>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-erro-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.2: Margem de erro em função do tamanho da amostra (<span class="math inline">\(\sigma = 15\)</span> mmHg). O eixo vertical é a margem; o horizontal, o número de exames. A curva desaba no começo e depois se arrasta rente ao zero — enquanto o custo, no rodapé da figura, cresce em linha reta.
+</figcaption>
+</figure>
+</div>
+<p>Execute a animação e acompanhe os três números do rodapé ao mesmo tempo:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(n\)</span></th>
+<th style="text-align: right;">Margem de erro</th>
+<th style="text-align: right;">Custo (R$ 50/exame)</th>
+<th style="text-align: left;">O que se ganhou</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">± 2,94</td>
+<td style="text-align: right;">R$ 5.000</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">± 1,47</td>
+<td style="text-align: right;">R$ 20.000</td>
+<td style="text-align: left;">metade da margem, 4× o custo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.600</td>
+<td style="text-align: right;">± 0,74</td>
+<td style="text-align: right;">R$ 80.000</td>
+<td style="text-align: left;">metade da margem, 4× o custo</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6.400</td>
+<td style="text-align: right;">± 0,37</td>
+<td style="text-align: right;">R$ 320.000</td>
+<td style="text-align: left;">metade da margem, 4× o custo</td>
+</tr>
+</tbody>
+</table>
+<p>Cada linha da tabela custa o <strong>quádruplo</strong> da anterior e entrega a <strong>metade</strong> do ganho. É por isso que existe um ponto, em todo estudo, em que a resposta honesta é: <em>“mais amostra não vai mudar a conclusão; o que falta é um desenho melhor.”</em></p>
+<div class="keybox">
+<p><strong>O ponto de parada não é matemático, é de decisão.</strong> Você para de aumentar <span class="math inline">\(n\)</span> quando a margem de erro ficou pequena o bastante para responder à pergunta clínica — não quando ela ficou pequena em termos absolutos.</p>
+<p>Uma margem de ± 0,7 mmHg é ótima para um estudo de hipertensão e um desperdício para um questionário de dor (que varia de 0 a 10).</p>
+</div>
+</section>
+<section id="precisão-custa-caro" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="precisão-custa-caro"><span class="header-section-number">3.6.2</span> Precisão custa caro</h3>
+<p>O raciocínio do custo é o que transforma a estatística em decisão de orçamento. Suponha que cada exame custe R$ 50 (coleta, insumo, tempo de equipe):</p>
+<ul>
+<li>100 exames → R$ 5.000 e margem de ± 2,94 mmHg;</li>
+<li>400 exames → R$ 20.000 e margem de ± 1,47 mmHg;</li>
+<li>1.600 exames → R$ 80.000 e margem de ± 0,74 mmHg.</li>
+</ul>
+<p>Se a pergunta é “o grupo tratado tem pressão menor que o controle, com diferença esperada de 8 mmHg?”, a margem de ± 2,94 já responde com folga. Pagar R$ 75.000 extras por ± 0,74 é comprar precisão que o estudo não vai usar.</p>
+<p class="small">
+Os valores acima são hipotéticos e servem para a conta; troque pelo custo real do seu projeto.
+</p>
+</section>
+<section id="amostra-não-é-fração-da-população" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="amostra-não-é-fração-da-população"><span class="header-section-number">3.6.3</span> Amostra não é fração da população</h3>
+<p>Esta é a confusão mais difundida — e a que mais distorce orçamentos. Muitos projetos afirmam coisas como <em>“vamos entrevistar 10% da população”</em>. A lógica parece intuitiva: se 10% de uma amostra é bom, 10% da população também é.</p>
+<p><strong>Não é assim.</strong> O erro da estimativa depende de <span class="math inline">\(n\)</span> e de <span class="math inline">\(\sigma\)</span>. O tamanho da população <span class="math inline">\(N\)</span> entra apenas por um fator de correção, e só quando a amostra é uma fração grande dela:</p>
+<p><span class="math display">\[EP = \frac{\sigma}{\sqrt{n}} \times \sqrt{\frac{N - n}{N - 1}}\]</span></p>
+<p>O segundo termo é a <strong>correção para população finita</strong>. Veja o que ele faz na prática, sempre amostrando 10% da população:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">População <span class="math inline">\(N\)</span></th>
+<th style="text-align: right;">Amostra <span class="math inline">\(n\)</span></th>
+<th style="text-align: right;">Fração</th>
+<th style="text-align: right;">Fator de correção</th>
+<th style="text-align: right;"><span class="math inline">\(EP\)</span> com <span class="math inline">\(\sigma=15\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">10%</td>
+<td style="text-align: right;">0,951</td>
+<td style="text-align: right;">3,19</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">10%</td>
+<td style="text-align: right;">0,949</td>
+<td style="text-align: right;">1,42</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">10.000</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">10%</td>
+<td style="text-align: right;">0,949</td>
+<td style="text-align: right;">0,45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.000.000</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0,1%</td>
+<td style="text-align: right;">0,9995</td>
+<td style="text-align: right;">0,47</td>
+</tr>
+</tbody>
+</table>
+<p>Duas leituras, ambas importantes:</p>
+<ol type="1">
+<li><strong>Quando você amostra 10%, o fator é praticamente o mesmo (≈ 0,95) qualquer que seja <span class="math inline">\(N\)</span>.</strong> O que importa é a <em>fração</em>, não o tamanho absoluto da população.</li>
+<li><strong>Quando <span class="math inline">\(N\)</span> é enorme — o caso de quase todo estudo clínico —, o fator vale 1.</strong> Comparar 1.000 pessoas entre uma cidade de 10.000 e um país de 200 milhões dá a mesma precisão. O país não é “mais difícil” por ser maior.</li>
+</ol>
+<div class="keybox">
+<p><strong>A intuição correta:</strong> o tamanho da amostra responde à pergunta <em>“quanta variabilidade eu preciso domar?”</em>, não à pergunta <em>“que pedaço da população eu preciso cobrir?”</em>.</p>
+<p>Por isso um estudo com 1.200 pacientes num hospital de uma cidade pequena pode ser tão preciso quanto um com 1.200 pacientes numa capital — e por isso “10% da população” não é um critério de tamanho amostral.</p>
+</div>
+<p>A única situação em que <span class="math inline">\(N\)</span> realmente importa é o <strong>censo quase total</strong>: quando <span class="math inline">\(n\)</span> chega perto de <span class="math inline">\(N\)</span>, o fator de correção derruba o erro rapidamente. Amostrar 150 de 200 pessoas (75%) dá um fator de 0,50 — metade do erro. Mas isso só acontece em populações pequenas e fechadas: uma turma, um rebanho, os 40 pacientes de uma clínica.</p>
+</section>
+</section>
+<section id="fluidos-homogêneos-e-heterogêneos" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="fluidos-homogêneos-e-heterogêneos"><span class="header-section-number">3.7</span> Fluidos homogêneos e heterogêneos</h2>
+<p>Até aqui falamos de <span class="math inline">\(\sigma\)</span> como se fosse um número dado. Ele não é: <span class="math inline">\(\sigma\)</span> é uma propriedade <strong>do material que você estuda</strong>. E é aqui que a bioquímica, a farmácia e a clínica entram na conversa.</p>
+<section id="a-metáfora-da-panela-de-novo" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="a-metáfora-da-panela-de-novo"><span class="header-section-number">3.7.1</span> A metáfora da panela, de novo</h3>
+<p>Pense em dois frascos sobre a bancada:</p>
+<ul>
+<li><strong>Frasco A:</strong> soro glicosado 5%, preparado, agitado e estabilizado. A concentração é a mesma em qualquer ponto do líquido. Uma alíquota de 1 mL representa o frasco inteiro.</li>
+<li><strong>Frasco B:</strong> uma suspensão de antibiótico mal dispersada, ou sangue total recém-colhido. A concentração <strong>varia</strong> de ponto para ponto — e varia também com o tempo, porque as partículas sedimentam.</li>
+</ul>
+<p>No frasco A, o erro da sua medida vem quase todo do <strong>instrumento</strong>. No frasco B, vem do <strong>material</strong>: duas alíquotas do mesmo frasco podem diferir mais entre si do que dois frascos diferentes.</p>
+<div class="keybox">
+<p><strong>Homogêneo</strong> = a variabilidade dentro da unidade é pequena; uma alíquota conta a história toda.</p>
+<p><strong>Heterogêneo</strong> = a variabilidade dentro da unidade é grande; uma alíquota conta <em>uma</em> história, que pode não ser a do todo.</p>
+</div>
+</section>
+<section id="o-mesmo-método-dois-materiais" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="o-mesmo-método-dois-materiais"><span class="header-section-number">3.7.2</span> O mesmo método, dois materiais</h3>
+<p>A figura abaixo usa o mesmo método de medida e o mesmo <span class="math inline">\(n = 10\)</span> nos dois materiais. A única coisa que muda é o desvio padrão:</p>
+<div id="fig-disp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-disp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<iframe class="w-frame" src="widgets/dispersao.html" title="Material homogêneo e heterogêneo com o mesmo n" loading="lazy">
+</iframe>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-disp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.3: Mesmo <span class="math inline">\(n\)</span>, mesmo método, dois materiais. O material homogêneo produz um intervalo de ± 1,42; o heterogêneo, de ± 5,73 — quatro vezes mais largo, porque seu desvio padrão é quatro vezes maior.
+</figcaption>
+</figure>
+</div>
+<p>Os números contam a história inteira:</p>
+<ul>
+<li><strong>Homogêneo:</strong> <span class="math inline">\(\sigma = 2{,}0\)</span>, erro padrão 0,63, intervalo de 98,6 a 101,4.</li>
+<li><strong>Heterogêneo:</strong> <span class="math inline">\(\sigma = 8{,}0\)</span>, erro padrão 2,53, intervalo de 94,3 a 105,7.</li>
+</ul>
+<p>O intervalo do material heterogêneo é <strong>quatro vezes mais largo</strong> com o mesmo número de alíquotas. E como <span class="math inline">\(n\)</span> entra ao quadrado nessa relação, igualar a precisão exigiria <span class="math inline">\(4^2 = 16\)</span> vezes mais amostras.</p>
+</section>
+<section id="o-que-fazer-com-a-heterogeneidade" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="o-que-fazer-com-a-heterogeneidade"><span class="header-section-number">3.7.3</span> O que fazer com a heterogeneidade</h3>
+<p>Existem cinco saídas, e a escolha entre elas é uma decisão científica, não estatística:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Estratégia</th>
+<th style="text-align: left;">O que faz</th>
+<th style="text-align: left;">Efeito no <span class="math inline">\(n\)</span></th>
+<th style="text-align: left;">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Homogeneizar</strong></td>
+<td style="text-align: left;">Reduz <span class="math inline">\(\sigma\)</span> antes de amostrar</td>
+<td style="text-align: left;">Cai muito</td>
+<td style="text-align: left;">Agitar a suspensão antes de pipetar; homogeneizar o tecido no ultrassom</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Estratificar</strong></td>
+<td style="text-align: left;">Separa a população em grupos internamente homogêneos</td>
+<td style="text-align: left;">Cai</td>
+<td style="text-align: left;">Sortear por faixa etária, por turno, por lote</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Parear</strong></td>
+<td style="text-align: left;">Mede o mesmo indivíduo duas vezes</td>
+<td style="text-align: left;">Cai muito</td>
+<td style="text-align: left;">Antes e depois no mesmo paciente</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Aumentar <span class="math inline">\(n\)</span></strong></td>
+<td style="text-align: left;">Compra precisão com dinheiro</td>
+<td style="text-align: left;">Aumenta</td>
+<td style="text-align: left;">Mais pacientes, mais alíquotas</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Medir melhor</strong></td>
+<td style="text-align: left;">Reduz a variância analítica</td>
+<td style="text-align: left;">Cai</td>
+<td style="text-align: left;">Calibrar o aparelho, padronizar a técnica</td>
+</tr>
+</tbody>
+</table>
+<p>A quarta opção é a mais usada e quase sempre a pior. As três primeiras atacam a <strong>causa</strong> da heterogeneidade; a quarta apenas paga por ela.</p>
+</section>
+<section id="de-onde-vem-a-variabilidade" class="level3" data-number="3.7.4">
+<h3 data-number="3.7.4" class="anchored" data-anchor-id="de-onde-vem-a-variabilidade"><span class="header-section-number">3.7.4</span> De onde vem a variabilidade</h3>
+<p>Em qualquer medida biológica, a variância total é a soma de três parcelas:</p>
+<p><span class="math display">\[\sigma^2_{\text{total}} = \sigma^2_{\text{entre indivíduos}} + \sigma^2_{\text{dentro do indivíduo}} + \sigma^2_{\text{medida}}\]</span></p>
+<p>Essa decomposição explica decisões práticas que parecem arbitrárias:</p>
+<ul>
+<li><strong>Glicemia capilar</strong> varia muito <em>dentro</em> da mesma pessoa ao longo do dia (jejum, pós-prandial, estresse). Por isso o protocolo exige jejum: você está tentando remover uma parcela de variância, não “ser mais rigoroso”.</li>
+<li><strong>Hematócrito</strong> varia com a posição do paciente e com a hidratação. Colher sentado e deitado dá resultados diferentes — parte da variabilidade é postural, não biológica.</li>
+<li><strong>Contagem de ovos de parasita nas fezes</strong> varia de dia para dia. É por isso que os protocolos de diagnóstico parasitológico recomendam <strong>múltiplas amostras em dias alternados</strong>: você está amostrando um material heterogêneo no tempo, e uma única coleta pode subestimar a carga parasitária.</li>
+<li><strong>Uniformidade de conteúdo de comprimidos</strong>: a variabilidade entre comprimidos de um lote é justamente o que a especificação farmacopeica controla. Amostrar 10 comprimidos não é capricho — é o número que detecta a heterogeneidade relevante do lote.</li>
+</ul>
+<div class="keybox">
+<p>Se a maior parte da variância é <strong>analítica</strong>, aumentar o número de pacientes não melhora nada: você está medindo o mesmo material com o mesmo erro. A pergunta “quantos pacientes?” só faz sentido depois de responder “quanto dessa variação é do paciente e quanto é do aparelho?”.</p>
+</div>
+</section>
+<section id="ligações-com-outras-disciplinas" class="level3" data-number="3.7.5">
+<h3 data-number="3.7.5" class="anchored" data-anchor-id="ligações-com-outras-disciplinas"><span class="header-section-number">3.7.5</span> Ligações com outras disciplinas</h3>
+<p>A amostragem não é um capítulo de estatística: é um capítulo de método científico que aparece em toda a bancada e em todo ambulatório.</p>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Bioquímica e biologia molecular</strong></p>
+<p>Homogeneizar o tecido antes de dosar proteína; usar <em>pools</em>; escolher o número de réplicas técnicas (que controlam a variância analítica) e biológicas (que controlam a variância entre amostras). Confundir as duas é o erro mais comum de bancada.</p>
+</div>
+<div class="card">
+<p><strong>Farmácia</strong></p>
+<p>Amostragem de lote para controle de qualidade, uniformidade de conteúdo, testes de dissolução. A pergunta “quantas unidades?” é normativa e depende da variabilidade esperada do processo.</p>
+</div>
+<div class="card">
+<p><strong>Odontologia</strong></p>
+<p>A unidade amostral pode ser o paciente, o dente ou o sítio — e os três níveis não são independentes. Seis sítios do mesmo dente se parecem mais entre si do que sítios de pacientes diferentes: é preciso um modelo que reconheça essa estrutura, não um <span class="math inline">\(n\)</span> maior.</p>
+</div>
+<div class="card">
+<p><strong>Fisioterapia</strong></p>
+<p>Pacientes variam muito entre si; medidas repetidas no mesmo paciente variam pouco. É por isso que o desenho pareado é tão poderoso nessa área — e por que estudos com 15 pacientes pareados podem ser mais conclusivos que 60 independentes.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="de-que-depende-o-tamanho-da-amostra" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="de-que-depende-o-tamanho-da-amostra"><span class="header-section-number">3.8</span> De que depende o tamanho da amostra</h2>
+<p>A pergunta “quantos pacientes eu preciso?” tem seis respostas parciais, e elas se combinam numa conta só. Antes da conta, a intuição de cada uma.</p>
+<section id="os-seis-fatores" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="os-seis-fatores"><span class="header-section-number">3.8.1</span> Os seis fatores</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 25%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Fator</th>
+<th style="text-align: center;">Símbolo</th>
+<th style="text-align: left;">Se <strong>aumenta</strong>…</th>
+<th style="text-align: left;">Se <strong>diminui</strong>…</th>
+<th style="text-align: left;">Por quê</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Variabilidade</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\sigma\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> aumenta</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> diminui</td>
+<td style="text-align: left;">Mais ruído exige mais sinal para enxergar o mesmo efeito</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Erro aceitável (margem)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(E\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> diminui</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> aumenta</td>
+<td style="text-align: left;">Querer ± 0,5 em vez de ± 1 custa 4× mais</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tamanho do efeito</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\Delta\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> diminui</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> aumenta</td>
+<td style="text-align: left;">É mais fácil provar que 8 ≠ 0 do que 1 ≠ 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Nível de significância</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> diminui</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> aumenta</td>
+<td style="text-align: left;">Exigir p &lt; 0,01 em vez de p &lt; 0,05 custa mais dados</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Poder do teste</strong></td>
+<td style="text-align: center;"><span class="math inline">\(1-\beta\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> aumenta</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> diminui</td>
+<td style="text-align: left;">Querer 90% de chance de achar o efeito custa mais que 80%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Desenho</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: left;">depende</td>
+<td style="text-align: left;">depende</td>
+<td style="text-align: left;">Pareado e estratificado reduzem o <span class="math inline">\(n\)</span> necessário; conglomerado aumenta</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cuidado-causas-e-consequências" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="cuidado-causas-e-consequências"><span class="header-section-number">3.8.2</span> Cuidado: causas e consequências</h3>
+<p>Vale uma observação que evita muita confusão. Na lista acima, alguns fatores <strong>entram na conta</strong> e outros são <strong>resultado dela</strong>:</p>
+<ul>
+<li><strong>Entram na conta (você decide ou mede antes):</strong> <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(E\)</span>, <span class="math inline">\(\Delta\)</span>, <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(1-\beta\)</span> e o desenho.</li>
+<li><strong>São consequência:</strong> o erro padrão, a margem de erro e o valor de <em>p</em>.</li>
+</ul>
+<p>O erro padrão não é uma escolha: ele é <span class="math inline">\(\sigma/\sqrt{n}\)</span> — muda quando você muda <span class="math inline">\(n\)</span> ou quando muda de material. Dizer “quero um erro padrão de 2” é apenas outra forma de dizer “quero uma margem de 3,9”.</p>
+<div class="keybox">
+<p><strong>A pergunta certa não é “quantos?”, é “quanto de erro eu tolero?”.</strong> Definida a margem aceitável — em unidades clínicas, não em casas decimais —, o <span class="math inline">\(n\)</span> é consequência aritmética.</p>
+</div>
+</section>
+<section id="a-fórmula-para-uma-média" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="a-fórmula-para-uma-média"><span class="header-section-number">3.8.3</span> A fórmula para uma média</h3>
+<p>Para estimar uma média com margem de erro <span class="math inline">\(E\)</span>, com confiança de <span class="math inline">\(95\%\)</span>:</p>
+<p><span class="math display">\[n = \left( \frac{z_{1-\alpha/2} \cdot \sigma}{E} \right)^2\]</span></p>
+<p>Com <span class="math inline">\(z_{0{,}975} = 1{,}96\)</span>:</p>
+<p><span class="math display">\[n = \left( \frac{1{,}96 \, \sigma}{E} \right)^2\]</span></p>
+<p>Repare em duas coisas. Primeiro, <strong><span class="math inline">\(\sigma\)</span> e <span class="math inline">\(E\)</span> entram ao quadrado</strong> — dobrar a precisão desejada quadruplica o <span class="math inline">\(n\)</span>; dobrar a variabilidade também. Segundo, o <span class="math inline">\(N\)</span> da população <strong>não aparece</strong>: ele só entra na correção de população finita, discutida acima.</p>
+</section>
+<section id="exemplo-o-teor-do-comprimido" class="level3" data-number="3.8.4">
+<h3 data-number="3.8.4" class="anchored" data-anchor-id="exemplo-o-teor-do-comprimido"><span class="header-section-number">3.8.4</span> Exemplo: o teor do comprimido</h3>
+<p>Voltemos ao controle de qualidade. Um lote de paracetamol 500 mg tem desvio padrão histórico de <span class="math inline">\(\sigma = 2{,}59\)</span> mg. A especificação tolera um erro de 1 mg na média do lote.</p>
+<p><span class="math display">\[n = \left( \frac{1{,}96 \times 2{,}59}{1} \right)^2 = 25{,}8 \;\rightarrow\; 26 \text{ comprimidos}\]</span></p>
+<p>Se o laboratório quiser apertar a margem para 0,5 mg:</p>
+<p><span class="math display">\[n = \left( \frac{1{,}96 \times 2{,}59}{0{,}5} \right)^2 = 103{,}1 \;\rightarrow\; 104 \text{ comprimidos}\]</span></p>
+<p><strong>Metade da margem, quatro vezes a amostra.</strong> É a mesma aritmética de sempre.</p>
+</section>
+<section id="a-fórmula-para-uma-proporção" class="level3" data-number="3.8.5">
+<h3 data-number="3.8.5" class="anchored" data-anchor-id="a-fórmula-para-uma-proporção"><span class="header-section-number">3.8.5</span> A fórmula para uma proporção</h3>
+<p>Para estimar uma proporção (prevalência, taxa de cura, adesão):</p>
+<p><span class="math display">\[n = \frac{z^2 \, p(1-p)}{E^2}\]</span></p>
+<p>O termo <span class="math inline">\(p(1-p)\)</span> é a variabilidade de uma proporção — e ele tem um máximo em <span class="math inline">\(p = 0{,}5\)</span> (onde vale 0,25). Isso gera a regra prática mais útil do capítulo:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Proporção esperada</th>
+<th style="text-align: right;"><span class="math inline">\(p(1-p)\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(n\)</span> para <span class="math inline">\(E = 5\%\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(n\)</span> para <span class="math inline">\(E = 3\%\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">50%</td>
+<td style="text-align: right;">0,250</td>
+<td style="text-align: right;">385</td>
+<td style="text-align: right;">1.068</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">37,5%</td>
+<td style="text-align: right;">0,234</td>
+<td style="text-align: right;">361</td>
+<td style="text-align: right;">1.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10%</td>
+<td style="text-align: right;">0,090</td>
+<td style="text-align: right;">139</td>
+<td style="text-align: right;">385</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p><strong>Quando você não faz ideia da proporção, use <span class="math inline">\(p = 0{,}5\)</span>.</strong> É o pior caso: dá o maior <span class="math inline">\(n\)</span> possível, e portanto nunca subestima o esforço necessário. É a escolha conservadora padrão em projetos de prevalência.</p>
+</div>
+</section>
+<section id="duas-médias-poder-e-erro-tipo-ii" class="level3" data-number="3.8.6">
+<h3 data-number="3.8.6" class="anchored" data-anchor-id="duas-médias-poder-e-erro-tipo-ii"><span class="header-section-number">3.8.6</span> Duas médias: poder e erro tipo II</h3>
+<p>Quando o objetivo é <strong>comparar dois grupos</strong>, a conta muda de natureza: não se trata mais de estimar com margem, e sim de <strong>detectar uma diferença</strong> se ela existir. Aí entram os dois erros:</p>
+<ul>
+<li><strong>Erro tipo I (<span class="math inline">\(\alpha\)</span>):</strong> dizer que há diferença quando não há. É o <em>p</em> &lt; 0,05.</li>
+<li><strong>Erro tipo II (<span class="math inline">\(\beta\)</span>):</strong> <strong>não</strong> detectar a diferença quando ela existe. É o erro silencioso, o que faz um estudo “não encontrar nada” — e ser publicado como se nada houvesse.</li>
+<li><strong>Poder (<span class="math inline">\(1-\beta\)</span>):</strong> a chance de detectar o efeito se ele for real. O padrão é 80% (ou 90%).</li>
+</ul>
+<p><span class="math display">\[n_{\text{por grupo}} = \frac{2 \, (z_{1-\alpha/2} + z_{1-\beta})^2 \, \sigma^2}{\Delta^2}\]</span></p>
+<p>O termo <span class="math inline">\(\Delta/\sigma\)</span> tem nome próprio — <strong>tamanho do efeito padronizado</strong>, <span class="math inline">\(d\)</span> — e é a razão sinal/ruído do estudo. A fórmula, reescrita, diz tudo:</p>
+<p><span class="math display">\[n_{\text{por grupo}} \approx \frac{2 \, (1{,}96 + 0{,}84)^2}{d^2} = \frac{15{,}7}{d^2}\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tamanho do efeito <span class="math inline">\(d\)</span></th>
+<th style="text-align: left;">Interpretação</th>
+<th style="text-align: right;"><span class="math inline">\(n\)</span> por grupo (poder 80%)</th>
+<th style="text-align: right;"><span class="math inline">\(n\)</span> por grupo (poder 90%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0,2</td>
+<td style="text-align: left;">pequeno</td>
+<td style="text-align: right;">394</td>
+<td style="text-align: right;">527</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0,5</td>
+<td style="text-align: left;">médio</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0,8</td>
+<td style="text-align: left;">grande</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">34</td>
+</tr>
+</tbody>
+</table>
+<p>Leia a tabela como um aviso: <strong>um efeito pequeno exige um estudo enorme</strong>. Se a diferença esperada entre dois tratamentos é de 0,2 desvios padrão, você precisa de quase 400 pacientes por grupo para ter 80% de chance de encontrá-la — e de mais de 500 para 90%.</p>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p class="small">
+O resultado é 63,8 — arredondado para 64 por grupo. A fórmula com <span class="math inline">\(z\)</span> dá 63; a diferença é que o R usa a distribuição <span class="math inline">\(t\)</span>, que é a correta para amostras finitas.
+</p>
+</section>
+<section id="o-efeito-do-efeito" class="level3" data-number="3.8.7">
+<h3 data-number="3.8.7" class="anchored" data-anchor-id="o-efeito-do-efeito"><span class="header-section-number">3.8.7</span> O efeito do efeito</h3>
+<p>Há uma consequência clínica importante nessa seção, e ela é frequentemente mal interpretada na literatura: <strong>“não houve diferença significativa” não é o mesmo que “não há diferença”</strong>. Pode ser que o estudo tenha sido pequeno demais para enxergar uma diferença real.</p>
+<div class="keybox">
+<p>Um estudo com 20 pacientes por grupo e <span class="math inline">\(d = 0{,}2\)</span> tem menos de 20% de chance de detectar o efeito. Se ele conclui “não houve diferença”, a conclusão correta é: <strong>“o estudo não tinha poder para detectá-la”</strong>.</p>
+<p>É por isso que o cálculo amostral precisa aparecer no projeto <strong>antes</strong> da coleta: ele é a promessa de que o estudo será capaz de responder à pergunta que se propõe.</p>
+</div>
+</section>
+<section id="os-fatores-na-prática" class="level3" data-number="3.8.8">
+<h3 data-number="3.8.8" class="anchored" data-anchor-id="os-fatores-na-prática"><span class="header-section-number">3.8.8</span> Os fatores na prática</h3>
+<p>Juntando tudo, o quadro mental para a sua próxima reunião de projeto:</p>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>Se <span class="math inline">\(\sigma\)</span> é grande</strong></p>
+<p>Homogeneíze, estratifique, pareie ou meça melhor — antes de pensar em aumentar <span class="math inline">\(n\)</span>.</p>
+</div>
+<div class="card">
+<p><strong>Se <span class="math inline">\(\Delta\)</span> é pequeno</strong></p>
+<p>O estudo vai ser grande. Pergunte-se se o efeito pequeno é clinicamente relevante antes de gastar.</p>
+</div>
+<div class="card">
+<p><strong>Se o poder é 90%</strong></p>
+<p>O <span class="math inline">\(n\)</span> cresce ~30% em relação a 80%. Vale quando o erro tipo II é caro (testar um tratamento que pode salvar vidas).</p>
+</div>
+</div>
+</section>
+</section>
+<section id="como-sortear-as-técnicas" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="como-sortear-as-técnicas"><span class="header-section-number">3.9</span> Como sortear: as técnicas</h2>
+<p>Até aqui tratamos do <strong>quanto</strong>. Agora, do <strong>como</strong> — e a escolha do método determina se a margem de erro que você calculou tem algum significado.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2358,81 +3170,231 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
+<section id="a-regra-de-ouro" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="a-regra-de-ouro"><span class="header-section-number">3.9.1</span> A regra de ouro</h3>
+<div class="keybox">
+<p><strong>Amostragem probabilística:</strong> todo indivíduo da população tem uma chance <strong>conhecida e diferente de zero</strong> de ser sorteado.</p>
+<p>É essa chance conhecida que permite calcular o erro da estimativa. Sem ela, não existe margem de erro — existe apenas opinião sobre os dados.</p>
+</div>
 </section>
-<section id="tipos-de-amostragem" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="tipos-de-amostragem"><span class="header-section-number">3.2</span> Tipos de Amostragem</h2>
-<p>A escolha da técnica de amostragem adequada é crucial para o sucesso de qualquer estudo. Este capítulo apresenta uma descrição detalhada, dividindo as técnicas em duas categorias principais <span class="citation" data-cites="pagano2004">(<a href="referencias.html#ref-pagano2004" role="doc-biblioref">Pagano e Gauvreau 2004</a>)</span>:</p>
-<section id="amostragem-probabilística" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="amostragem-probabilística"><span class="header-section-number">3.2.1</span> Amostragem Probabilística</h3>
-<p>Garante que cada indivíduo da população tenha uma chance conhecida e não nula de ser selecionado. É o padrão-ouro para inferência estatística.</p>
-<section id="amostragem-aleatória-simples-aas" class="level4" data-number="3.2.1.1">
-<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="amostragem-aleatória-simples-aas"><span class="header-section-number">3.2.1.1</span> Amostragem Aleatória Simples (AAS)</h4>
-<p>A AAS é a técnica de amostragem mais básica e fundamental. Ela se baseia na ideia de que cada indivíduo da população tem a mesma chance de ser selecionado para a amostra. Imagine um sorteio em que cada nome da população está em um bilhete: a AAS seria como tirar esses bilhetes aleatoriamente, sem favorecer ninguém.</p>
+<section id="amostragem-aleatória-simples-aas" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="amostragem-aleatória-simples-aas"><span class="header-section-number">3.9.2</span> Amostragem Aleatória Simples (AAS)</h3>
+<p>O padrão-ouro conceitual: cada indivíduo tem a mesma chance de ser selecionado, e as seleções são independentes.</p>
 <ul>
-<li><strong>Ideal para populações homogêneas:</strong> A AAS funciona melhor quando a população é homogênea, ou seja, quando os indivíduos são semelhantes em suas características. <em>Exemplo prático:</em> Sortear aleatoriamente placas de Petri padronizadas para testar a eficácia de um novo conservante na disciplina de “Microbiologia Básica”.</li>
-<li><strong>Vantagens:</strong> Simplicidade, precisão (em populações homogêneas) e eficiência.</li>
-<li><strong>Desvantagens:</strong> Pode gerar amostras distorcidas em populações heterogêneas e requer uma lista completa de todos os indivíduos da população.</li>
+<li><strong>Como se faz:</strong> sorteio por número aleatório a partir de uma lista completa da população.</li>
+<li><strong>Exige:</strong> lista completa e atualizada. Sem lista, não há AAS.</li>
+<li><strong>Funciona melhor:</strong> em populações razoavelmente homogêneas.</li>
+<li><strong>Ponto fraco:</strong> em populações grandes e dispersas, o sorteio pode produzir uma amostra logisticamente inviável (10 pacientes sorteados em 10 cidades diferentes).</li>
 </ul>
 </section>
-<section id="amostragem-sistemática" class="level4" data-number="3.2.1.2">
-<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="amostragem-sistemática"><span class="header-section-number">3.2.1.2</span> Amostragem Sistemática</h4>
-<p>Em vez de depender de sorteios puramente aleatórios de todos os elementos, a amostragem sistemática utiliza um processo de intervalo para garantir a representatividade da amostra.</p>
+<section id="amostragem-sistemática" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="amostragem-sistemática"><span class="header-section-number">3.9.3</span> Amostragem Sistemática</h3>
+<p>Sorteia-se o primeiro elemento e depois se salta de <span class="math inline">\(k\)</span> em <span class="math inline">\(k\)</span>, onde <span class="math inline">\(k = N/n\)</span>.</p>
 <ul>
-<li><strong>Funcionamento:</strong> Divida o tamanho da população pelo tamanho desejado da amostra para encontrar o “intervalo”. Sorteie o primeiro indivíduo dentro desse intervalo e, em seguida, pule sistematicamente. <em>Exemplo prático:</em> Selecionar 1 a cada 10 fichas clínicas no arquivo da faculdade de Odontologia para um levantamento epidemiológico.</li>
-<li><strong>Vantagens:</strong> Mais rápida e fácil de implementar que a AAS em listas muito grandes.</li>
-<li><strong>Desvantagens:</strong> Suscetível a vieses se a lista da população apresentar algum tipo de ordenação oculta (ex: ciclos sazonais de doenças).</li>
+<li><strong>Vantagem:</strong> rápida e prática em listas grandes — 1 a cada 10 fichas do arquivo.</li>
+<li><strong>Risco:</strong> se a lista tiver um <strong>ciclo oculto</strong> com o mesmo período de <span class="math inline">\(k\)</span>, a amostra fica enviesada. Sortear 1 a cada 7 fichas de um arquivo organizado por dia da semana pega sempre a segunda-feira.</li>
+</ul>
+<p class="small">
+Em arquivos clínicos ordenados por data de atendimento, esse risco é real: a amostra sistemática pode capturar um padrão sazonal inteiro.
+</p>
+</section>
+<section id="amostragem-estratificada" class="level3" data-number="3.9.4">
+<h3 data-number="3.9.4" class="anchored" data-anchor-id="amostragem-estratificada"><span class="header-section-number">3.9.4</span> Amostragem Estratificada</h3>
+<p>A população é dividida em <strong>estratos</strong> internamente homogêneos (sexo, faixa etária, turno, lote) e o sorteio acontece <strong>dentro</strong> de cada estrato.</p>
+<ul>
+<li><strong>Objetivo:</strong> garantir proporção e reduzir a variabilidade total.</li>
+<li><strong>Efeito no <span class="math inline">\(n\)</span>:</strong> geralmente <strong>reduz</strong> — você está removendo a variabilidade <em>entre</em> estratos da conta.</li>
+<li><strong>Exemplo:</strong> se 20% dos pacientes da clínica são idosos, a amostra terá 20% de idosos, sorteados dentro desse grupo.</li>
 </ul>
 </section>
-<section id="amostragem-estratificada" class="level4" data-number="3.2.1.3">
-<h4 data-number="3.2.1.3" class="anchored" data-anchor-id="amostragem-estratificada"><span class="header-section-number">3.2.1.3</span> Amostragem Estratificada</h4>
-<p>Técnica poderosa para garantir a representatividade em pesquisas com populações heterogêneas. Ela divide a população em subgrupos homogêneos (estratos) e aplica um sorteio dentro de cada estrato.</p>
+<section id="amostragem-por-conglomerados" class="level3" data-number="3.9.5">
+<h3 data-number="3.9.5" class="anchored" data-anchor-id="amostragem-por-conglomerados"><span class="header-section-number">3.9.5</span> Amostragem por Conglomerados</h3>
+<p>Sorteiam-se <strong>grupos inteiros</strong> (conglomerados) e medem-se todos os indivíduos de dentro deles.</p>
 <ul>
-<li><strong>Funcionamento:</strong> <em>Exemplo prático:</em> Se você for avaliar o nível de ansiedade na “Sala de espera do atendimento odontológico”, pode estratificar a amostra separando crianças, adultos e idosos. Se os idosos representam 20% dos pacientes da clínica, o sorteio garantirá que a sua amostra final seja composta por exatos 20% de idosos.</li>
-<li><strong>Vantagens:</strong> Garante a representatividade de grupos minoritários, evitando distorções.</li>
-<li><strong>Desvantagens:</strong> Exige conhecimento prévio detalhado das proporções da população.</li>
+<li><strong>Objetivo:</strong> reduzir custo logístico.</li>
+<li><strong>Efeito no <span class="math inline">\(n\)</span>:</strong> geralmente <strong>aumenta</strong>. Indivíduos do mesmo conglomerado se parecem entre si (efeito de desenho), então cada um traz menos informação nova.</li>
+<li><strong>Exemplo:</strong> sortear 5 Unidades Básicas de Saúde e entrevistar todos os pacientes presentes em cada uma.</li>
 </ul>
 </section>
-<section id="amostragem-por-conglomerados" class="level4" data-number="3.2.1.4">
-<h4 data-number="3.2.1.4" class="anchored" data-anchor-id="amostragem-por-conglomerados"><span class="header-section-number">3.2.1.4</span> Amostragem por Conglomerados</h4>
-<p>Especialmente útil quando se trabalha com populações geograficamente dispersas ou quando a lista completa da população não está disponível. Em vez de sortear indivíduos, sorteiam-se grupos inteiros (conglomerados).</p>
-<ul>
-<li><strong>Funcionamento:</strong> <em>Exemplo prático:</em> Num estudo de “Saúde Coletiva”, em vez de sortear pacientes individualmente em toda a cidade, você sorteia 5 Unidades Básicas de Saúde (conglomerados) e entrevista todos os pacientes que lá estiverem.</li>
-<li><strong>Vantagens:</strong> Alta praticidade logística e menor custo de deslocamento.</li>
-<li><strong>Desvantagens:</strong> Perda de precisão se os indivíduos dentro do mesmo conglomerado forem muito parecidos entre si (efeito de vizinhança).</li>
-</ul>
-<hr>
+<section id="a-confusão-clássica" class="level3" data-number="3.9.6">
+<h3 data-number="3.9.6" class="anchored" data-anchor-id="a-confusão-clássica"><span class="header-section-number">3.9.6</span> A confusão clássica</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Estratificada</th>
+<th style="text-align: left;">Conglomerados</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>O que se sorteia</strong></td>
+<td style="text-align: left;">Indivíduos, dentro de cada estrato</td>
+<td style="text-align: left;">Grupos inteiros</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Objetivo</strong></td>
+<td style="text-align: left;">Precisão e proporcionalidade</td>
+<td style="text-align: left;">Logística e custo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Efeito na precisão</strong></td>
+<td style="text-align: left;">Aumenta</td>
+<td style="text-align: left;">Diminui (se o grupo for homogêneo por dentro)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Palavra-chave</strong></td>
+<td style="text-align: left;">“dentro de cada grupo”</td>
+<td style="text-align: left;">“todos os de dentro”</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p><strong>Estratificar divide para garantir. Conglomerar sorteia blocos por praticidade.</strong> A primeira aumenta a precisão; a segunda a sacrifica em troca de logística. Confundir as duas é um dos erros mais comuns em projetos de campo.</p>
+</div>
 </section>
+<section id="amostragem-não-probabilística" class="level3" data-number="3.9.7">
+<h3 data-number="3.9.7" class="anchored" data-anchor-id="amostragem-não-probabilística"><span class="header-section-number">3.9.7</span> Amostragem não probabilística</h3>
+<p>Não há sorteio — logo, não há margem de erro calculável. Isso não as torna inúteis; torna as conclusões <strong>descritivas</strong>, não inferenciais.</p>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>Conveniência</strong></p>
+<p>Quem está à mão: a própria turma, os pacientes da semana.</p>
+<p><em>Rápido, barato e enviesado. Serve para piloto e para hipótese.</em></p>
+</div>
+<div class="card">
+<p><strong>Bola de neve</strong></p>
+<p>Um participante indica outro.</p>
+<p><em>A única saída para populações escondidas. Vicia-se no círculo de quem começou.</em></p>
+</div>
+<div class="card">
+<p><strong>Quotas</strong></p>
+<p>Metas por subgrupo, sem sorteio final: 50 mulheres e 50 homens, abordando quem passa.</p>
+<p><em>Parece estratificada. Não é.</em></p>
+</div>
+</div>
 </section>
-<section id="prática-interativa-simulando-sorteios-no-r" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="prática-interativa-simulando-sorteios-no-r"><span class="header-section-number">3.2.2</span> Prática Interativa: Simulando Sorteios no R</h3>
-<p>No bloco abaixo, vamos utilizar o R para simular a seleção de uma <strong>Amostra Aleatória Simples</strong> a partir de uma população hipotética de pacientes. Clique em <em>Run Code</em> para realizar o sorteio:</p>
-<div id="qwebr-insertion-location-1"></div>
+<section id="sorteando-no-r" class="level3" data-number="3.9.8">
+<h3 data-number="3.9.8" class="anchored" data-anchor-id="sorteando-no-r"><span class="header-section-number">3.9.8</span> Sorteando no R</h3>
+<div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p><em>Dica: Execute o código várias vezes. A cada execução, um novo grupo totalmente diferente será sorteado, ilustrando a base da aleatoriedade.</em></p>
-<hr>
-</section>
-<section id="amostragem-não-probabilística" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="amostragem-não-probabilística"><span class="header-section-number">3.2.3</span> Amostragem Não Probabilística</h3>
-<p>Não garante que todos os indivíduos tenham chance de serem selecionados. Os resultados não podem ser extrapolados matematicamente para toda a população com margem de erro conhecida, mas são fundamentais para estudos iniciais ou populações de difícil acesso.</p>
-<section id="amostragem-por-conveniência" class="level4" data-number="3.2.3.1">
-<h4 data-number="3.2.3.1" class="anchored" data-anchor-id="amostragem-por-conveniência"><span class="header-section-number">3.2.3.1</span> Amostragem por Conveniência</h4>
-<p>Baseia-se na facilidade de acesso aos participantes. Indivíduos que estão facilmente disponíveis são selecionados. * <strong>Exemplo prático:</strong> Avaliar a flexibilidade da coluna cervical aplicando questionários e testes de “Fisioterapia” apenas nos alunos da sua própria turma. * <strong>Vantagens e Desvantagens:</strong> É extremamente rápido e barato, mas possui alto viés de seleção. Seus colegas jovens não representam a flexibilidade cervical da população geral.</p>
-</section>
-<section id="amostragem-por-bola-de-neve" class="level4" data-number="3.2.3.2">
-<h4 data-number="3.2.3.2" class="anchored" data-anchor-id="amostragem-por-bola-de-neve"><span class="header-section-number">3.2.3.2</span> Amostragem por Bola de Neve</h4>
-<p>Funciona como uma bola de neve que rola e aumenta de tamanho à medida que incorpora novos participantes, sendo ideal para populações escondidas ou marginalizadas. * <strong>Exemplo prático:</strong> Uma pesquisa sobre o uso de substâncias ilícitas não documentadas. Você encontra um indivíduo que o utiliza e pede a ele que indique outro usuário do seu círculo social, e assim sucessivamente. * <strong>Vantagens e Desvantagens:</strong> Acesso a grupos fechados, porém a amostra pode ficar viciada no perfil de um único círculo de amizades.</p>
-</section>
-<section id="amostragem-por-quotas" class="level4" data-number="3.2.3.3">
-<h4 data-number="3.2.3.3" class="anchored" data-anchor-id="amostragem-por-quotas"><span class="header-section-number">3.2.3.3</span> Amostragem por Quotas</h4>
-<p>Busca garantir a representatividade de diferentes subgrupos de forma intencional, mas sem o uso de sorteio aleatório final (o que a difere da estratificada). * <strong>Exemplo prático:</strong> O pesquisador decide que precisa entrevistar 50 mulheres e 50 homens sobre a preferência por um novo sabor de elixir bucal. Ele vai à rua e aborda as pessoas até atingir essa quota exata, interrompendo a coleta para o grupo que bater a meta primeiro.</p>
+<p class="small">
+Rode várias vezes. Cada execução sorteia um grupo diferente — e é essa variabilidade que o capítulo 9 vai transformar em intervalo de confiança.
+</p>
 </section>
 </section>
+<section id="erros-que-não-se-corrigem-com-mais-gente" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="erros-que-não-se-corrigem-com-mais-gente"><span class="header-section-number">3.10</span> Erros que não se corrigem com mais gente</h2>
+<p>A esta altura, a mensagem já deve estar clara: <strong><span class="math inline">\(n\)</span> combate o erro aleatório, não o viés</strong>. Vale conhecer os cinco suspeitos de plantão.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Viés</th>
+<th style="text-align: left;">O que é</th>
+<th style="text-align: left;">Exemplo em saúde</th>
+<th style="text-align: left;">Como se combate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Seleção</strong></td>
+<td style="text-align: left;">Quem entra não representa quem deveria</td>
+<td style="text-align: left;">Estudar flexibilidade só com jovens</td>
+<td style="text-align: left;">Sorteio, critérios claros, estratificação</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Não resposta</strong></td>
+<td style="text-align: left;">Quem não responde difere de quem responde</td>
+<td style="text-align: left;">Questionário postal com 20% de retorno</td>
+<td style="text-align: left;">Busca ativa, comparação com não respondentes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Cobertura</strong></td>
+<td style="text-align: left;">A lista de onde se sorteia está incompleta</td>
+<td style="text-align: left;">Sortear do cadastro da UBS, ignorando quem nunca foi</td>
+<td style="text-align: left;">Comparar com censo ou inquérito populacional</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Sobrevivência</strong></td>
+<td style="text-align: left;">Só os que “duraram” entram no estudo</td>
+<td style="text-align: left;">Avaliar um tratamento apenas em quem completou</td>
+<td style="text-align: left;">Análise por intenção de tratar</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Aferição</strong></td>
+<td style="text-align: left;">O instrumento mede diferente entre grupos</td>
+<td style="text-align: left;">Aparelho descalibrado num dos centros</td>
+<td style="text-align: left;">Calibração, cegamento, padronização</td>
+</tr>
+</tbody>
+</table>
+<section id="o-caso-das-500-alunas" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="o-caso-das-500-alunas"><span class="header-section-number">3.10.1</span> O caso das 500 alunas</h3>
+<p>Imagine medir a flexibilidade cervical de 500 pessoas — <strong>todas alunas do primeiro período de Fisioterapia</strong>.</p>
+<p>A amostra é grande. E continua errada: ninguém ali representa a flexibilidade de uma pessoa de 70 anos, nem de um trabalhador braçal, nem de um paciente com cervicalgia crônica.</p>
+<div class="keybox">
+<p>O tamanho da amostra reduz o <strong>erro aleatório</strong>. Jamais corrige o <strong>erro sistemático</strong>.</p>
+<p>Uma amostra enviesada de um milhão de pessoas continua enviesada — e agora com um intervalo de confiança estreito, o que é pior: a precisão falsa dá credibilidade ao erro.</p>
+</div>
 </section>
-<section id="considerações-essenciais-e-aplicações" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="considerações-essenciais-e-aplicações"><span class="header-section-number">3.3</span> Considerações Essenciais e Aplicações</h2>
-<p>Ao escolher uma técnica de amostragem, fatores como o tamanho da população, homogeneidade, disponibilidade de recursos e objetivos da pesquisa devem ser considerados <span class="citation" data-cites="triola2017">(<a href="referencias.html#ref-triola2017" role="doc-biblioref">Triola 2017</a>)</span>.</p>
-<p>Nas biociências, essas ferramentas são essenciais: * <strong>Estudos epidemiológicos:</strong> Amostragem estratificada para garantir representatividade populacional (idade, sexo, etnia). * <strong>Ensaios clínicos:</strong> Sorteio aleatório simples para formar o grupo controle e o grupo intervenção sem viés do pesquisador. * <strong>Estudos ecológicos e biodiversidade:</strong> Conglomerados para estudar áreas florestais ou bacias hidrográficas.</p>
-<p>A compreensão profunda da amostragem permite aos biocientistas obter resultados confiáveis, separando a ciência rigorosa das generalizações equivocadas.</p>
+</section>
+<section id="prática-interativa-vendo-a-lgn-e-o-n-no-r" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="prática-interativa-vendo-a-lgn-e-o-n-no-r"><span class="header-section-number">3.11</span> Prática Interativa: vendo a LGN e o n no R</h2>
+<p>Duas simulações curtas que reproduzem o que as animações mostraram.</p>
+<section id="a-média-convergindo" class="level3" data-number="3.11.1">
+<h3 data-number="3.11.1" class="anchored" data-anchor-id="a-média-convergindo"><span class="header-section-number">3.11.1</span> A média convergindo</h3>
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Cada linha é uma amostra nova de uma população com <span class="math inline">\(\mu = 100\)</span>. O erro da média cai, mas não na proporção do <span class="math inline">\(n\)</span>: multiplicar a amostra por 10 reduz o erro por cerca de <span class="math inline">\(\sqrt{10} \approx 3{,}2\)</span>.</p>
+</section>
+<section id="o-n-não-é-fração-da-população" class="level3" data-number="3.11.2">
+<h3 data-number="3.11.2" class="anchored" data-anchor-id="o-n-não-é-fração-da-população"><span class="header-section-number">3.11.2</span> O n não é fração da população</h3>
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Os dois valores são praticamente idênticos. O tamanho da população não é o que determina a precisão — a variabilidade e o <span class="math inline">\(n\)</span> são.</p>
+</section>
+</section>
+<section id="o-que-levar-deste-capítulo" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="o-que-levar-deste-capítulo"><span class="header-section-number">3.12</span> O que levar deste capítulo</h2>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Amostra é o elo mais frágil do estudo.</strong> Um erro de seleção não se conserta na análise, por mais sofisticada que seja.</li>
+<li><strong>Probabilística exige chance conhecida.</strong> É o que autoriza margem de erro; sem sorteio, há descrição, não inferência.</li>
+<li><strong>A LGN garante convergência, não bondade.</strong> A média amostral se aproxima de <span class="math inline">\(\mu\)</span> quando <span class="math inline">\(n\)</span> cresce — desde que as observações sejam independentes e da mesma população.</li>
+<li><strong>O erro cai com <span class="math inline">\(\sqrt{n}\)</span>.</strong> Metade da margem custa 4× a amostra; um décimo da margem custa 100×.</li>
+<li><strong>O <span class="math inline">\(n\)</span> não é fração da população.</strong> Depende de <span class="math inline">\(\sigma\)</span>, do efeito, do erro tolerado, do poder e do desenho.</li>
+<li><strong>Homogêneo dispensa alíquotas; heterogêneo exige mais, ou homogeneização.</strong> O <span class="math inline">\(\sigma\)</span> é do material, não do estatístico.</li>
+<li><strong>Viés não se resolve com tamanho.</strong> Amostra grande e torta continua torta — e com aparência de precisa.</li>
+</ul>
+</div>
+</section>
+<section id="exercícios" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">3.13</span> Exercícios</h2>
+<p><strong>CAP3-01.</strong> Uma clínica tem 800 pacientes hipertensos cadastrados. Explique por que uma amostra de 200 pacientes não é “mais representativa” do que uma de 80 por ser uma fração maior da população.</p>
+<p><strong>CAP3-02.</strong> Calcule o <span class="math inline">\(n\)</span> necessário para estimar a pressão arterial média de uma população com <span class="math inline">\(\sigma = 15\)</span> mmHg, admitindo margem de erro de 3 mmHg e 95% de confiança.</p>
+<p><strong>CAP3-03.</strong> Um laboratório quer estimar o teor médio de um lote com margem de ± 0,5 mg e <span class="math inline">\(\sigma = 2{,}59\)</span> mg. Quantos comprimidos precisa medir? O que acontece com o <span class="math inline">\(n\)</span> se a margem for relaxada para ± 1 mg?</p>
+<p><strong>CAP3-04.</strong> Um estudo de prevalência não tem estimativa prévia da proporção esperada. Que valor de <span class="math inline">\(p\)</span> deve ser usado no cálculo e por quê?</p>
+<p><strong>CAP3-05.</strong> Explique, em duas frases, a diferença entre erro aleatório e viés. Dê um exemplo de cada em um estudo de fisioterapia.</p>
+<p><strong>CAP3-06.</strong> Um pesquisador sorteia 1 a cada 7 prontuários de um arquivo organizado por dia da semana. Que problema pode surgir? Como resolver?</p>
+<p><strong>CAP3-07.</strong> Diferencie amostragem estratificada de amostragem por conglomerados quanto ao objetivo e ao efeito sobre a precisão.</p>
+<p><strong>CAP3-08.</strong> Um estudo com 20 pacientes por grupo não encontrou diferença significativa entre dois tratamentos. O pesquisador conclui que “os tratamentos são equivalentes”. Avalie a conclusão.</p>
+<p><strong>CAP3-09.</strong> Você tem duas amostras: uma de soro homogeneizado (<span class="math inline">\(\sigma = 2\)</span>) e outra de uma suspensão heterogênea (<span class="math inline">\(\sigma = 8\)</span>), ambas com <span class="math inline">\(n = 10\)</span>. Compare as margens de erro e explique o que causaria a diferença.</p>
+<p><strong>CAP3-10.</strong> Explique por que “aumentar a amostra” é a pior das cinco estratégias para lidar com heterogeneidade de um material biológico.</p>
+</section>
+<section id="referências" class="level2" data-number="3.14">
+<h2 data-number="3.14" class="anchored" data-anchor-id="referências"><span class="header-section-number">3.14</span> Referências</h2>
+<p>As bases conceituais deste capítulo estão em <span class="citation" data-cites="pagano2004">(<a href="referencias.html#ref-pagano2004" role="doc-biblioref">Pagano e Gauvreau 2004</a>)</span>, <span class="citation" data-cites="vieira2008">(<a href="referencias.html#ref-vieira2008" role="doc-biblioref">Vieira 2008</a>)</span> e <span class="citation" data-cites="triola2017">(<a href="referencias.html#ref-triola2017" role="doc-biblioref">Triola 2017</a>)</span>. Os exemplos numéricos são simulações didáticas construídas para o livro, com parâmetros declarados no texto.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

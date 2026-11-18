@@ -94,3 +94,21 @@
 
 .deck-card-soon { opacity: .62; }
 .deck-card-soon::before { background: #cbd5e1; }
+
+/* ---------------------------------------------------------------
+   Widgets interativos (cap. 3) — arquivos autônomos em widgets/,
+   embutidos por iframe para isolar CSS/JS do tema do livro.
+   --------------------------------------------------------------- */
+.w-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1000 / 450;
+  min-height: 300px;
+  border: 0;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, .08);
+  background: #fff;
+}
+@media (max-width: 640px) {
+  .w-frame { aspect-ratio: auto; height: 380px; }
+}

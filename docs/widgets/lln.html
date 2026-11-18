@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lei dos grandes números — convergência da média amostral</title>
+<style>
+html,body{margin:0;height:100%;background:transparent}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#334155;-webkit-font-smoothing:antialiased}
+.w-anim{--w-ink:#0b1220;--w-body:#334155;--w-muted:#64748b;--w-line:#e6ecf5;--w-teal:#0d9488;--w-indigo:#4f46e5;height:100%;box-sizing:border-box;display:flex;flex-direction:column;background:#fff;padding:12px 16px 8px;border-radius:14px;color:var(--w-body)}
+.w-anim svg{flex:1 1 auto;min-height:0;width:100%}
+.w-anim .w-top{flex:0 0 auto}
+.w-anim .w-bot{flex:0 0 auto;margin-top:4px}
+.w-anim .w-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:2px}
+.w-anim .w-tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--w-teal)}
+.w-anim .w-hint{font-size:13px;color:var(--w-muted)}
+.w-anim svg{display:block}
+.w-anim .w-grid{stroke:#eef2f8;stroke-width:1}
+.w-anim .w-ax{stroke:#cbd5e1;stroke-width:1.2}
+.w-anim .w-tick{fill:#94a3b8;font-size:15px;font-family:inherit}
+.w-anim .w-lbl{fill:#64748b;font-size:16px;font-family:inherit}
+.w-anim .w-axis{fill:#94a3b8;font-size:14px;font-family:inherit;font-style:italic}
+.w-anim .w-band{fill:#0d9488;opacity:.10}
+.w-anim .w-mu-line{stroke:#4f46e5;stroke-width:1.6;stroke-dasharray:7 5}
+.w-anim .w-muted{fill:#4f46e5;font-size:16px;font-weight:700;font-family:inherit}
+.w-anim .w-path{fill:none;stroke:#0d9488;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.w-anim .w-dot{fill:#0d9488;stroke:#fff;stroke-width:2}
+.w-anim .w-bot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+.w-anim .w-btn{font:inherit;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--w-line);background:#f8fafc;color:var(--w-ink);cursor:pointer;transition:background .15s,border-color .15s}
+.w-anim .w-btn:hover{background:#eef2f8;border-color:#d7e0ee}
+.w-anim .w-play{background:#0d9488;border-color:#0d9488;color:#fff}
+.w-anim .w-play:hover{background:#0f766e;border-color:#0f766e}
+.w-anim .w-read{font-size:13px;color:var(--w-muted);margin-left:auto}
+.w-anim .w-read b{color:var(--w-ink);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="w-anim w-lln">
+  <div class="w-top">
+    <span class="w-tag">Simulação ao vivo</span>
+    <span class="w-hint">μ = 100 mmHg &middot; σ = 15 &middot; cada ponto é a média acumulada</span>
+  </div>
+  <svg viewBox="0 0 1000 340" role="img" aria-label="Convergência da média amostral para o parâmetro populacional"></svg>
+  <div class="w-bot">
+    <button type="button" class="w-btn w-play">Executar</button>
+    <button type="button" class="w-btn w-reset">Reiniciar</button>
+    <span class="w-read">n = <b class="w-n">0</b> &middot; média = <b class="w-mu">—</b> mmHg &middot; erro = <b class="w-err">—</b></span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var host = document.querySelector('.w-lln'); if (!host) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  var svg = host.querySelector('svg');
+  var L = 58, R = 18, T = 18, B = 40, W = 1000, H = 340;
+  var iw = W - L - R, ih = H - T - B;
+  var MU = 100, SD = 15, N = 500, yMin = MU - 3 * SD, yMax = MU + 3 * SD;
+
+  function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var rnd = mulberry32(20260303), dados = [], i, u, v;
+  for (i = 0; i < N; i++) { u = 0; v = 0; while (u === 0) u = rnd(); while (v === 0) v = rnd(); dados.push(MU + SD * Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v)); }
+  var medias = [], acc = 0;
+  for (i = 0; i < N; i++) { acc += dados[i]; medias[i] = acc / (i + 1); }
+
+  var xMax = 25;
+  function y(val) { return T + ih * (1 - (val - yMin) / (yMax - yMin)); }
+  function xf(n) { return L + iw * (n / xMax); }
+  function fmt(val, d) { return val.toFixed(d).replace('.', ','); }
+
+  var gStatic = mk('g', {}), gBand = mk('g', {}), gX = mk('g', {}), gMu = mk('g', {}), gLine = mk('g', {});
+  svg.appendChild(gStatic); svg.appendChild(gBand); svg.appendChild(gX); svg.appendChild(gMu); svg.appendChild(gLine);
+
+  [60, 80, 100, 120, 140].forEach(function (val) {
+    gStatic.appendChild(mk('line', { x1: L, x2: L + iw, y1: y(val), y2: y(val), 'class': 'w-grid' }));
+    var t = mk('text', { x: L - 12, y: y(val) + 5, 'class': 'w-tick', 'text-anchor': 'end' }); t.textContent = val; gStatic.appendChild(t);
+  });
+  gStatic.appendChild(mk('line', { x1: L, x2: L, y1: T, y2: T + ih, 'class': 'w-ax' }));
+  gStatic.appendChild(mk('line', { x1: L, x2: L + iw, y1: T + ih, y2: T + ih, 'class': 'w-ax' }));
+  var axn = mk('text', { x: L + iw, y: T + ih - 7, 'class': 'w-axis', 'text-anchor': 'end' });
+  axn.textContent = 'n = observações acumuladas'; gStatic.appendChild(axn);
+
+  var bandRect = mk('rect', { x: L, y: T, width: iw, height: ih, 'class': 'w-band' });
+  gBand.appendChild(bandRect);
+  gMu.appendChild(mk('line', { x1: L, x2: L + iw, y1: y(MU), y2: y(MU), 'class': 'w-mu-line' }));
+  var muLab = mk('text', { x: L + iw - 4, y: y(MU) - 9, 'class': 'w-muted', 'text-anchor': 'end' });
+  muLab.textContent = 'μ = 100'; gMu.appendChild(muLab);
+
+  var path = mk('path', { 'class': 'w-path' }); gLine.appendChild(path);
+  var dot = mk('circle', { r: 5, 'class': 'w-dot', cx: -20, cy: -20 }); gLine.appendChild(dot);
+
+  var elN = host.querySelector('.w-n'), elM = host.querySelector('.w-mu'), elE = host.querySelector('.w-err');
+  var btnPlay = host.querySelector('.w-play'), btnReset = host.querySelector('.w-reset');
+
+  function draw(n) {
+    xMax = Math.max(25, n);
+    gX.innerHTML = '';
+    [0, xMax / 2, xMax].forEach(function (tv) {
+      var xx = xf(tv);
+      gX.appendChild(mk('line', { x1: xx, x2: xx, y1: T + ih, y2: T + ih + 5, 'class': 'w-ax' }));
+      var t = mk('text', { x: xx, y: T + ih + 24, 'class': 'w-tick', 'text-anchor': 'middle' });
+      t.textContent = Math.round(tv); gX.appendChild(t);
+    });
+    if (n > 0) {
+      var d = '';
+      for (var k = 0; k < n; k++) d += (k ? 'L' : 'M') + xf(k + 1).toFixed(1) + ' ' + y(medias[k]).toFixed(1);
+      path.setAttribute('d', d);
+      dot.setAttribute('cx', xf(n)); dot.setAttribute('cy', y(medias[n - 1]));
+      var half = Math.min(1.96 * SD / Math.sqrt(n), 3 * SD);
+      bandRect.setAttribute('y', y(MU + half));
+      bandRect.setAttribute('height', y(MU - half) - y(MU + half));
+      elN.textContent = n;
+      elM.textContent = fmt(medias[n - 1], 2);
+      elE.textContent = fmt(Math.abs(medias[n - 1] - MU), 2);
+    } else {
+      path.setAttribute('d', ''); dot.setAttribute('cx', -20); dot.setAttribute('cy', -20);
+      elN.textContent = 0; elM.textContent = '—'; elE.textContent = '—';
+    }
+  }
+
+  var cur = 25, timer = null;
+  function stop() { if (timer) { clearInterval(timer); timer = null; } btnPlay.textContent = 'Executar'; }
+  function play() {
+    if (timer) { stop(); return; }
+    if (cur >= N) cur = 0;
+    btnPlay.textContent = 'Pausar';
+    timer = setInterval(function () {
+      cur += 4;
+      if (cur >= N) { cur = N; draw(cur); stop(); return; }
+      draw(cur);
+    }, 30);
+  }
+  btnPlay.addEventListener('click', play);
+  btnReset.addEventListener('click', function () { stop(); cur = 25; draw(cur); });
+  draw(cur);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Erro inferencial e tamanho da amostra</title>
+<style>
+html,body{margin:0;height:100%;background:transparent}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#334155;-webkit-font-smoothing:antialiased}
+.w-erro{--w-ink:#0b1220;--w-body:#334155;--w-muted:#64748b;--w-line:#e6ecf5;--w-teal:#0d9488;--w-indigo:#4f46e5;--w-amber:#f59e0b;height:100%;box-sizing:border-box;display:flex;flex-direction:column;background:#fff;padding:12px 16px 8px;border-radius:14px;color:var(--w-body)}
+.w-erro svg{flex:1 1 auto;min-height:0;width:100%}
+.w-erro .w-top{flex:0 0 auto}
+.w-erro .w-bot{flex:0 0 auto;margin-top:4px}
+.w-erro .w-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:2px}
+.w-erro .w-tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b45309}
+.w-erro .w-hint{font-size:13px;color:var(--w-muted)}
+.w-erro svg{display:block}
+.w-erro .w-grid{stroke:#eef2f8;stroke-width:1}
+.w-erro .w-ax{stroke:#cbd5e1;stroke-width:1.2}
+.w-erro .w-tick{fill:#94a3b8;font-size:15px;font-family:inherit}
+.w-erro .w-zone{fill:#f59e0b;opacity:.05}
+.w-erro .w-ghost{fill:none;stroke:#94a3b8;stroke-width:2;opacity:.30}
+.w-erro .w-axis{fill:#94a3b8;font-size:14px;font-family:inherit;font-style:italic}
+.w-erro .w-guide{stroke:#94a3b8;stroke-width:1;stroke-dasharray:3 4}
+.w-erro .w-glab{fill:#64748b;font-size:15px;font-family:inherit;font-weight:600}
+.w-erro .w-path{fill:none;stroke:#0d9488;stroke-width:3.2;stroke-linejoin:round;stroke-linecap:round}
+.w-erro .w-dot{fill:#0d9488;stroke:#fff;stroke-width:2.5}
+.w-erro .w-bot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+.w-erro .w-btn{font:inherit;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--w-line);background:#f8fafc;color:var(--w-ink);cursor:pointer}
+.w-erro .w-btn:hover{background:#eef2f8;border-color:#d7e0ee}
+.w-erro .w-play{background:#0d9488;border-color:#0d9488;color:#fff}
+.w-erro .w-play:hover{background:#0f766e}
+.w-erro .w-read{font-size:13px;color:var(--w-muted);margin-left:auto}
+.w-erro .w-read b{color:var(--w-ink);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="w-anim w-erro">
+  <div class="w-top">
+    <span class="w-tag">Retorno decrescente</span>
+    <span class="w-hint">margem de erro = 1,96 × 15 / √n &nbsp;&middot;&nbsp; σ = 15 mmHg &nbsp;&middot;&nbsp; R$ 50 por exame</span>
+  </div>
+  <svg viewBox="0 0 1000 340" role="img" aria-label="Margem de erro em função do tamanho da amostra"></svg>
+  <div class="w-bot">
+    <button type="button" class="w-btn w-play">Executar</button>
+    <button type="button" class="w-btn w-reset">Reiniciar</button>
+    <span class="w-read">n = <b class="w-n">10</b> &middot; margem = <b class="w-m">±9,30</b> &middot; custo = <b class="w-c">R$ 500</b></span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var host = document.querySelector('.w-erro'); if (!host) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  var svg = host.querySelector('svg');
+  var L = 62, R = 20, T = 16, B = 40, W = 1000, H = 340;
+  var iw = W - L - R, ih = H - T - B;
+  var SD = 15, N0 = 10, N1 = 2000, YMAX = 10;
+  function margem(n) { return 1.96 * SD / Math.sqrt(n); }
+  function y(v) { return T + ih * (1 - v / YMAX); }
+  function xf(n) { return L + iw * ((n - N0) / (N1 - N0)); }
+  function num(v, d) { return v.toFixed(d).replace('.', ','); }
+  function milhar(v) { return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+
+  var gStatic = mk('g', {}), gZone = mk('g', {}), gGuide = mk('g', {}), gLine = mk('g', {});
+  svg.appendChild(gStatic); svg.appendChild(gZone); svg.appendChild(gGuide); svg.appendChild(gLine);
+
+  [0, 2, 4, 6, 8, 10].forEach(function (val) {
+    gStatic.appendChild(mk('line', { x1: L, x2: L + iw, y1: y(val), y2: y(val), 'class': 'w-grid' }));
+    var t = mk('text', { x: L - 12, y: y(val) + 5, 'class': 'w-tick', 'text-anchor': 'end' }); t.textContent = val; gStatic.appendChild(t);
+  });
+  [500, 1000, 1500, 2000].forEach(function (val) {
+    gStatic.appendChild(mk('line', { x1: xf(val), x2: xf(val), y1: T + ih, y2: T + ih + 5, 'class': 'w-ax' }));
+    var t = mk('text', { x: xf(val), y: T + ih + 24, 'class': 'w-tick', 'text-anchor': 'middle' }); t.textContent = milhar(val); gStatic.appendChild(t);
+  });
+  gStatic.appendChild(mk('line', { x1: L, x2: L, y1: T, y2: T + ih, 'class': 'w-ax' }));
+  gStatic.appendChild(mk('line', { x1: L, x2: L + iw, y1: T + ih, y2: T + ih, 'class': 'w-ax' }));
+  var axn = mk('text', { x: L + iw, y: T + ih - 7, 'class': 'w-axis', 'text-anchor': 'end' });
+  axn.textContent = 'n = número de exames'; gStatic.appendChild(axn);
+
+  gZone.appendChild(mk('rect', { x: xf(400), y: T, width: L + iw - xf(400), height: ih, 'class': 'w-zone' }));
+
+  var guides = [[100, '±2,94'], [400, '±1,47'], [1600, '±0,74']];
+  guides.forEach(function (g) {
+    var gg = mk('g', { 'class': 'w-g', opacity: 0 });
+    gg.appendChild(mk('line', { x1: xf(g[0]), x2: xf(g[0]), y1: y(margem(g[0])), y2: T + ih, 'class': 'w-guide' }));
+    var t = mk('text', { x: xf(g[0]) + 7, y: y(margem(g[0])) - 8, 'class': 'w-glab' }); t.textContent = g[1]; gg.appendChild(t);
+    gGuide.appendChild(gg);
+    g[2] = gg;
+  });
+
+  var ghost = mk('path', { 'class': 'w-ghost' });
+  var dg = '', kg, vg;
+  for (kg = N0; kg <= N1; kg *= 1.02) { vg = margem(kg); dg += (dg ? 'L' : 'M') + xf(kg).toFixed(1) + ' ' + y(vg).toFixed(2); }
+  dg += 'L' + xf(N1).toFixed(1) + ' ' + y(margem(N1)).toFixed(2);
+  ghost.setAttribute('d', dg); gLine.appendChild(ghost);
+
+  var path = mk('path', { 'class': 'w-path' }); gLine.appendChild(path);
+  var dot = mk('circle', { r: 6, 'class': 'w-dot', cx: xf(N0), cy: y(margem(N0)) }); gLine.appendChild(dot);
+
+  var elN = host.querySelector('.w-n'), elM = host.querySelector('.w-m'), elC = host.querySelector('.w-c');
+  var btnPlay = host.querySelector('.w-play'), btnReset = host.querySelector('.w-reset');
+
+  function draw(n) {
+    var d = '', k, v;
+    for (k = N0; k <= n; k *= 1.02) { v = margem(k); d += (d ? 'L' : 'M') + xf(k).toFixed(1) + ' ' + y(v).toFixed(2); }
+    d += (d ? 'L' : 'M') + xf(n).toFixed(1) + ' ' + y(margem(n)).toFixed(2);
+    path.setAttribute('d', d);
+    dot.setAttribute('cx', xf(n)); dot.setAttribute('cy', y(margem(n)));
+    elN.textContent = milhar(n); elM.textContent = '±' + num(margem(n), 2); elC.textContent = 'R$ ' + milhar(n * 50);
+    guides.forEach(function (g) { g[2].setAttribute('opacity', n >= g[0] ? 1 : 0); });
+  }
+
+  var cur = N0, timer = null;
+  function stop() { if (timer) { clearInterval(timer); timer = null; } btnPlay.textContent = 'Executar'; }
+  btnPlay.addEventListener('click', function () {
+    if (timer) { stop(); return; }
+    if (cur >= N1 * 0.98) cur = N0;
+    btnPlay.textContent = 'Pausar';
+    timer = setInterval(function () {
+      cur *= 1.03;
+      if (cur >= N1) { cur = N1; draw(N1); stop(); return; }
+      draw(Math.round(cur));
+    }, 28);
+  });
+  btnReset.addEventListener('click', function () { stop(); cur = N0; draw(N0); });
+  draw(N0);
+})();
+</script>
+
+</body>
+</html>
