@@ -2084,7 +2084,7 @@ window.Quarto = {
   <li><a href="#o-n-não-é-fração-da-população" id="toc-o-n-não-é-fração-da-população" class="nav-link" data-scroll-target="#o-n-não-é-fração-da-população"><span class="header-section-number">3.11.2</span> O n não é fração da população</a></li>
   </ul></li>
   <li><a href="#o-que-levar-deste-capítulo" id="toc-o-que-levar-deste-capítulo" class="nav-link" data-scroll-target="#o-que-levar-deste-capítulo"><span class="header-section-number">3.12</span> O que levar deste capítulo</a></li>
-  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">3.13</span> Exercícios</a></li>
+  <li><a href="#exercicios" id="toc-exercicios" class="nav-link" data-scroll-target="#exercicios"><span class="header-section-number">3.13</span> 🧠 Exercícios de fixação</a></li>
   <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">3.14</span> Referências</a></li>
   </ul>
 </nav>
@@ -3379,22 +3379,328 @@ Rode várias vezes. Cada execução sorteia um grupo diferente — e é essa var
 </ul>
 </div>
 </section>
-<section id="exercícios" class="level2" data-number="3.13">
-<h2 data-number="3.13" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">3.13</span> Exercícios</h2>
-<p><strong>CAP3-01.</strong> Uma clínica tem 800 pacientes hipertensos cadastrados. Explique por que uma amostra de 200 pacientes não é “mais representativa” do que uma de 80 por ser uma fração maior da população.</p>
-<p><strong>CAP3-02.</strong> Calcule o <span class="math inline">\(n\)</span> necessário para estimar a pressão arterial média de uma população com <span class="math inline">\(\sigma = 15\)</span> mmHg, admitindo margem de erro de 3 mmHg e 95% de confiança.</p>
-<p><strong>CAP3-03.</strong> Um laboratório quer estimar o teor médio de um lote com margem de ± 0,5 mg e <span class="math inline">\(\sigma = 2{,}59\)</span> mg. Quantos comprimidos precisa medir? O que acontece com o <span class="math inline">\(n\)</span> se a margem for relaxada para ± 1 mg?</p>
-<p><strong>CAP3-04.</strong> Um estudo de prevalência não tem estimativa prévia da proporção esperada. Que valor de <span class="math inline">\(p\)</span> deve ser usado no cálculo e por quê?</p>
-<p><strong>CAP3-05.</strong> Explique, em duas frases, a diferença entre erro aleatório e viés. Dê um exemplo de cada em um estudo de fisioterapia.</p>
-<p><strong>CAP3-06.</strong> Um pesquisador sorteia 1 a cada 7 prontuários de um arquivo organizado por dia da semana. Que problema pode surgir? Como resolver?</p>
-<p><strong>CAP3-07.</strong> Diferencie amostragem estratificada de amostragem por conglomerados quanto ao objetivo e ao efeito sobre a precisão.</p>
-<p><strong>CAP3-08.</strong> Um estudo com 20 pacientes por grupo não encontrou diferença significativa entre dois tratamentos. O pesquisador conclui que “os tratamentos são equivalentes”. Avalie a conclusão.</p>
-<p><strong>CAP3-09.</strong> Você tem duas amostras: uma de soro homogeneizado (<span class="math inline">\(\sigma = 2\)</span>) e outra de uma suspensão heterogênea (<span class="math inline">\(\sigma = 8\)</span>), ambas com <span class="math inline">\(n = 10\)</span>. Compare as margens de erro e explique o que causaria a diferença.</p>
-<p><strong>CAP3-10.</strong> Explique por que “aumentar a amostra” é a pior das cinco estratégias para lidar com heterogeneidade de um material biológico.</p>
+<section id="exercicios" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="exercicios"><span class="header-section-number">3.13</span> 🧠 Exercícios de fixação</h2>
+<p><em>A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!</em></p>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-01</strong></p>
+<pre class="quizdown"><code># Num estudo sobre anemia em gestantes de um município, o conjunto de TODAS as gestantes atendidas pelo SUS naquele município é:
+- [ ] A amostra do estudo.
+  &gt; **Incorreto.** Amostra é a parte efetivamente examinada. O conjunto completo de onde ela sai é a população.
+- [x] A população de interesse, da qual se retira a amostra.
+  &gt; **Correto!** População é o conjunto completo sobre o qual se quer concluir. A amostra é o subconjunto medido, e é dela que se infere o que vale para a população.
+- [ ] O parâmetro do estudo.
+  &gt; **Incorreto.** Parâmetro é o número que descreve a população (a média de hemoglobina, por exemplo), não o conjunto de pessoas.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-02</strong></p>
+<pre class="quizdown"><code># Na notação do capítulo, qual símbolo representa a MÉDIA POPULACIONAL, aquela que nunca observamos?
+- [ ] x-barra.
+  &gt; **Incorreto.** x-barra é a média da amostra: um valor que medimos e que serve de estimativa.
+- [x] mu.
+  &gt; **Correto!** mu é o parâmetro populacional. As letras gregas (mu, sigma, pi) descrevem a população; as latinas (x-barra, s, p-chapéu) descrevem a amostra.
+- [ ] p-chapéu.
+  &gt; **Incorreto.** p-chapéu é a proporção observada na amostra, não a média populacional.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-03</strong></p>
+<pre class="quizdown"><code># Uma clínica tem 300 pacientes cadastrados. Um pesquisador mede a glicemia de todos os 300 e calcula a média. Se a pergunta é 'qual a glicemia média dos pacientes desta clínica?', o valor obtido é:
+- [x] Um parâmetro populacional, pois todos os elementos da população de interesse foram medidos.
+  &gt; **Correto!** Quando se mede todo mundo, o conjunto é a população e a média é mu. Não há salto amostral, logo não há inferência nem margem de erro a declarar.
+- [ ] Uma estatística amostral, pois toda média é uma estatística.
+  &gt; **Incorreto.** O símbolo não depende da conta, e sim da origem dos dados: vindo da amostra é x-barra; vindo da população inteira é mu.
+- [ ] Uma estimativa que exigiria obrigatoriamente intervalo de confiança.
+  &gt; **Incorreto.** Intervalo de confiança quantifica a incerteza do salto amostra-população. Sem amostra, não há salto a quantificar.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-04</strong></p>
+<pre class="quizdown"><code># A diferença entre a média de uma amostra e o verdadeiro mu que tende a DIMINUIR conforme o n cresce chama-se:
+- [x] Erro aleatório (erro amostral).
+  &gt; **Correto!** É o efeito do sorteio: uma amostra fica acima, outra abaixo, e a média desses desvios se anula. Aumentar n reduz esse erro, na proporção de 1 sobre raiz de n.
+- [ ] Viés.
+  &gt; **Incorreto.** Viés é erro sistemático: puxa sempre para o mesmo lado e não diminui quando n cresce. Amostra grande e enviesada continua errada.
+- [ ] Erro tipo I.
+  &gt; **Incorreto.** Erro tipo I é rejeitar a hipótese nula quando ela é verdadeira — conceito de teste de hipóteses, não de amostragem.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-05</strong></p>
+<pre class="quizdown"><code># Para estimar a flexibilidade média de idosos de uma cidade, um pesquisador mede 500 estudantes de Educação Física. O que há de errado?
+- [x] Viés de seleção: a amostra é grande, mas não representa a população-alvo, e isso não se corrige aumentando n.
+  &gt; **Correto!** O erro aqui é sistemático: todos os 500 são jovens e treinados. Com um milhão deles o resultado seria o mesmo — e com intervalo de confiança estreito, o que dá falsa credibilidade ao erro.
+- [ ] Nada: 500 é uma amostra grande, logo representativa.
+  &gt; **Incorreto.** Tamanho não cria representatividade. Quem garante representatividade é o sorteio, não o número de participantes.
+- [ ] Apenas erro aleatório, que diminui com n maior.
+  &gt; **Incorreto.** Erro aleatório é oscilação em torno do alvo. Aqui a amostra mira outro alvo — é viés.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-06</strong></p>
+<pre class="quizdown"><code># O que a lei dos grandes números garante?
+- [ ] Que toda amostra pequena produz estimativa errada.
+  &gt; **Incorreto.** Amostras pequenas produzem estimativas instáveis, não necessariamente erradas. A lei fala do comportamento quando n cresce.
+- [x] Que a média amostral tende a se aproximar de mu conforme n cresce, com observações independentes da mesma população.
+  &gt; **Correto!** Convergência em probabilidade: a chance de a estimativa se afastar de mu diminui com n. Vale para a média e também para a proporção.
+- [ ] Que qualquer amostra grande é representativa, independentemente de como foi sorteada.
+  &gt; **Incorreto.** A lei exige observações independentes e da mesma população. Amostra grande e enviesada converge para o valor errado — o viés não desaparece.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-07</strong></p>
+<pre class="quizdown"><code># Para aplicar a lei dos grandes números ao estudo de irmãos gêmeos, tratando cada um como observação independente, comete-se um erro porque:
+- [x] Observações de irmãos não são independentes: um influencia o outro e ambos compartilham genética e ambiente.
+  &gt; **Correto!** A independência é hipótese da lei. Gêmeos informam quase a mesma coisa duas vezes, e o n efetivo é menor do que o n contado.
+- [ ] Irmãos não podem participar de pesquisa.
+  &gt; **Incorreto.** Podem — o que não se pode é contá-los como observações independentes sem tratamento adequado (modelos para dados correlacionados).
+- [ ] A lei só vale para variáveis contínuas.
+  &gt; **Incorreto.** Vale também para proporções e contagens. O problema aqui é a dependência entre observações, não o tipo da variável.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-08</strong></p>
+<pre class="quizdown"><code># Medindo pressão arterial com sigma = 15 mmHg e n = 100 pacientes, o erro padrão da média vale:
+- [ ] 15 mmHg, o mesmo do desvio padrão.
+  &gt; **Incorreto.** O erro padrão é sempre menor que o desvio padrão quando n é maior que 1: ele é sigma dividido pela raiz de n.
+- [x] 1,5 mmHg, pois 15 dividido pela raiz de 100 é 15 dividido por 10.
+  &gt; **Correto!** Erro padrão = sigma / raiz de n = 15/10 = 1,5. A margem de 95% fica em 1,96 x 1,5, aproximadamente 2,94 mmHg.
+- [ ] 0,15 mmHg, pois se divide 15 por 100.
+  &gt; **Incorreto.** A divisão é pela raiz de n, não por n. Dividir por n daria uma precisão fantasiosa.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-09</strong></p>
+<pre class="quizdown"><code># Ainda com sigma = 15 mmHg: passando de n = 100 para n = 400, a margem de erro de 95% vai de aproximadamente:
+- [x] ± 2,94 mmHg para ± 1,47 mmHg.
+  &gt; **Correto!** Quadruplicar o n divide o erro padrão por 2 (raiz de 4), e a margem cai pela metade. É o retorno decrescente: cada dobra de precisão custa o quádruplo de exames.
+- [ ] ± 2,94 mmHg para ± 0,74 mmHg.
+  &gt; **Incorreto.** ± 0,74 seria alcançado com n = 1.600, não com 400. Quadruplicar n reduz o erro à metade, não a um quarto.
+- [ ] ± 2,94 mmHg para ± 2,94 mmHg, pois o desvio padrão não muda.
+  &gt; **Incorreto.** O sigma do material não muda, mas o erro padrão da média muda: ele depende de n.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-10</strong></p>
+<pre class="quizdown"><code># Para reduzir a margem de erro à METADE, mantendo o mesmo nível de confiança e o mesmo sigma, o tamanho da amostra deve ser:
+- [ ] Duplicado.
+  &gt; **Incorreto.** Dobrar n reduz a margem por raiz de 2, cerca de 29 por cento — não pela metade.
+- [x] Quadruplicado.
+  &gt; **Correto!** A margem é proporcional a 1 sobre raiz de n. Para cair à metade, a raiz de n precisa dobrar, ou seja, n precisa ser quatro vezes maior.
+- [ ] Aumentado em 50 por cento.
+  &gt; **Incorreto.** O ganho seria de apenas 18 por cento na margem. A relação é quadrática, não linear.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-11</strong></p>
+<pre class="quizdown"><code># Duas amostras de 1.000 pessoas medindo a mesma variável: uma tirada de uma cidade de 50 mil habitantes, outra de 1 milhão. O erro padrão da média é:
+- [x] Praticamente o mesmo nas duas, porque depende sobretudo de n e de sigma, não do tamanho da população.
+  &gt; **Correto!** Com sigma = 15, as duas amostras dão erro padrão de cerca de 0,47. Só a correção de população finita muda — e muda pouco.
+- [ ] Vinte vezes maior na cidade de 1 milhão, pois a população é vinte vezes maior.
+  &gt; **Incorreto.** O erro não cresce com o tamanho da população. Se crescesse, nenhum estudo nacional seria possível.
+- [ ] Vinte vezes menor na cidade de 50 mil, pois a amostra representa uma fração maior.
+  &gt; **Incorreto.** A fração amostral só pesa quando é grande (acima de uns 10 por cento). Aqui ela é 2 por cento e 0,1 por cento, ambas pequenas.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-12</strong></p>
+<pre class="quizdown"><code># Uma população tem N = 200 e você sorteia n = 20. A correção de população finita vale aproximadamente:
+- [x] 0,95 — desconto pequeno, porque a amostra é 10 por cento da população.
+  &gt; **Correto!** Raiz de (200-20)/(200-1) = raiz de 0,905 = 0,951. O erro padrão cai de 3,35 para 3,19 — pouco.
+- [ ] 1,00 — a correção só vale para populações infinitas.
+  &gt; **Incorreto.** É o contrário: a correção existe justamente para população finita, e vale 1 quando n é desprezível frente a N.
+- [ ] 0,50 — sempre que se sorteia menos de um quarto da população.
+  &gt; **Incorreto.** O fator 0,50 só aparece quando se examina 75 por cento da população: com N = 200, isso seria n = 150.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-13</strong></p>
+<pre class="quizdown"><code># Um lote de paracetamol tem sigma = 2,59 mg. Para estimar o teor médio com margem de erro de 1 mg e 95 por cento de confiança, o n necessário é:
+- [ ] 11 comprimidos.
+  &gt; **Incorreto.** Com 11 comprimidos a margem ficaria em cerca de 1,5 mg, longe do 1 mg pedido. Para 1 mg a conta exige 26.
+- [x] 26 comprimidos.
+  &gt; **Correto!** n = (1,96 x 2,59 / 1) ao quadrado = 25,8, arredondando para cima, 26.
+- [ ] 100 comprimidos.
+  &gt; **Incorreto.** Cem corresponderia a uma margem de cerca de 0,5 mg, não de 1 mg.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-14</strong></p>
+<pre class="quizdown"><code># No mesmo lote do exercício anterior, se a margem for apertada de 1 mg para 0,5 mg, o n passa a ser:
+- [x] 104 comprimidos, quatro vezes mais que os 26 da margem de 1 mg.
+  &gt; **Correto!** Metade da margem exige o quádruplo da amostra: n = (1,96 x 2,59 / 0,5) ao quadrado = 103,1, ou 104. É a regra do retorno decrescente em ação.
+- [ ] 52 comprimidos, o dobro.
+  &gt; **Incorreto.** Dobrar o n reduz a margem por raiz de 2, não pela metade. A relação entre margem e n é quadrática.
+- [ ] 26 comprimidos, pois o desvio padrão não mudou.
+  &gt; **Incorreto.** O sigma é o mesmo, mas a exigência de precisão mudou — e ela entra na conta ao quadrado.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-15</strong></p>
+<pre class="quizdown"><code># Sem estimativa prévia da proporção esperada, para estimar uma prevalência com margem de 5 por cento e 95 por cento de confiança, usa-se n igual a:
+- [ ] 139.
+  &gt; **Incorreto.** 139 corresponde a p = 0,10, que é uma estimativa otimista — e otimismo no cálculo amostral costuma custar caro depois.
+- [x] 385.
+  &gt; **Correto!** Com p = 0,5, n = (1,96 ao quadrado x 0,25) / 0,05 ao quadrado = 384,2, ou 385. É o pior caso e, por isso, o valor seguro quando não se sabe nada.
+- [ ] 1.068.
+  &gt; **Incorreto.** 1.068 seria para margem de 3 por cento, não de 5 por cento.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-16</strong></p>
+<pre class="quizdown"><code># Por que o valor p = 0,5 é recomendado quando não há estimativa prévia da proporção?
+- [x] Porque p(1-p) é máximo em 0,5, e isso dá o maior n possível: nunca se subestima o esforço de coleta.
+  &gt; **Correto!** Em 0,5 o produto p(1-p) vale 0,25, o máximo. Qualquer outro valor dá n menor — e um cálculo otimista pode deixar o estudo sem precisão no fim.
+- [ ] Porque metade da população sempre tem a característica estudada.
+  &gt; **Incorreto.** Nada garante isso. O 0,5 não é uma previsão, é uma escolha conservadora de cálculo.
+- [ ] Porque o R só aceita p = 0,5 na função de cálculo amostral.
+  &gt; **Incorreto.** Qualquer p entre 0 e 1 é aceito. A escolha de 0,5 é estatística, não computacional.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-17</strong></p>
+<pre class="quizdown"><code># Num ensaio com dois grupos, para detectar uma diferença padronizada d = 0,5 com 80 por cento de poder e 5 por cento de significância, o n por grupo é cerca de:
+- [ ] 26.
+  &gt; **Incorreto.** 26 por grupo corresponde a d = 0,8, um efeito grande. Para d = 0,5 o estudo precisa de mais gente.
+- [x] 64.
+  &gt; **Correto!** A função power.t.test do R devolve 63,8, ou 64 por grupo. Fórmulas com z dão 63; a diferença é o uso da distribuição t, correta em amostras finitas.
+- [ ] 394.
+  &gt; **Incorreto.** 394 por grupo seria necessário para d = 0,2, um efeito pequeno — quase seis vezes mais pacientes.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-18</strong></p>
+<pre class="quizdown"><code># O erro tipo II de um teste de hipóteses é:
+- [x] Não detectar uma diferença que realmente existe.
+  &gt; **Correto!** É o erro silencioso: o estudo não encontra o efeito e conclui que ele não existe. Seu complemento, 1 menos beta, é o poder do estudo.
+- [ ] Detectar uma diferença que não existe.
+  &gt; **Incorreto.** Esse é o erro tipo I, controlado pelo nível de significância alfa — o famoso p menor que 0,05.
+- [ ] Calcular errado o tamanho da amostra.
+  &gt; **Incorreto.** O erro tipo II não é erro de conta, e sim a consequência probabilística de um estudo com pouco poder.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-19</strong></p>
+<pre class="quizdown"><code># Um pesquisador calculou 64 pacientes por grupo para 80 por cento de poder. Se ele quiser 90 por cento de poder, o n:
+- [x] Aumenta, para cerca de 86 por grupo.
+  &gt; **Correto!** Mais poder significa menos chance de erro tipo II, e isso custa amostra: 86 em vez de 64. Vale a pena quando perder um efeito real é caro.
+- [ ] Diminui, porque mais poder deixa o estudo mais eficiente.
+  &gt; **Incorreto.** Poder e amostra caminham juntos: exigir mais certeza de detectar o efeito exige mais dados.
+- [ ] Não muda, pois o poder não entra na fórmula do n.
+  &gt; **Incorreto.** Entra, pela constante (z de alfa mais z de beta) ao quadrado, que aparece no numerador.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-20</strong></p>
+<pre class="quizdown"><code># Um estudo com 20 pacientes por grupo não encontrou diferença significativa entre dois tratamentos. O pesquisador conclui que 'os tratamentos são equivalentes'. A conclusão correta é:
+- [x] O estudo provavelmente não tinha poder para detectar a diferença; inconclusivo é o termo adequado.
+  &gt; **Correto!** Com 20 por grupo, apenas efeitos grandes seriam detectados. 'Não significativo' significa 'não encontrei', não 'não existe' — e o intervalo de confiança mostra o quanto o estudo poderia ter deixado passar.
+- [ ] Os tratamentos são equivalentes, pois não houve diferença significativa.
+  &gt; **Incorreto.** Ausência de evidência não é evidência de ausência. Confundir as duas coisas é o erro tipo II travestido de conclusão.
+- [ ] Os tratamentos são diferentes, mas o teste foi mal escolhido.
+  &gt; **Incorreto.** Nada indica que os tratamentos difiram. O que se sabe é que o estudo não tinha força para decidir.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-21</strong></p>
+<pre class="quizdown"><code># Para detectar um efeito pequeno, com d = 0,2, e 80 por cento de poder, são necessários cerca de:
+- [x] 394 pacientes por grupo.
+  &gt; **Correto!** Efeitos pequenos exigem estudos grandes: quase 400 por grupo, e 527 se o poder for de 90 por cento. Por isso muitos estudos 'negativos' apenas eram pequenos demais.
+- [ ] 64 pacientes por grupo, como no efeito médio.
+  &gt; **Incorreto.** 64 serve para d = 0,5. Para metade do efeito, o n cresce com o quadrado da razão: cerca de seis vezes mais.
+- [ ] 26 pacientes por grupo.
+  &gt; **Incorreto.** 26 serve para d = 0,8, um efeito grande. Usá-lo para efeito pequeno garante um estudo inconclusivo.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-22</strong></p>
+<pre class="quizdown"><code># Dois materiais são medidos com o mesmo n = 10: um soro homogeneizado, com sigma = 2, e uma suspensão heterogênea, com sigma = 8. As margens de 95 por cento valem, respectivamente:
+- [x] Aproximadamente ± 1,42 e ± 5,73.
+  &gt; **Correto!** Com o mesmo n, a margem é proporcional ao sigma: quatro vezes mais variabilidade, quatro vezes mais margem. O método é o mesmo; o material é que mudou.
+- [ ] Iguais, pois o n e o método foram os mesmos.
+  &gt; **Incorreto.** O n é igual, mas a margem também depende de sigma. Foi justamente isso que mudou entre os dois materiais.
+- [ ] ± 0,63 e ± 2,53, que são os erros padrão.
+  &gt; **Incorreto.** 0,63 e 2,53 são os erros padrão; a margem de 95 por cento é 1,96 vez maior que eles.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-23</strong></p>
+<pre class="quizdown"><code># Se o desvio padrão de um material é quatro vezes maior que o de outro, para obter a mesma margem de erro é preciso:
+- [ ] Quatro vezes mais amostras.
+  &gt; **Incorreto.** Quatro vezes é o aumento da margem com n fixo. Para compensar, o n precisa crescer com o quadrado dessa razão.
+- [x] Dezesseis vezes mais amostras, pois n é proporcional ao quadrado de sigma.
+  &gt; **Correto!** Margem proporcional a sigma e n proporcional a sigma ao quadrado: 4 ao quadrado dá 16. É o argumento mais forte a favor de homogeneizar antes de multiplicar coletas.
+- [ ] A mesma quantidade, mudando apenas o instrumento de medida.
+  &gt; **Incorreto.** Trocar o instrumento não altera a variabilidade biológica do material. Sem mais amostras ou homogeneização, a margem continua maior.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-24</strong></p>
+<pre class="quizdown"><code># Diante de um material biológico heterogêneo, qual é a melhor estratégia, segundo o capítulo?
+- [x] Homogeneizar, estratificar ou parear, atacando a causa da variabilidade, em vez de apenas aumentar o n.
+  &gt; **Correto!** As três primeiras reduzem sigma e, com isso, o n necessário. Aumentar a amostra é a opção mais usada e quase sempre a mais cara: paga-se pela heterogeneidade em vez de reduzi-la.
+- [ ] Aumentar o n, que sempre resolve qualquer problema de precisão.
+  &gt; **Incorreto.** Aumentar n funciona, mas custa o quadrado do ganho e não toca na causa. Há caminhos mais baratos e mais informativos.
+- [ ] Reduzir o nível de confiança de 95 para 80 por cento.
+  &gt; **Incorreto.** Isso encolhe a margem às custas de menos confiança — maquiar o problema em vez de resolvê-lo.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-25</strong></p>
+<pre class="quizdown"><code># Sobre a amostragem aleatória simples, é correto afirmar que:
+- [x] Cada indivíduo tem chance conhecida e igual de ser sorteado, e isso exige a lista completa da população.
+  &gt; **Correto!** A chance conhecida é o que autoriza calcular margem de erro. Sem lista completa, não há sorteio equiprovável — e sem ele, a amostra não é probabilística.
+- [ ] Basta escolher pessoas ao acaso na rua, desde que em número suficiente.
+  &gt; **Incorreto.** Escolher 'ao acaso' na rua não dá chance conhecida a ninguém: quem não passa ali tem chance zero. Isso é conveniência.
+- [ ] Ela dispensa a lista, desde que a população seja homogênea.
+  &gt; **Incorreto.** Homogeneidade reduz o n necessário, mas não substitui o mecanismo de sorteio.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-26</strong></p>
+<pre class="quizdown"><code># Um pesquisador sorteia 1 a cada 7 prontuários de um arquivo organizado por dia da semana e encontra sempre segundas-feiras. O problema dessa amostragem sistemática é:
+- [x] A periodicidade oculta: o intervalo de 7 coincide com o ciclo do arquivo e viesa a amostra.
+  &gt; **Correto!** A sistemática funciona quando a ordem da lista é aleatória em relação ao que se mede. Com ciclo de mesmo período, seleciona-se sempre o mesmo tipo de caso.
+- [ ] O cálculo da margem de erro, que se torna impossível.
+  &gt; **Incorreto.** A sistemática é probabilística e permite estimar o erro; o defeito aqui é a coincidência com o ciclo.
+- [ ] O tamanho da amostra, que fica pequeno demais.
+  &gt; **Incorreto.** O n é definido pelo pesquisador; o problema é a qualidade da seleção, não o número.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-27</strong></p>
+<pre class="quizdown"><code># O objetivo central da amostragem estratificada é:
+- [x] Garantir a proporção de cada subgrupo e ganhar precisão, sorteando dentro de grupos internamente homogêneos.
+  &gt; **Correto!** Se 20 por cento dos pacientes são idosos, a estratificada garante 20 por cento de idosos na amostra. Como o sorteio ocorre dentro de grupos homogêneos, a estimativa final fica mais precisa.
+- [ ] Reduzir o custo de deslocamento, sorteando regiões inteiras.
+  &gt; **Incorreto.** Essa é a lógica dos conglomerados, não da estratificada.
+- [ ] Permitir que qualquer pessoa se voluntarie para o estudo.
+  &gt; **Incorreto.** Voluntariado é amostragem de conveniência, não probabilística, e não garante proporção alguma.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-28</strong></p>
+<pre class="quizdown"><code># A amostragem por conglomerados consiste em:
+- [x] Sortear grupos inteiros e examinar todos os indivíduos de dentro deles, por razões de logística.
+  &gt; **Correto!** Cinco UBS sorteadas, todos os presentes entrevistados. Economiza deslocamento, mas perde precisão: indivíduos de um mesmo grupo se parecem mais entre si do que entre grupos.
+- [ ] Sortear grupos e depois sortear indivíduos dentro de cada grupo, garantindo proporção.
+  &gt; **Incorreto.** Essa descrição combina estratificação com sorteio interno; no conglomerado simples, todos os indivíduos do grupo entram.
+- [ ] Dividir a população em grupos e escolher o grupo mais acessível.
+  &gt; **Incorreto.** Escolher 'o mais acessível' é conveniência. No conglomerado, o grupo é sorteado — a chance de cada conglomerado precisa ser conhecida.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-29</strong></p>
+<pre class="quizdown"><code># Abordar pessoas no corredor de um hospital até completar 50 mulheres e 50 homens é uma amostragem:
+- [x] Por quotas, não probabilística: há metas por subgrupo, mas nenhum sorteio.
+  &gt; **Correto!** Parece estratificada, mas falta o sorteio final. Quem é abordado depende de quem passa, e não se pode declarar margem de erro para essa amostra.
+- [ ] Estratificada, pois garante a proporção de homens e mulheres.
+  &gt; **Incorreto.** A estratificada sorteia dentro de cada estrato; aqui a entrada é por conveniência do horário e do corredor.
+- [ ] Aleatória simples, pois cada pessoa que passa tem a mesma chance.
+  &gt; **Incorreto.** Pessoas que não passam naquele corredor têm chance zero, então as chances não são iguais nem conhecidas.</code></pre>
+</div>
+<div class="questao-banco">
+<p><strong>Questão #CAP3-30</strong></p>
+<pre class="quizdown"><code># Qual destes problemas NÃO é resolvido aumentando o tamanho da amostra?
+- [x] O viés de seleção na escolha dos participantes.
+  &gt; **Correto: esta é a resposta.** Aumentar n reduz o erro aleatório e estreita o intervalo de confiança, mas não corrige um erro sistemático. Amostra grande e torta continua torta — agora com aparência de precisa.
+- [ ] O erro padrão da média.
+  &gt; **Incorreto (é resolvido).** O erro padrão cai com a raiz de n: mais amostra, menos erro aleatório.
+- [ ] A largura do intervalo de confiança de 95 por cento.
+  &gt; **Incorreto (é resolvido).** O intervalo estreita com o aumento de n, porque a margem cai.
+- [ ] A instabilidade da estimativa entre sorteios diferentes.
+  &gt; **Incorreto (é resolvida).** Amostras maiores oscilam menos de um sorteio para outro.</code></pre>
+</div>
 </section>
 <section id="referências" class="level2" data-number="3.14">
 <h2 data-number="3.14" class="anchored" data-anchor-id="referências"><span class="header-section-number">3.14</span> Referências</h2>
 <p>As bases conceituais deste capítulo estão em <span class="citation" data-cites="pagano2004">(<a href="referencias.html#ref-pagano2004" role="doc-biblioref">Pagano e Gauvreau 2004</a>)</span>, <span class="citation" data-cites="vieira2008">(<a href="referencias.html#ref-vieira2008" role="doc-biblioref">Vieira 2008</a>)</span> e <span class="citation" data-cites="triola2017">(<a href="referencias.html#ref-triola2017" role="doc-biblioref">Triola 2017</a>)</span>. Os exemplos numéricos são simulações didáticas construídas para o livro, com parâmetros declarados no texto.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Deixe o seu feedback!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span style="color: #2C3E50;">Não se esqueça de curtir e comentar ao final desse capítulo.</span><br> <span style="color: #166534; font-weight: bold;">Isso é muito importante para melhorar o livro interativo! ❤️</span></p>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

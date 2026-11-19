@@ -95,3 +95,410 @@ Os estudos experimentais são aqueles em que os pesquisadores manipulam uma vari
 
 * **Estudos de intervenção:** Os pesquisadores administram um tratamento ou intervenção a um grupo de participantes e observam o efeito direto dessa ação. *Exemplos práticos:* testar a eficácia antimicrobiana de um extrato isolado na disciplina de "Botânica Farmacêutica" ou avaliar o tempo de recuperação motora com o uso de um novo equipamento de Fisioterapia.
 * **Estudos de controle:** Os pesquisadores comparam os resultados de um grupo de participantes que recebeu um tratamento com os resultados de um grupo que não o recebeu (ou recebeu o padrão/placebo). *Exemplo prático:* testar se diferentes tempos de exposição à autoclave eliminam completamente os esporos bacterianos em instrumentais comparados ao grupo controle, validando os protocolos na disciplina de "Biossegurança".
+
+## 🧠 Exercícios de fixação {#exercicios}
+
+*A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
+
+::: {.questao-banco}
+**Questão #CAP2-01**
+```quizdown
+# Um pesquisador acompanha 300 gestantes atendidas na UBS, registra a dieta habitual de cada uma e o peso ao nascer do bebê, sem orientar nenhuma conduta. Quanto ao desenho, esse estudo é:
+- [ ] Experimental, porque houve acompanhamento ao longo do tempo e medida de desfecho.
+  > **Incorreto.** Acompanhar no tempo não faz o estudo ser experimental. O que define é a intervenção do pesquisador sobre a exposição.
+- [x] Observacional, porque o pesquisador mediu a exposição sem interferir nela.
+  > **Correto!** Ele apenas registrou a dieta que as gestantes já tinham. Sem manipular a exposição, o estudo é observacional — e o máximo que se sustenta é associação.
+- [ ] Ecológico, porque comparou gestantes de regiões diferentes.
+  > **Incorreto.** O estudo ecológico usa dados agregados de grupos (municípios, escolas), não medidas individuais de cada gestante.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-02**
+```quizdown
+# O Framingham Heart Study, iniciado em 1948 com 5.127 residentes acompanhados por décadas, é o exemplo clássico de:
+- [ ] Estudo de caso-controle, pois comparou doentes e sadios.
+  > **Incorreto.** No caso-controle parte-se do desfecho e olha-se para o passado. Em Framingham partiu-se de pessoas sadias e seguiu-se adiante.
+- [x] Estudo de coorte, pois um grupo foi seguido ao longo do tempo para ver quem desenvolveria a doença.
+  > **Correto!** Coorte = grupo acompanhado no tempo, medindo exposições antes do desfecho. Foi assim que pressão alta, colesterol e tabagismo se firmaram como fatores de risco cardiovascular.
+- [ ] Ensaio clínico randomizado, pois os participantes foram sorteados.
+  > **Incorreto.** Não houve sorteio para receber intervenção nem grupo placebo: os residentes foram observados em sua vida habitual.
+- [ ] Estudo ecológico, pois usou dados do município de Framingham.
+  > **Incorreto.** Os dados eram individuais, de cada residente, e não taxas agregadas do município.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-03**
+```quizdown
+# A diferença essencial entre um estudo de coorte e um estudo de caso-controle está no ponto de partida:
+- [x] A coorte parte da exposição e caminha para o desfecho; o caso-controle parte do desfecho e investiga a exposição no passado.
+  > **Correto!** É a bússola do desenho: coorte segue o sentido do tempo (exposto → doente); caso-controle olha para trás (doente → exposto?).
+- [ ] A coorte parte do desfecho e o caso-controle parte da exposição.
+  > **Incorreto.** Está invertido. Quem parte do desfecho é o caso-controle, e é por isso que ele é chamado de retrospectivo.
+- [ ] Ambos partem da exposição; a diferença é que o caso-controle usa placebo.
+  > **Incorreto.** Placebo é recurso de estudo experimental. Estudos observacionais não distribuem placebo a ninguém.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-04**
+```quizdown
+# Em um estudo de caso-controle sobre uso crônico de analgésico e insuficiência hepática, o grupo de comparação (controles) deve ser formado por:
+- [ ] Pacientes com a mesma doença, mas em estágio mais leve.
+  > **Incorreto.** Se todos têm a doença, não há como comparar doentes com não doentes — o contraste que define o desenho desaparece.
+- [x] Pessoas sem a doença, vindas da mesma população que gerou os casos.
+  > **Correto!** O controle representa a exposição que existiria entre os não doentes daquela população. Se vier de outro lugar, o viés de seleção entra pela porta da frente.
+- [ ] Voluntários sadios que receberam placebo no lugar do analgésico.
+  > **Incorreto.** Estudo observacional não atribui tratamento nem placebo; os controles são apenas pessoas sem o desfecho.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-05**
+```quizdown
+# Um estudo associa a fluoretação da água de cada município à taxa de cáries da comunidade. A unidade de análise desse estudo é:
+- [ ] O dente de cada criança examinada.
+  > **Incorreto.** Unidade dente seria um estudo clínico individual; aqui não há exame por criança, e sim totais do município.
+- [x] O município, ou seja, um grupo — por isso o desenho é ecológico.
+  > **Correto!** Estudo ecológico trabalha com variáveis de nível populacional: % de água fluoretada de um lado, taxa de cáries do outro. Nenhum indivíduo é acompanhado.
+- [ ] O prontuário odontológico de cada paciente.
+  > **Incorreto.** Prontuário é dado individual. O estudo ecológico usa agregados, não fichas individuais.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-06**
+```quizdown
+# Um município com água fluoretada tem taxa média de cáries menor que outro sem flúor. Um gestor conclui que 'cada criança deste município terá menos cáries'. Esse raciocínio comete:
+- [ ] Viés de confusão, porque a água fluoretada confunde o efeito do açúcar.
+  > **Incorreto.** Confusão é outra coisa: uma terceira variável ligada à exposição e ao desfecho. Aqui o problema é de nível de análise.
+- [x] Falácia ecológica, pois conclui sobre indivíduos a partir de médias de grupo.
+  > **Correto!** A média do município não descreve nenhuma criança em particular. Concluir do agregado para o indivíduo é a falácia ecológica, o limite clássico desse desenho.
+- [ ] Erro de amostragem, porque a amostra era pequena.
+  > **Incorreto.** O estudo nem usa amostra de indivíduos: usa o município inteiro. O problema é o salto do grupo para a pessoa, não o tamanho da amostra.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-07**
+```quizdown
+# Um professor relata uma variação anatômica rara de um nervo encontrada durante as aulas de Anatomia Sistêmica, descrevendo-a em detalhe. Esse trabalho é, tipicamente:
+- [x] Um estudo descritivo, ponto de partida para perguntas analíticas futuras.
+  > **Correto!** O relato descreve o achado sem comparar grupos nem testar hipóteses. É a função do descritivo: documentar e levantar perguntas.
+- [ ] Um estudo analítico, porque descreve uma relação entre estruturas.
+  > **Incorreto.** Descrever a posição de um nervo não é testar relação entre variáveis; não há grupo de comparação nem medida de associação.
+- [ ] Um ensaio clínico, porque houve dissecção do cadáver.
+  > **Incorreto.** Dissecção é procedimento de aula, não intervenção em participantes vivos com grupo controle. Não há desenho experimental.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-08**
+```quizdown
+# Na tabela de caso-controle do capítulo, os casos são 45 expostos e 15 não expostos; os controles, 20 expostos e 60 não expostos. A razão de chances (OR) vale:
+- [ ] 0,11, indicando forte proteção da exposição.
+  > **Incorreto.** 0,11 apareceria se a conta fosse invertida (15×20 dividido por 45×60). O cálculo correto usa caso exposto × controle não exposto no numerador.
+- [x] 9,0, indicando que a exposição se associa a chance nove vezes maior do desfecho.
+  > **Correto!** OR = (45 × 60) / (15 × 20) = 2.700 / 300 = 9,0. Acima de 1, a exposição aparece associada a mais chance do desfecho.
+- [ ] 3,0, porque se divide 45 por 15 e se subtrai 60 por 20.
+  > **Incorreto.** 45/15 = 3 é só a razão de expostos entre os casos. O OR é o quociente entre as duas razões internas: (45/15) dividido por (20/60) = 3 dividido por 0,33 = 9.
+- [ ] 1,0, pois casos e controles têm o mesmo tamanho.
+  > **Incorreto.** OR = 1 significa ausência de associação — e é justamente o que este exemplo não mostra.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-09**
+```quizdown
+# Ainda sobre o OR = 9,0 do exercício anterior, a leitura correta é:
+- [ ] Nove por cento dos casos foram expostos.
+  > **Incorreto.** 45 de 60 casos (75%) eram expostos. O 9,0 é uma razão de chances, não uma porcentagem.
+- [x] A chance de o desfecho estar presente é nove vezes maior entre os expostos do que entre os não expostos.
+  > **Correto!** É a leitura que o próprio código do capítulo imprime. Razão de chances compara chances (odds), não riscos, e por isso a frase não pode virar 'nove vezes mais risco'.
+- [ ] O desfecho ocorre em 90% dos expostos.
+  > **Incorreto.** Para afirmar porcentagem de desfecho seria preciso acompanhar os expostos ao longo do tempo — o que um caso-controle não faz.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-10**
+```quizdown
+# Em outro caso-controle, o OR calculado foi 0,25. A interpretação adequada é:
+- [x] A exposição se associa a menor chance do desfecho — o OR abaixo de 1 aponta na direção protetora.
+  > **Correto!** OR menor que 1 inverte o sentido: o grupo exposto tem um quarto da chance do grupo não exposto. Acima de 1, associa-se a mais chance; igual a 1, nenhuma associação.
+- [ ] O estudo é inválido, porque OR não pode ser menor que 1.
+  > **Incorreto.** OR varia de 0 ao infinito; valores abaixo de 1 são comuns e indicam associação inversa (protetora).
+- [ ] Não há associação, pois 0,25 está próximo de zero.
+  > **Incorreto.** Ausência de associação é OR = 1. Quanto mais próximo de zero, mais forte é a associação protetora.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-11**
+```quizdown
+# Qual destas informações NÃO pode ser estimada diretamente a partir de um estudo de caso-controle?
+- [ ] A razão de chances entre exposição e desfecho.
+  > **Incorreto.** Esta é exatamente a medida que o desenho produz — inclusive é a que o bloco de código do capítulo calcula.
+- [x] A incidência (risco absoluto) do desfecho na população.
+  > **Correto!** O caso-controle parte dos doentes e não acompanha os sadios no tempo, então não mede quantos casos novos surgem. Para incidência é preciso coorte.
+- [ ] A proporção de expostos entre os casos e entre os controles.
+  > **Incorreto.** Isso é parte da tabela 2x2 e está disponível: 45 de 60 casos e 20 de 80 controles eram expostos.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-12**
+```quizdown
+# Um levantamento inicial mostra que bebedores de café têm mais câncer de pulmão. Ao controlar o tabagismo, a associação quase desaparece. O tabagismo, nesse caso, é:
+- [x] Um fator de confusão: ligado ao café e ao câncer, e não controlado no desenho inicial.
+  > **Correto!** Quem bebe café tende a fumar mais, e fumar causa câncer. A variável de confusão explica a associação aparente — é o viés de confusão descrito no capítulo.
+- [ ] Um viés de seleção, porque fumantes foram escolhidos a dedo.
+  > **Incorreto.** Não houve seleção preferencial de fumantes; houve uma terceira variável ligada aos dois lados da associação.
+- [ ] Um erro de aferição, porque o consumo de café foi medido errado.
+  > **Incorreto.** O problema não está na medida do café, e sim na presença de outra causa do desfecho associada à exposição.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-13**
+```quizdown
+# Um estudo sobre lesões por esforço repetitivo entrevista apenas os estudantes que permaneceram no curso até o último ano. O viés mais evidente é de:
+- [x] Seleção: quem abandonou o curso — provavelmente por causa das lesões — ficou fora da amostra.
+  > **Correto!** A amostra é formada por sobreviventes do percurso. Se a lesão é a causa da saída, o grupo estudado subestima o problema.
+- [ ] Informação, porque os estudantes mentiram sobre a dor.
+  > **Incorreto.** Não há indício de erro de relato; o problema é quem entrou na amostra, não o que responderam.
+- [ ] Confusão, porque a carga horária varia entre os cursos.
+  > **Incorreto.** Variação de carga horária poderia ser confundidora em outro desenho, mas aqui o recorte temporal exclui um grupo inteiro — isso é seleção.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-14**
+```quizdown
+# Em um caso-controle sobre analgésico e insuficiência hepática, os casos lembram com detalhe o medicamento que usaram, e os controles sadios não têm motivo para lembrar. Esse é um exemplo de:
+- [x] Viés de informação (de memória), porque o relato difere entre casos e controles.
+  > **Correto!** A diferença de lembrança cria associação onde pode não haver. Entrevista cega e registros de dispensação reduzem esse viés.
+- [ ] Viés de confusão, porque a doença confunde a memória.
+  > **Incorreto.** Confusão envolve uma terceira variável causal. Aqui o defeito está na qualidade da informação coletada, e não numa causa oculta.
+- [ ] Falácia ecológica, porque comparou grupos.
+  > **Incorreto.** A falácia ecológica é sobre inferir do agregado para o indivíduo; este estudo compara indivíduos e erra na medida.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-15**
+```quizdown
+# Por que o estudo experimental é considerado mais forte para afirmar causalidade?
+- [x] Porque a alocação por sorteio tende a equilibrar os fatores de confusão entre os grupos, inclusive os não medidos.
+  > **Correto!** A randomização distribui idade, gravidade e hábitos de forma equilibrada. Com os grupos comparáveis, a diferença observada pode ser atribuída à intervenção.
+- [ ] Porque o grupo experimental é sempre maior que o controle.
+  > **Incorreto.** Grupos costumam ter tamanhos semelhantes; tamanho não é o que sustenta a inferência causal.
+- [ ] Porque o pesquisador mede as variáveis com mais cuidado que no observacional.
+  > **Incorreto.** Medir bem ajuda, mas o que sustenta causalidade é a intervenção com alocação aleatória — não a qualidade da medida.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-16**
+```quizdown
+# Em um ensaio clínico de um novo analgésico, um grupo recebe o comprimido ativo e o outro recebe um comprimido idêntico sem princípio ativo. A função do placebo é:
+- [x] Isolar o efeito específico do tratamento do efeito de expectativa e de cuidado.
+  > **Correto!** Sem placebo, melhora por expectativa seria creditada ao fármaco. O placebo torna os grupos iguais em tudo, menos no princípio ativo.
+- [ ] Garantir que todos os participantes melhorem.
+  > **Incorreto.** O placebo não é tratamento; ele existe para que a comparação seja justa.
+- [ ] Substituir o sorteio, tornando os grupos comparáveis.
+  > **Incorreto.** Quem torna os grupos comparáveis é a alocação aleatória. O placebo controla a expectativa, não a distribuição das características.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-17**
+```quizdown
+# Um ensaio clínico randomizado com 400 pacientes mostrou superioridade do tratamento A. O que a randomização NÃO garante?
+- [x] Que a amostra represente a população atendida na clínica.
+  > **Correto!** A randomização cuida da comparabilidade interna entre os grupos. A representatividade da população depende de como os 400 foram selecionados — isso é amostragem, tema do capítulo 3.
+- [ ] Que os grupos sejam comparáveis quanto às características conhecidas.
+  > **Incorreto.** Isso é justamente o que a randomização faz, e vale também para características não medidas.
+- [ ] Que o efeito observado possa ser atribuído à intervenção.
+  > **Incorreto.** Com grupos comparáveis e intervenção controlada, essa atribuição é o ponto forte do desenho.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-18**
+```quizdown
+# Segundo a classificação do capítulo, os estudos experimentais se dividem em:
+- [x] Estudos de intervenção, que aplicam um tratamento e observam o efeito, e estudos de controle, que comparam com grupo não tratado, padrão ou placebo.
+  > **Correto!** A distinção está em haver ou não grupo de comparação explícito. Testar um extrato em placa é intervenção; comparar dois protocolos de autoclave é controle.
+- [ ] Estudos descritivos e estudos analíticos.
+  > **Incorreto.** Descritivo e analítico é a divisão dos observacionais, não dos experimentais.
+- [ ] Estudos de coorte e estudos de caso-controle.
+  > **Incorreto.** Coorte e caso-controle são desenhos observacionais: não há intervenção do pesquisador.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-19**
+```quizdown
+# Para verificar se dois tempos de exposição à autoclave eliminam esporos bacterianos, comparando com o protocolo padrão, o desenho adequado é:
+- [x] Experimental com grupo controle, pois o pesquisador atribui os tempos e compara com o padrão.
+  > **Correto!** Há intervenção (o tempo é imposto) e há comparação (protocolo padrão). É o desenho que valida protocolos de biossegurança.
+- [ ] Caso-controle, pois compara dois grupos.
+  > **Incorreto.** Comparar grupos não faz dele caso-controle: ali o pesquisador não escolhe a exposição, apenas observa o passado.
+- [ ] Ecológico, pois usa dados de laboratório.
+  > **Incorreto.** Dados de laboratório são individuais (cada placa, cada ciclo), não taxas agregadas de população.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-20**
+```quizdown
+# Um extrato vegetal inibe o crescimento de uma bactéria em placas de Petri. Qual é o limite mais imediato para concluir que ele trata infecção em humanos?
+- [x] É um experimento in vitro: o ambiente da placa não reproduz absorção, metabolismo e defesa do organismo.
+  > **Correto!** O teste mostra atividade antimicrobiana em condições controladas. Transpor para o paciente exige ensaios em modelos animais e, depois, em humanos.
+- [ ] Nenhum: se inibiu a bactéria, o efeito existe e pode ser extrapolado.
+  > **Incorreto.** Inibir em placa é condição necessária, não suficiente. Concentração alcançável no tecido e toxicidade precisam ser testadas.
+- [ ] O estudo é inválido por não ter grupo controle.
+  > **Incorreto.** Experimentos in vitro também têm controle (placa sem extrato). O limite é a extrapolação, não a ausência de controle.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-21**
+```quizdown
+# Por que a coorte permite calcular a incidência de uma doença, e o caso-controle não?
+- [x] Porque a coorte parte de pessoas sadias e conta os casos novos ao longo do tempo.
+  > **Correto!** Incidência exige denominador de pessoas em risco seguidas no tempo. O caso-controle já seleciona doentes, então o denominador de risco se perde.
+- [ ] Porque a coorte tem sempre amostra maior.
+  > **Incorreto.** Tamanho não é a questão. Estimativas de incidência pequenas são mais eficientes em coortes pequenas e longas do que em caso-controle enorme.
+- [ ] Porque o caso-controle não mede exposição.
+  > **Incorreto.** O caso-controle mede exposição — só que retrospectivamente, sem acompanhar quem ainda não adoeceu.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-22**
+```quizdown
+# Um gestor quer saber 'qual a proporção de hipertensos entre os usuários da UBS neste momento'. O desenho mais direto é:
+- [x] Um estudo descritivo de prevalência, medindo uma vez o grupo de interesse.
+  > **Correto!** Prevalência é uma fotografia: quantos têm a condição agora. Não se segue ninguém no tempo nem se compara exposição com desfecho.
+- [ ] Um ensaio clínico randomizado.
+  > **Incorreto.** Ensaio testa efeito de intervenção; não serve para medir quantos já têm a doença.
+- [ ] Um estudo de coorte de 20 anos.
+  > **Incorreto.** Coorte responde 'quem adoece ao longo do tempo', não 'quantos estão doentes agora'. Seria caro e lento para a pergunta.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-23**
+```quizdown
+# Para investigar uma doença rara, com poucos casos disponíveis, o desenho mais eficiente é:
+- [x] Caso-controle, pois começa pelos casos existentes e escolhe controles comparáveis.
+  > **Correto!** Doença rara torna a coorte inviável: seria preciso acompanhar milhares por anos para acumular casos. O caso-controle parte de quem já adoeceu.
+- [ ] Coorte prospectiva, pois só ela mede incidência.
+  > **Incorreto.** Mediria, mas a custo proibitivo: para uma doença rara, poucos casos apareceriam na amostra.
+- [ ] Ecológico, pois trabalha com números pequenos.
+  > **Incorreto.** Ecológico usa agregados populacionais e não resolve o problema de poucos casos individuais.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-24**
+```quizdown
+# Já para uma exposição rara (por exemplo, contato com um reagente pouco usado), o desenho que melhor garante número suficiente de expostos é:
+- [x] Coorte, pois ela seleciona pela exposição e assim reúne quem foi exposto.
+  > **Correto!** Se a exposição é rara, partir dela garante o grupo de interesse. O caso-controle teria dificuldade de achar casos expostos suficientes.
+- [ ] Caso-controle, pois ele seleciona pela exposição.
+  > **Incorreto.** O caso-controle seleciona pelo desfecho; a exposição é reconstruída depois. Exposição rara fica ainda mais rara entre os casos.
+- [ ] Descritivo, pois basta relatar os casos.
+  > **Incorreto.** Relato descreve achados; não estima associação entre exposição e desfecho.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-25**
+```quizdown
+# Qual é a principal desvantagem prática da coorte prospectiva?
+- [x] Custo e tempo: é preciso acompanhar muitos participantes por anos para acumular desfechos.
+  > **Correto!** Framingham acompanha residentes desde 1948 — isso é décadas de financiamento e equipe. Perdas de seguimento e mudanças de hábito ao longo do caminho também complicam.
+- [ ] A impossibilidade de medir exposição antes do desfecho.
+  > **Incorreto.** Essa é justamente a vantagem da coorte: mede a exposição antes, reduzindo o viés de memória.
+- [ ] O fato de não permitir calcular incidência.
+  > **Incorreto.** A coorte é o desenho que melhor estima incidência.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-26**
+```quizdown
+# Qual das alternativas abaixo NÃO é uma limitação dos estudos observacionais apontada no capítulo?
+- [x] A impossibilidade de calcular razão de chances.
+  > **Correto: esta é a afirmação falsa.** O caso-controle — que é observacional — calcula OR rotineiramente. As limitações reais são confusão, seleção e informação.
+- [ ] A existência de fatores de confusão não controlados.
+  > **Incorreto (é limitação real).** Sem intervenção, outras variáveis podem explicar a associação observada.
+- [ ] O risco de viés de seleção na composição dos grupos.
+  > **Incorreto (é limitação real).** Quem entra e quem fica fora da amostra pode distorcer o resultado.
+- [ ] O risco de viés de informação na medida das variáveis.
+  > **Incorreto (é limitação real).** Recordar mal o passado ou preencher mal a ficha compromete a comparação.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-27**
+```quizdown
+# Um estudo observacional bem conduzido, com 10 mil participantes e ajuste estatístico para várias variáveis, permite afirmar com segurança:
+- [x] Que há associação entre exposição e desfecho, com confundidores conhecidos controlados.
+  > **Correto!** Ajuste estatístico reduz confusão medida, mas não elimina a não medida nem substitui a aleatorização. O que se sustenta é associação.
+- [ ] Que a exposição causa o desfecho, pois a amostra é grande.
+  > **Incorreto.** Tamanho reduz erro aleatório, não confusão. Sem intervenção, causalidade permanece hipótese.
+- [ ] Que nenhum fator de confusão pode estar presente.
+  > **Incorreto.** Só se controla o que se mediu. Fatores desconhecidos ou mal medidos continuam atuando.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-28**
+```quizdown
+# Entre as contribuições do Framingham Heart Study, o capítulo destaca:
+- [x] A identificação de pressão alta, colesterol alto e tabagismo como fatores de risco cardiovasculares.
+  > **Correto!** Foi uma coorte de longo prazo que ligou medidas repetidas de exposição ao surgimento de eventos cardíacos — o modelo do que uma coorte pode entregar.
+- [ ] A demonstração de que o café causa câncer.
+  > **Incorreto.** Esse foi o exemplo de confusão discutido no capítulo, não um achado de Framingham.
+- [ ] A criação do primeiro ensaio clínico randomizado da história.
+  > **Incorreto.** Framingham é coorte observacional; não houve intervenção nem sorteio.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-29**
+```quizdown
+# Um artigo relata o caso de um único paciente que desenvolveu reação adversa rara após uso de um fitoterápico. Esse desenho é:
+- [x] Relato de caso, um estudo descritivo que gera hipótese, não prova associação.
+  > **Correto!** Um caso não permite calcular frequência nem comparar grupos. Serve para chamar atenção e propor investigação — e é assim que se deve lê-lo.
+- [ ] Caso-controle, pois descreve um caso e seus controles.
+  > **Incorreto.** Não há grupo de controle: é um caso isolado, sem comparação.
+- [ ] Coorte, pois o paciente foi acompanhado.
+  > **Incorreto.** Acompanhar um paciente doente não é coorte; coorte exige grupo definido e seguimento para desfechos.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP2-30**
+```quizdown
+# Uma clínica quer testar se um novo curativo acelera a cicatrização de úlceras em relação ao curativo convencional, sorteando qual curativo cada paciente recebe. O desenho é:
+- [x] Ensaio clínico randomizado — experimental, com grupo controle e alocação aleatória.
+  > **Correto!** Há intervenção (o curativo é atribuído), controle (convencional) e sorteio (reduz confusão). É o desenho que sustenta a afirmação de eficácia.
+- [ ] Coorte prospectiva, pois os pacientes serão acompanhados até cicatrizar.
+  > **Incorreto.** Haveria seguimento, mas o pesquisador decide qual curativo cada paciente recebe — isso é intervenção, não observação.
+- [ ] Estudo ecológico, pois compara dois grupos de pacientes.
+  > **Incorreto.** Comparar grupos de indivíduos não é ecológico; ecológico compara populações inteiras por meio de agregados.
+```
+:::
+
+::: {.callout-tip}
+## Deixe o seu feedback!
+
+[Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
+:::
