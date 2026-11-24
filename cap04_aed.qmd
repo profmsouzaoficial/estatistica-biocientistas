@@ -1,108 +1,973 @@
----
-title: "Análise Exploratória de Dados"
----
+# Análise Exploratória de Dados nas Ciências da Saúde
 
 [▶ Abrir apresentação](slides/aula04_aed/index.html){.deck-btn target="_blank"}
 
-Imagine que você está diante de um baú misterioso, trancado por enigmas e segredos. Dentro dele, um universo de informações à espera para ser descoberto. A chave para abrir este baú e revelar seus tesouros é a **Análise Exploratória de Dados (AED)**.
+Imagine que você está diante de um baú misterioso, trancado por enigmas e segredos. Dentro dele, um universo de informações à espera de ser descoberto. A chave para abrir este baú é a **Análise Exploratória de Dados (AED)**.
 
-A AED é como um mapa que o guia por este universo, ajudando a:
+A metáfora é boa, mas convém trocá-la por uma cena concreta: você acaba de receber a planilha de uma clínica-escola com 240 pacientes, seis colunas e nenhuma legenda. Antes de perguntar "o tratamento funcionou?", é preciso perguntar **o que esses números são capazes de dizer**. A AED é essa etapa — e ela ocupa, na prática real, mais tempo do que o teste estatístico que vem depois.
 
-*   **Explorar e compreender** os dados, desvendando suas características e segredos;
-*   **Identificar padrões**, como tendências e relações entre as informações, que podem levar a insights valiosos;
-*   **Encontrar outliers e anomalias**, que podem indicar erros ou eventos incomuns;
-*   **Formular hipóteses** sobre os dados, que podem ser testadas posteriormente com métodos estatísticos mais formais.
+Neste capítulo você vai aprender a fazer as quatro perguntas que abrem qualquer conjunto de dados, a escolher a medida de resumo certa para cada tipo de variável, a reconhecer um gráfico que informa e um gráfico que engana, e a montar uma tabela que um revisor aceite sem pedir correção.
 
-Neste capítulo, embarcaremos numa jornada pela AED, desvendando os seus principais conceitos e preparando os seus dados para a análise com o uso do R.
+## A pergunta que este capítulo responde
 
----
+Sua planilha tem, entre outras colunas, idade, sexo, dor antes e depois da fisioterapia (escala 0–10), número de sessões e tempo de internação. A pergunta do estudo é se a fisioterapia reduz a dor. Antes de qualquer teste, quatro perguntas precisam de resposta:
 
-## O que é AED e qual a sua importância?
+1. **Onde está o centro?** — qual é o valor típico de cada variável;
+2. **Quanto os dados se espalham?** — dois grupos com a mesma média podem ser completamente diferentes;
+3. **Qual é a forma da distribuição e existem valores improváveis?** — um único erro de digitação pode inverter uma conclusão;
+4. **Como as variáveis se relacionam?** — a dor cai junto com o número de sessões, ou não?
 
-A AED é um conjunto de técnicas que visa explorar e entender um conjunto de dados de forma iterativa e visual. É um processo informal e flexível que permite ao analista "mergulhar" nos dados e descobrir padrões e relações que poderiam passar despercebidos em análises mais formais.
+As respostas decidem três coisas: a **medida** que você vai relatar, o **gráfico** que vai desenhar e o **teste** que fará sentido usar depois.
 
-A importância da AED reside nos seus benefícios práticos:
-1.  **Conhecimento profundo dos dados:** Essencial para entender a estrutura e a distribuição antes da modelagem matemática.
-2.  **Identificação de problemas:** Revela *outliers* biológicos (ex: uma frequência cardíaca registrada como 800 bpm devido a erro de digitação).
-3.  **Tomada de decisões:** Fornece a base de evidências para escolher o teste de hipótese correto (paramétrico vs. não-paramétrico).
+::: {.keybox}
+**A regra do capítulo:** primeiro olhe, depois conte. Nenhum teste estatístico conserta dados que você não examinou — ele apenas disfarça o problema com um valor de *p*.
+:::
 
-## Tipos de Dados e Medidas Descritivas
+## Vocabulário mínimo
 
-O primeiro passo na AED é compreender a natureza dos dados que temos em mãos. Como vimos no Capítulo 1, eles dividem-se em qualitativos (atributos) e quantitativos (medidas). Para resumir essas informações, recorremos às **Medidas Descritivas**:
+| Termo | O que é | Exemplo | Símbolo |
+|:--|:--|:--|:--|
+| **Unidade de análise** | O "tijolo" medido | O paciente (ou o dente, ou o sítio periodontal) | — |
+| **Variável** | O que foi medido em cada unidade | Hemoglobina, dor (EVA), índice CPO-D | — |
+| **Observação** | Uma linha da planilha | Um paciente | — |
+| **Distribuição** | O conjunto dos valores de uma variável | As 240 hemoglobinas | — |
+| **Medida de resumo** | Um número que condensa a distribuição | Média, mediana, desvio padrão | $\bar{x}$, $s$ |
+| **Outlier** | Valor muito distante do resto | Hemoglobina de 2 g/dL | — |
 
-*   **Média e Mediana:** Representam o centro dos dados. A mediana é especialmente resistente a *outliers*.
-*   **Amplitude, Variância e Desvio Padrão:** Indicam a dispersão. O desvio padrão é o mais utilizado por retornar a dispersão para a mesma unidade de medida da variável original.
-*   **Quartis:** Dividem os dados em quatro partes iguais (25%, 50%, 75%).
-*   **Assimetria e Curtose:** Avaliam o formato da curva de distribuição em relação à Normalidade.
+::: {.callout-warning}
+## A unidade de análise muda a conta
+
+Em Odontologia é comum medir **dentes** ou **sítios** por paciente. Cem dentes de 25 pacientes não são cem observações independentes: os dentes de uma mesma boca se parecem entre si por compartilhar a mesma saliva, a mesma dieta e o mesmo biofilme. Tratar cada dente como um paciente infla o *n*, estreita o intervalo de confiança e produz um valor de *p* que o estudo não ganhou.
+
+É a mesma armadilha da dependência discutida no capítulo 3: **o número de linhas da planilha não é o número de informações independentes.**
+:::
+
+## Por que explorar antes de testar
+
+Quatro razões, todas com consequência prática:
+
+::: {.cards .cols-2}
+::: {.card}
+**Encontrar o impossível**
+
+Frequência cardíaca de 800 bpm, idade de 250 anos, glicemia negativa, pressão de 1.200 mmHg. Quase sempre é erro de digitação ou troca de unidade — e corrigir isso na fonte é barato.
+:::
+
+::: {.card}
+**Escolher o teste certo**
+
+Testes paramétricos supõem distribuição aproximadamente simétrica e sem outliers extremos. Se essa suposição falha, o teste escolhido responde a outra pergunta.
+:::
+
+::: {.card}
+**Descobrir que a média esconde histórias**
+
+Dois grupos podem ter a mesma média e significados clínicos opostos. A média é um resumo, e todo resumo perde informação.
+:::
+
+::: {.card}
+**Gerar hipóteses**
+
+Um padrão inesperado na exploração — "os pacientes com mais sessões são justamente os que menos melhoram" — pode valer um artigo, ou revelar um confundidor.
+:::
+:::
+
+### A média esconde histórias: um exemplo de dor
+
+Dois analgésicos foram testados em pacientes com dor lombar. A tabela mostra a redução da dor na EVA, em cada paciente:
+
+| Paciente | Analgésico A | Analgésico B |
+|--:|--:|--:|
+| 1 | 3,0 | 6,0 |
+| 2 | 3,2 | 6,2 |
+| 3 | 3,4 | 6,0 |
+| 4 | 3,0 | 6,2 |
+| 5 | 3,4 | 0,2 |
+| 6 | 3,2 | 0,4 |
+| 7 | 3,0 | 0,2 |
+| 8 | 3,4 | 0,4 |
+| **Média** | **3,2** | **3,2** |
+| **Desvio padrão** | **0,19** | **3,10** |
+
+As duas médias são idênticas: 3,2 pontos. E as conclusões clínicas são opostas.
+
+No grupo A, **todos** melhoraram algo entre 3,0 e 3,4 pontos — um efeito modesto e previsível. No grupo B, metade melhorou 6 pontos (quase desapareceu a dor) e metade praticamente não melhorou. Se o artigo relatasse somente "redução média de 3,2 pontos", o leitor não saberia que B é um medicamento que funciona muito bem em alguns pacientes e quase nada em outros.
+
+É por isso que média e desvio padrão andam juntos, e é por isso que o gráfico importa: a média é uma frase; o gráfico é a história.
+
+<p class="small">Dados simulados para o exemplo. Todos os números desta seção podem ser conferidos no R, na seção "No R, passo a passo".</p>
+
+## O centro: média, mediana e moda
+
+Há três respostas possíveis para "onde fica o valor típico", e elas não são intercambiáveis.
+
+**Média** ($\bar{x}$) é a soma dividida pelo número de observações:
+
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
+
+**Mediana** é o valor que ocupa a posição central quando os dados são ordenados. Com $n$ par, é a média dos dois valores centrais. **Moda** é o valor mais frequente.
+
+| Medida | O que faz | Use quando | Onde engana |
+|:--|:--|:--|:--|
+| **Média** | usa todos os valores | distribuição simétrica, sem extremos | um único valor extremo muda o resultado |
+| **Mediana** | valor do meio | distribuição assimétrica, variável ordinal, presença de outliers | ignora a magnitude dos extremos |
+| **Moda** | valor mais frequente | variável categórica (sexo, tipo de fratura) | empates; instável em variável contínua |
+
+### O caso que todo mundo já viu
+
+Glicemia de seis pacientes, em mg/dL: **90 · 95 · 100 · 105 · 110 · 800**.
+
+$$\text{média} = 216{,}7 \qquad \text{mediana} = 102{,}5$$
+
+O valor 800 é um erro de digitação. Ele levou a média de ~100 para 216,7, um valor que não descreve nenhum dos seis pacientes e que, num relatório, sugeriria uma população gravemente hiperglicêmica. A mediana praticamente não se moveu.
+
+**Um único ponto pode destruir a média.** E note o detalhe importante: a média não está "errada" como conta — ela está errada como **resumo**, porque foi calculada sobre dados que ninguém conferiu.
+
+<iframe class="w-frame" src="widgets/centro-mediana.html" title="Média e mediana com um valor extremo ajustável" loading="lazy"></iframe>
+
+<p class="small">Arraste o valor do último paciente de 800 até 120. A mediana fica parada em 102,5 porque a posição central não muda; a média desce de 216,7 para 103,3. É a diferença entre "resistir a extremos" e "usar todos os valores".</p>
+
+::: {.callout-tip}
+## Uso correto da média
+
+"Após conferir os prontuários e corrigir um valor digitado errado, a glicemia média foi 103,3 mg/dL (DP 10,8; n = 6), com valores entre 90 e 120 mg/dL."
+
+A frase traz **a medida, a dispersão, o n e a faixa observada**. Com esses quatro elementos, o leitor sabe onde está o centro e o quanto os pacientes se afastam dele.
+:::
+
+::: {.callout-warning}
+## Uso incorreto da média
+
+**1. Relatar só a média.** "Glicemia média de 216,7 mg/dL" — sem dispersão, sem n e sem olhar os dados. O número é aritmeticamente correto e clinicamente falso.
+
+**2. Calcular média de variável ordinal.** "Dor média de 2,3" quando a dor foi classificada como leve (1), moderada (2) ou intensa (3). A média de códigos não tem unidade nem significado: 2,3 não é "entre moderada e intensa". Para ordinal, relate a **mediana** ou a **distribuição de frequências** (quantos em cada categoria).
+
+**3. Usar a média para esconder a cauda.** "Tempo médio de internação de 6 dias" numa amostra em que 70% ficaram 3 dias e 10% ficaram 30. A média descreve poucos pacientes e nenhum deles ao mesmo tempo.
+:::
 
 ::: {.callout-note}
-## O poder do pacote `gtsummary` no R
-Na prática biocientífica, gerar tabelas descritivas completas para publicação pode demorar horas. Usando o pacote `gtsummary`, podemos cruzar variáveis de um ensaio clínico com uma única linha de código.
+## E a escala de dor (EVA)? É ordinal ou numérica?
+
+A EVA de 0 a 10 é formalmente **ordinal**: a distância entre 2 e 3 não é necessariamente igual à distância entre 8 e 9. Na prática, a literatura clínica a trata como numérica com frequência, e isso é aceitável quando a distribuição é razoavelmente simétrica e o *n* é razoável.
+
+A regra defensável é esta: **se a distribuição é assimétrica ou o *n* é pequeno, relate a mediana e o intervalo interquartil**; se você relatar a média, mostre também a distribuição. O que não se faz é escolher a medida depois de ver qual delas deu o resultado mais bonito.
 :::
+
+## A dispersão: amplitude, variância, desvio padrão, IIQ e CV
+
+Saber o centro é metade do trabalho. A outra metade é saber **o quanto os valores se afastam dele** — e há cinco medidas para isso, cada uma com uma unidade e uma fragilidade.
+
+| Medida | Unidade | O que diz | Robusta a extremos? |
+|:--|:--|:--|:--|
+| **Amplitude** | a da variável | distância entre o maior e o menor valor | não — depende de dois valores apenas |
+| **Variância** ($s^2$) | unidade ao quadrado | dispersão média, elevada ao quadrado | não |
+| **Desvio padrão** ($s$) | a da variável | distância típica dos valores à média | não, mas é a mais usada |
+| **IIQ** | a da variável | largura dos 50% centrais | sim, muito |
+| **CV** (%) | adimensional | dispersão relativa à média | não |
+
+**Variância** é a média dos desvios ao quadrado:
+
+$$s^2 = \frac{1}{n-1}\sum_{i=1}^{n}\left(x_i - \bar{x}\right)^2$$
+
+**Desvio padrão** é a raiz quadrada da variância, $s = \sqrt{s^2}$.
+
+O desvio padrão é o mais relatado por um motivo simples: ele volta para a unidade original. Uma variância de 225 (mg/dL)² não diz nada a um clínico; um desvio padrão de 15 mg/dL diz "os pacientes costumam ficar a uns 15 mg/dL da média".
+
+### O erro que mais aparece nas revistas: DP ou EPM?
+
+Aqui está a confusão mais comum em artigos da área da saúde. Existem duas quantidades parecidas:
+
+- o **desvio padrão (DP)** descreve **o quanto os pacientes variam** em torno da média;
+- o **erro padrão da média (EPM)** descreve **a precisão com que estimamos a média** — e depende do tamanho da amostra:
+
+$$\text{EPM} = \frac{s}{\sqrt{n}}$$
+
+| | Desvio padrão (DP) | Erro padrão (EPM) |
+|:--|:--|:--|
+| Responde | "quanto os pacientes variam?" | "quanto a média estimada pode variar?" |
+| Depende de $n$? | não | sim, divide por $\sqrt{n}$ |
+| Exemplo ($s = 15$, $n = 100$) | 15 mg/dL | 1,5 mg/dL |
+| Quando usar | descrever a amostra (Tabela 1, métodos) | comparar médias, construir intervalo de confiança |
+
+Com $s = 15$ e $n = 100$, o EPM vale 1,5. É dez vezes menor que o DP — e é por isso que ele "melhora" o resultado visualmente. Relatar EPM e chamar de DP é uma forma silenciosa de exagero: a barra de erro encolhe, a diferença entre grupos parece maior, e nada mudou nos dados.
+
+::: {.callout-tip}
+## Uso correto do desvio padrão
+
+"Hb 13,4 ± 1,5 g/dL (média ± DP; n = 120)" — e, ao comparar dois grupos, "diferença de 0,8 g/dL (IC 95%: 0,3 a 1,3)".
+
+Duas frases, dois papéis: o DP descreve a amostra; o intervalo de confiança quantifica a incerteza da comparação.
+:::
+
+::: {.callout-warning}
+## Uso incorreto do desvio padrão
+
+"Hb 13,4 ± 0,14 g/dL" sem dizer o que é o segundo número. Se for EPM, a dispersão real dos pacientes é dez vezes maior; se for DP, a precisão da média é que foi exagerada. **Todo símbolo ± precisa de legenda** — "média ± DP", "média ± EPM", "média (IC 95%)" — e a legenda não pode variar entre tabelas do mesmo artigo.
+:::
+
+### O coeficiente de variação: comparar o que não se compara
+
+O CV transforma o desvio padrão em porcentagem da média:
+
+$$CV = \frac{s}{\bar{x}} \times 100\%$$
+
+Ele serve para comparar a variabilidade de variáveis com unidades ou magnitudes diferentes. Hemoglobina com DP 1,5 g/dL e média 13,0 g/dL tem CV de 11,5%; glicemia com DP 30 mg/dL e média 100 mg/dL tem CV de 30%. Conclusão: mesmo sendo "30" um número maior que "1,5", a glicemia é mais variável **em termos relativos** — e é essa comparação que interessa quando você quer saber qual exame é mais estável numa bancada.
+
+<p class="small">Cuidado: o CV só faz sentido em variáveis estritamente positivas e com média longe de zero. Para variáveis que podem ser negativas (variação de peso, diferença de pressão), o CV não tem interpretação.</p>
+
+## A forma: assimetria e curtose
+
+Duas distribuições podem ter a mesma média e o mesmo desvio padrão e ainda assim serem muito diferentes: uma é simétrica, a outra tem cauda.
+
+- **Assimetria à direita** (cauda longa para valores altos): tempo de internação, custo de tratamento, número de cáries, contagem de crises. A média fica **maior** que a mediana.
+- **Assimetria à esquerda** (cauda para valores baixos): notas de provas muito fáceis, idade de óbito em algumas doenças. A média fica **menor** que a mediana.
+- **Curtose** mede o peso das caudas: distribuições com curtose alta têm mais valores extremos do que a normal, o que torna o desvio padrão uma descrição otimista.
+
+::: {.keybox}
+**Regra prática que resolve 90% dos casos:** compare a média com a mediana. Se as duas estão próximas, a distribuição é aproximadamente simétrica e a média pode ser relatada. Se a média está bem acima da mediana (ou bem abaixo), há cauda — e o resumo honesto é **mediana com intervalo interquartil**.
+:::
+
+## Os cinco números e o boxplot
+
+O boxplot é a representação gráfica dos cinco números de uma distribuição:
+
+1. **Mínimo** (até o limite inferior, excluindo outliers);
+2. **Q1** — 25% dos dados ficam abaixo;
+3. **Mediana** — Q2, o centro;
+4. **Q3** — 75% ficam abaixo;
+5. **Máximo** (até o limite superior, excluindo outliers).
+
+A caixa contém os 50% centrais, e sua altura é o **IIQ** ($Q3 - Q1$). Os bigodes se estendem até o valor mais extremo que ainda esteja dentro de $1{,}5 \times \text{IIQ}$ a partir da caixa; o que passa disso é desenhado como ponto solto e chamado de outlier.
+
+::: {.callout-warning}
+## O que o boxplot esconde
+
+**O tamanho da amostra.** Um boxplot de 3 pacientes parece igual a um de 300 — e é lido com a mesma confiança.
+
+**A forma real.** Uma distribuição bimodal (metade dos pacientes melhora muito, metade nada) produz o mesmo boxplot de uma distribuição simétrica, porque a caixa só sabe contar quartis.
+
+**Os valores individuais.** Se cada grupo tem menos de ~20 observações, mostre os pontos (gráfico de pontos ou boxplot com jitter). É a diferença entre apresentar um resumo e apresentar os dados.
+:::
+
+## O gráfico certo para cada dado
+
+A escolha do gráfico não é estética: é consequência do tipo de variável e da pergunta. A tabela abaixo é o resumo que resolve a maior parte dos casos.
+
+| Variável | A pergunta | O gráfico | Exemplo clínico |
+|:--|:--|:--|:--|
+| Categórica nominal | quantos em cada categoria? | barras (horizontais se houver muitas categorias) | tipo de fratura por serviço de ortopedia |
+| Categórica ordinal | como as categorias se distribuem? | barras **ordenadas** | classificação de dor (leve, moderada, intensa) |
+| Quantitativa, um grupo | qual a forma da distribuição? | histograma ou densidade | hemoglobina de 240 pacientes |
+| Quantitativa, vários grupos | comparar distribuições | boxplot (com pontos se $n$ pequeno) | tempo de internação por tratamento |
+| Duas quantitativas | existe relação? | dispersão | idade × pressão sistólica |
+| Série temporal | como evolui no tempo? | linha | casos de dengue por mês |
+| Parte de um todo | qual a composição? | barras empilhadas (100%) ou pizza, se ≤ 5 fatias | desfecho (alta, transferência, óbito) |
+
+### Histograma: a escolha das classes muda a história
+
+O histograma divide o intervalo dos dados em classes e conta quantos valores caem em cada uma. A largura da classe é uma decisão do analista — e decisões diferentes produzem desenhos diferentes com os mesmos dados.
+
+<iframe class="w-frame" src="widgets/hist-bins.html" title="Histograma de hemoglobina com número de classes ajustável" loading="lazy"></iframe>
+
+<p class="small">São os mesmos 240 pacientes em todas as posições do controle. Com 4 classes, o desenho sugere uma distribuição larga e sem estrutura; com 26, aparece um segundo grupo de pacientes com hemoglobina entre 8 e 11 g/dL — os anêmicos. O gráfico não mentiu em nenhum dos dois casos: ele só mostrou o que a classe permitia ver.</p>
+
+::: {.callout-tip}
+## Uso correto do histograma
+
+Use classes de largura **igual**, em número suficiente para ver a forma (nem 3, nem 60), com o eixo x em escala contínua e o $n$ informado na legenda. Se a variável for discreta com poucos valores possíveis (número de gestações, 0 a 6), use barras por valor em vez de histograma.
+:::
+
+::: {.callout-warning}
+## Uso incorreto do histograma
+
+**Classes desiguais sem aviso** — o desenho passa a depender da largura de cada barra, não dos dados.
+
+**Histograma de variável categórica** — "histograma de tipo de parto" é um gráfico de barras disfarçado.
+
+**Eixo y cortado** — em histograma, o eixo y representa contagem e deve começar em zero, como em qualquer gráfico de barras.
+:::
+
+### Boxplot: comparar grupos sem se perder
+
+O boxplot é ótimo para **comparar** distribuições lado a lado, porque alinha medianas e caixas na mesma escala. É o gráfico padrão para "tempo de internação por grupo de tratamento", "glicemia por turno de coleta", "CPO-D por escola".
+
+Como todo resumo, ele perde informação — e a perda mais grave é o $n$. Um boxplot com 4 observações e outro com 400 podem ter exatamente a mesma aparência.
+
+### Dispersão: duas variáveis ao mesmo tempo
+
+O diagrama de dispersão mostra cada paciente como um ponto, com uma variável em cada eixo. É o gráfico certo para "a dor cai conforme as sessões aumentam?" ou "a pressão sobe com a idade?".
+
+Dois cuidados:
+
+- **Sobreposição**: com muitos pontos, vários caem no mesmo lugar. Use transparência (`alpha`) ou jitter para mostrar densidade.
+- **Escala**: um único paciente com valor extremo pode esmagar todos os outros num canto. Verifique antes de concluir que "não há relação".
+
+### Barras: para categorias, não para esconder distribuições
+
+Gráfico de barras serve para **contagens ou proporções em categorias**. Ele começa **obrigatoriamente em zero**, porque a área da barra é o que o olho compara: cortar o eixo faz uma diferença de 0,2 parecer dez vezes maior.
+
+O uso mais abusivo é o "gráfico de barras de média com barrinha de erro". Ele mostra a média de uma variável contínua, esconde a distribuição inteira e, dependendo do que a barrinha representa (DP? EPM? IC?), exagera ou minimiza a diferença. Se precisar mostrar médias, mostre também os pontos ou use um boxplot.
+
+::: {.callout-tip}
+## Uso correto do gráfico de barras
+
+"Proporção de pacientes com anemia, por grupo (n = 60 e n = 58)" — eixo y de 0 a 40%, barras ordenadas pela frequência, o n escrito no rótulo de cada barra e a unidade no eixo.
+
+Três decisões que bastam: **eixo em zero**, **n visível** e **ordem que signifique algo**.
+:::
+
+::: {.callout-warning}
+## Uso incorreto do gráfico de barras
+
+**Eixo cortado em 8,3** com valores entre 8,4 e 9,0: dois valores que diferem 7% viram barras de alturas 7 vezes diferentes.
+
+**Barras de média com barrinha de erro** — esconde a distribuição e, sem legenda, não se sabe se o erro é DP, EPM ou IC.
+
+**Efeito 3D** — a profundidade desloca a leitura da altura e não acrescenta informação.
+
+**Ordem alfabética** quando a informação está na ordem (leve, moderado, grave) — e ordem decrescente quando você quer destacar o maior valor.
+:::
+
+### Linhas: só quando o eixo x é tempo
+
+Linha conecta pontos porque existe continuidade entre eles. Use para séries temporais (casos por mês, tendência de vendas), nunca para categorias sem ordem (linha entre "farmácia" e "enfermagem" não significa nada).
+
+### Pizza: quase nunca
+
+A pizza só funciona quando as fatias somam 100%, são no máximo quatro ou cinco e a diferença entre elas é grande. O olho humano compara mal ângulos: com 12 categorias, a pizza vira legenda colorida — e uma barra ordenada mostraria a mesma informação com precisão.
+
+### Como um gráfico engana
+
+<iframe class="w-frame" src="widgets/eixo-truncado.html" title="Como cortar o eixo y distorce a comparação entre barras" loading="lazy"></iframe>
+
+<p class="small">Arraste o início do eixo para 1,1 e observe: o dado não mudou, mas a diferença entre o controle e o grupo "A + B" passou a parecer 20 vezes maior do que é. No gráfico de barras, a área é a mensagem — e é por isso que cortar o eixo nele é enganoso, enquanto no gráfico de linhas é aceitável (ali o que importa é a variação, não a distância até zero).</p>
+
+Os truques mais comuns, todos encontrados em artigos e em material de marketing:
+
+1. **Eixo truncado** em gráfico de barras — a diferença parece maior do que é.
+2. **Escala logarítmica sem aviso** — achata crescimentos enormes e esconde a magnitude.
+3. **Área ou volume** — um círculo com o dobro do diâmetro tem quatro vezes a área; o leitor lê "duas vezes".
+4. **Efeito 3D** — a profundidade desloca a leitura das alturas e não acrescenta informação.
+5. **Eixo duplo** — duas escalas no mesmo gráfico permitem criar qualquer correlação visual que se queira.
+6. **Cores e ordem** — ordenar as categorias de forma conveniente sugere tendência onde não há.
+7. **Pizza com muitas fatias** — ângulos pequenos são indistinguíveis.
+
+::: {.keybox}
+**As cinco regras de ouro**
+
+1. O eixo de barras começa em zero.
+2. Mostre o $n$ — no título, na legenda ou no eixo.
+3. Uma figura, uma mensagem: se o gráfico precisa de três parágrafos para ser entendido, ele não está pronto.
+4. Rotule eixos com **nome da variável e unidade**.
+5. Se o gráfico for cortado, distorcido ou transformado, **avise na legenda**.
+:::
+
+## Tabelas que comunicam
+
+Uma tabela bem feita permite ao leitor comparar números sem esforço. Uma tabela ruim obriga a fazer contas de cabeça — e é aí que os erros de leitura começam.
+
+### As sete regras
+
+1. **Unidade no cabeçalho**, não no corpo: "Hemoglobina (g/dL)" e não "13,2 g/dL" em cada célula.
+2. **Casas decimais consistentes** dentro da mesma coluna: 45,3 e 47,0 — nunca 45,3 e 47.
+3. **Todo símbolo tem legenda**: "±" é DP, EPM ou IC? A legenda responde, e a mesma convenção vale para o artigo inteiro.
+4. **Porcentagem sempre com denominador**: "32% (19/60)", porque 32% de 60 e 32% de 600 não são a mesma evidência.
+5. **$n$ em cada grupo**, no cabeçalho ou na primeira coluna.
+6. **Números alinhados à direita ou ao centro** (vírgula sob vírgula), texto à esquerda.
+7. **Ordem lógica**: por grupo, por frequência decrescente ou cronológica — nunca alfabética por acidente.
+
+### A mesma tabela, errada e certa
+
+**Errado:**
+
+| Grupo | Idade | Hemoglobina | Anemia |
+|:--|:--|:--|:--|
+| A | 45,3 | 13,2 ± 1,5 | 32% |
+| B | 47 | 12,8 ± 1,4 | 28,4% |
+
+O que está errado: idade com uma casa decimal em um grupo e nenhuma no outro; "±" sem dizer se é DP ou EPM; porcentagem sem denominador; nenhum $n$; unidade ausente no cabeçalho; "Grupo A" e "Grupo B" sem dizer o que são.
+
+**Certo:**
+
+| Grupo | n | Idade (anos) | Hemoglobina (g/dL) | Anemia, n (%) |
+|:--|--:|--:|--:|--:|
+| Controle | 60 | 45,3 (12,1) | 13,2 (1,5) | 19 (31,7) |
+| Fisioterapia | 58 | 47,0 (11,8) | 12,8 (1,4) | 16 (27,6) |
+
+*Valores são média (DP), exceto n e Anemia, n (%).*
+
+A segunda tabela diz, sem ambiguidade, quantos pacientes há em cada grupo, o que significam os parênteses, qual é a unidade e qual é o denominador de cada porcentagem. Um revisor não tem o que pedir; um leitor não tem o que supor.
+
+### A Tabela 1 do artigo
+
+A "Tabela 1" é a primeira tabela de quase todo artigo clínico: o retrato dos participantes, variável por variável, grupo por grupo. Ela responde a três perguntas: quem são os pacientes, os grupos são comparáveis, e o sorteio funcionou?
+
+No R, o pacote `gtsummary` gera essa tabela em poucas linhas:
 
 ```r
 #| eval: false
 library(gtsummary)
 library(dplyr)
 
-# Exemplo de geração de Tabela 1 descritiva
 dados_clinicos %>%
-  select(idade, tratamento, resposta_tumoral) %>%
-  tbl_summary(by = tratamento) %>%
-  add_p()
+  select(idade, sexo, tratamento, resposta_tumoral) %>%
+  tbl_summary(by = tratamento,
+              statistic = list(all_continuous() ~ "{mean} ({sd})",
+                               all_categorical() ~ "{n} ({p}%)"),
+              missing = "ifany") %>%
+  add_p() %>%
+  bold_labels()
 ```
 
----
+Se os grupos já diferem na Tabela 1 em variáveis que importam para o desfecho, qualquer comparação posterior nasce suspeita. E note: incluir ou não valor de *p* na Tabela 1 é um debate em aberto na literatura — muitos periódicos desaconselham, porque a Tabela 1 é descritiva, não inferencial. O que não se discute é a necessidade de mostrar $n$ e a medida de dispersão.
 
-## Gráficos como Aliados na Exploração
+::: {.callout-warning}
+## Erros de tabela que custam revisão
 
-A visualização de dados transforma números brutos em intuição visual. A escolha do gráfico correto depende inteiramente do tipo de dado:
+**Coluna "média ± DP" com categorias dentro** — "3,2 ± 0,19; 4 casos leves" na mesma célula. Cada tipo de variável merece sua própria coluna.
 
-*   **Histograma:** Ideal para a distribuição de dados quantitativos contínuos (ex: níveis de hemoglobina).
-*   **Boxplot:** Excelente para resumir medidas descritivas (mediana, quartis e outliers) e comparar distribuições entre grupos.
-*   **Diagrama de Dispersão:** Mostra a correlação entre duas variáveis quantitativas contínuas.
+**Percentual que não fecha** — colunas que somam 98% ou 102% por arredondamento sem nota de rodapé.
 
-Abaixo, simulamos a criação de um Boxplot com o pacote `ggplot2`, o padrão ouro para visualização de dados em R:
+**Abreviações sem legenda** — "PCR", "Hb", "IMC" podem ter mais de um significado na área da saúde.
 
-```r
-#| eval: false
-library(ggplot2)
+**Tabela com 12 colunas** — se não cabe na página, o leitor não compara nada. Considere dividir em duas ou inverter linhas e colunas.
+:::
 
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  geom_boxplot(alpha = 0.7, outlier.color = "red") +
-  theme_minimal() +
-  labs(title = "Distribuição do Comprimento da Sépala por Espécie",
-       x = "Espécie", y = "Comprimento (cm)")
+## Outliers: erro, achado ou outra população
+
+Todo conjunto real tem valores que fogem do padrão, e eles são de três tipos:
+
+1. **Erro de digitação ou de unidade** — 800 em vez de 80; 2,5 g/dL de hemoglobina em vez de 12,5; pressão em mmHg digitada em cmH₂O.
+2. **Erro de medição** — aparelho descalibrado, amostra hemolisada, paciente que não estava em jejum.
+3. **Evento real** — o paciente com glicemia de 420 mg/dL que existe, está internado e é justamente o caso que interessa.
+
+A conduta muda conforme o tipo:
+
+- **Verifique na fonte** (prontuário, ficha, laudo) antes de qualquer decisão.
+- **Nunca apague em silêncio.** O famoso "limpei os outliers" é uma das formas mais eficientes de transformar um resultado verdadeiro em um resultado bonito.
+- **Faça análise de sensibilidade:** repita a análise com e sem os valores suspeitos e relate as duas. Se a conclusão muda, o achado depende de um único paciente — e o leitor tem o direito de saber.
+- **Se o valor é real, ele é dado.** Relate a mediana (robusta) ou um método que acomode a cauda, e discuta o caso.
+
+::: {.callout-note}
+## Critérios usuais, não leis
+
+O critério mais usado em boxplot é "ponto além de $1{,}5 \times \text{IIQ}$". Outro critério é o escore $z$ acima de 3 (ou seja, três desvios padrão da média). Nenhum dos dois prova que o valor é erro: eles apenas dizem "olhe com atenção". O julgamento é clínico, não aritmético.
+:::
+
+## Checklist antes de fechar a análise
+
+| Verificação | Pergunta que você faz |
+|:--|:--|
+| Faixa de valores | Existe valor impossível (idade 250, FC 800, glicemia negativa)? |
+| Valores ausentes | Quantos faltam em cada variável? Faltam mais em um grupo? |
+| Distribuição | A variável é simétrica ou tem cauda? |
+| Medida relatada | Média com DP ou mediana com IIQ — a escolha combina com a forma? |
+| Dispersão | Todo número relatado vem com $n$ e com a medida de dispersão? |
+| Gráfico | O tipo combina com a variável? O eixo começa em zero? O $n$ aparece? |
+| Tabela | Unidades, decimais, legendas e denominadores estão explícitos? |
+| Outliers | Foram verificados na fonte? A análise sem eles muda a conclusão? |
+| Unidade de análise | Cada linha da planilha é uma observação independente? |
+
+## No R, passo a passo
+
+Rode os blocos abaixo direto no navegador. Nada precisa ser instalado.
+
+```{webr-r}
+glicemia <- c(90, 95, 100, 105, 110, 800)
+
+media   <- mean(glicemia)
+mediana <- median(glicemia)
+dp      <- sd(glicemia)
+iiq     <- IQR(glicemia)
+
+round(c(media = media, mediana = mediana, dp = dp, iiq = iiq), 2)
+quantile(glicemia, c(.25, .50, .75))
+boxplot(glicemia, col = "#0d9488", ylab = "Glicemia (mg/dL)")
 ```
 
----
+<p class="small">Troque o 800 por 130, rode de novo e compare. Depois troque por 80: a média desce mais do que a mediana? Por quê?</p>
 
-## 🧠 Prática: Teste os seus Conhecimentos
+```{webr-r}
+# os dois analgesicos do exemplo da secao anterior
+A <- c(3.0, 3.2, 3.4, 3.0, 3.4, 3.2, 3.0, 3.4)
+B <- c(6.0, 6.2, 6.0, 6.2, 0.2, 0.4, 0.2, 0.4)
 
-<div class="questao-banco">
+round(c(media_A = mean(A), dp_A = sd(A)), 2)
+round(c(media_B = mean(B), dp_B = sd(B)), 2)
+
+boxplot(A, B, names = c("A", "B"),
+        col = c("#0d9488", "#d97706"),
+        ylab = "Redução da dor (EVA)")
+```
+
+As médias são iguais e os desvios padrão não. O boxplot mostra o que a média escondeu: em B, a caixa cobre quase toda a escala.
+
+## O que levar deste capítulo
+
+::: {.incremental}
+- **Explore antes de testar.** Dado sujo gera resultado com aparência de rigor.
+- **Centro e dispersão andam juntos.** Média sem desvio padrão é meia informação — e mediana sem IIQ também.
+- **A forma decide a medida.** Simétrica: média e DP. Assimétrica ou ordinal: mediana e IIQ.
+- **DP descreve pacientes; EPM descreve a estimativa.** Confundir os dois é o erro mais comum das revistas.
+- **O gráfico segue o tipo da variável.** Histograma para uma contínua, boxplot para comparar grupos, dispersão para duas quantitativas, barras para categorias — sempre começando em zero.
+- **A largura da classe muda o histograma.** Se a forma só aparece com uma escolha específica, suspeite.
+- **Tabela boa não faz o leitor calcular.** Unidade no cabeçalho, decimais consistentes, $n$ e legendas explícitos.
+- **Outlier é pergunta, não incômodo.** Verifique, relate a análise de sensibilidade, nunca apague em silêncio.
+:::
+
+## 🧠 Exercícios de fixação {#exercicios}
+
+*A cada acesso, 3 novas questões são sorteadas. Teve dúvida em alguma? Anote o ID da questão e chame o Tutor Virtual no canto inferior direito!*
+
+::: {.questao-banco}
 **Questão #CAP4-01**
-```markdown
-# Em uma análise exploratória de dados de glicemia de pacientes, o pesquisador optou por utilizar uma medida de dispersão que apresenta o resultado na mesma unidade de medida da variável original (mg/dL). Qual medida foi escolhida?
-
-- [ ] Variância.
-> A variância eleva a unidade original ao quadrado (mg/dL)², o que dificulta a interpretação clínica direta.
-- [x] Desvio Padrão.
-> **Correto!** O desvio padrão é a raiz quadrada da variância, retornando o valor de dispersão exatamente para a unidade de medida original dos dados, facilitando a interpretação prática.
-- [ ] Curtose.
-> A curtose avalia o achatamento da curva de distribuição, não sendo uma medida direta de dispersão de valores.
+```quizdown
+# Uma amostra de 6 pacientes tem glicemias 90, 95, 100, 105, 110 e 800 mg/dL. O valor 800 é claramente um erro de digitação. Qual medida de centro descreve melhor esse grupo?
+- [ ] A média, 216,7 mg/dL.
+  > **Incorreto.** A média usa todos os valores e por isso é arrastada pelo erro: 216,7 não descreve nenhum dos seis pacientes.
+- [x] A mediana, 102,5 mg/dL.
+  > **Correto!** A mediana depende só da posição central e praticamente não se move com um valor extremo.
+- [ ] A amplitude, 710 mg/dL.
+  > **Incorreto.** Amplitude é medida de dispersão, não de centro — e ela também é destruída pelo valor extremo.
+- [ ] A moda, que não pode ser calculada.
+  > **Incorreto.** A moda existe, mas em variável contínua com seis valores distintos é pouco informativa.
 ```
-</div>
+:::
 
----
+::: {.questao-banco}
+**Questão #CAP4-02**
+```quizdown
+# Por que o desvio padrão é relatado com mais frequência do que a variância num artigo da área da saúde?
+- [ ] Porque o desvio padrão sempre tem valor menor que a variância.
+  > **Incorreto.** Ele é menor apenas quando a variância passa de 1; com variância 0,25 o desvio padrão é 0,5.
+- [x] Porque ele está na mesma unidade da variável, e o leitor consegue interpretá-lo.
+  > **Correto!** Um desvio padrão de 1,5 g/dL fala de hemoglobina; uma variância de 2,25 g/dL ao quadrado não tem leitura clínica.
+- [ ] Porque a variância não pode ser calculada em amostras pequenas.
+  > **Incorreto.** Ela pode — a divisão por n menos 1 existe justamente para corrigir o viés em amostras pequenas.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-03**
+```quizdown
+# Num prontuário, a dor foi registrada como 1 = leve, 2 = moderada e 3 = intensa. A média encontrada foi 2,3. Qual é o problema?
+- [ ] Nenhum: 2,3 é a dor média e pode ser relatado.
+  > **Incorreto.** Média de códigos não tem unidade nem significado: 2,3 não é uma dor entre moderada e intensa.
+- [x] A média de uma variável ordinal não tem interpretação; o correto é mediana ou distribuição de frequências.
+  > **Correto!** Para variável ordinal, a informação está na ordem e na frequência de cada categoria, não na média dos códigos.
+- [ ] O problema é o tamanho da amostra.
+  > **Incorreto.** O problema é o tipo de variável, não o número de pacientes.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-04**
+```quizdown
+# Em qual situação a moda é a medida de centro mais informativa?
+- [x] Tipo de parto, com as categorias cesárea, vaginal e fórceps.
+  > **Correto!** Em variável nominal, a moda (a categoria mais frequente) é a única medida de centro que faz sentido.
+- [ ] Hemoglobina de 240 pacientes.
+  > **Incorreto.** Em variável contínua, quase todo valor aparece uma vez e a moda é instável.
+- [ ] Idade dos pacientes, de 18 a 90 anos.
+  > **Incorreto.** Idade é numérica: a moda seria apenas o valor mais repetido, sem resumir a distribuição.
+- [ ] Tempo de internação em dias.
+  > **Incorreto.** Tempo é contínuo e assimétrico: mediana e intervalo interquartil resumem melhor.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-05**
+```quizdown
+# Os tempos de internação de cinco pacientes foram 3, 4, 4, 5 e 24 dias. O 24 é um caso real, confirmado no prontuário. O que acontece com as medidas de centro?
+- [x] A média sobe para 8 dias e a mediana continua 4.
+  > **Correto!** A soma é 40 e a média vale 8; a mediana continua na posição central, que é 4.
+- [ ] A média e a mediana sobem na mesma proporção.
+  > **Incorreto.** A mediana depende da posição, não da magnitude: ela não se move quando muda o valor mais alto.
+- [ ] A mediana sobe para 8 e a média continua 4.
+  > **Incorreto.** É o contrário: quem usa todos os valores é a média.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-06**
+```quizdown
+# Um conjunto de hemoglobinas tem média 13,4 e mediana 13,5 g/dL. O que isso sugere sobre a distribuição?
+- [x] É aproximadamente simétrica, e a média com desvio padrão é um resumo adequado.
+  > **Correto!** Quando média e mediana quase coincidem, não há cauda relevante e a média é uma boa descrição do centro.
+- [ ] É assimétrica à direita, porque a média é menor que a mediana.
+  > **Incorreto.** Numa assimetria à direita a média fica maior que a mediana — e aqui as duas coincidem.
+- [ ] Há obrigatoriamente um outlier.
+  > **Incorreto.** Média e mediana próximas sugerem o contrário: ausência de valores que arrastem a média.
+- [ ] A amostra é pequena demais para concluir qualquer coisa.
+  > **Incorreto.** A proximidade entre média e mediana informa sobre a forma, independentemente do tamanho da amostra.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-07**
+```quizdown
+# O tempo de internação de 200 pacientes tem mediana 4 dias e média 9 dias. Como relatar o resultado?
+- [x] Mediana 4 dias (IIQ 3 a 7), porque a média maior que a mediana indica cauda à direita.
+  > **Correto!** A cauda longa de internações prolongadas puxa a média; a mediana descreve o paciente típico.
+- [ ] Média 9 dias (DP 6), porque a média usa todos os dados.
+  > **Incorreto.** Usar todos os valores é vantagem só quando a distribuição não tem cauda — aqui ela tem.
+- [ ] Apenas a amplitude, de 1 a 90 dias.
+  > **Incorreto.** A amplitude não descreve o centro e depende de dois valores apenas.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-08**
+```quizdown
+# Um intervalo interquartil de 96 a 109 mg/dL significa que:
+- [x] 50% centrais dos pacientes têm glicemia entre 96 e 109 mg/dL.
+  > **Correto!** O intervalo interquartil vai de Q1 a Q3 e contém metade das observações.
+- [ ] 95% dos pacientes têm glicemia entre 96 e 109 mg/dL.
+  > **Incorreto.** Essa faixa é a do intervalo de confiança de 95%, que é outra coisa.
+- [ ] A média é 102,5 mg/dL.
+  > **Incorreto.** O intervalo interquartil não informa o centro, embora a mediana esteja dentro dele.
+- [ ] Nenhum paciente está fora de 96 a 109.
+  > **Incorreto.** O intervalo interquartil deixa de fora 25% de cada lado.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-09**
+```quizdown
+# Um artigo relata hemoglobina de 13,4 mais ou menos 0,14 g/dL em 100 pacientes. A dispersão real dos pacientes (desvio padrão) é próxima de:
+- [x] 1,4 g/dL, porque 0,14 é o erro padrão e o desvio padrão é cerca de 10 vezes maior quando n = 100.
+  > **Correto!** O erro padrão é o desvio padrão dividido pela raiz de n; com n = 100, a raiz vale 10.
+- [ ] 0,14 g/dL, porque o número após o símbolo de mais ou menos é sempre o desvio padrão.
+  > **Incorreto.** É justamente a confusão do capítulo: sem legenda, o segundo número pode ser erro padrão.
+- [ ] 0,0014 g/dL.
+  > **Incorreto.** Não há base para dividir de novo: é o erro padrão que é menor que o desvio padrão, não o contrário.
+- [ ] Não é possível estimar sem conhecer a média.
+  > **Incorreto.** A média foi dada (13,4); o que faltava era a legenda do símbolo.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-10**
+```quizdown
+# Duas variáveis foram medidas: creatinina, com média 1,0 mg/dL e desvio padrão 0,3; e glicemia, com média 100 mg/dL e desvio padrão 15. Qual apresenta maior variabilidade relativa?
+- [x] A creatinina, com coeficiente de variação de 30% contra 15% da glicemia.
+  > **Correto!** O coeficiente de variação é o desvio padrão dividido pela média: 0,3 dividido por 1,0 dá 30%; 15 dividido por 100 dá 15%.
+- [ ] A glicemia, porque seu desvio padrão (15) é maior que 0,3.
+  > **Incorreto.** Comparar desvios padrão brutos só vale quando a unidade e a escala são as mesmas.
+- [ ] As duas, porque ambas têm dispersão.
+  > **Incorreto.** Todas têm dispersão; a pergunta é qual tem mais, em termos relativos.
+- [ ] Nenhuma, porque o coeficiente de variação não se aplica a variáveis contínuas.
+  > **Incorreto.** Ele se aplica justamente a variáveis positivas e contínuas.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-11**
+```quizdown
+# Um grupo de 12 pacientes tem desvio padrão de pressão arterial igual a zero. O que isso significa?
+- [x] Todos os 12 têm exatamente o mesmo valor de pressão.
+  > **Correto!** Desvio padrão zero significa ausência de variação em torno da média.
+- [ ] A média é zero.
+  > **Incorreto.** O desvio padrão mede dispersão; a média pode ser 120 mmHg com desvio padrão zero.
+- [ ] Houve erro de cálculo, pois o desvio padrão nunca é zero.
+  > **Incorreto.** É raro, mas possível — e costuma indicar dados copiados ou arredondados em excesso.
+- [ ] Metade dos pacientes está acima e metade abaixo da média.
+  > **Incorreto.** Isso descreveria simetria, não ausência de dispersão.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-12**
+```quizdown
+# Qual é a principal limitação da amplitude como medida de dispersão?
+- [x] Depende apenas dos dois valores extremos e ignora todo o resto.
+  > **Correto!** Um único outlier muda a amplitude sem que a dispersão dos demais tenha mudado.
+- [ ] Ela é difícil de calcular.
+  > **Incorreto.** É a mais simples de todas: máximo menos mínimo.
+- [ ] Ela não tem unidade.
+  > **Incorreto.** A amplitude tem a mesma unidade da variável.
+- [ ] Ela só pode ser usada em variáveis categóricas.
+  > **Incorreto.** Amplitude exige variável numérica, onde existe subtração.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-13**
+```quizdown
+# Por que toda média deve vir acompanhada do tamanho da amostra?
+- [x] Porque a precisão da média depende de n, e o leitor precisa saber sobre quantos pacientes ela foi calculada.
+  > **Correto!** Uma média de 3 pacientes e uma de 300 têm incertezas muito diferentes.
+- [ ] Porque a média muda de valor quando n muda, mesmo com os mesmos dados.
+  > **Incorreto.** A média é a mesma; o que muda é a confiança que se pode ter nela.
+- [ ] Porque sem n não é possível calcular o desvio padrão.
+  > **Incorreto.** O desvio padrão se calcula com os valores; o n é necessário para saber a precisão da média.
+- [ ] Porque as revistas exigem, sem motivo estatístico.
+  > **Incorreto.** Há motivo: o n entra no erro padrão e no intervalo de confiança.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-14**
+```quizdown
+# Um estudo odontológico mediu o índice de placa em 4 sítios de cada um de 30 pacientes e tratou os 120 sítios como observações independentes. Qual é o problema?
+- [x] Os sítios de um mesmo paciente se parecem entre si; o n efetivo é menor que 120 e o valor de p fica otimista.
+  > **Correto!** É a dependência entre observações: a unidade de análise é o paciente, não o sítio.
+- [ ] Nenhum: cada sítio foi medido separadamente.
+  > **Incorreto.** Medir separadamente não torna as medidas independentes.
+- [ ] O problema é que 4 sítios é pouco para cada paciente.
+  > **Incorreto.** O número de sítios por paciente não é o ponto; a dependência é.
+- [ ] O problema é que o índice de placa é ordinal.
+  > **Incorreto.** Mesmo sendo ordinal, o problema apontado aqui é a unidade de análise.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-15**
+```quizdown
+# Num conjunto de custos de tratamento, a média é 4.200 e a mediana é 1.800. O que explica a diferença?
+- [x] A cauda à direita: poucos tratamentos muito caros elevam a média sem deslocar a mediana.
+  > **Correto!** Custos são tipicamente assimétricos à direita, e a mediana descreve o caso típico.
+- [ ] Um erro de digitação, obrigatoriamente.
+  > **Incorreto.** É possível, mas a diferença entre média e mediana é esperada em custos e deve ser verificada, não presumida.
+- [ ] A distribuição é simétrica e a média está errada.
+  > **Incorreto.** Numa distribuição simétrica, média e mediana coincidem.
+- [ ] O desvio padrão é maior que a média.
+  > **Incorreto.** Isso não explica a diferença entre as duas medidas de centro.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-16**
+```quizdown
+# A caixa de um boxplot vai de 12 a 18 e a linha interna está em 14. O que esses números representam?
+- [x] Q1 em 12, mediana em 14 e Q3 em 18, com intervalo interquartil de 6.
+  > **Correto!** A caixa vai de Q1 a Q3 e a linha interna é a mediana.
+- [ ] Mínimo em 12, média em 14 e máximo em 18.
+  > **Incorreto.** Os extremos ficam nas pontas dos bigodes, não na caixa.
+- [ ] Desvio padrão de 6 e média de 14.
+  > **Incorreto.** O boxplot não representa desvio padrão.
+- [ ] Intervalo de confiança de 95% de 12 a 18.
+  > **Incorreto.** A caixa não é intervalo de confiança.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-17**
+```quizdown
+# Num boxplot, um ponto aparece acima do bigode superior. Pelo critério usual, ele é desenhado como outlier quando está acima de:
+- [x] Q3 mais 1,5 vez o intervalo interquartil.
+  > **Correto!** É o critério de Tukey, que usa a caixa e o intervalo interquartil.
+- [ ] A média mais o desvio padrão.
+  > **Incorreto.** Esse critério existe (escore z maior que 1), mas não é o usado no boxplot.
+- [ ] O valor máximo da amostra.
+  > **Incorreto.** Nada pode estar acima do máximo.
+- [ ] Duas vezes a mediana.
+  > **Incorreto.** Não é um critério de outlier.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-18**
+```quizdown
+# Qual informação um boxplot NÃO mostra?
+- [x] Se a distribuição é bimodal.
+  > **Correto!** Duas distribuições muito diferentes podem gerar o mesmo boxplot; os quartis não guardam a forma.
+- [ ] A mediana.
+  > **Incorreto.** A mediana é a linha dentro da caixa.
+- [ ] O intervalo interquartil.
+  > **Incorreto.** Ele é a altura da caixa.
+- [ ] A presença de outliers.
+  > **Incorreto.** Eles aparecem como pontos isolados além dos bigodes.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-19**
+```quizdown
+# Qual gráfico é adequado para mostrar a distribuição de tipos de fratura atendidos num pronto-socorro?
+- [x] Gráfico de barras com a frequência de cada tipo.
+  > **Correto!** Variável nominal pede barras — horizontais, se houver muitas categorias.
+- [ ] Histograma das frequências.
+  > **Incorreto.** Histograma exige variável numérica contínua e classes com largura.
+- [ ] Diagrama de dispersão.
+  > **Incorreto.** Dispersão mostra a relação entre duas variáveis quantitativas.
+- [ ] Boxplot por tipo de fratura.
+  > **Incorreto.** Boxplot resume variável numérica, e aqui não há valor numérico a resumir.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-20**
+```quizdown
+# Você quer avaliar se a pressão sistólica aumenta com a idade em 200 pacientes. Qual gráfico usar?
+- [x] Diagrama de dispersão com idade no eixo x e pressão no eixo y.
+  > **Correto!** Duas variáveis quantitativas pedem dispersão, que mostra a relação ponto a ponto.
+- [ ] Dois histogramas separados, um de idade e um de pressão.
+  > **Incorreto.** Histogramas descrevem cada variável isolada e não mostram relação.
+- [ ] Gráfico de barras com a média de pressão por faixa de idade.
+  > **Incorreto.** Agrupar em faixas esconde a variação e pode criar a impressão de relação mais forte.
+- [ ] Gráfico de pizza com a proporção de hipertensos.
+  > **Incorreto.** A pizza não mostra a relação entre duas variáveis quantitativas.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-21**
+```quizdown
+# Qual situação justifica o uso de gráfico de pizza?
+- [x] Mostrar a composição do desfecho (alta, transferência, óbito) num total de 100%, com três categorias.
+  > **Correto!** Pizza funciona com poucas fatias que somam um todo.
+- [ ] Comparar a média de pressão entre quatro grupos.
+  > **Incorreto.** Pizza não representa médias.
+- [ ] Mostrar a evolução dos casos ao longo de 12 meses.
+  > **Incorreto.** Série temporal pede gráfico de linhas.
+- [ ] Mostrar 12 tipos de bactéria isolados em culturas.
+  > **Incorreto.** Com 12 fatias os ângulos ficam indistinguíveis; barras ordenadas resolvem.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-22**
+```quizdown
+# Um gráfico de barras começa o eixo y em 8, numa escala em que os valores vão de 8,2 a 9,0. Qual é o efeito?
+- [x] A diferença entre as barras parece muito maior do que é, porque a área não é proporcional ao valor.
+  > **Correto!** Em barras, a comparação é de área; cortar o eixo distorce a leitura.
+- [ ] Nenhum, desde que os números estejam escritos nas barras.
+  > **Incorreto.** O número ajuda, mas a impressão visual continua distorcida — e é ela que fica.
+- [ ] O gráfico fica mais preciso, porque amplia a região de interesse.
+  > **Incorreto.** Ampliar a região é legítimo em gráfico de linhas, não em barras.
+- [ ] A média das barras muda de valor.
+  > **Incorreto.** Nenhum dado muda; só a representação.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-23**
+```quizdown
+# Você fez um histograma de 240 hemoglobinas com 4 classes e depois com 26. A forma pareceu diferente. O que fazer?
+- [x] Relatar que a forma depende da largura de classe e escolher o número com critério declarado, mostrando o gráfico escolhido.
+  > **Correto!** A decisão precisa de critério declarado, não de qual desenho ficou melhor.
+- [ ] Escolher o histograma que mostra o resultado esperado.
+  > **Incorreto.** Escolher o desenho depois de ver o resultado é uma forma de viés.
+- [ ] Concluir que o histograma não serve para esses dados.
+  > **Incorreto.** Ele serve; o que não serve é escolher as classes por conveniência.
+- [ ] Usar sempre 4 classes, porque é mais simples.
+  > **Incorreto.** Poucas classes podem esconder estrutura real, como um segundo grupo de pacientes.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-24**
+```quizdown
+# Quando o gráfico de linhas é a escolha correta?
+- [x] Para mostrar a evolução de casos de dengue mês a mês.
+  > **Correto!** A linha pressupõe continuidade no eixo x, e o tempo é contínuo.
+- [ ] Para comparar a frequência de quatro tipos de fratura.
+  > **Incorreto.** Categorias sem ordem pedem barras.
+- [ ] Para mostrar a relação entre idade e pressão.
+  > **Incorreto.** Duas variáveis quantitativas pedem dispersão.
+- [ ] Para mostrar a composição de um total em porcentagem.
+  > **Incorreto.** Composição pede barras empilhadas ou pizza.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-25**
+```quizdown
+# Um artigo apresenta barras com a média de dor de dois grupos e uma barrinha de erro em cada. Qual é a principal crítica?
+- [x] A barra mostra só a média e esconde a distribuição; além disso, a legenda precisa dizer se o erro é desvio padrão, erro padrão ou intervalo de confiança.
+  > **Correto!** Sem essa legenda, a diferença pode parecer maior ou menor do que é.
+- [ ] Nenhuma: barras de média são o padrão em revistas clínicas.
+  > **Incorreto.** Ser comum não torna adequado; a distribuição fica invisível.
+- [ ] O problema é que a barra deveria começar em zero.
+  > **Incorreto.** Começar em zero é regra de barras de frequência; aqui o problema é o resumo esconder a distribuição.
+- [ ] O problema é que a média não pode ser calculada para dor.
+  > **Incorreto.** Pode, com ressalvas; a crítica principal é a informação escondida.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-26**
+```quizdown
+# Qual erro há numa tabela que traz, na mesma coluna, 45,3 anos e 47 anos?
+- [x] Número inconsistente de casas decimais na mesma coluna.
+  > **Correto!** O padrão é manter o mesmo número de decimais em toda a coluna: 45,3 e 47,0.
+- [ ] Uso de vírgula decimal em vez de ponto.
+  > **Incorreto.** Em português, a vírgula é a convenção correta.
+- [ ] Ausência de unidade no cabeçalho.
+  > **Incorreto.** A unidade aparece (anos); o erro é o número de casas decimais.
+- [ ] Mistura de média e mediana.
+  > **Incorreto.** Não há indicação de que medidas diferentes tenham sido misturadas.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-27**
+```quizdown
+# Uma tabela diz que 32% dos pacientes do grupo A tinham anemia, mas não informa o n do grupo. Por que isso é um problema?
+- [x] Porque a mesma porcentagem pode vir de 8 em 25 ou de 320 em 1.000, com precisões muito diferentes.
+  > **Correto!** Porcentagem sem denominador não permite julgar a incerteza.
+- [ ] Porque a porcentagem deveria ser calculada sobre o total dos dois grupos.
+  > **Incorreto.** A porcentagem é por grupo; o que falta é o denominador de cada um.
+- [ ] Porque anemia é variável contínua e não pode ser contada.
+  > **Incorreto.** Anemia é categórica (sim ou não) e pode ser contada.
+- [ ] Porque 32% é um valor alto demais para anemia.
+  > **Incorreto.** Não há como julgar sem saber a população e o critério diagnóstico.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-28**
+```quizdown
+# Para que serve a Tabela 1 de um artigo clínico?
+- [x] Para descrever os participantes e mostrar se os grupos comparados são semelhantes.
+  > **Correto!** Ela caracteriza a amostra e permite avaliar a comparabilidade dos grupos.
+- [ ] Para provar que o tratamento funcionou.
+  > **Incorreto.** A Tabela 1 é descritiva; o efeito aparece nas análises seguintes.
+- [ ] Para substituir o cálculo do tamanho da amostra.
+  > **Incorreto.** O tamanho da amostra é definido no planejamento do estudo.
+- [ ] Para listar os valores individuais de cada paciente.
+  > **Incorreto.** Ela resume; os dados individuais não costumam ser publicados.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-29**
+```quizdown
+# Por que a análise exploratória deve vir antes do teste de hipóteses?
+- [x] Porque a distribuição e a presença de outliers definem qual teste é adequado e se suas suposições valem.
+  > **Correto!** O teste supõe algo sobre os dados; a exploração verifica se a suposição é razoável.
+- [ ] Porque o teste de hipóteses não pode ser feito sem gráficos.
+  > **Incorreto.** Ele pode ser feito; o problema é fazê-lo às cegas.
+- [ ] Porque a exploração garante que o resultado será significativo.
+  > **Incorreto.** Explorar não aumenta o efeito; só evita conclusões sobre dados mal compreendidos.
+- [ ] Porque a exploração substitui o teste quando a amostra é pequena.
+  > **Incorreto.** Ela orienta a escolha; não substitui a inferência.
+```
+:::
+
+::: {.questao-banco}
+**Questão #CAP4-30**
+```quizdown
+# Um paciente tem glicemia de 420 mg/dL, confirmada no prontuário e no exame repetido. Qual é a conduta correta na análise?
+- [x] Manter o valor, relatar a mediana ou analisar com e sem ele, e discutir o caso.
+  > **Correto!** Valor real é dado; a análise de sensibilidade mostra se a conclusão depende dele.
+- [ ] Excluir o paciente, porque o valor é muito diferente dos demais.
+  > **Incorreto.** Excluir um caso real só porque é extremo é uma forma de manipulação.
+- [ ] Substituir 420 pela média do grupo.
+  > **Incorreto.** Substituir um valor medido por outro inventado distorce a dispersão.
+- [ ] Manter o valor e não mencionar a análise de sensibilidade.
+  > **Incorreto.** O leitor precisa saber se a conclusão depende de um único paciente.
+```
+:::
 
 ## Referências
 
-*   SOUZA, Márcio Luís Moreira de. *Estatística para Biocientistas*. Governador Valadares, 2026.
-*   WICKHAM, Hadley; GROLEMUND, Garrett. *R for Data Science: Import, Tidy, Transform, Visualize, and Model Data*. O'Reilly Media, 2017.
+As bases conceituais deste capítulo estão em [@pagano2004], [@vieira2008] e [@triola2017]. Os exemplos numéricos e as simulações interativas foram construídos para o livro, com parâmetros declarados no texto.
 
 ::: {.callout-tip}
 ## Deixe o seu feedback!
 
 [Não se esqueça de curtir e comentar ao final desse capítulo.]{style="color: #2C3E50;"}<br>
-[Isso é muito importante para melhorar o livro interativo!]{style="color: #166534; font-weight: bold;"}
+[Isso é muito importante para melhorar o livro interativo! ❤️]{style="color: #166534; font-weight: bold;"}
 :::

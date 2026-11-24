@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Os mesmos dados, histórias diferentes: o número de classes do histograma</title>
+<style>
+html,body{margin:0;height:100%;background:transparent}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#334155;-webkit-font-smoothing:antialiased}
+.w-hist{--ink:#0b1220;--body:#334155;--muted:#64748b;--line:#e6ecf5;--teal:#0d9488;--indigo:#6366f1}
+.w-hist{height:100%;box-sizing:border-box;display:flex;flex-direction:column;background:#fff;padding:12px 16px 10px;border-radius:14px;color:var(--body)}
+.w-hist .w-top{flex:0 0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.w-hist .w-tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.w-hist .w-hint{font-size:13px;color:var(--muted)}
+.w-hist svg{flex:1 1 auto;min-height:0;width:100%;display:block}
+.w-hist .w-bot{flex:0 0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:2px}
+.w-hist .w-slider{display:flex;align-items:center;gap:10px;flex:1 1 300px;min-width:240px}
+.w-hist .w-slider label{font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap}
+.w-hist input[type=range]{flex:1 1 auto;accent-color:var(--teal);height:22px;cursor:pointer}
+.w-hist .w-note{flex:1 1 380px;font-size:13px;color:var(--muted);line-height:1.35}
+.w-hist .w-note b{color:var(--ink)}
+.w-hist .w-ax{stroke:#cbd5e1;stroke-width:1.2}
+.w-hist .w-tick{fill:#94a3b8;font-size:14px}
+.w-hist .w-grid{stroke:#eef2f8;stroke-width:1}
+.w-hist .w-bar{fill:#0d9488;opacity:.82;stroke:#fff;stroke-width:1}
+</style>
+</head>
+<body>
+<div class="w-anim w-hist">
+  <div class="w-top">
+    <span class="w-tag">Simulação</span>
+    <span class="w-hint">hemoglobina de 240 pacientes (g/dL) &middot; os mesmos dados, só muda o número de classes</span>
+  </div>
+  <svg viewBox="0 0 1000 300" role="img" aria-label="Histograma de hemoglobina com número de classes ajustável"></svg>
+  <div class="w-bot">
+    <div class="w-slider">
+      <label for="w-bins">classes:</label>
+      <input id="w-bins" type="range" min="4" max="30" step="1" value="10">
+      <span id="w-binsv" style="font-variant-numeric:tabular-nums;font-size:15px;color:#0b1220"><b>10</b></span>
+    </div>
+    <div class="w-note" id="w-note"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var host = document.querySelector('.w-hist'); if (!host) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  function txt(p, s, a) { var e = mk('text', a || {}); e.textContent = s; p.appendChild(e); return e; }
+  var num = function (v, d) { return v.toFixed(d === undefined ? 1 : d).replace('.', ','); };
+
+  // --- gerador determinístico (mesma figura em todo acesso) -----------------
+  var seed = 20261007;
+  function rnd() { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+  function gauss() {
+    var u = Math.max(rnd(), 1e-9), v = rnd();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+  var dados = [];
+  for (var i = 0; i < 240; i++) {
+    var v;
+    if (i % 6 === 0) { v = 10.2 + 0.7 * gauss(); }    // ~40 pacientes com anemia
+    else { v = 13.6 + 1.15 * gauss(); }
+    dados.push(Math.min(18.5, Math.max(7.2, v)));
+  }
+  dados.sort(function (a, b) { return a - b; });
+  var mediana = (dados[119] + dados[120]) / 2;
+
+  var svg = host.querySelector('svg');
+  var L = 64, R = 962, TOP = 34, BOT = 238, DMIN = 7, DMAX = 19;
+
+  function x(v) { return L + (R - L) * (v - DMIN) / (DMAX - DMIN); }
+
+  var gBars = mk('g', {}), gAx = mk('g', {});
+  svg.appendChild(gAx); svg.appendChild(gBars);
+
+  // eixos fixos
+  [8, 10, 12, 14, 16, 18].forEach(function (v) {
+    gAx.appendChild(mk('line', { x1: x(v), x2: x(v), y1: TOP, y2: BOT, 'class': 'w-grid' }));
+    gAx.appendChild(txt(gAx, v, { x: x(v), y: BOT + 22, 'class': 'w-tick', 'text-anchor': 'middle' }));
+  });
+  gAx.appendChild(mk('line', { x1: L, x2: R, y1: BOT, y2: BOT, 'class': 'w-ax' }));
+  gAx.appendChild(txt(gAx, 'hemoglobina (g/dL)', { x: (L + R) / 2, y: BOT + 42, 'class': 'w-tick', 'text-anchor': 'middle' }));
+  gAx.appendChild(txt(gAx, 'n = 240 · mediana ' + num(mediana) + ' g/dL', { x: L, y: 20, 'class': 'w-tick', fill: '#64748b' }));
+
+  var input = host.querySelector('#w-bins');
+  var qs = new URLSearchParams(location.search);
+  if (qs.get('bins')) input.value = qs.get('bins');
+  var elN = host.querySelector('#w-binsv'), elNote = host.querySelector('#w-note');
+  var gTicks = mk('g', {}); svg.appendChild(gTicks);
+
+  function draw() {
+    var k = +input.value;
+    while (gBars.firstChild) gBars.removeChild(gBars.firstChild);
+    while (gTicks.firstChild) gTicks.removeChild(gTicks.firstChild);
+
+    var w = (DMAX - DMIN) / k;
+    var counts = new Array(k).fill(0);
+    dados.forEach(function (v) {
+      var j = Math.floor((v - DMIN) / w);
+      if (j < 0) j = 0; if (j >= k) j = k - 1;
+      counts[j]++;
+    });
+    var maxc = Math.max.apply(null, counts);
+
+    counts.forEach(function (c, j) {
+      var x0 = x(DMIN + j * w), x1 = x(DMIN + (j + 1) * w);
+      var h = (BOT - TOP) * (c / maxc);
+      gBars.appendChild(mk('rect', {
+        x: x0 + 0.8, y: BOT - h, width: Math.max(1, x1 - x0 - 1.6), height: h,
+        'class': 'w-bar', rx: 1.5
+      }));
+    });
+
+    [0, Math.round(maxc / 2), maxc].forEach(function (c) {
+      var y = BOT - (BOT - TOP) * (c / maxc);
+      if (c > 0) gTicks.appendChild(txt(gTicks, c, { x: L - 8, y: y + 5, 'class': 'w-tick', 'text-anchor': 'end' }));
+    });
+
+    elN.innerHTML = '<b>' + k + '</b>';
+
+    var largura = num(w, 2) + ' g/dL';
+    var note;
+    if (k <= 6) {
+      note = 'Com <b>' + k + '</b> classes (largura ' + largura + '), o desenho vira poucos blocos grossos e a forma real — um pico perto de ' + num(mediana) + ' com uma cauda de pacientes anêmicos à esquerda — desaparece.';
+    } else if (k <= 12) {
+      note = 'Com <b>' + k + '</b> classes (largura ' + largura + '), aparece o pico perto de ' + num(mediana) + ' g/dL, mas o grupo com anemia ainda fica escondido.';
+    } else {
+      note = 'Com <b>' + k + '</b> classes (largura ' + largura + '), a cauda à esquerda aparece: há um segundo grupo, com valores entre 8 e 11 g/dL.';
+    }
+    elNote.innerHTML = note;
+  }
+  input.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Um valor extremo arrasta a média e deixa a mediana parada</title>
+<style>
+html,body{margin:0;height:100%;background:transparent}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#334155;-webkit-font-smoothing:antialiased}
+.w-cent{--ink:#0b1220;--body:#334155;--muted:#64748b;--line:#e6ecf5;--teal:#0d9488;--amber:#d97706;--red:#dc2626}
+.w-cent{height:100%;box-sizing:border-box;display:flex;flex-direction:column;background:#fff;padding:12px 16px 10px;border-radius:14px;color:var(--body)}
+.w-cent .w-top{flex:0 0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.w-cent .w-tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.w-cent .w-hint{font-size:13px;color:var(--muted)}
+.w-cent svg{flex:1 1 auto;min-height:0;width:100%;display:block}
+.w-cent .w-bot{flex:0 0 auto;display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:2px}
+.w-cent .w-slider{display:flex;align-items:center;gap:10px;flex:1 1 320px;min-width:260px}
+.w-cent .w-slider label{font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap}
+.w-cent input[type=range]{flex:1 1 auto;accent-color:var(--red);height:22px;cursor:pointer}
+.w-cent .w-out{font-variant-numeric:tabular-nums;font-size:15px;color:var(--ink)}
+.w-cent .w-out b{font-weight:800}
+.w-cent .w-ax{stroke:#cbd5e1;stroke-width:1.2}
+.w-cent .w-tick{fill:#94a3b8;font-size:14px}
+.w-cent .w-pt{stroke:#fff;stroke-width:1.5}
+.w-cent .w-lab{font-size:15px;font-weight:700}
+.w-cent .w-neutral{font-size:13px;fill:#64748b}
+</style>
+</head>
+<body>
+<div class="w-anim w-cent">
+  <div class="w-top">
+    <span class="w-tag">Simulação</span>
+    <span class="w-hint">glicemia de 6 pacientes (mg/dL) &middot; arraste o último valor e veja quem se mexe</span>
+  </div>
+  <svg viewBox="0 0 1000 300" role="img" aria-label="Média e mediana de seis valores de glicemia, com um valor extremo ajustável"></svg>
+  <div class="w-bot">
+    <div class="w-slider">
+      <label for="w-x">último paciente:</label>
+      <input id="w-x" type="range" min="120" max="800" step="5" value="800">
+      <span id="w-xv" class="w-out" style="min-width:76px"><b>800</b> mg/dL</span>
+    </div>
+    <span class="w-out">média <b id="w-mean">216,7</b> &middot; mediana <b id="w-med">102,5</b></span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var host = document.querySelector('.w-cent'); if (!host) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  function txt(p, s, a) { var e = mk('text', a || {}); e.textContent = s; p.appendChild(e); return e; }
+  var num = function (v, d) { return v.toFixed(d === undefined ? 1 : d).replace('.', ','); };
+
+  var svg = host.querySelector('svg');
+  var base = [90, 95, 100, 105, 110];          // os cinco pacientes "normais"
+  var L = 70, R = 950, DMIN = 80, DMAX = 830;
+
+  function x(v) { return L + (R - L) * (v - DMIN) / (DMAX - DMIN); }
+
+  var g = mk('g', {}); svg.appendChild(g);
+
+  // eixo
+  for (var v = 100; v <= 800; v += 100) {
+    g.appendChild(mk('line', { x1: x(v), x2: x(v), y1: 60, y2: 250, stroke: '#f1f5f9', 'stroke-width': 1 }));
+    g.appendChild(txt(g, v, { x: x(v), y: 272, 'class': 'w-tick', 'text-anchor': 'middle' }));
+  }
+  g.appendChild(mk('line', { x1: L, x2: R, y1: 250, y2: 250, 'class': 'w-ax' }));
+  g.appendChild(txt(g, 'glicemia (mg/dL)', { x: R, y: 292, 'class': 'w-neutral', 'text-anchor': 'end' }));
+
+  // pontos fixos, em zigue-zague para não se sobrepor
+  var yOff = [0, -20, 0, -20, 0];
+  base.forEach(function (v, i) {
+    g.appendChild(mk('circle', { cx: x(v), cy: 170 + yOff[i], r: 7, fill: '#0d9488', 'class': 'w-pt' }));
+  });
+
+  // marcadores
+  var meanLine = mk('line', { x1: 0, x2: 0, y1: 108, y2: 250, stroke: '#0d9488', 'stroke-width': 2.5, 'stroke-dasharray': '6 5' });
+  var medLine  = mk('line', { x1: 0, x2: 0, y1: 108, y2: 250, stroke: '#d97706', 'stroke-width': 2.5 });
+  g.appendChild(meanLine); g.appendChild(medLine);
+
+  var meanLab = txt(g, '', { x: 0, y: 96, 'class': 'w-lab', fill: '#0d9488', 'text-anchor': 'middle' });
+  var medLab  = txt(g, '', { x: 0, y: 62, 'class': 'w-lab', fill: '#d97706', 'text-anchor': 'middle' });
+
+  var moving = mk('circle', { cx: 0, cy: 170, r: 9, fill: '#dc2626', 'class': 'w-pt' });
+  g.appendChild(moving);
+  var movLab = txt(g, '', { x: 0, y: 205, 'class': 'w-lab', fill: '#dc2626', 'text-anchor': 'middle' });
+
+  var input = host.querySelector('#w-x');
+  var qs = new URLSearchParams(location.search);
+  if (qs.get('x')) input.value = qs.get('x');
+  var elX = host.querySelector('#w-xv'), elM = host.querySelector('#w-mean'), elD = host.querySelector('#w-med');
+
+  function update() {
+    var xv = +input.value;
+    var vals = base.concat([xv]);
+    var mean = vals.reduce(function (a, b) { return a + b; }, 0) / vals.length;
+    var sorted = vals.slice().sort(function (a, b) { return a - b; });
+    var med = (sorted[2] + sorted[3]) / 2;
+
+    moving.setAttribute('cx', x(xv));
+    movLab.setAttribute('x', x(xv));
+    movLab.textContent = xv;
+
+    meanLine.setAttribute('x1', x(mean)); meanLine.setAttribute('x2', x(mean));
+    medLine.setAttribute('x1', x(med));   medLine.setAttribute('x2', x(med));
+    meanLab.setAttribute('x', x(mean));   meanLab.textContent = 'média ' + num(mean);
+    medLab.setAttribute('x', x(med));     medLab.textContent = 'mediana ' + num(med);
+
+    elX.innerHTML = '<b>' + xv + '</b> mg/dL';
+    elM.textContent = num(mean);
+    elD.textContent = num(med);
+  }
+  input.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

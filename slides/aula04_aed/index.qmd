@@ -12,11 +12,41 @@ doi: "10.5281/zenodo.23858966"
 
 ## O baú trancado
 
-Você tem uma planilha com 4.000 pacientes e não faz ideia do que há dentro.
+Você tem uma planilha com 240 pacientes e não faz ideia do que há dentro.
 
 A **Análise Exploratória de Dados** é a chave: não é o teste que prova, é o mapa que diz **por onde começar** — e onde pode haver armadilha.
 
 <p class="small">Pular essa etapa é a causa mais comum de uma análise inteira ter de ser refeita.</p>
+
+## O roteiro de hoje
+
+:::: {.cards .cols-2}
+::: {.card}
+**1. As quatro perguntas**
+
+Centro, dispersão, forma e relação — o que cada uma decide.
+:::
+
+::: {.card}
+**2. Centro e dispersão**
+
+Média, mediana, desvio padrão, erro padrão e coeficiente de variação.
+:::
+
+::: {.card}
+**3. Gráficos e tabelas**
+
+O gráfico certo para cada variável — e como um gráfico engana.
+:::
+
+::: {.card}
+**4. Outliers e o R**
+
+O que fazer com o valor impossível, e a AED feita ao vivo.
+:::
+::::
+
+## Parte 1 — As quatro perguntas {.divider}
 
 ## AED não é olhar, é investigar
 
@@ -42,7 +72,60 @@ Gerar hipóteses que os testes formais vão avaliar depois.
 :::
 ::::
 
-## O centro e a dispersão {.divider}
+## As quatro perguntas de toda AED
+
+::: {.incremental}
+- **Onde está o centro?** → decide a medida que você vai relatar (média ou mediana).
+- **Quanto os dados se espalham?** → decide se a média basta ou se é preciso o IIQ.
+- **Qual é a forma — e há valores impossíveis?** → decide o teste e revela erro de digitação.
+- **Como as variáveis se relacionam?** → decide o gráfico e sugere a hipótese seguinte.
+:::
+
+<p class="small">Nenhuma dessas perguntas é sobre o valor de p. Todas são sobre o dado.</p>
+
+## A armadilha da unidade de análise
+
+Em Odontologia, medir **4 sítios em cada um de 30 pacientes** não produz 120 observações independentes.
+
+::: {.keybox}
+**O número de linhas da planilha não é o número de informações independentes.**
+
+Dentes de uma mesma boca compartilham saliva, dieta e biofilme. Tratar cada dente como um paciente infla o *n* e produz um valor de p que o estudo não ganhou.
+:::
+
+<p class="small">Pergunte sempre: cada linha da minha planilha é um paciente — ou um pedaço dele?</p>
+
+## Dois analgésicos, a mesma média
+
+| | Analgésico A | Analgésico B |
+|:--|:--|:--|
+| Pacientes 1 a 4 | 3,0 · 3,2 · 3,4 · 3,0 | 6,0 · 6,2 · 6,0 · 6,2 |
+| Pacientes 5 a 8 | 3,4 · 3,2 · 3,0 · 3,4 | 0,2 · 0,4 · 0,2 · 0,4 |
+| **Média** | **3,2** | **3,2** |
+
+Valores = redução da dor na EVA (0–10).
+
+::: {.callout-tip icon="false"}
+## Vote antes de virar
+Se você só pudesse ver a média, escolheria qual analgésico? Por quê?
+:::
+
+## A mesma média, conclusões opostas
+
+| | Analgésico A | Analgésico B |
+|:--|--:|--:|
+| Média | 3,2 | 3,2 |
+| **Desvio padrão** | **0,19** | **3,10** |
+
+::: {.keybox}
+Em **A**, todos melhoraram entre 3,0 e 3,4 — efeito modesto e previsível.
+
+Em **B**, metade melhorou 6 pontos e metade quase nada.
+
+**A média é uma frase. O gráfico é a história.**
+:::
+
+## Parte 2 — Centro e dispersão {.divider}
 
 ## Duas perguntas, duas medidas
 
@@ -84,19 +167,89 @@ A mediana praticamente não se moveu. **Um único ponto pode destruir a média.*
 
 <p class="small">Primeiro encontre o erro. Depois escolha a medida. Nunca o contrário.</p>
 
-## O boxplot em cinco números
+## Mão na massa: arraste o 800
 
-O diagrama de caixa resume uma distribuição em cinco posições:
+<iframe class="w-frame" src="../../widgets/centro-mediana.html" title="Média e mediana com um valor extremo ajustável" style="height:430px"></iframe>
 
-::: {.incremental}
-- **Mínimo** e **máximo** — até onde os dados vão (excluindo outliers).
-- **Q1** — 25% dos dados ficam abaixo dele.
-- **Mediana** — o centro de verdade.
-- **Q3** — 75% ficam abaixo dele.
-- **Outliers** — pontos além de 1,5 vez o IIQ; desenhados como pontos soltos.
+<p class="small">Leve o último paciente de 800 até 120. O que acontece com cada marcador?</p>
+
+## Média ou mediana? A decisão
+
+| Situação | Relate | Por quê |
+|:--|:--|:--|
+| Distribuição simétrica | média com desvio padrão | usa todos os valores; é eficiente |
+| Cauda à direita ou à esquerda | mediana com IIQ | não se move com extremos |
+| Variável ordinal | mediana ou frequências | média de códigos não significa nada |
+| Variável categórica | moda ou proporções | não há ordem a somar |
+
+<p class="small">Na dúvida, compare média e mediana: se estão próximas, a distribuição é simétrica.</p>
+
+## Onde a média não significa nada
+
+::: {.callout-warning icon="false"}
+## O erro clássico
+"Dor média de 2,3" quando a dor foi classificada em **leve (1), moderada (2), intensa (3)**.
+
+2,3 não é "entre moderada e intensa" — é a média de três códigos inventados pelo analista.
 :::
 
-<p class="small">Se o outlier é erro, corrija. Se é paciente de verdade, ele é o achado mais importante do estudo.</p>
+::: {.incremental}
+- Ordinal pede **mediana** ou **distribuição de frequências** (quantos em cada categoria).
+- A escala de dor (EVA 0–10) é caso-limite: tratada como numérica na prática, mas com *n* pequeno ou distribuição assimétrica, relate a mediana.
+- **Nunca escolha a medida depois de ver qual delas ficou melhor.**
+:::
+
+## A dispersão em cinco medidas
+
+| Medida | Unidade | O que diz | Robusta? |
+|:--|:--|:--|:--|
+| Amplitude | a da variável | distância entre extremos | não |
+| Variância | ao quadrado | dispersão ao quadrado | não |
+| **Desvio padrão** | a da variável | distância típica à média | não, mas é a mais usada |
+| **IIQ** | a da variável | largura dos 50% centrais | sim |
+| **CV (%)** | adimensional | dispersão relativa | não |
+
+## O erro que mais aparece nas revistas: DP × EPM
+
+| | Desvio padrão | Erro padrão (EPM) |
+|:--|:--|:--|
+| Responde | quanto os pacientes variam? | quão precisa é a média? |
+| Depende de *n*? | não | sim, divide por raiz de *n* |
+| Exemplo (*s* = 15, *n* = 100) | **15 mg/dL** | **1,5 mg/dL** |
+
+::: {.keybox}
+Relatar o EPM e chamar de DP é uma forma silenciosa de exagero: a barra de erro encolhe, a diferença parece maior — e nada mudou nos dados.
+
+**Todo símbolo "mais ou menos" precisa de legenda.**
+:::
+
+## Coeficiente de variação: comparar o incomparável
+
+::: {.formula}
+$$CV = \frac{s}{\bar{x}} \times 100\%$$
+:::
+
+| Variável | Média | Desvio padrão | CV |
+|:--|--:|--:|--:|
+| Hemoglobina | 13,0 g/dL | 1,5 g/dL | **11,5%** |
+| Glicemia | 100 mg/dL | 30 mg/dL | **30%** |
+
+<p class="small">O desvio padrão da glicemia é 20 vezes maior — mas as unidades são diferentes. O CV mostra que, em termos relativos, a glicemia é quase três vezes mais variável.</p>
+
+## Mão na massa: calcule no R
+
+```{webr-r}
+glicemia <- c(90, 95, 100, 105, 110, 800)
+
+round(c(media = mean(glicemia),
+        mediana = median(glicemia),
+        dp = sd(glicemia),
+        iiq = IQR(glicemia)), 2)
+```
+
+<p class="small">Troque o 800 por 130 e rode de novo. Depois tire o valor e veja o que muda. Para rodar: clique na célula e aperte o botão de executar.</p>
+
+## Parte 3 — Gráficos e tabelas {.divider}
 
 ## O gráfico certo para o dado certo
 
@@ -128,22 +281,142 @@ Relação entre **duas quantitativas**.
 
 <p class="small">Gráfico de pizza com 12 categorias não é visualização: é decoração.</p>
 
-## Vendo o estrago no R
+## Histograma: a classe muda a história
 
-```{webr-r}
-glicemia <- c(90, 95, 100,
-              105, 110, 800)
+<iframe class="w-frame" src="../../widgets/hist-bins.html" title="Histograma de hemoglobina com número de classes ajustável" style="height:430px"></iframe>
 
-# media e mediana lado a lado
-mean(glicemia)
-median(glicemia)
+<p class="small">São os mesmos 240 pacientes. Vá de 4 a 26 classes: quando o segundo grupo aparece?</p>
 
-# o outlier aparece solto
-boxplot(glicemia,
-        col = "#0d9488")
-```
+## O que apareceu com 26 classes
 
-<p class="small">Rode também com 130 no lugar de 800: o que muda mais, a média ou a mediana?</p>
+::: {.incremental}
+- Com **4 classes**, o desenho sugere uma distribuição larga e sem estrutura.
+- Com **26 classes**, surge um segundo grupo entre 8 e 11 g/dL — os pacientes anêmicos.
+- O gráfico não mentiu em nenhum dos dois casos: **mostrou o que a classe permitia ver**.
+- Por isso a escolha das classes precisa de **critério declarado**, não de qual desenho ficou melhor.
+:::
+
+## O boxplot em cinco números
+
+O diagrama de caixa resume uma distribuição em cinco posições:
+
+::: {.incremental}
+- **Mínimo** e **máximo** — até onde os dados vão (excluindo outliers).
+- **Q1** — 25% dos dados ficam abaixo dele.
+- **Mediana** — o centro de verdade.
+- **Q3** — 75% ficam abaixo dele.
+- **Outliers** — pontos além de 1,5 vez o IIQ; desenhados como pontos soltos.
+:::
+
+<p class="small">Se o outlier é erro, corrija. Se é paciente de verdade, ele é o achado mais importante do estudo.</p>
+
+## O que o boxplot esconde
+
+:::: {.cards .cols-3}
+::: {.card}
+**O tamanho da amostra**
+
+Um boxplot de 4 pacientes e outro de 400 podem ter a mesma cara.
+:::
+
+::: {.card}
+**A forma**
+
+Bimodal ou simétrica, a caixa é igual: quartis não guardam a forma.
+:::
+
+::: {.card}
+**Os pontos**
+
+Com menos de ~20 por grupo, mostre os pontos e o jitter.
+:::
+::::
+
+<p class="small">A pergunta que resolve: "o leitor consegue saber quantos pacientes há aqui?" Se não, escreva o n.</p>
+
+## Dispersão: quando o ponto esconde o paciente
+
+- **Sobreposição** — com muitos pacientes, use transparência (`alpha`) ou jitter.
+- **Escala** — um único valor extremo esmaga os outros num canto e faz parecer que "não há relação".
+- **Conclusão** — antes de dizer que não há associação, olhe sem o ponto extremo.
+
+<p class="small">No R: `geom_point(alpha = 0.4)` e `geom_jitter(width = .1, height = .1)`.</p>
+
+## Barras: o eixo começa em zero
+
+<iframe class="w-frame" src="../../widgets/eixo-truncado.html" title="Como cortar o eixo y distorce a comparação entre barras" style="height:430px"></iframe>
+
+<p class="small">Arraste o início do eixo até 1,1. O dado não mudou — a impressão, sim.</p>
+
+## Como um gráfico engana
+
+::: {.incremental}
+- **Eixo truncado** em barras — a diferença parece maior do que é.
+- **Escala logarítmica sem aviso** — achata crescimentos enormes.
+- **Área ou volume** — o dobro do diâmetro é quatro vezes a área; o leitor lê "duas vezes".
+- **Efeito 3D** — desloca a leitura da altura e não informa nada.
+- **Eixo duplo** — permite criar qualquer correlação visual.
+- **Pizza com 12 fatias** — ângulos pequenos são indistinguíveis.
+:::
+
+## Caça ao erro
+
+Três figuras de um artigo. Qual é o problema de **cada uma**?
+
+::: {.incremental}
+1. Gráfico de barras comparando dois grupos que diferem 0,3 ponto, com eixo de 8,2 a 9,0.
+2. Boxplot por grupo com 3 pacientes em cada, sem os pontos individuais.
+3. Pizza com 11 espécies de bactérias isoladas em culturas.
+:::
+
+<p class="small">Dois minutos com o colega ao lado. Depois discutimos.</p>
+
+## Caça ao erro — respostas
+
+::: {.incremental}
+- **1. Eixo truncado.** Barras que diferem 3% viram barras de alturas muito diferentes. Corrija começando o eixo em zero (ou use pontos).
+- **2. n pequeno demais para um resumo.** Com 3 pacientes, o boxplot esconde os valores e sugere precisão que não existe. Mostre os pontos.
+- **3. Pizza com fatias demais.** Ângulos pequenos não se comparam. Use barras ordenadas.
+:::
+
+## Tabela: encontre os cinco problemas
+
+| Grupo | Idade | Hemoglobina | Anemia |
+|:--|:--|:--|:--|
+| A | 45,3 | 13,2 ± 1,5 | 32% |
+| B | 47 | 12,8 ± 1,4 | 28,4% |
+
+::: {.callout-tip icon="false"}
+## Sua vez
+São **cinco problemas**. Dois minutos, em duplas: anote cada um e depois compare com a tabela do próximo slide.
+:::
+
+<p class="small">Dica: casas decimais, o símbolo "mais ou menos", as porcentagens e o significado de "A" e "B".</p>
+
+## Tabela: a versão que passa no revisor
+
+| Grupo | n | Idade (anos) | Hemoglobina (g/dL) | Anemia, n (%) |
+|:--|--:|--:|--:|--:|
+| Controle | 60 | 45,3 (12,1) | 13,2 (1,5) | 19 (31,7) |
+| Fisioterapia | 58 | 47,0 (11,8) | 12,8 (1,4) | 16 (27,6) |
+
+*Valores são média (DP), exceto n e Anemia, n (%).*
+
+::: {.keybox}
+Os cinco problemas eram: **decimais inconsistentes**, **"±" sem legenda**, **% sem denominador**, **nenhum n** e **unidades fora do cabeçalho**.
+:::
+
+## As sete regras da tabela
+
+::: {.incremental}
+- **Unidade no cabeçalho** — "Hemoglobina (g/dL)", nunca "13,2 g/dL" em cada célula.
+- **Mesmas casas decimais** na coluna — 45,3 e 47,0.
+- **Todo símbolo tem legenda** — "±" é DP, EPM ou IC?
+- **Porcentagem com denominador** — 32% (19/60).
+- **n em cada grupo.**
+- **Números alinhados à direita**, vírgula sob vírgula.
+- **Ordem lógica** — por grupo, por frequência ou cronológica.
+:::
 
 ## Tabela 1: o resumo que vai para o artigo
 
@@ -162,30 +435,82 @@ A **Tabela 1** é o retrato do estudo: quem são os pacientes, como os grupos se
 Se os grupos já diferem na Tabela 1, qualquer comparação posterior nasce suspeita.
 :::
 
+## Parte 4 — Fechando {.divider}
+
+## Outliers: três origens
+
+:::: {.cards .cols-3}
+::: {.card}
+**Erro de digitação**
+
+800 em vez de 80; 2,5 g/dL em vez de 12,5. Corrige-se na fonte.
+:::
+
+::: {.card}
+**Erro de medição**
+
+Aparelho descalibrado, amostra hemolisada, paciente sem jejum. Registre e discuta.
+:::
+
+::: {.card}
+**Evento real**
+
+O paciente com glicemia de 420 mg/dL existe — e é justamente o caso que interessa.
+:::
+::::
+
+## O que fazer com o outlier
+
+::: {.incremental}
+- **Verifique na fonte** — prontuário, ficha, laudo — antes de qualquer decisão.
+- **Nunca apague em silêncio.** "Limpei os outliers" transforma resultado verdadeiro em resultado bonito.
+- **Análise de sensibilidade** — repita com e sem o valor e relate as duas.
+- **Se é real, é dado** — relate a mediana e discuta o caso.
+:::
+
+<p class="small">O critério de 1,5 × IIQ diz "olhe com atenção", não "descarte".</p>
+
 ## Pause e pense
 
 ::: {.keybox}
 **1.** Um colega relata "tempo médio de internação de 6 dias". Que informação essencial está faltando?
 
 **2.** Na glicemia com o valor 800, você reporta a média ou a mediana? E o que faz com o 800?
+
+**3.** Seu gráfico de barras mostra 62% num grupo e 58% no outro, com eixo de 55% a 65%. O que o leitor vai concluir?
 :::
 
 ## Respostas
 
 ::: {.incremental}
-- **1. A dispersão.** "6 dias" pode significar "todo mundo ficou entre 5 e 7" ou "metade ficou 1 dia e metade ficou 11". Sem desvio padrão ou IIQ, o número não informa.
+- **1. A dispersão.** "6 dias" pode significar "todo mundo ficou entre 5 e 7" ou "metade ficou 1 dia e metade ficou 11". Sem DP ou IIQ, o número não informa.
 - **2. A mediana** — e investigue o 800 antes de qualquer coisa: erro de digitação se corrige na fonte; paciente real merece uma nota no relatório.
+- **3. Que a diferença é enorme.** Com o eixo em zero, 62% e 58% são barras quase iguais — e é essa a leitura honesta.
 :::
 
-<p class="small">A pergunta que sempre fecha a AED: os dados que eu tenho são capazes de responder à pergunta que eu fiz?</p>
+## Mão na massa: caça ao erro no R
+
+```{webr-r}
+# pressao de 9 pacientes, em mmHg
+pressao <- c(120, 125, 118, 122, 130, 128, 119, 125, 1200)
+
+summary(pressao)
+round(c(media = mean(pressao),
+        mediana = median(pressao)), 1)
+boxplot(pressao, col = "#d97706")
+```
+
+<p class="small">Ache o valor impossível, corrija na fonte e rode de novo. Depois escreva a frase que você colocaria no artigo.</p>
 
 ## O que levar daqui
 
 ::: {.incremental}
 - **Explore antes de testar** — o teste aplicado sobre dado sujo produz erro com aparência de rigor.
 - **Centro e dispersão andam juntos** — média sem desvio padrão é meia informação.
+- **A forma decide a medida** — simétrica: média e DP; assimétrica ou ordinal: mediana e IIQ.
+- **DP descreve pacientes; EPM descreve a estimativa** — confundir os dois é o erro mais comum.
+- **O gráfico certo depende do tipo do dado** — e o eixo das barras começa em zero.
 - **Outlier é uma pergunta, não um incômodo** — erro ou descoberta, decida com critério.
-- **O gráfico certo depende do tipo do dado** — histograma, boxplot ou dispersão, nunca por hábito.
 :::
 
 ## Próximos passos

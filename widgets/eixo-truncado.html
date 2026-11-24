@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cortar o eixo y infla a diferença entre as barras</title>
+<style>
+html,body{margin:0;height:100%;background:transparent}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#334155;-webkit-font-smoothing:antialiased}
+.w-eixo{--ink:#0b1220;--body:#334155;--muted:#64748b;--line:#e6ecf5;--teal:#0d9488;--red:#dc2626}
+.w-eixo{height:100%;box-sizing:border-box;display:flex;flex-direction:column;background:#fff;padding:12px 16px 10px;border-radius:14px;color:var(--body)}
+.w-eixo .w-top{flex:0 0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.w-eixo .w-tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.w-eixo .w-hint{font-size:13px;color:var(--muted)}
+.w-eixo svg{flex:1 1 auto;min-height:0;width:100%;display:block}
+.w-eixo .w-bot{flex:0 0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:2px}
+.w-eixo .w-slider{display:flex;align-items:center;gap:10px;flex:1 1 280px;min-width:230px}
+.w-eixo .w-slider label{font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap}
+.w-eixo input[type=range]{flex:1 1 auto;accent-color:var(--red);height:22px;cursor:pointer}
+.w-eixo .w-note{flex:1 1 400px;font-size:13px;color:var(--muted);line-height:1.35}
+.w-eixo .w-note b{color:var(--ink)}
+.w-eixo .w-ax{stroke:#cbd5e1;stroke-width:1.2}
+.w-eixo .w-tick{fill:#94a3b8;font-size:14px}
+.w-eixo .w-val{fill:#0b1220;font-size:16px;font-weight:700}
+.w-eixo .w-cat{fill:#334155;font-size:15px}
+.w-eixo .w-base{stroke:#dc2626;stroke-width:2.5;stroke-dasharray:7 5}
+</style>
+</head>
+<body>
+<div class="w-anim w-eixo">
+  <div class="w-top">
+    <span class="w-tag">Simulação</span>
+    <span class="w-hint">redução média da dor (EVA, 0&ndash;10) em 4 grupos &middot; arraste o início do eixo</span>
+  </div>
+  <svg viewBox="0 0 1000 300" role="img" aria-label="Gráfico de barras com início do eixo y ajustável"></svg>
+  <div class="w-bot">
+    <div class="w-slider">
+      <label for="w-y0">início do eixo:</label>
+      <input id="w-y0" type="range" min="0" max="1.1" step="0.1" value="0">
+      <span id="w-y0v" style="font-variant-numeric:tabular-nums;font-size:15px;color:#0b1220;min-width:52px"><b>0,0</b></span>
+    </div>
+    <div class="w-note" id="w-note"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var host = document.querySelector('.w-eixo'); if (!host) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  function txt(p, s, a) { var e = mk('text', a || {}); e.textContent = s; p.appendChild(e); return e; }
+  var num = function (v, d) { return v.toFixed(d === undefined ? 1 : d).replace('.', ','); };
+
+  var grupos = [
+    { nome: 'Controle', v: 1.2 },
+    { nome: 'Fisioterapia A', v: 2.4 },
+    { nome: 'Fisioterapia B', v: 2.6 },
+    { nome: 'A + B', v: 3.1 }
+  ];
+
+  var svg = host.querySelector('svg');
+  var L = 86, R = 950, TOP = 26, BOT = 232, YMAX = 3.2;
+  var input = host.querySelector('#w-y0');
+  var qs = new URLSearchParams(location.search);
+  if (qs.get('y0')) input.value = qs.get('y0');
+  var elV = host.querySelector('#w-y0v'), elNote = host.querySelector('#w-note');
+
+  var g = mk('g', {}); svg.appendChild(g);
+  var gAx = mk('g', {}); svg.appendChild(gAx);
+
+  function y(v, y0) { return BOT - (BOT - TOP) * (v - y0) / (YMAX - y0); }
+
+  function draw() {
+    while (g.firstChild) g.removeChild(g.firstChild);
+    while (gAx.firstChild) gAx.removeChild(gAx.firstChild);
+
+    var y0 = +input.value;
+    if (y0 > 1.1) y0 = 1.1;
+
+    // barras
+    var bw = (R - L) / grupos.length;
+    var lo = Math.min.apply(null, grupos.map(function (g) { return g.v; }));
+    var hi = Math.max.apply(null, grupos.map(function (g) { return g.v; }));
+
+    grupos.forEach(function (gr, i) {
+      var x0 = L + i * bw + bw * 0.18;
+      var x1 = L + (i + 1) * bw - bw * 0.18;
+      var top = y(gr.v, y0);
+      g.appendChild(mk('rect', {
+        x: x0, y: top, width: x1 - x0, height: Math.max(1, BOT - top),
+        fill: '#0d9488', opacity: 0.82, rx: 3
+      }));
+      g.appendChild(txt(g, num(gr.v), { x: (x0 + x1) / 2, y: Math.min(top - 8, BOT - 8), 'class': 'w-val', 'text-anchor': 'middle' }));
+      g.appendChild(txt(g, gr.nome, { x: (x0 + x1) / 2, y: BOT + 24, 'class': 'w-cat', 'text-anchor': 'middle' }));
+    });
+
+    // eixo y e ticks
+    gAx.appendChild(mk('line', { x1: L, x2: L, y1: TOP - 8, y2: BOT, 'class': 'w-ax' }));
+    gAx.appendChild(mk('line', { x1: L, x2: R, y1: BOT, y2: BOT, 'class': 'w-ax' }));
+    for (var t = y0; t <= YMAX + 1e-9; t += (YMAX - y0) / 4) {
+      var yy = y(t, y0);
+      gAx.appendChild(mk('line', { x1: L - 6, x2: L, y1: yy, y2: yy, 'class': 'w-ax' }));
+      gAx.appendChild(txt(gAx, num(t), { x: L - 12, y: yy + 5, 'class': 'w-tick', 'text-anchor': 'end' }));
+    }
+
+    // linha do início do eixo
+    if (y0 > 0.01) {
+      gAx.appendChild(mk('line', { x1: L, x2: R, y1: BOT, y2: BOT, 'class': 'w-base' }));
+      gAx.appendChild(txt(gAx, 'eixo cortado em ' + num(y0), { x: L + 8, y: TOP + 12, 'class': 'w-tick', 'text-anchor': 'start', fill: '#dc2626', 'font-weight': 700 }));
+    }
+
+    var raz = (hi - y0) / Math.max(lo - y0, 0.05);
+    var nota;
+    if (y0 < 0.05) {
+      nota = 'Eixo em zero: a maior barra é <b>' + num(raz) + '×</b> a menor. É a leitura honesta — a área do retângulo é proporcional ao valor.';
+    } else {
+      nota = 'Eixo cortado em ' + num(y0) + ': a mesma diferença agora parece <b>' + num(raz) + '×</b> maior. O dado não mudou; a impressão, sim.';
+    }
+    elNote.innerHTML = nota;
+    elV.innerHTML = '<b>' + num(y0) + '</b>';
+  }
+  input.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

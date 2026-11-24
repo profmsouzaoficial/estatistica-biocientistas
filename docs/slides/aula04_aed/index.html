@@ -491,7 +491,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"glicemia <- c(90, 95, 100,\n              105, 110, 800)\n\n# media e mediana lado a lado\nmean(glicemia)\nmedian(glicemia)\n\n# o outlier aparece solto\nboxplot(glicemia,\n        col = \"#0d9488\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"glicemia <- c(90, 95, 100, 105, 110, 800)\n\nround(c(media = mean(glicemia),\n        mediana = median(glicemia),\n        dp = sd(glicemia),\n        iiq = IQR(glicemia)), 2)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# pressao de 9 pacientes, em mmHg\npressao <- c(120, 125, 118, 122, 130, 128, 119, 125, 1200)\n\nsummary(pressao)\nround(c(media = mean(pressao),\n        mediana = median(pressao)), 1)\nboxplot(pressao, col = \"#d97706\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.75","editor-max-height":"430","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -2052,11 +2052,35 @@ Márcio Luís Moreira de Souza
 </section>
 <section id="o-baú-trancado" class="slide level2">
 <h2>O baú trancado</h2>
-<p>Você tem uma planilha com 4.000 pacientes e não faz ideia do que há dentro.</p>
+<p>Você tem uma planilha com 240 pacientes e não faz ideia do que há dentro.</p>
 <p>A <strong>Análise Exploratória de Dados</strong> é a chave: não é o teste que prova, é o mapa que diz <strong>por onde começar</strong> — e onde pode haver armadilha.</p>
 <p class="small">
 Pular essa etapa é a causa mais comum de uma análise inteira ter de ser refeita.
 </p>
+</section>
+<section id="o-roteiro-de-hoje" class="slide level2">
+<h2>O roteiro de hoje</h2>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>1. As quatro perguntas</strong></p>
+<p>Centro, dispersão, forma e relação — o que cada uma decide.</p>
+</div>
+<div class="card">
+<p><strong>2. Centro e dispersão</strong></p>
+<p>Média, mediana, desvio padrão, erro padrão e coeficiente de variação.</p>
+</div>
+<div class="card">
+<p><strong>3. Gráficos e tabelas</strong></p>
+<p>O gráfico certo para cada variável — e como um gráfico engana.</p>
+</div>
+<div class="card">
+<p><strong>4. Outliers e o R</strong></p>
+<p>O que fazer com o valor impossível, e a AED feita ao vivo.</p>
+</div>
+</div>
+</section>
+<section id="parte-1-as-quatro-perguntas" class="slide level2 divider">
+<h2>Parte 1 — As quatro perguntas</h2>
 </section>
 <section id="aed-não-é-olhar-é-investigar" class="slide level2">
 <h2>AED não é olhar, é investigar</h2>
@@ -2075,8 +2099,100 @@ Pular essa etapa é a causa mais comum de uma análise inteira ter de ser refeit
 </div>
 </div>
 </section>
-<section id="o-centro-e-a-dispersão" class="slide level2 divider">
-<h2>O centro e a dispersão</h2>
+<section id="as-quatro-perguntas-de-toda-aed" class="slide level2">
+<h2>As quatro perguntas de toda AED</h2>
+<ul>
+<li class="fragment"><strong>Onde está o centro?</strong> → decide a medida que você vai relatar (média ou mediana).</li>
+<li class="fragment"><strong>Quanto os dados se espalham?</strong> → decide se a média basta ou se é preciso o IIQ.</li>
+<li class="fragment"><strong>Qual é a forma — e há valores impossíveis?</strong> → decide o teste e revela erro de digitação.</li>
+<li class="fragment"><strong>Como as variáveis se relacionam?</strong> → decide o gráfico e sugere a hipótese seguinte.</li>
+</ul>
+<p class="small">
+Nenhuma dessas perguntas é sobre o valor de p.&nbsp;Todas são sobre o dado.
+</p>
+</section>
+<section id="a-armadilha-da-unidade-de-análise" class="slide level2">
+<h2>A armadilha da unidade de análise</h2>
+<p>Em Odontologia, medir <strong>4 sítios em cada um de 30 pacientes</strong> não produz 120 observações independentes.</p>
+<div class="keybox">
+<p><strong>O número de linhas da planilha não é o número de informações independentes.</strong></p>
+<p>Dentes de uma mesma boca compartilham saliva, dieta e biofilme. Tratar cada dente como um paciente infla o <em>n</em> e produz um valor de p que o estudo não ganhou.</p>
+</div>
+<p class="small">
+Pergunte sempre: cada linha da minha planilha é um paciente — ou um pedaço dele?
+</p>
+</section>
+<section id="dois-analgésicos-a-mesma-média" class="slide level2">
+<h2>Dois analgésicos, a mesma média</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Analgésico A</th>
+<th style="text-align: left;">Analgésico B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Pacientes 1 a 4</td>
+<td style="text-align: left;">3,0 · 3,2 · 3,4 · 3,0</td>
+<td style="text-align: left;">6,0 · 6,2 · 6,0 · 6,2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pacientes 5 a 8</td>
+<td style="text-align: left;">3,4 · 3,2 · 3,0 · 3,4</td>
+<td style="text-align: left;">0,2 · 0,4 · 0,2 · 0,4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Média</strong></td>
+<td style="text-align: left;"><strong>3,2</strong></td>
+<td style="text-align: left;"><strong>3,2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Valores = redução da dor na EVA (0–10).</p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Vote antes de virar</strong></p>
+</div>
+<div class="callout-content">
+<p>Se você só pudesse ver a média, escolheria qual analgésico? Por quê?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-mesma-média-conclusões-opostas" class="slide level2">
+<h2>A mesma média, conclusões opostas</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Analgésico A</th>
+<th style="text-align: right;">Analgésico B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Média</td>
+<td style="text-align: right;">3,2</td>
+<td style="text-align: right;">3,2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Desvio padrão</strong></td>
+<td style="text-align: right;"><strong>0,19</strong></td>
+<td style="text-align: right;"><strong>3,10</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>Em <strong>A</strong>, todos melhoraram entre 3,0 e 3,4 — efeito modesto e previsível.</p>
+<p>Em <strong>B</strong>, metade melhorou 6 pontos e metade quase nada.</p>
+<p><strong>A média é uma frase. O gráfico é a história.</strong></p>
+</div>
+</section>
+<section id="parte-2-centro-e-dispersão" class="slide level2 divider">
+<h2>Parte 2 — Centro e dispersão</h2>
 </section>
 <section id="duas-perguntas-duas-medidas" class="slide level2">
 <h2>Duas perguntas, duas medidas</h2>
@@ -2109,19 +2225,202 @@ Pular essa etapa é a causa mais comum de uma análise inteira ter de ser refeit
 Primeiro encontre o erro. Depois escolha a medida. Nunca o contrário.
 </p>
 </section>
-<section id="o-boxplot-em-cinco-números" class="slide level2">
-<h2>O boxplot em cinco números</h2>
-<p>O diagrama de caixa resume uma distribuição em cinco posições:</p>
-<ul>
-<li class="fragment"><strong>Mínimo</strong> e <strong>máximo</strong> — até onde os dados vão (excluindo outliers).</li>
-<li class="fragment"><strong>Q1</strong> — 25% dos dados ficam abaixo dele.</li>
-<li class="fragment"><strong>Mediana</strong> — o centro de verdade.</li>
-<li class="fragment"><strong>Q3</strong> — 75% ficam abaixo dele.</li>
-<li class="fragment"><strong>Outliers</strong> — pontos além de 1,5 vez o IIQ; desenhados como pontos soltos.</li>
-</ul>
+<section id="mão-na-massa-arraste-o-800" class="slide level2">
+<h2>Mão na massa: arraste o 800</h2>
+<iframe class="w-frame" src="../../widgets/centro-mediana.html" title="Média e mediana com um valor extremo ajustável" style="height:430px">
+</iframe>
 <p class="small">
-Se o outlier é erro, corrija. Se é paciente de verdade, ele é o achado mais importante do estudo.
+Leve o último paciente de 800 até 120. O que acontece com cada marcador?
 </p>
+</section>
+<section id="média-ou-mediana-a-decisão" class="slide level2">
+<h2>Média ou mediana? A decisão</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Situação</th>
+<th style="text-align: left;">Relate</th>
+<th style="text-align: left;">Por quê</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Distribuição simétrica</td>
+<td style="text-align: left;">média com desvio padrão</td>
+<td style="text-align: left;">usa todos os valores; é eficiente</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cauda à direita ou à esquerda</td>
+<td style="text-align: left;">mediana com IIQ</td>
+<td style="text-align: left;">não se move com extremos</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Variável ordinal</td>
+<td style="text-align: left;">mediana ou frequências</td>
+<td style="text-align: left;">média de códigos não significa nada</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Variável categórica</td>
+<td style="text-align: left;">moda ou proporções</td>
+<td style="text-align: left;">não há ordem a somar</td>
+</tr>
+</tbody>
+</table>
+<p class="small">
+Na dúvida, compare média e mediana: se estão próximas, a distribuição é simétrica.
+</p>
+</section>
+<section id="onde-a-média-não-significa-nada" class="slide level2">
+<h2>Onde a média não significa nada</h2>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>O erro clássico</strong></p>
+</div>
+<div class="callout-content">
+<p>“Dor média de 2,3” quando a dor foi classificada em <strong>leve (1), moderada (2), intensa (3)</strong>.</p>
+<p>2,3 não é “entre moderada e intensa” — é a média de três códigos inventados pelo analista.</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Ordinal pede <strong>mediana</strong> ou <strong>distribuição de frequências</strong> (quantos em cada categoria).</li>
+<li class="fragment">A escala de dor (EVA 0–10) é caso-limite: tratada como numérica na prática, mas com <em>n</em> pequeno ou distribuição assimétrica, relate a mediana.</li>
+<li class="fragment"><strong>Nunca escolha a medida depois de ver qual delas ficou melhor.</strong></li>
+</ul>
+</section>
+<section id="a-dispersão-em-cinco-medidas" class="slide level2">
+<h2>A dispersão em cinco medidas</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Medida</th>
+<th style="text-align: left;">Unidade</th>
+<th style="text-align: left;">O que diz</th>
+<th style="text-align: left;">Robusta?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Amplitude</td>
+<td style="text-align: left;">a da variável</td>
+<td style="text-align: left;">distância entre extremos</td>
+<td style="text-align: left;">não</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Variância</td>
+<td style="text-align: left;">ao quadrado</td>
+<td style="text-align: left;">dispersão ao quadrado</td>
+<td style="text-align: left;">não</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Desvio padrão</strong></td>
+<td style="text-align: left;">a da variável</td>
+<td style="text-align: left;">distância típica à média</td>
+<td style="text-align: left;">não, mas é a mais usada</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>IIQ</strong></td>
+<td style="text-align: left;">a da variável</td>
+<td style="text-align: left;">largura dos 50% centrais</td>
+<td style="text-align: left;">sim</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>CV (%)</strong></td>
+<td style="text-align: left;">adimensional</td>
+<td style="text-align: left;">dispersão relativa</td>
+<td style="text-align: left;">não</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="o-erro-que-mais-aparece-nas-revistas-dp-epm" class="slide level2">
+<h2>O erro que mais aparece nas revistas: DP × EPM</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Desvio padrão</th>
+<th style="text-align: left;">Erro padrão (EPM)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Responde</td>
+<td style="text-align: left;">quanto os pacientes variam?</td>
+<td style="text-align: left;">quão precisa é a média?</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Depende de <em>n</em>?</td>
+<td style="text-align: left;">não</td>
+<td style="text-align: left;">sim, divide por raiz de <em>n</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Exemplo (<em>s</em> = 15, <em>n</em> = 100)</td>
+<td style="text-align: left;"><strong>15 mg/dL</strong></td>
+<td style="text-align: left;"><strong>1,5 mg/dL</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>Relatar o EPM e chamar de DP é uma forma silenciosa de exagero: a barra de erro encolhe, a diferença parece maior — e nada mudou nos dados.</p>
+<p><strong>Todo símbolo “mais ou menos” precisa de legenda.</strong></p>
+</div>
+</section>
+<section id="coeficiente-de-variação-comparar-o-incomparável" class="slide level2">
+<h2>Coeficiente de variação: comparar o incomparável</h2>
+<div class="formula">
+<p><span class="math display">\[CV = \frac{s}{\bar{x}} \times 100\%\]</span></p>
+</div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variável</th>
+<th style="text-align: right;">Média</th>
+<th style="text-align: right;">Desvio padrão</th>
+<th style="text-align: right;">CV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hemoglobina</td>
+<td style="text-align: right;">13,0 g/dL</td>
+<td style="text-align: right;">1,5 g/dL</td>
+<td style="text-align: right;"><strong>11,5%</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Glicemia</td>
+<td style="text-align: right;">100 mg/dL</td>
+<td style="text-align: right;">30 mg/dL</td>
+<td style="text-align: right;"><strong>30%</strong></td>
+</tr>
+</tbody>
+</table>
+<p class="small">
+O desvio padrão da glicemia é 20 vezes maior — mas as unidades são diferentes. O CV mostra que, em termos relativos, a glicemia é quase três vezes mais variável.
+</p>
+</section>
+<section id="mão-na-massa-calcule-no-r" class="slide level2">
+<h2>Mão na massa: calcule no R</h2>
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p class="small">
+Troque o 800 por 130 e rode de novo. Depois tire o valor e veja o que muda. Para rodar: clique na célula e aperte o botão de executar.
+</p>
+</section>
+<section id="parte-3-gráficos-e-tabelas" class="slide level2 divider">
+<h2>Parte 3 — Gráficos e tabelas</h2>
 </section>
 <section id="o-gráfico-certo-para-o-dado-certo" class="slide level2">
 <h2>O gráfico certo para o dado certo</h2>
@@ -2146,13 +2445,192 @@ Se o outlier é erro, corrija. Se é paciente de verdade, ele é o achado mais i
 Gráfico de pizza com 12 categorias não é visualização: é decoração.
 </p>
 </section>
-<section id="vendo-o-estrago-no-r" class="slide level2">
-<h2>Vendo o estrago no R</h2>
-<div id="qwebr-insertion-location-1"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<section id="histograma-a-classe-muda-a-história" class="slide level2">
+<h2>Histograma: a classe muda a história</h2>
+<iframe class="w-frame" src="../../widgets/hist-bins.html" title="Histograma de hemoglobina com número de classes ajustável" style="height:430px">
+</iframe>
 <p class="small">
-Rode também com 130 no lugar de 800: o que muda mais, a média ou a mediana?
+São os mesmos 240 pacientes. Vá de 4 a 26 classes: quando o segundo grupo aparece?
 </p>
+</section>
+<section id="o-que-apareceu-com-26-classes" class="slide level2">
+<h2>O que apareceu com 26 classes</h2>
+<ul>
+<li class="fragment">Com <strong>4 classes</strong>, o desenho sugere uma distribuição larga e sem estrutura.</li>
+<li class="fragment">Com <strong>26 classes</strong>, surge um segundo grupo entre 8 e 11 g/dL — os pacientes anêmicos.</li>
+<li class="fragment">O gráfico não mentiu em nenhum dos dois casos: <strong>mostrou o que a classe permitia ver</strong>.</li>
+<li class="fragment">Por isso a escolha das classes precisa de <strong>critério declarado</strong>, não de qual desenho ficou melhor.</li>
+</ul>
+</section>
+<section id="o-boxplot-em-cinco-números" class="slide level2">
+<h2>O boxplot em cinco números</h2>
+<p>O diagrama de caixa resume uma distribuição em cinco posições:</p>
+<ul>
+<li class="fragment"><strong>Mínimo</strong> e <strong>máximo</strong> — até onde os dados vão (excluindo outliers).</li>
+<li class="fragment"><strong>Q1</strong> — 25% dos dados ficam abaixo dele.</li>
+<li class="fragment"><strong>Mediana</strong> — o centro de verdade.</li>
+<li class="fragment"><strong>Q3</strong> — 75% ficam abaixo dele.</li>
+<li class="fragment"><strong>Outliers</strong> — pontos além de 1,5 vez o IIQ; desenhados como pontos soltos.</li>
+</ul>
+<p class="small">
+Se o outlier é erro, corrija. Se é paciente de verdade, ele é o achado mais importante do estudo.
+</p>
+</section>
+<section id="o-que-o-boxplot-esconde" class="slide level2">
+<h2>O que o boxplot esconde</h2>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>O tamanho da amostra</strong></p>
+<p>Um boxplot de 4 pacientes e outro de 400 podem ter a mesma cara.</p>
+</div>
+<div class="card">
+<p><strong>A forma</strong></p>
+<p>Bimodal ou simétrica, a caixa é igual: quartis não guardam a forma.</p>
+</div>
+<div class="card">
+<p><strong>Os pontos</strong></p>
+<p>Com menos de ~20 por grupo, mostre os pontos e o jitter.</p>
+</div>
+</div>
+<p class="small">
+A pergunta que resolve: “o leitor consegue saber quantos pacientes há aqui?” Se não, escreva o n.
+</p>
+</section>
+<section id="dispersão-quando-o-ponto-esconde-o-paciente" class="slide level2">
+<h2>Dispersão: quando o ponto esconde o paciente</h2>
+<ul>
+<li><strong>Sobreposição</strong> — com muitos pacientes, use transparência (<code>alpha</code>) ou jitter.</li>
+<li><strong>Escala</strong> — um único valor extremo esmaga os outros num canto e faz parecer que “não há relação”.</li>
+<li><strong>Conclusão</strong> — antes de dizer que não há associação, olhe sem o ponto extremo.</li>
+</ul>
+<p class="small">
+No R: <code>geom_point(alpha = 0.4)</code> e <code>geom_jitter(width = .1, height = .1)</code>.
+</p>
+</section>
+<section id="barras-o-eixo-começa-em-zero" class="slide level2">
+<h2>Barras: o eixo começa em zero</h2>
+<iframe class="w-frame" src="../../widgets/eixo-truncado.html" title="Como cortar o eixo y distorce a comparação entre barras" style="height:430px">
+</iframe>
+<p class="small">
+Arraste o início do eixo até 1,1. O dado não mudou — a impressão, sim.
+</p>
+</section>
+<section id="como-um-gráfico-engana" class="slide level2">
+<h2>Como um gráfico engana</h2>
+<ul>
+<li class="fragment"><strong>Eixo truncado</strong> em barras — a diferença parece maior do que é.</li>
+<li class="fragment"><strong>Escala logarítmica sem aviso</strong> — achata crescimentos enormes.</li>
+<li class="fragment"><strong>Área ou volume</strong> — o dobro do diâmetro é quatro vezes a área; o leitor lê “duas vezes”.</li>
+<li class="fragment"><strong>Efeito 3D</strong> — desloca a leitura da altura e não informa nada.</li>
+<li class="fragment"><strong>Eixo duplo</strong> — permite criar qualquer correlação visual.</li>
+<li class="fragment"><strong>Pizza com 12 fatias</strong> — ângulos pequenos são indistinguíveis.</li>
+</ul>
+</section>
+<section id="caça-ao-erro" class="slide level2">
+<h2>Caça ao erro</h2>
+<p>Três figuras de um artigo. Qual é o problema de <strong>cada uma</strong>?</p>
+<ol type="1">
+<li class="fragment">Gráfico de barras comparando dois grupos que diferem 0,3 ponto, com eixo de 8,2 a 9,0.</li>
+<li class="fragment">Boxplot por grupo com 3 pacientes em cada, sem os pontos individuais.</li>
+<li class="fragment">Pizza com 11 espécies de bactérias isoladas em culturas.</li>
+</ol>
+<p class="small">
+Dois minutos com o colega ao lado. Depois discutimos.
+</p>
+</section>
+<section id="caça-ao-erro-respostas" class="slide level2">
+<h2>Caça ao erro — respostas</h2>
+<ul>
+<li class="fragment"><strong>1. Eixo truncado.</strong> Barras que diferem 3% viram barras de alturas muito diferentes. Corrija começando o eixo em zero (ou use pontos).</li>
+<li class="fragment"><strong>2. n pequeno demais para um resumo.</strong> Com 3 pacientes, o boxplot esconde os valores e sugere precisão que não existe. Mostre os pontos.</li>
+<li class="fragment"><strong>3. Pizza com fatias demais.</strong> Ângulos pequenos não se comparam. Use barras ordenadas.</li>
+</ul>
+</section>
+<section id="tabela-encontre-os-cinco-problemas" class="slide level2">
+<h2>Tabela: encontre os cinco problemas</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Grupo</th>
+<th style="text-align: left;">Idade</th>
+<th style="text-align: left;">Hemoglobina</th>
+<th style="text-align: left;">Anemia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">45,3</td>
+<td style="text-align: left;">13,2 ± 1,5</td>
+<td style="text-align: left;">32%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">47</td>
+<td style="text-align: left;">12,8 ± 1,4</td>
+<td style="text-align: left;">28,4%</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Sua vez</strong></p>
+</div>
+<div class="callout-content">
+<p>São <strong>cinco problemas</strong>. Dois minutos, em duplas: anote cada um e depois compare com a tabela do próximo slide.</p>
+</div>
+</div>
+</div>
+<p class="small">
+Dica: casas decimais, o símbolo “mais ou menos”, as porcentagens e o significado de “A” e “B”.
+</p>
+</section>
+<section id="tabela-a-versão-que-passa-no-revisor" class="slide level2">
+<h2>Tabela: a versão que passa no revisor</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Grupo</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">Idade (anos)</th>
+<th style="text-align: right;">Hemoglobina (g/dL)</th>
+<th style="text-align: right;">Anemia, n (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Controle</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">45,3 (12,1)</td>
+<td style="text-align: right;">13,2 (1,5)</td>
+<td style="text-align: right;">19 (31,7)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fisioterapia</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">47,0 (11,8)</td>
+<td style="text-align: right;">12,8 (1,4)</td>
+<td style="text-align: right;">16 (27,6)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Valores são média (DP), exceto n e Anemia, n (%).</em></p>
+<div class="keybox">
+<p>Os cinco problemas eram: <strong>decimais inconsistentes</strong>, <strong>“±” sem legenda</strong>, <strong>% sem denominador</strong>, <strong>nenhum n</strong> e <strong>unidades fora do cabeçalho</strong>.</p>
+</div>
+</section>
+<section id="as-sete-regras-da-tabela" class="slide level2">
+<h2>As sete regras da tabela</h2>
+<ul>
+<li class="fragment"><strong>Unidade no cabeçalho</strong> — “Hemoglobina (g/dL)”, nunca “13,2 g/dL” em cada célula.</li>
+<li class="fragment"><strong>Mesmas casas decimais</strong> na coluna — 45,3 e 47,0.</li>
+<li class="fragment"><strong>Todo símbolo tem legenda</strong> — “±” é DP, EPM ou IC?</li>
+<li class="fragment"><strong>Porcentagem com denominador</strong> — 32% (19/60).</li>
+<li class="fragment"><strong>n em cada grupo.</strong></li>
+<li class="fragment"><strong>Números alinhados à direita</strong>, vírgula sob vírgula.</li>
+<li class="fragment"><strong>Ordem lógica</strong> — por grupo, por frequência ou cronológica.</li>
+</ul>
 </section>
 <section id="tabela-1-o-resumo-que-vai-para-o-artigo" class="slide level2">
 <h2>Tabela 1: o resumo que vai para o artigo</h2>
@@ -2166,21 +2644,60 @@ Rode também com 130 no lugar de 800: o que muda mais, a média ou a mediana?
 <p>Se os grupos já diferem na Tabela 1, qualquer comparação posterior nasce suspeita.</p>
 </div>
 </section>
+<section id="parte-4-fechando" class="slide level2 divider">
+<h2>Parte 4 — Fechando</h2>
+</section>
+<section id="outliers-três-origens" class="slide level2">
+<h2>Outliers: três origens</h2>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>Erro de digitação</strong></p>
+<p>800 em vez de 80; 2,5 g/dL em vez de 12,5. Corrige-se na fonte.</p>
+</div>
+<div class="card">
+<p><strong>Erro de medição</strong></p>
+<p>Aparelho descalibrado, amostra hemolisada, paciente sem jejum. Registre e discuta.</p>
+</div>
+<div class="card">
+<p><strong>Evento real</strong></p>
+<p>O paciente com glicemia de 420 mg/dL existe — e é justamente o caso que interessa.</p>
+</div>
+</div>
+</section>
+<section id="o-que-fazer-com-o-outlier" class="slide level2">
+<h2>O que fazer com o outlier</h2>
+<ul>
+<li class="fragment"><strong>Verifique na fonte</strong> — prontuário, ficha, laudo — antes de qualquer decisão.</li>
+<li class="fragment"><strong>Nunca apague em silêncio.</strong> “Limpei os outliers” transforma resultado verdadeiro em resultado bonito.</li>
+<li class="fragment"><strong>Análise de sensibilidade</strong> — repita com e sem o valor e relate as duas.</li>
+<li class="fragment"><strong>Se é real, é dado</strong> — relate a mediana e discuta o caso.</li>
+</ul>
+<p class="small">
+O critério de 1,5 × IIQ diz “olhe com atenção”, não “descarte”.
+</p>
+</section>
 <section id="pause-e-pense" class="slide level2">
 <h2>Pause e pense</h2>
 <div class="keybox">
 <p><strong>1.</strong> Um colega relata “tempo médio de internação de 6 dias”. Que informação essencial está faltando?</p>
 <p><strong>2.</strong> Na glicemia com o valor 800, você reporta a média ou a mediana? E o que faz com o 800?</p>
+<p><strong>3.</strong> Seu gráfico de barras mostra 62% num grupo e 58% no outro, com eixo de 55% a 65%. O que o leitor vai concluir?</p>
 </div>
 </section>
 <section id="respostas" class="slide level2">
 <h2>Respostas</h2>
 <ul>
-<li class="fragment"><strong>1. A dispersão.</strong> “6 dias” pode significar “todo mundo ficou entre 5 e 7” ou “metade ficou 1 dia e metade ficou 11”. Sem desvio padrão ou IIQ, o número não informa.</li>
+<li class="fragment"><strong>1. A dispersão.</strong> “6 dias” pode significar “todo mundo ficou entre 5 e 7” ou “metade ficou 1 dia e metade ficou 11”. Sem DP ou IIQ, o número não informa.</li>
 <li class="fragment"><strong>2. A mediana</strong> — e investigue o 800 antes de qualquer coisa: erro de digitação se corrige na fonte; paciente real merece uma nota no relatório.</li>
+<li class="fragment"><strong>3. Que a diferença é enorme.</strong> Com o eixo em zero, 62% e 58% são barras quase iguais — e é essa a leitura honesta.</li>
 </ul>
+</section>
+<section id="mão-na-massa-caça-ao-erro-no-r" class="slide level2">
+<h2>Mão na massa: caça ao erro no R</h2>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p class="small">
-A pergunta que sempre fecha a AED: os dados que eu tenho são capazes de responder à pergunta que eu fiz?
+Ache o valor impossível, corrija na fonte e rode de novo. Depois escreva a frase que você colocaria no artigo.
 </p>
 </section>
 <section id="o-que-levar-daqui" class="slide level2">
@@ -2188,8 +2705,10 @@ A pergunta que sempre fecha a AED: os dados que eu tenho são capazes de respond
 <ul>
 <li class="fragment"><strong>Explore antes de testar</strong> — o teste aplicado sobre dado sujo produz erro com aparência de rigor.</li>
 <li class="fragment"><strong>Centro e dispersão andam juntos</strong> — média sem desvio padrão é meia informação.</li>
+<li class="fragment"><strong>A forma decide a medida</strong> — simétrica: média e DP; assimétrica ou ordinal: mediana e IIQ.</li>
+<li class="fragment"><strong>DP descreve pacientes; EPM descreve a estimativa</strong> — confundir os dois é o erro mais comum.</li>
+<li class="fragment"><strong>O gráfico certo depende do tipo do dado</strong> — e o eixo das barras começa em zero.</li>
 <li class="fragment"><strong>Outlier é uma pergunta, não um incômodo</strong> — erro ou descoberta, decida com critério.</li>
-<li class="fragment"><strong>O gráfico certo depende do tipo do dado</strong> — histograma, boxplot ou dispersão, nunca por hábito.</li>
 </ul>
 </section>
 <section id="próximos-passos" class="slide level2">
