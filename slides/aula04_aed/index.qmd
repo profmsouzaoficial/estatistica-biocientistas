@@ -30,13 +30,13 @@ Centro, dispersão, forma e relação — o que cada uma decide.
 ::: {.card}
 **2. Centro e dispersão**
 
-Média, mediana, desvio padrão, erro padrão e coeficiente de variação.
+As fórmulas, por que *esta* média, a história da variância, DP, EPM e CV.
 :::
 
 ::: {.card}
 **3. Gráficos e tabelas**
 
-O gráfico certo para cada variável — e como um gráfico engana.
+17 gráficos, do boxplot à rede de contatos — e como um gráfico engana.
 :::
 
 ::: {.card}
@@ -173,6 +173,61 @@ A mediana praticamente não se moveu. **Um único ponto pode destruir a média.*
 
 <p class="small">Leve o último paciente de 800 até 120. O que acontece com cada marcador?</p>
 
+## As quatro médias (e a pergunta de cada uma)
+
+| Média | Quando é a certa | Exemplo |
+|:--|:--|:--|
+| **Aritmética** | valores que se **somam** | glicemia, Hb, pressão |
+| **Ponderada** | observações com **pesos** diferentes | juntar dois estudos com n diferente |
+| **Geométrica** | valores que se **multiplicam** | títulos, diluições, *fold-change* |
+| **Harmônica** | **taxas** (o que soma é o tempo) | *clearance*, velocidade média |
+
+<p class="small">"Média" não é uma conta: é uma decisão sobre o que se soma. Escolher errado não arredonda — enviesa.</p>
+
+## A conta da média, termo a termo
+
+::: {.formula}
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i = \frac{90+95+100+105+110+800}{6} = 216{,}7$$
+:::
+
+::: {.incremental}
+- **A soma dos desvios é zero** — a média é o ponto de equilíbrio.
+- **Ela minimiza a soma dos quadrados dos desvios** — por isso a variância se apoia nela.
+- **Todo valor pesa 1** — inclusive o 800.
+:::
+
+<p class="small">Sem a segunda propriedade não existiriam mínimos quadrados, variância nem regressão.</p>
+
+## A mediana em três passos
+
+::: {.formula}
+$$\text{posição da mediana} = \frac{n+1}{2}$$
+:::
+
+::: {.incremental}
+- **Ordene** os valores — a mediana depende da ordem, não da magnitude.
+- **n ímpar**: posição inteira. Com n = 7, é o 4º valor.
+- **n par**: cai entre dois valores. Com n = 6, é a média do 3º com o 4º.
+:::
+
+**Glicemias:** 90 · 95 · 100 · 105 · 110 · 800 → mediana = (100 + 105)/2 = **102,5**
+
+<p class="small">A mediana é o percentil 50; Q1 e Q3 são os percentis 25 e 75 — a família que alimenta o boxplot.</p>
+
+## Quando a média aritmética é a escolha errada
+
+Títulos de anticorpo: **1:40 · 1:80 · 1:160**
+
+::: {.formula}
+$$\text{aritmética} = \frac{40+80+160}{3} = 93{,}3 \qquad \text{geométrica} = \sqrt[3]{40 \cdot 80 \cdot 160} = 80$$
+:::
+
+::: {.keybox}
+**93,3 é um título que não existe** na série de diluições. O título dobra a cada passo: é uma escala logarítmica disfarçada.
+:::
+
+<p class="small">No R: `exp(mean(log(x)))`. Para 2, 4 e 8 → aritmética 4,67 · geométrica 4,00 · harmônica 3,43.</p>
+
 ## Média ou mediana? A decisão
 
 | Situação | Relate | Por quê |
@@ -208,6 +263,95 @@ A mediana praticamente não se moveu. **Um único ponto pode destruir a média.*
 | **Desvio padrão** | a da variável | distância típica à média | não, mas é a mais usada |
 | **IIQ** | a da variável | largura dos 50% centrais | sim |
 | **CV (%)** | adimensional | dispersão relativa | não |
+
+## A variância: por que elevar ao quadrado?
+
+::: {.formula}
+$$s^2 = \frac{\sum\left(x_i - \bar{x}\right)^2}{n-1} \qquad s = \sqrt{s^2}$$
+:::
+
+Somar os desvios **não funciona**: dá zero em qualquer conjunto.
+
+::: {.incremental}
+- **Módulo** → desvio médio absoluto: robusto, mas sem álgebra.
+- **Quadrado** → variância: derivável, decomponível e somável entre variáveis independentes.
+- A história escolheu o quadrado — e a inferência inteira depende disso.
+:::
+
+## A conta, com números
+
+Glicemias: 90 · 95 · 100 · 105 · 110 · 120 → média **103,3**
+
+| $x_i$ | $x_i - \bar{x}$ | $(x_i - \bar{x})^2$ |
+|--:|--:|--:|
+| 90 | −13,33 | 177,78 |
+| 95 | −8,33 | 69,44 |
+| 100 | −3,33 | 11,11 |
+| 105 | +1,67 | 2,78 |
+| 110 | +6,67 | 44,44 |
+| 120 | +16,67 | 277,78 |
+| **soma** | **0** | **583,33** |
+
+::: {.formula}
+$$s^2 = \frac{583{,}33}{5} = 116{,}67 \qquad s = \sqrt{116{,}67} = 10{,}8\ \text{mg/dL}$$
+:::
+
+<p class="small">A coluna do meio vale zero sempre: é a prova de que a média precisa do quadrado para medir dispersão.</p>
+
+## Por que n − 1? (Bessel, 1818)
+
+Com **n = 2**: valores 8 e 12 → média 10, desvios +2 e −2, soma dos quadrados 8.
+
+::: {.formula}
+$$\frac{8}{2} = 4 \qquad \text{ou} \qquad \frac{8}{1} = 8 \;?$$
+:::
+
+::: {.incremental}
+- A amostra fica **mais perto da própria média** do que da média populacional.
+- Um grau de liberdade foi gasto para estimar o centro.
+- A subestimação cai com o n: 20% em n = 5 · 5% em n = 20 · 1% em n = 100.
+:::
+
+<p class="small">Por isso existem σ² (divide por N) e s² (divide por n − 1) — e por isso só o s² aparece em artigo.</p>
+
+## Por que os quadrados venceram
+
+::: {.incremental}
+- **1805 · Legendre** — mínimos quadrados para a órbita de cometas: solução única, equações lineares.
+- **1809 · Gauss** — se os erros são normais, é o estimador mais provável.
+- **1818 · Bessel** — o divisor n − 1.
+- **1894 · Pearson** — "variância", "desvio padrão", z e correlação.
+- **1918–25 · Fisher** — ANOVA: a variância se **decompõe** em partes.
+- **1960+ · Tukey e Huber** — robustez: um ponto não pode mandar em tudo.
+:::
+
+<p class="small">Amplitude e desvio médio absoluto ficaram para trás por falta de álgebra. A variância tem — e é isso que a mantém no centro da estatística.</p>
+
+## Amplitude × IIQ: quem enxerga o quê
+
+:::: {.cards .cols-2}
+::: {.card}
+**Amplitude = máximo − mínimo**
+
+Dois pontos decidem por todos os outros.
+
+Cresce com o tamanho da amostra.
+
+Serve para controle de qualidade — não para inferência.
+:::
+
+::: {.card}
+**IIQ = Q3 − Q1**
+
+A largura dos 50% centrais.
+
+Robusta: ponto de ruptura de 25%.
+
+A cerca de 1,5 × IIQ define o outlier.
+:::
+::::
+
+<p class="small">Hb: Q1 = 12,2 · Q3 = 14,3 → IIQ = 2,1. Cerca superior = 14,3 + 3,15 = 17,45; os valores 21,3 e 23,1 ficam fora dela.</p>
 
 ## O erro que mais aparece nas revistas: DP × EPM
 
@@ -334,19 +478,179 @@ Com menos de ~20 por grupo, mostre os pontos e o jitter.
 
 <p class="small">A pergunta que resolve: "o leitor consegue saber quantos pacientes há aqui?" Se não, escreva o n.</p>
 
-## Dispersão: quando o ponto esconde o paciente
-
-- **Sobreposição** — com muitos pacientes, use transparência (`alpha`) ou jitter.
-- **Escala** — um único valor extremo esmaga os outros num canto e faz parecer que "não há relação".
-- **Conclusão** — antes de dizer que não há associação, olhe sem o ponto extremo.
-
-<p class="small">No R: `geom_point(alpha = 0.4)` e `geom_jitter(width = .1, height = .1)`.</p>
-
 ## Barras: o eixo começa em zero
 
 <iframe class="w-frame" src="../../widgets/eixo-truncado.html" title="Como cortar o eixo y distorce a comparação entre barras" style="height:430px"></iframe>
 
 <p class="small">Arraste o início do eixo até 1,1. O dado não mudou — a impressão, sim.</p>
+
+## Galeria: 17 gráficos, 17 perguntas
+
+:::: {.cards .cols-3}
+::: {.card}
+**Para comparar**
+
+Barras · empilhadas · pirâmide · treemap
+:::
+
+::: {.card}
+**Para distribuir**
+
+Histograma · boxplot · beeswarm
+:::
+
+::: {.card}
+**Para relacionar**
+
+Dispersão · mapa de calor · rede · similaridade
+:::
+
+::: {.card}
+**Para o tempo**
+
+Linha · série com intervenção · Kaplan-Meier
+:::
+
+::: {.card}
+**Para sintetizar**
+
+Forest plot · volcano
+:::
+
+::: {.card}
+**Para o texto**
+
+Nuvem · árvore de palavras
+:::
+::::
+
+<p class="small">A pergunta vem primeiro; o gráfico é a resposta visual. Nas próximas telas, o mesmo dado e a decisão que o desenho carrega.</p>
+
+## Pizza × barras: a mesma informação
+
+![](../../img/cap04/fig04_pizza_vs_barras.png){height=360px}
+
+<p class="figcap">Oito classes de dispensação. Na pizza, responder "a primeira é o dobro da segunda?" exige medir ângulos com o olho. Nas barras ordenadas, a resposta está na ordem e no número.</p>
+
+## Empilhadas: três desenhos, três perguntas
+
+![](../../img/cap04/fig04_empilhadas.png){height=360px}
+
+<p class="figcap">Agrupado: "quantos em cada desfecho?" · Empilhado: "qual o total e a composição?" · 100%: "qual a proporção?" — e só este último é honesto para comparar proporções, desde que o n apareça.</p>
+
+## Boxplot anatômico
+
+![](../../img/cap04/fig04_boxplot_anatomia.png){height=380px}
+
+<p class="figcap">Q1 = 12,2 · mediana = 12,9 · Q3 = 14,3 · IIQ = 2,1 · bigode até 16,9 · outliers 21,3 e 23,1. O boxplot é uma cerca desenhada.</p>
+
+## Pares: cada paciente é uma linha
+
+![](../../img/cap04/fig04_pares.png){height=380px}
+
+<p class="figcap">Onze de doze melhoraram — e um piorou. "EVA média 7,4 → 4,1" apaga exatamente o paciente que precisa ser discutido.</p>
+
+## Séries temporais: tendência, ciclo e intervenção
+
+![](../../img/cap04/fig04_serie_temporal.png){width=660px}
+
+<p class="figcap">Acima: tendência de alta + ciclo anual + queda após a campanha. Abaixo: média móvel de 12 meses, que apaga o ciclo e revela a tendência. Nenhum está errado — respondem a perguntas diferentes.</p>
+
+## Dispersão: a nuvem conta mais que o r
+
+![](../../img/cap04/fig04_dispersao.png){height=310px}
+
+- **Dois perfis na mesma nuvem** — a correlação global esconde a população anêmica.
+
+<p class="figcap">Sobreposição: use `alpha` ou hexbin. E lembre: associação não é causa.</p>
+
+## Mapa de calor: 28 correlações de uma vez
+
+![](../../img/cap04/fig04_heatmap_correlacao.png){width=640px}
+
+<p class="figcap">Escala divergente centrada em zero, metade simétrica omitida, valor escrito dentro da célula. E ordene as linhas por similaridade: os blocos aparecem.</p>
+
+## Volcano: efeito × evidência
+
+![](../../img/cap04/fig04_volcano.png){height=380px}
+
+<p class="figcap">Eixo x: tamanho do efeito (log2FC). Eixo y: força da evidência (−log10 p). Os candidatos são os cantos superiores — mas 3.000 testes exigem correção para múltiplas comparações.</p>
+
+## Sobrevida: o tempo até o desfecho
+
+![](../../img/cap04/fig04_kaplan_meier.png){width=640px}
+
+<p class="figcap">Degraus, tiques de censura e tabela de risco: sem ela, 2 pacientes no mês 48 parecem iguais a 120. Medianas: 13 e 18 meses.</p>
+
+## Forest plot: a síntese da evidência
+
+![](../../img/cap04/fig04_forest.png){height=380px}
+
+<p class="figcap">Só 2 dos 6 estudos são significativos isoladamente — e o losango combinado (0,66; IC 0,53–0,82) é conclusivo. É o argumento da metanálise e o seu perigo: só vale se os estudos forem comparáveis.</p>
+
+## Treemap: hierarquia que cabe na tela
+
+![](../../img/cap04/fig04_treemap_atc.png){height=380px}
+
+<p class="figcap">Área proporcional, hierarquia grupo → classe (ATC). Ótimo para estrutura, ruim para comparar valores próximos: retângulos finos enganam o olho.</p>
+
+## Nuvem de palavras: convite, não análise
+
+![](../../img/cap04/fig04_wordcloud.png){height=360px}
+
+<p class="figcap">Área não é linear (dobro da fonte ≈ quatro vezes a área), a posição é arbitrária e não há escala. Use como abertura — e acompanhe com barras das 10 mais frequentes.</p>
+
+## Árvore de palavras: a frase inteira
+
+![](../../img/cap04/fig04_wordtree.png){height=380px}
+
+<p class="figcap">"Me movimento" se desdobra em andar, subir escada e carregar peso — três situações que a nuvem trataria como uma só. O custo é a codificação manual.</p>
+
+## Redes: a topologia é o achado
+
+![](../../img/cap04/fig04_rede_contatos.png){height=390px}
+
+<p class="figcap">Cinco grupos densos e poucas pontes entre eles: são as pontes que decidem se o surto fica contido. Nenhuma coluna de planilha contém essa informação.</p>
+
+## Similaridade: fármacos que se parecem
+
+![](../../img/cap04/fig04_similaridade_farmacos.png){width=620px}
+
+<p class="figcap">Perfis de eventos adversos, similaridade de cosseno, ordenação por agrupamento. Os blocos na diagonal são descobertos nos dados. Similaridade não é equivalência terapêutica.</p>
+
+## O que faz um gráfico moderno funcionar
+
+:::: {.cards .cols-2}
+::: {.card}
+**Decisões que fazem a figura**
+
+Título com a mensagem · rótulo direto · ordem com sentido · base zero para área · cor com significado · anotação no ponto · incerteza visível · **n** em toda figura.
+:::
+
+::: {.card}
+**O teste final**
+
+O leitor entende sem ajuda?
+
+Se você precisou explicar o gráfico no texto, **o gráfico ainda não está pronto**.
+:::
+::::
+
+<p class="figcap">Sofisticação sem pergunta é enfeite. O melhor gráfico é o que o leitor entende sem ajuda — não o que tem mais camadas.</p>
+
+## Tipos modernos que valem conhecer
+
+| Gráfico | Serve para | Cuidado |
+|:--|:--|:--|
+| **Small multiples** | mesma medida em muitos grupos | escala idêntica entre painéis |
+| **Slope / dumbbell** | antes e depois no mesmo indivíduo | destaque os extremos |
+| **Raincloud / beeswarm** | distribuição com n pequeno | vira bagunça acima de ~200 pontos |
+| **Ridgeline** | muitas distribuições empilhadas | sobreposição esconde valores |
+| **Hexbin** | dispersão com milhares de pontos | legenda de cor explícita |
+| **Alluvial / Sankey** | fluxo entre estados | vira espaguete; agrupe |
+| **Mapa coroplético** | padrão geográfico | normalize por população |
+
+<p class="figcap">Referências para olhar: Our World in Data, Financial Times, The Economist, NYT — todos usam as mesmas dez decisões da tela anterior.</p>
 
 ## Como um gráfico engana
 

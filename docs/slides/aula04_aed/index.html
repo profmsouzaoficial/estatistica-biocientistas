@@ -95,7 +95,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-a89229e09502302707e59e6b7ead7038.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-95df86f7d1e988947e3bb5cfd863e2ce.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -2067,11 +2067,11 @@ Pular essa etapa é a causa mais comum de uma análise inteira ter de ser refeit
 </div>
 <div class="card">
 <p><strong>2. Centro e dispersão</strong></p>
-<p>Média, mediana, desvio padrão, erro padrão e coeficiente de variação.</p>
+<p>As fórmulas, por que <em>esta</em> média, a história da variância, DP, EPM e CV.</p>
 </div>
 <div class="card">
 <p><strong>3. Gráficos e tabelas</strong></p>
-<p>O gráfico certo para cada variável — e como um gráfico engana.</p>
+<p>17 gráficos, do boxplot à rede de contatos — e como um gráfico engana.</p>
 </div>
 <div class="card">
 <p><strong>4. Outliers e o R</strong></p>
@@ -2233,6 +2233,90 @@ Primeiro encontre o erro. Depois escolha a medida. Nunca o contrário.
 Leve o último paciente de 800 até 120. O que acontece com cada marcador?
 </p>
 </section>
+<section id="as-quatro-médias-e-a-pergunta-de-cada-uma" class="slide level2">
+<h2>As quatro médias (e a pergunta de cada uma)</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Média</th>
+<th style="text-align: left;">Quando é a certa</th>
+<th style="text-align: left;">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Aritmética</strong></td>
+<td style="text-align: left;">valores que se <strong>somam</strong></td>
+<td style="text-align: left;">glicemia, Hb, pressão</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Ponderada</strong></td>
+<td style="text-align: left;">observações com <strong>pesos</strong> diferentes</td>
+<td style="text-align: left;">juntar dois estudos com n diferente</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Geométrica</strong></td>
+<td style="text-align: left;">valores que se <strong>multiplicam</strong></td>
+<td style="text-align: left;">títulos, diluições, <em>fold-change</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Harmônica</strong></td>
+<td style="text-align: left;"><strong>taxas</strong> (o que soma é o tempo)</td>
+<td style="text-align: left;"><em>clearance</em>, velocidade média</td>
+</tr>
+</tbody>
+</table>
+<p class="small">
+“Média” não é uma conta: é uma decisão sobre o que se soma. Escolher errado não arredonda — enviesa.
+</p>
+</section>
+<section id="a-conta-da-média-termo-a-termo" class="slide level2">
+<h2>A conta da média, termo a termo</h2>
+<div class="formula">
+<p><span class="math display">\[\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i = \frac{90+95+100+105+110+800}{6} = 216{,}7\]</span></p>
+</div>
+<ul>
+<li class="fragment"><strong>A soma dos desvios é zero</strong> — a média é o ponto de equilíbrio.</li>
+<li class="fragment"><strong>Ela minimiza a soma dos quadrados dos desvios</strong> — por isso a variância se apoia nela.</li>
+<li class="fragment"><strong>Todo valor pesa 1</strong> — inclusive o 800.</li>
+</ul>
+<p class="small">
+Sem a segunda propriedade não existiriam mínimos quadrados, variância nem regressão.
+</p>
+</section>
+<section id="a-mediana-em-três-passos" class="slide level2">
+<h2>A mediana em três passos</h2>
+<div class="formula">
+<p><span class="math display">\[\text{posição da mediana} = \frac{n+1}{2}\]</span></p>
+</div>
+<ul>
+<li class="fragment"><strong>Ordene</strong> os valores — a mediana depende da ordem, não da magnitude.</li>
+<li class="fragment"><strong>n ímpar</strong>: posição inteira. Com n = 7, é o 4º valor.</li>
+<li class="fragment"><strong>n par</strong>: cai entre dois valores. Com n = 6, é a média do 3º com o 4º.</li>
+</ul>
+<p><strong>Glicemias:</strong> 90 · 95 · 100 · 105 · 110 · 800 → mediana = (100 + 105)/2 = <strong>102,5</strong></p>
+<p class="small">
+A mediana é o percentil 50; Q1 e Q3 são os percentis 25 e 75 — a família que alimenta o boxplot.
+</p>
+</section>
+<section id="quando-a-média-aritmética-é-a-escolha-errada" class="slide level2">
+<h2>Quando a média aritmética é a escolha errada</h2>
+<p>Títulos de anticorpo: <strong>1:40 · 1:80 · 1:160</strong></p>
+<div class="formula">
+<p><span class="math display">\[\text{aritmética} = \frac{40+80+160}{3} = 93{,}3 \qquad \text{geométrica} = \sqrt[3]{40 \cdot 80 \cdot 160} = 80\]</span></p>
+</div>
+<div class="keybox">
+<p><strong>93,3 é um título que não existe</strong> na série de diluições. O título dobra a cada passo: é uma escala logarítmica disfarçada.</p>
+</div>
+<p class="small">
+No R: <code>exp(mean(log(x)))</code>. Para 2, 4 e 8 → aritmética 4,67 · geométrica 4,00 · harmônica 3,43.
+</p>
+</section>
 <section id="média-ou-mediana-a-decisão" class="slide level2">
 <h2>Média ou mediana? A decisão</h2>
 <table class="caption-top">
@@ -2344,6 +2428,123 @@ Na dúvida, compare média e mediana: se estão próximas, a distribuição é s
 </tr>
 </tbody>
 </table>
+</section>
+<section id="a-variância-por-que-elevar-ao-quadrado" class="slide level2">
+<h2>A variância: por que elevar ao quadrado?</h2>
+<div class="formula">
+<p><span class="math display">\[s^2 = \frac{\sum\left(x_i - \bar{x}\right)^2}{n-1} \qquad s = \sqrt{s^2}\]</span></p>
+</div>
+<p>Somar os desvios <strong>não funciona</strong>: dá zero em qualquer conjunto.</p>
+<ul>
+<li class="fragment"><strong>Módulo</strong> → desvio médio absoluto: robusto, mas sem álgebra.</li>
+<li class="fragment"><strong>Quadrado</strong> → variância: derivável, decomponível e somável entre variáveis independentes.</li>
+<li class="fragment">A história escolheu o quadrado — e a inferência inteira depende disso.</li>
+</ul>
+</section>
+<section id="a-conta-com-números" class="slide level2">
+<h2>A conta, com números</h2>
+<p>Glicemias: 90 · 95 · 100 · 105 · 110 · 120 → média <strong>103,3</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(x_i\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(x_i - \bar{x}\)</span></th>
+<th style="text-align: right;"><span class="math inline">\((x_i - \bar{x})^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">−13,33</td>
+<td style="text-align: right;">177,78</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">−8,33</td>
+<td style="text-align: right;">69,44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">−3,33</td>
+<td style="text-align: right;">11,11</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">+1,67</td>
+<td style="text-align: right;">2,78</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">+6,67</td>
+<td style="text-align: right;">44,44</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">+16,67</td>
+<td style="text-align: right;">277,78</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><strong>soma</strong></td>
+<td style="text-align: right;"><strong>0</strong></td>
+<td style="text-align: right;"><strong>583,33</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="formula">
+<p><span class="math display">\[s^2 = \frac{583{,}33}{5} = 116{,}67 \qquad s = \sqrt{116{,}67} = 10{,}8\ \text{mg/dL}\]</span></p>
+</div>
+<p class="small">
+A coluna do meio vale zero sempre: é a prova de que a média precisa do quadrado para medir dispersão.
+</p>
+</section>
+<section id="por-que-n-1-bessel-1818" class="slide level2">
+<h2>Por que n − 1? (Bessel, 1818)</h2>
+<p>Com <strong>n = 2</strong>: valores 8 e 12 → média 10, desvios +2 e −2, soma dos quadrados 8.</p>
+<div class="formula">
+<p><span class="math display">\[\frac{8}{2} = 4 \qquad \text{ou} \qquad \frac{8}{1} = 8 \;?\]</span></p>
+</div>
+<ul>
+<li class="fragment">A amostra fica <strong>mais perto da própria média</strong> do que da média populacional.</li>
+<li class="fragment">Um grau de liberdade foi gasto para estimar o centro.</li>
+<li class="fragment">A subestimação cai com o n: 20% em n = 5 · 5% em n = 20 · 1% em n = 100.</li>
+</ul>
+<p class="small">
+Por isso existem σ² (divide por N) e s² (divide por n − 1) — e por isso só o s² aparece em artigo.
+</p>
+</section>
+<section id="por-que-os-quadrados-venceram" class="slide level2">
+<h2>Por que os quadrados venceram</h2>
+<ul>
+<li class="fragment"><strong>1805 · Legendre</strong> — mínimos quadrados para a órbita de cometas: solução única, equações lineares.</li>
+<li class="fragment"><strong>1809 · Gauss</strong> — se os erros são normais, é o estimador mais provável.</li>
+<li class="fragment"><strong>1818 · Bessel</strong> — o divisor n − 1.</li>
+<li class="fragment"><strong>1894 · Pearson</strong> — “variância”, “desvio padrão”, z e correlação.</li>
+<li class="fragment"><strong>1918–25 · Fisher</strong> — ANOVA: a variância se <strong>decompõe</strong> em partes.</li>
+<li class="fragment"><strong>1960+ · Tukey e Huber</strong> — robustez: um ponto não pode mandar em tudo.</li>
+</ul>
+<p class="small">
+Amplitude e desvio médio absoluto ficaram para trás por falta de álgebra. A variância tem — e é isso que a mantém no centro da estatística.
+</p>
+</section>
+<section id="amplitude-iiq-quem-enxerga-o-quê" class="slide level2">
+<h2>Amplitude × IIQ: quem enxerga o quê</h2>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Amplitude = máximo − mínimo</strong></p>
+<p>Dois pontos decidem por todos os outros.</p>
+<p>Cresce com o tamanho da amostra.</p>
+<p>Serve para controle de qualidade — não para inferência.</p>
+</div>
+<div class="card">
+<p><strong>IIQ = Q3 − Q1</strong></p>
+<p>A largura dos 50% centrais.</p>
+<p>Robusta: ponto de ruptura de 25%.</p>
+<p>A cerca de 1,5 × IIQ define o outlier.</p>
+</div>
+</div>
+<p class="small">
+Hb: Q1 = 12,2 · Q3 = 14,3 → IIQ = 2,1. Cerca superior = 14,3 + 3,15 = 17,45; os valores 21,3 e 23,1 ficam fora dela.
+</p>
 </section>
 <section id="o-erro-que-mais-aparece-nas-revistas-dp-epm" class="slide level2">
 <h2>O erro que mais aparece nas revistas: DP × EPM</h2>
@@ -2496,23 +2697,226 @@ Se o outlier é erro, corrija. Se é paciente de verdade, ele é o achado mais i
 A pergunta que resolve: “o leitor consegue saber quantos pacientes há aqui?” Se não, escreva o n.
 </p>
 </section>
-<section id="dispersão-quando-o-ponto-esconde-o-paciente" class="slide level2">
-<h2>Dispersão: quando o ponto esconde o paciente</h2>
-<ul>
-<li><strong>Sobreposição</strong> — com muitos pacientes, use transparência (<code>alpha</code>) ou jitter.</li>
-<li><strong>Escala</strong> — um único valor extremo esmaga os outros num canto e faz parecer que “não há relação”.</li>
-<li><strong>Conclusão</strong> — antes de dizer que não há associação, olhe sem o ponto extremo.</li>
-</ul>
-<p class="small">
-No R: <code>geom_point(alpha = 0.4)</code> e <code>geom_jitter(width = .1, height = .1)</code>.
-</p>
-</section>
 <section id="barras-o-eixo-começa-em-zero" class="slide level2">
 <h2>Barras: o eixo começa em zero</h2>
 <iframe class="w-frame" src="../../widgets/eixo-truncado.html" title="Como cortar o eixo y distorce a comparação entre barras" style="height:430px">
 </iframe>
 <p class="small">
 Arraste o início do eixo até 1,1. O dado não mudou — a impressão, sim.
+</p>
+</section>
+<section id="galeria-17-gráficos-17-perguntas" class="slide level2">
+<h2>Galeria: 17 gráficos, 17 perguntas</h2>
+<div class="cards cols-3">
+<div class="card">
+<p><strong>Para comparar</strong></p>
+<p>Barras · empilhadas · pirâmide · treemap</p>
+</div>
+<div class="card">
+<p><strong>Para distribuir</strong></p>
+<p>Histograma · boxplot · beeswarm</p>
+</div>
+<div class="card">
+<p><strong>Para relacionar</strong></p>
+<p>Dispersão · mapa de calor · rede · similaridade</p>
+</div>
+<div class="card">
+<p><strong>Para o tempo</strong></p>
+<p>Linha · série com intervenção · Kaplan-Meier</p>
+</div>
+<div class="card">
+<p><strong>Para sintetizar</strong></p>
+<p>Forest plot · volcano</p>
+</div>
+<div class="card">
+<p><strong>Para o texto</strong></p>
+<p>Nuvem · árvore de palavras</p>
+</div>
+</div>
+<p class="small">
+A pergunta vem primeiro; o gráfico é a resposta visual. Nas próximas telas, o mesmo dado e a decisão que o desenho carrega.
+</p>
+</section>
+<section id="pizza-barras-a-mesma-informação" class="slide level2">
+<h2>Pizza × barras: a mesma informação</h2>
+<p><img data-src="../../img/cap04/fig04_pizza_vs_barras.png" height="360"></p>
+<p class="figcap">
+Oito classes de dispensação. Na pizza, responder “a primeira é o dobro da segunda?” exige medir ângulos com o olho. Nas barras ordenadas, a resposta está na ordem e no número.
+</p>
+</section>
+<section id="empilhadas-três-desenhos-três-perguntas" class="slide level2">
+<h2>Empilhadas: três desenhos, três perguntas</h2>
+<p><img data-src="../../img/cap04/fig04_empilhadas.png" height="360"></p>
+<p class="figcap">
+Agrupado: “quantos em cada desfecho?” · Empilhado: “qual o total e a composição?” · 100%: “qual a proporção?” — e só este último é honesto para comparar proporções, desde que o n apareça.
+</p>
+</section>
+<section id="boxplot-anatômico" class="slide level2">
+<h2>Boxplot anatômico</h2>
+<p><img data-src="../../img/cap04/fig04_boxplot_anatomia.png" height="380"></p>
+<p class="figcap">
+Q1 = 12,2 · mediana = 12,9 · Q3 = 14,3 · IIQ = 2,1 · bigode até 16,9 · outliers 21,3 e 23,1. O boxplot é uma cerca desenhada.
+</p>
+</section>
+<section id="pares-cada-paciente-é-uma-linha" class="slide level2">
+<h2>Pares: cada paciente é uma linha</h2>
+<p><img data-src="../../img/cap04/fig04_pares.png" height="380"></p>
+<p class="figcap">
+Onze de doze melhoraram — e um piorou. “EVA média 7,4 → 4,1” apaga exatamente o paciente que precisa ser discutido.
+</p>
+</section>
+<section id="séries-temporais-tendência-ciclo-e-intervenção" class="slide level2">
+<h2>Séries temporais: tendência, ciclo e intervenção</h2>
+
+<img data-src="../../img/cap04/fig04_serie_temporal.png" width="660" class="r-stretch"><p class="figcap">
+Acima: tendência de alta + ciclo anual + queda após a campanha. Abaixo: média móvel de 12 meses, que apaga o ciclo e revela a tendência. Nenhum está errado — respondem a perguntas diferentes.
+</p>
+</section>
+<section id="dispersão-a-nuvem-conta-mais-que-o-r" class="slide level2">
+<h2>Dispersão: a nuvem conta mais que o r</h2>
+<p><img data-src="../../img/cap04/fig04_dispersao.png" height="310"></p>
+<ul>
+<li><strong>Dois perfis na mesma nuvem</strong> — a correlação global esconde a população anêmica.</li>
+</ul>
+<p class="figcap">
+Sobreposição: use <code>alpha</code> ou hexbin. E lembre: associação não é causa.
+</p>
+</section>
+<section id="mapa-de-calor-28-correlações-de-uma-vez" class="slide level2">
+<h2>Mapa de calor: 28 correlações de uma vez</h2>
+
+<img data-src="../../img/cap04/fig04_heatmap_correlacao.png" width="640" class="r-stretch"><p class="figcap">
+Escala divergente centrada em zero, metade simétrica omitida, valor escrito dentro da célula. E ordene as linhas por similaridade: os blocos aparecem.
+</p>
+</section>
+<section id="volcano-efeito-evidência" class="slide level2">
+<h2>Volcano: efeito × evidência</h2>
+<p><img data-src="../../img/cap04/fig04_volcano.png" height="380"></p>
+<p class="figcap">
+Eixo x: tamanho do efeito (log2FC). Eixo y: força da evidência (−log10 p). Os candidatos são os cantos superiores — mas 3.000 testes exigem correção para múltiplas comparações.
+</p>
+</section>
+<section id="sobrevida-o-tempo-até-o-desfecho" class="slide level2">
+<h2>Sobrevida: o tempo até o desfecho</h2>
+
+<img data-src="../../img/cap04/fig04_kaplan_meier.png" width="640" class="r-stretch"><p class="figcap">
+Degraus, tiques de censura e tabela de risco: sem ela, 2 pacientes no mês 48 parecem iguais a 120. Medianas: 13 e 18 meses.
+</p>
+</section>
+<section id="forest-plot-a-síntese-da-evidência" class="slide level2">
+<h2>Forest plot: a síntese da evidência</h2>
+<p><img data-src="../../img/cap04/fig04_forest.png" height="380"></p>
+<p class="figcap">
+Só 2 dos 6 estudos são significativos isoladamente — e o losango combinado (0,66; IC 0,53–0,82) é conclusivo. É o argumento da metanálise e o seu perigo: só vale se os estudos forem comparáveis.
+</p>
+</section>
+<section id="treemap-hierarquia-que-cabe-na-tela" class="slide level2">
+<h2>Treemap: hierarquia que cabe na tela</h2>
+<p><img data-src="../../img/cap04/fig04_treemap_atc.png" height="380"></p>
+<p class="figcap">
+Área proporcional, hierarquia grupo → classe (ATC). Ótimo para estrutura, ruim para comparar valores próximos: retângulos finos enganam o olho.
+</p>
+</section>
+<section id="nuvem-de-palavras-convite-não-análise" class="slide level2">
+<h2>Nuvem de palavras: convite, não análise</h2>
+<p><img data-src="../../img/cap04/fig04_wordcloud.png" height="360"></p>
+<p class="figcap">
+Área não é linear (dobro da fonte ≈ quatro vezes a área), a posição é arbitrária e não há escala. Use como abertura — e acompanhe com barras das 10 mais frequentes.
+</p>
+</section>
+<section id="árvore-de-palavras-a-frase-inteira" class="slide level2">
+<h2>Árvore de palavras: a frase inteira</h2>
+<p><img data-src="../../img/cap04/fig04_wordtree.png" height="380"></p>
+<p class="figcap">
+“Me movimento” se desdobra em andar, subir escada e carregar peso — três situações que a nuvem trataria como uma só. O custo é a codificação manual.
+</p>
+</section>
+<section id="redes-a-topologia-é-o-achado" class="slide level2">
+<h2>Redes: a topologia é o achado</h2>
+<p><img data-src="../../img/cap04/fig04_rede_contatos.png" height="390"></p>
+<p class="figcap">
+Cinco grupos densos e poucas pontes entre eles: são as pontes que decidem se o surto fica contido. Nenhuma coluna de planilha contém essa informação.
+</p>
+</section>
+<section id="similaridade-fármacos-que-se-parecem" class="slide level2">
+<h2>Similaridade: fármacos que se parecem</h2>
+
+<img data-src="../../img/cap04/fig04_similaridade_farmacos.png" width="620" class="r-stretch"><p class="figcap">
+Perfis de eventos adversos, similaridade de cosseno, ordenação por agrupamento. Os blocos na diagonal são descobertos nos dados. Similaridade não é equivalência terapêutica.
+</p>
+</section>
+<section id="o-que-faz-um-gráfico-moderno-funcionar" class="slide level2">
+<h2>O que faz um gráfico moderno funcionar</h2>
+<div class="cards cols-2">
+<div class="card">
+<p><strong>Decisões que fazem a figura</strong></p>
+<p>Título com a mensagem · rótulo direto · ordem com sentido · base zero para área · cor com significado · anotação no ponto · incerteza visível · <strong>n</strong> em toda figura.</p>
+</div>
+<div class="card">
+<p><strong>O teste final</strong></p>
+<p>O leitor entende sem ajuda?</p>
+<p>Se você precisou explicar o gráfico no texto, <strong>o gráfico ainda não está pronto</strong>.</p>
+</div>
+</div>
+<p class="figcap">
+Sofisticação sem pergunta é enfeite. O melhor gráfico é o que o leitor entende sem ajuda — não o que tem mais camadas.
+</p>
+</section>
+<section id="tipos-modernos-que-valem-conhecer" class="slide level2">
+<h2>Tipos modernos que valem conhecer</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Gráfico</th>
+<th style="text-align: left;">Serve para</th>
+<th style="text-align: left;">Cuidado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Small multiples</strong></td>
+<td style="text-align: left;">mesma medida em muitos grupos</td>
+<td style="text-align: left;">escala idêntica entre painéis</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Slope / dumbbell</strong></td>
+<td style="text-align: left;">antes e depois no mesmo indivíduo</td>
+<td style="text-align: left;">destaque os extremos</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Raincloud / beeswarm</strong></td>
+<td style="text-align: left;">distribuição com n pequeno</td>
+<td style="text-align: left;">vira bagunça acima de ~200 pontos</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Ridgeline</strong></td>
+<td style="text-align: left;">muitas distribuições empilhadas</td>
+<td style="text-align: left;">sobreposição esconde valores</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Hexbin</strong></td>
+<td style="text-align: left;">dispersão com milhares de pontos</td>
+<td style="text-align: left;">legenda de cor explícita</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Alluvial / Sankey</strong></td>
+<td style="text-align: left;">fluxo entre estados</td>
+<td style="text-align: left;">vira espaguete; agrupe</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Mapa coroplético</strong></td>
+<td style="text-align: left;">padrão geográfico</td>
+<td style="text-align: left;">normalize por população</td>
+</tr>
+</tbody>
+</table>
+<p class="figcap">
+Referências para olhar: Our World in Data, Financial Times, The Economist, NYT — todos usam as mesmas dez decisões da tela anterior.
 </p>
 </section>
 <section id="como-um-gráfico-engana" class="slide level2">

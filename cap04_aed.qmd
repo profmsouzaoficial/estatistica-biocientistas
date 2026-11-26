@@ -101,11 +101,121 @@ No grupo A, **todos** melhoraram algo entre 3,0 e 3,4 pontos — um efeito modes
 
 Há três respostas possíveis para "onde fica o valor típico", e elas não são intercambiáveis.
 
-**Média** ($\bar{x}$) é a soma dividida pelo número de observações:
+### A média aritmética, termo a termo
 
-$$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
+A média aritmética é a soma de todos os valores dividida pelo número de valores:
 
-**Mediana** é o valor que ocupa a posição central quando os dados são ordenados. Com $n$ par, é a média dos dois valores centrais. **Moda** é o valor mais frequente.
+$$\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
+
+Cada pedaço da fórmula tem um papel:
+
+| Símbolo | Como se lê | O que significa na planilha |
+|:--|:--|:--|
+| $x_i$ | "x índice i" | o valor de cada paciente, na ordem em que aparece |
+| $n$ | tamanho da amostra | quantos pacientes entram na conta |
+| $\sum_{i=1}^{n}$ | somatório, de 1 até $n$ | some todos os valores, do primeiro ao último |
+| $\bar{x}$ | "x barra" | o resultado: a média da amostra |
+
+Com as seis glicemias que servem de fio condutor neste capítulo (90, 95, 100, 105, 110, 800):
+
+$$\bar{x} = \frac{90 + 95 + 100 + 105 + 110 + 800}{6} = \frac{1\,300}{6} = 216{,}7\ \text{mg/dL}$$
+
+A conta é trivial. O que importa são **três propriedades** que explicam por que a média se comporta como se comporta:
+
+1. **A soma dos desvios é sempre zero.** Se você subtrair a média de cada valor e somar os resultados, chega a zero. A média é o ponto de equilíbrio: o que está acima compensa exatamente o que está abaixo.
+2. **A média é o número que minimiza a soma dos quadrados dos desvios.** Entre todos os valores possíveis, é a média que torna $\sum (x_i - c)^2$ o menor possível. Guarde isso: é a razão matemática pela qual a variância usa a média como referência — e a razão histórica pela qual o método dos mínimos quadrados venceu.
+3. **Todo valor entra com o mesmo peso.** O 800 entra na soma exatamente como o 90. A média não sabe que 800 é implausível; ela só soma.
+
+::: {.callout-note}
+## E a "média ponderada"? Não é a mesma coisa?
+
+É parecida, mas não é a mesma. Na média aritmética simples, cada observação vale 1. Na ponderada, cada observação vale um peso $w_i$:
+
+$$\bar{x}_w = \frac{\sum w_i x_i}{\sum w_i}$$
+
+Quando todos os pesos são iguais, a fórmula ponderada **se reduz** à aritmética. Ou seja: a média aritmética é um caso particular da ponderada, e é a escolha certa quando não há motivo para dar peso diferente a nenhum paciente. Se há motivo — e ele precisa ser declarado —, use a ponderada.
+:::
+
+### Por que a média aritmética, e não a ponderada, a geométrica ou a harmônica?
+
+Porque "média" não é uma conta: é uma **decisão sobre o que se soma**. Existem quatro médias clássicas, e cada uma responde a uma pergunta diferente. Escolher a errada não produz um arredondamento impreciso — produz um **erro sistemático**, que cresce com a dispersão dos dados.
+
+| Média | Fórmula | Pergunta que responde | Exemplo em ciências da vida |
+|:--|:--|:--|:--|
+| **Aritmética** | $\frac{1}{n}\sum x_i$ | "se todos os valores fossem iguais, qual seria esse valor?" | glicemia média de 6 pacientes |
+| **Ponderada** | $\frac{\sum w_i x_i}{\sum w_i}$ | "e se cada valor tiver um peso diferente?" | juntar as médias de dois estudos com $n$ diferentes; concentração de uma mistura |
+| **Geométrica** | $\sqrt[n]{x_1 x_2 \cdots x_n}$ | "qual é o fator típico de uma sequência que se multiplica?" | títulos de anticorpo (1:40, 1:80, 1:160), diluições, crescimento bacteriano, *fold-change* |
+| **Harmônica** | $\frac{n}{\sum 1/x_i}$ | "qual é a taxa típica quando o que soma é o tempo?" | *clearance* medido em vários períodos, velocidade média, custo por unidade |
+
+O exemplo mais rápido para ver a diferença: os números **2, 4 e 8**.
+
+$$\text{aritmética} = \frac{2+4+8}{3} = 4{,}67 \qquad \text{geométrica} = \sqrt[3]{2 \cdot 4 \cdot 8} = 4 \qquad \text{harmônica} = \frac{3}{\frac{1}{2}+\frac{1}{4}+\frac{1}{8}} = 3{,}43$$
+
+Três números, três respostas — cada uma correta para uma pergunta diferente. Quando os dados são **aditivos** (mg/dL, mmHg, anos, contagens), a aritmética é a certa. Quando são **multiplicativos** (títulos, diluições, razões), a aritmética **superestima** e a geométrica é a honesta.
+
+::: {.callout-warning}
+## O erro clássico: média aritmética de títulos
+
+Três amostras de soro com títulos 1:40, 1:80 e 1:160. A média aritmética dos títulos é $\frac{40+80+160}{3} = 93{,}3$ — um título que **não existe** na série de diluições (a série é 1:40, 1:80, 1:160, 1:320...). A média geométrica é $\sqrt[3]{40 \cdot 80 \cdot 160} = 80$, que é o título central da série e o único resumo com sentido aqui.
+
+A razão é que o título dobra a cada passo: ele é uma escala **logarítmica** disfarçada. Somar títulos é somar grandezas que se multiplicam.
+:::
+
+**Exemplo de média ponderada (farmácia).** Misturam-se 200 mL de uma solução a 5% com 300 mL de uma solução a 10%. A concentração final **não** é 7,5% (a média simples das porcentagens), porque os volumes são diferentes:
+
+$$\bar{x}_w = \frac{200 \times 5 + 300 \times 10}{200 + 300} = \frac{1\,000 + 3\,000}{500} = 8{,}0\%$$
+
+O mesmo raciocínio vale para juntar dois estudos: um com $n = 40$ e média 12,1 e outro com $n = 60$ e média 13,4 têm média combinada
+
+$$\frac{40 \times 12{,}1 + 60 \times 13{,}4}{100} = 12{,}88$$
+
+e não 12,75, que é a média das médias e dá o mesmo peso ao estudo pequeno e ao grande.
+
+**Exemplo de média harmônica (fisioterapia).** Um mesmo volume de exercício é executado a 60 repetições/min em uma sessão e a 40 repetições/min em outra. A taxa média **não** é 50: como o que se soma é o *tempo*, a média correta é
+
+$$\frac{2}{\frac{1}{60} + \frac{1}{40}} = 48\ \text{rep/min}$$
+
+A harmônica é sempre menor que a aritmética e é a média certa quando a grandeza é uma **taxa por unidade de tempo** (ou por volume, ou por pessoa) e o denominador é que varia.
+
+::: {.keybox}
+**Regra de bolso para escolher a média**
+
+- As quantidades **se somam** (mg/dL, mmHg, kg, anos) → **aritmética**.
+- As quantidades **se multiplicam** (títulos, diluições, *fold-change*, crescimento) → **geométrica**.
+- São **taxas** e o que se acumula é o tempo (ou o volume) → **harmônica**.
+- As observações têm **pesos diferentes** (tamanho de estudo, volume, população) → **ponderada**.
+
+Na dúvida, pergunte: *"se eu somasse esses valores, o resultado teria significado?"* Se a resposta for não, a média aritmética provavelmente é a escolha errada.
+:::
+
+### A mediana, posição por posição
+
+A mediana é o valor que ocupa a posição central dos dados **ordenados**. A receita tem três passos: ordenar, contar, pegar o meio.
+
+$$\text{posição da mediana} = \frac{n+1}{2}$$
+
+- Se $n$ é **ímpar**, a posição é um número inteiro e a mediana é o valor daquela posição. Com $n = 7$, a posição é $\frac{8}{2} = 4$: o quarto valor.
+- Se $n$ é **par**, a posição cai entre dois valores e a mediana é a média deles. Com $n = 6$, a posição é $\frac{7}{2} = 3{,}5$: a média do terceiro com o quarto valor.
+
+Nas glicemias ordenadas (90, 95, 100, 105, 110, 800), a mediana é $\frac{100+105}{2} = 102{,}5$ mg/dL.
+
+Três propriedades que explicam o comportamento dela:
+
+1. **Não usa a magnitude dos extremos.** Trocar 800 por 8.000 não muda a mediana: o valor continua sendo o do meio. É essa indiferença que a torna **robusta**.
+2. **Metade dos dados fica de cada lado.** Por construção, 50% das observações são menores (ou iguais) e 50% são maiores (ou iguais).
+3. **A mediana minimiza a soma dos desvios absolutos** — o análogo da propriedade 2 da média, mas com módulo em vez de quadrado. É a medida de centro "certa" quando o custo de errar é linear, e não quadrático.
+
+A mediana é o **percentil 50**. Generalizando: o percentil $p$ é o valor abaixo do qual ficam $p\%$ dos dados; $Q_1$ é o percentil 25 e $Q_3$ é o 75. É essa família que alimenta o boxplot e o intervalo interquartil.
+
+### A moda
+
+A moda é o valor (ou categoria) mais frequente. É a única medida de centro que funciona para **variável nominal** — não existe "média de tipo de parto", mas existe "tipo de parto mais frequente".
+
+- **Categórica nominal:** a moda é o resumo natural (o esquema terapêutico mais usado, o agente infeccioso mais isolado).
+- **Ordinal:** a moda é aceitável, mas a mediana costuma ser melhor, porque usa a ordem.
+- **Contínua:** a moda só faz sentido depois de agrupar em classes — e muda de valor quando as classes mudam, o que é um mau sinal.
+
+Uma distribuição com **duas modas** (bimodal) não é um defeito: é um achado. Hemoglobina com um pico em 13,5 e outro em 10,0 sugere duas populações misturadas na mesma amostra, e nenhuma média ou mediana vai resumir bem esse conjunto. O gráfico — não o número — é que conta essa história.
 
 | Medida | O que faz | Use quando | Onde engana |
 |:--|:--|:--|:--|
@@ -165,13 +275,117 @@ Saber o centro é metade do trabalho. A outra metade é saber **o quanto os valo
 | **IIQ** | a da variável | largura dos 50% centrais | sim, muito |
 | **CV** (%) | adimensional | dispersão relativa à média | não |
 
-**Variância** é a média dos desvios ao quadrado:
+### A amplitude: dois pontos decidem por todos
 
-$$s^2 = \frac{1}{n-1}\sum_{i=1}^{n}\left(x_i - \bar{x}\right)^2$$
+$$\text{amplitude} = x_{(\max)} - x_{(\min)}$$
 
-**Desvio padrão** é a raiz quadrada da variância, $s = \sqrt{s^2}$.
+É a medida mais simples e a mais frágil. Numa série de 28 hemoglobinas que vai de 10,9 a 23,1 g/dL, a amplitude é $23{,}1 - 10{,}9 = 12{,}2$ g/dL — mas esse número é inteiramente decidido por **dois** pacientes. Se o 23,1 fosse erro de digitação, a amplitude cairia para 10,4 sem que nenhum dos outros 27 valores tivesse mudado.
 
-O desvio padrão é o mais relatado por um motivo simples: ele volta para a unidade original. Uma variância de 225 (mg/dL)² não diz nada a um clínico; um desvio padrão de 15 mg/dL diz "os pacientes costumam ficar a uns 15 mg/dL da média".
+Três problemas tornam a amplitude inadequada como resumo de dispersão:
+
+1. **Ignora todo o meio da distribuição.** Duas amostras com a mesma amplitude podem ter uma concentrada no centro e outra espalhada por igual.
+2. **Cresce com o tamanho da amostra.** Quanto mais pacientes você mede, maior a chance de aparecer um valor extremo — a amplitude de $n = 1.000$ é quase sempre maior que a de $n = 10$, mesmo que a população seja idêntica. Comparar amplitudes entre amostras de tamanhos diferentes é comparar maçãs com laranjas.
+3. **Não tem álgebra.** Não existe fórmula para a amplitude de uma soma de variáveis, nem intervalo de confiança para ela. A amplitude não entra em nenhum modelo.
+
+Ela ainda serve para duas coisas: **controle rápido de qualidade** ("os valores vão de 10,9 a 23,1; nenhum fora do plausível") e **descrição de faixa** em tabela ("valores entre 90 e 120 mg/dL"). Como *medida* de dispersão para inferência, não.
+
+### O IIQ: a largura dos 50% centrais
+
+O intervalo interquartil é a distância entre o terceiro e o primeiro quartil:
+
+$$\text{IIQ} = Q_3 - Q_1$$
+
+Ele cobre exatamente os **50% centrais** dos dados: ignora os 25% mais baixos e os 25% mais altos. É a medida de dispersão que acompanha a mediana, pela mesma razão que o desvio padrão acompanha a média — cada centro tem sua dispersão natural.
+
+Na série de 28 hemoglobinas da Figura 4.5, $Q_1 = 12{,}2$, $Q_3 = 14{,}3$ e o IIQ é $2{,}1$ g/dL. A "cerca" que define outlier fica $1{,}5 \times \text{IIQ}$ além de cada quartil: abaixo de $12{,}2 - 3{,}15 = 9{,}0$ ou acima de $14{,}3 + 3{,}15 = 17{,}4$. Os dois valores mais altos (21,3 e 23,1) ficam fora da cerca e são desenhados como pontos soltos.
+
+::: {.callout-note}
+## Por que o IIQ é robusto?
+
+Porque depende de **posições**, não de magnitudes. Para mudar o IIQ é preciso mover um valor que esteja perto do primeiro ou do terceiro quartil; mexer nos extremos não muda nada. Diz-se que o IIQ tem **ponto de ruptura de 25%**: até 25% dos dados podem ser arbitrariamente extremos sem que ele mude. A mediana tem 50%; a média e o desvio padrão têm 0% — basta um valor.
+:::
+
+O preço da robustez é a **insensibilidade**: o IIQ não sabe se a cauda tem um outlier ou trinta. Por isso ele nunca substitui o gráfico. Um IIQ pequeno com muitos outliers conta uma história que o número sozinho não conta.
+
+### A variância: por que elevar ao quadrado?
+
+A variância é a média dos desvios **ao quadrado**:
+
+$$s^2 = \frac{\sum_{i=1}^{n}\left(x_i - \bar{x}\right)^2}{n-1}$$
+
+e existe uma forma equivalente, mais prática para contas à mão e para demonstrar propriedades:
+
+$$s^2 = \frac{\sum x_i^2 - n\bar{x}^2}{n-1}$$
+
+A tabela abaixo faz a conta completa com as seis glicemias corrigidas (90, 95, 100, 105, 110, 120), cuja média é $103{,}3$:
+
+| $x_i$ | $x_i - \bar{x}$ | $(x_i - \bar{x})^2$ |
+|--:|--:|--:|
+| 90 | −13,33 | 177,78 |
+| 95 | −8,33 | 69,44 |
+| 100 | −3,33 | 11,11 |
+| 105 | +1,67 | 2,78 |
+| 110 | +6,67 | 44,44 |
+| 120 | +16,67 | 277,78 |
+| **soma** | **0** | **583,33** |
+
+$$s^2 = \frac{583{,}33}{6-1} = 116{,}67\ (\text{mg/dL})^2 \qquad s = \sqrt{116{,}67} = 10{,}8\ \text{mg/dL}$$
+
+A coluna do meio mostra a propriedade 1 da média: a soma dos desvios é zero. É por isso que **não dá para simplesmente tirar a média dos desvios** — o resultado seria sempre zero, para qualquer conjunto de dados. É preciso transformar os desvios em números não negativos antes de somar, e há duas formas de fazer isso: **módulo** (desvio médio absoluto) ou **quadrado** (variância). A história escolheu o quadrado; as razões estão a seguir.
+
+#### Por que $n-1$ e não $n$? (a correção de Bessel)
+
+Porque a média usada na conta é a **média da amostra**, não a média verdadeira da população — e a amostra fica artificialmente mais próxima da sua própria média do que da média populacional. Um grau de liberdade foi "gasto" para estimar o centro.
+
+O caso mais claro é $n = 2$. Tome os valores 8 e 12: a média é 10 e os desvios são $+2$ e $-2$, sempre simétricos. A soma dos quadrados é 8, quaisquer que sejam os dois valores. Dividir por $n = 2$ dá 4; dividir por $n - 1 = 1$ dá 8. Qual está certo? Se esses dois valores viessem de uma população com desvio padrão próximo de 3, a conta com $n$ daria 4 — plausível, mas por coincidência. Em média, $\sum (x_i - \bar{x})^2$ subestima a soma dos quadrados populacional pelo fator $(n-1)/n$, e é exatamente esse fator que a divisão por $n - 1$ corrige.
+
+A diferença prática é grande em amostras pequenas e some em amostras grandes: com $n = 5$, dividir por $n$ subestima a variância em 20%; com $n = 20$, em 5%; com $n = 100$, em 1%. É por isso que você encontra as duas fórmulas em livros diferentes — e por que a distinção entre **variância populacional** ($\sigma^2$, divide por $N$) e **variância amostral** ($s^2$, divide por $n-1$) existe.
+
+#### A história: por que os quadrados venceram
+
+O desvio médio absoluto (somar $|x_i - \bar{x}|$ e dividir por $n$) já era usado por Laplace no início do século XIX. Mesmo assim, a variância — com seus quadrados e sua unidade esquisita — virou o padrão da estatística. O motivo é uma sequência de vantagens que se reforçam:
+
+- **1805 — Legendre** publica *Nouvelles méthodes pour la détermination des orbites des comètes* e apresenta o **método dos mínimos quadrados**: para ajustar a órbita de um cometa a partir de observações imperfeitas, minimizar a soma dos quadrados dos erros era o caminho que produzia **uma única solução**, obtida resolvendo equações lineares. Com módulos, o problema não tinha solução fechada.
+- **1809 — Gauss** publica *Theoria motus corporum coelestium*, reivindica a prioridade do método (diz tê-lo usado desde 1795) e dá a justificativa probabilística: se os erros de medida se distribuem normalmente, os mínimos quadrados entregam o estimador **mais provável**. É aí que média, variância e curva normal passam a andar juntas.
+- **1818 — Bessel** mostra que a variância amostral precisa do divisor $n-1$ para não subestimar a variabilidade populacional. É a "correção de Bessel" que você acabou de ver.
+- **1894 — Pearson** consolida **variância** e **desvio padrão** no vocabulário estatístico; a padronização $z = (x - \bar{x})/s$ e a correlação passam a depender deles.
+- **1918–1925 — Fisher** consolida a **análise de variância** (ANOVA) e formaliza os graus de liberdade: a variância é a quantidade que se **decompõe** em partes (entre grupos e dentro dos grupos), e é essa decomposição que permite testar hipóteses.
+- **1960 em diante — Tukey, Huber e a estatística robusta** mostram o outro lado: os quadrados dão peso enorme aos extremos, e um único ponto pode dominar a análise. Daí a dupla mediana + IIQ (ou mediana + MAD) para dados com cauda pesada.
+
+O quadro abaixo resume o que cada medida ganha e perde:
+
+| Critério | Amplitude | Desvio médio absoluto | Variância / desvio padrão |
+|:--|:--|:--|:--|
+| Usa todos os valores? | não (2 pontos) | sim | sim |
+| Robusta a extremos? | não | sim | não |
+| Tem fórmula fechada e derivável? | — | não (o módulo não é derivável em zero) | **sim** |
+| Soma para variáveis independentes? | não | não | **sim** — $\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y)$ |
+| Entra em teste de hipótese e modelo? | não | raramente | **sim** (teste t, ANOVA, regressão) |
+| Unidade | a da variável | a da variável | ao quadrado (a do DP é a da variável) |
+
+A linha decisiva é a da **soma**: a variância de uma soma de variáveis independentes é a soma das variâncias. Essa propriedade é o motor de boa parte da inferência — do erro padrão ao intervalo de confiança, da ANOVA à propagação de erro de uma medida de laboratório. O desvio médio absoluto não tem essa propriedade; a variância tem. Foi por isso que ela ganhou, apesar da unidade ao quadrado.
+
+### Desvio padrão: a variância de volta à unidade
+
+$$s = \sqrt{s^2} = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n-1}}$$
+
+O desvio padrão é a raiz da variância, e a raiz tem uma função prática: **devolver o número para a unidade original**. Uma variância de 116,67 (mg/dL)² não diz nada a um clínico; um desvio padrão de 10,8 mg/dL diz "os pacientes costumam ficar a cerca de 10,8 mg/dL da média".
+
+Quando a distribuição é aproximadamente normal, o desvio padrão ganha uma interpretação ainda mais concreta — a regra **68–95–99,7**:
+
+| Distância da média | Proporção dos dados | No exemplo (média 103,3; DP 10,8) |
+|:--|:--|:--|
+| $\bar{x} \pm 1s$ | ≈ 68% | 92,5 a 114,1 mg/dL |
+| $\bar{x} \pm 2s$ | ≈ 95% | 81,7 a 124,9 mg/dL |
+| $\bar{x} \pm 3s$ | ≈ 99,7% | 70,9 a 135,7 mg/dL |
+
+É essa relação que faz do desvio padrão a medida de dispersão padrão em variáveis simétricas: ele se traduz diretamente em "quantos por cento dos pacientes estão nessa faixa". Em distribuições assimétricas a tradução falha — e é aí que entram a mediana e o IIQ.
+
+::: {.callout-warning}
+## O desvio padrão não é "a média dos desvios"
+
+Cuidado com a frase "o desvio padrão é a distância média dos valores à média". Ele é a **raiz da média dos quadrados** dos desvios — uma média quadrática, não aritmética. Por isso é sempre maior (ou igual) ao desvio médio absoluto. A confusão não é só semântica: ela leva a subestimar o quanto os extremos pesam.
+:::
 
 ### O erro que mais aparece nas revistas: DP ou EPM?
 
@@ -287,33 +501,24 @@ Use classes de largura **igual**, em número suficiente para ver a forma (nem 3,
 **Eixo y cortado** — em histograma, o eixo y representa contagem e deve começar em zero, como em qualquer gráfico de barras.
 :::
 
-### Boxplot: comparar grupos sem se perder
-
-O boxplot é ótimo para **comparar** distribuições lado a lado, porque alinha medianas e caixas na mesma escala. É o gráfico padrão para "tempo de internação por grupo de tratamento", "glicemia por turno de coleta", "CPO-D por escola".
-
-Como todo resumo, ele perde informação — e a perda mais grave é o $n$. Um boxplot com 4 observações e outro com 400 podem ter exatamente a mesma aparência.
-
-### Dispersão: duas variáveis ao mesmo tempo
-
-O diagrama de dispersão mostra cada paciente como um ponto, com uma variável em cada eixo. É o gráfico certo para "a dor cai conforme as sessões aumentam?" ou "a pressão sobe com a idade?".
-
-Dois cuidados:
-
-- **Sobreposição**: com muitos pontos, vários caem no mesmo lugar. Use transparência (`alpha`) ou jitter para mostrar densidade.
-- **Escala**: um único paciente com valor extremo pode esmagar todos os outros num canto. Verifique antes de concluir que "não há relação".
-
-### Barras: para categorias, não para esconder distribuições
+### Barras: o mesmo dado, dois desenhos
 
 Gráfico de barras serve para **contagens ou proporções em categorias**. Ele começa **obrigatoriamente em zero**, porque a área da barra é o que o olho compara: cortar o eixo faz uma diferença de 0,2 parecer dez vezes maior.
 
-O uso mais abusivo é o "gráfico de barras de média com barrinha de erro". Ele mostra a média de uma variável contínua, esconde a distribuição inteira e, dependendo do que a barrinha representa (DP? EPM? IC?), exagera ou minimiza a diferença. Se precisar mostrar médias, mostre também os pontos ou use um boxplot.
+O exemplo abaixo tem um dado banal — taxa de sucesso de quatro técnicas, entre 88,2% e 91,0% — e dois desenhos. A diferença entre a maior e a menor taxa é de 2,8 pontos percentuais. No gráfico da esquerda, ela parece enorme; no da direita, parece o que é.
+
+![](img/cap04/fig04_barras_errado_certo.png)
+
+<p class="small">**Figura 4.1** — O mesmo dado, dois desenhos. À esquerda: eixo de 87 a 92, ordem alfabética e uma cor diferente por barra. À direita: eixo de 0 a 100, ordem crescente e o valor escrito na ponta. Dados simulados.</p>
+
+Repare no que muda, além do eixo: a **ordem** (alfabética à esquerda, crescente à direita) e a **cor** (quatro cores sem significado à esquerda, uma cor só à direita). Nenhuma das duas decisões altera o dado; as duas alteram a conclusão que o leitor tira dele. Ordem e cor são informação, não decoração.
 
 ::: {.callout-tip}
 ## Uso correto do gráfico de barras
 
-"Proporção de pacientes com anemia, por grupo (n = 60 e n = 58)" — eixo y de 0 a 40%, barras ordenadas pela frequência, o n escrito no rótulo de cada barra e a unidade no eixo.
+"Proporção de pacientes com anemia, por grupo (n = 60 e n = 58)" — eixo y de 0 a 40%, barras ordenadas pela frequência, o $n$ escrito no rótulo de cada barra e a unidade no eixo.
 
-Três decisões que bastam: **eixo em zero**, **n visível** e **ordem que signifique algo**.
+Três decisões que bastam: **eixo em zero**, **$n$ visível** e **ordem que signifique algo**.
 :::
 
 ::: {.callout-warning}
@@ -328,13 +533,215 @@ Três decisões que bastam: **eixo em zero**, **n visível** e **ordem que signi
 **Ordem alfabética** quando a informação está na ordem (leve, moderado, grave) — e ordem decrescente quando você quer destacar o maior valor.
 :::
 
-### Linhas: só quando o eixo x é tempo
+### Empilhadas (e 100%): quando a pergunta é a composição
 
-Linha conecta pontos porque existe continuidade entre eles. Use para séries temporais (casos por mês, tendência de vendas), nunca para categorias sem ordem (linha entre "farmácia" e "enfermagem" não significa nada).
+Quando a categoria se divide em subcategorias — grupo de tratamento × desfecho (melhora, estável, piora) —, existem três desenhos possíveis, e cada um responde a uma pergunta diferente.
+
+![](img/cap04/fig04_empilhadas.png)
+
+<p class="small">**Figura 4.2** — Três desenhos para a mesma tabela de contingência: 3 grupos de 40 pacientes cada, classificados em melhora, estável ou piora. Dados simulados.</p>
+
+| Desenho | Responde | Cuidado |
+|:--|:--|:--|
+| **Agrupado** (dodged) | "quantos pacientes em cada desfecho, por grupo?" | com muitas subcategorias, as barras ficam finas e difíceis de comparar |
+| **Empilhado** | "qual o total e como ele se compõe?" | a comparação entre grupos fica presa à base comum; só a primeira fatia tem base alinhada |
+| **100% empilhado** | "qual a proporção de cada desfecho, por grupo?" | **esconde o $n$**: dois grupos com 10 e 100 pacientes parecem iguais |
+
+O 100% empilhado é o único dos três em que a comparação de proporções é honesta — mas ele só é honesto se o $n$ aparecer na legenda. É o gráfico certo para "a proporção de melhora foi 30%, 52,5% e 70% nos três grupos"; é o gráfico errado para "quantos pacientes melhoraram".
 
 ### Pizza: quase nunca
 
 A pizza só funciona quando as fatias somam 100%, são no máximo quatro ou cinco e a diferença entre elas é grande. O olho humano compara mal ângulos: com 12 categorias, a pizza vira legenda colorida — e uma barra ordenada mostraria a mesma informação com precisão.
+
+![](img/cap04/fig04_pizza_vs_barras.png)
+
+<p class="small">**Figura 4.3** — As mesmas oito categorias de dispensação, em pizza e em barras ordenadas. Na pizza, responder "a primeira classe é o dobro da segunda?" exige medir ângulos com o olho; nas barras, a resposta está na ordem e no número. Dados simulados.</p>
+
+Note o detalhe: a pizza tem **8 fatias** e a maior delas (340) é mais de dez vezes a menor (10). Mesmo nesse caso extremo — o mais favorável possível —, comparar a primeira com a segunda fatia é difícil. Com fatias parecidas, é impossível.
+
+Se você precisa mostrar "parte de um todo" com poucas categorias, uma **barra empilhada única** (ou um *donut* com o total no centro) resolve melhor que a pizza, porque todas as partes ficam sobre a mesma linha de base. E se o leitor precisa comparar valores, o gráfico é de barras — não há terceira opção.
+
+### Pirâmide etária: duas categorias, um eixo central
+
+Quando duas categorias dividem cada grupo (homens e mulheres, por faixa de idade; casos e controles, por exposição), a **pirâmide** coloca as duas barras de costas uma para a outra, com o eixo no centro. O formato geral — a silhueta — aparece imediatamente, o que é exatamente o que se quer mostrar.
+
+![](img/cap04/fig04_piramide.png)
+
+<p class="small">**Figura 4.4** — Pirâmide etária de 1.090 internações simuladas em uma clínica-escola. O eixo central é a linha de zero; os números ao lado de cada barra são as contagens absolutas. Dados simulados.</p>
+
+Dois cuidados: o eixo central precisa estar em **zero** (senão os dois lados ficam deslocados) e a escala dos dois lados tem de ser **a mesma** — se um lado vai até 160 e o outro até 100, a comparação visual é falsa. Repare que a mulher idosa (126 internações na faixa 70+) é o grupo mais frequente: uma informação que uma tabela de 16 números esconde e a silhueta entrega.
+
+### Boxplot: comparar grupos sem se perder
+
+O boxplot é ótimo para **comparar** distribuições lado a lado, porque alinha medianas e caixas na mesma escala. É o gráfico padrão para "tempo de internação por grupo de tratamento", "glicemia por turno de coleta", "CPO-D por escola".
+
+Como todo resumo, ele perde informação — e a perda mais grave é o $n$. Um boxplot com 4 observações e outro com 400 podem ter exatamente a mesma aparência. Por isso, com menos de ~20 observações por grupo, desenhe os pontos junto.
+
+![](img/cap04/fig04_boxplot_anatomia.png)
+
+<p class="small">**Figura 4.5** — Anatomia do boxplot com os 28 valores à mostra. A caixa vai de $Q_1$ a $Q_3$; a linha grossa é a mediana; o bigode vai até o valor mais extremo que ainda está dentro de $1{,}5 \times \text{IIQ}$ da caixa; o que passa disso é desenhado como ponto. Dados simulados.</p>
+
+Vale conferir a conta na figura: $Q_1 = 12{,}2$, mediana $= 12{,}9$, $Q_3 = 14{,}3$, IIQ $= 2{,}1$. A cerca superior é $14{,}3 + 1{,}5 \times 2{,}1 = 17{,}45$; o maior valor abaixo disso é 16,9 — o fim do bigode. Os valores 21,3 e 23,1 ficam fora e aparecem como pontos. **O boxplot é, literalmente, uma cerca desenhada.**
+
+### Dados pareados: cada paciente é uma linha
+
+Quando a mesma pessoa é medida antes e depois, a unidade de análise é o **par**, não a média de cada momento. O gráfico certo liga os dois valores do mesmo paciente com uma linha: o que interessa é a inclinação individual, e não a altura média dos dois grupos.
+
+![](img/cap04/fig04_pares.png)
+
+<p class="small">**Figura 4.6** — Dor na EVA (0 a 10) antes e depois de 12 pacientes. Cada linha é um paciente; o número à direita é a variação em pontos, em vermelho quando houve piora. Dados simulados.</p>
+
+Onze dos doze pacientes melhoraram, mas **um piorou** (P4, de 6 para 7). Uma tabela com "EVA média: 7,4 antes, 4,1 depois" resume o grupo e apaga esse paciente — que é justamente quem o clínico precisa discutir. O gráfico pareado (*slope chart* ou *dumbbell*) mantém o indivíduo visível, que é o que a estatística pareada pressupõe.
+
+### Linhas e séries temporais: tendência, sazonalidade e intervenção
+
+Linha conecta pontos porque existe continuidade entre eles. Use para séries temporais (casos por mês, tendência de vendas), nunca para categorias sem ordem — uma linha entre "farmácia" e "enfermagem" não significa nada.
+
+Uma série temporal bem desenhada responde a três perguntas de uma vez: existe **tendência**? existe **sazonalidade**? algum evento mudou o padrão?
+
+![](img/cap04/fig04_serie_temporal.png)
+
+<p class="small">**Figura 4.7** — Série mensal de 60 meses de casos notificados (acima) e a mesma série com média móvel de 12 meses (abaixo). A linha tracejada marca o início de uma campanha de controle vetorial. Dados simulados.</p>
+
+O painel de cima mostra as três coisas ao mesmo tempo: a tendência de alta (cerca de 1,4 caso por mês), o ciclo anual (pico no verão) e a queda depois da intervenção. O painel de baixo aplica uma **média móvel de 12 meses**, que "apaga" o ciclo anual e deixa a tendência visível. Nenhum dos dois está errado: eles respondem a perguntas diferentes.
+
+Três cuidados com séries temporais:
+
+1. **O eixo x é tempo e precisa ter espaçamento constante.** Meses com 28 e 31 dias não distorcem nada; um buraco de seis meses sem dados, sim — e ele precisa ser mostrado, não interpolado em silêncio.
+2. **Média móvel de 12 meses perde 6 meses em cada ponta.** O começo e o fim da linha são menos confiáveis que o meio, e é onde costuma estar a conclusão.
+3. **"Depois da intervenção" não é "por causa da intervenção".** A queda pode ser sazonal, pode ser artefato de notificação, pode ser regressão à média. Gráfico de série temporal sugere; não demonstra.
+### Dispersão: duas variáveis ao mesmo tempo
+
+O diagrama de dispersão mostra cada paciente como um ponto, com uma variável em cada eixo. É o gráfico certo para "a dor cai conforme as sessões aumentam?" ou "a pressão sobe com a idade?".
+
+![](img/cap04/fig04_dispersao.png)
+
+<p class="small">**Figura 4.8** — Hemoglobina por idade em 240 pacientes simulados. A cor separa dois perfis que a média juntaria num número só; a linha preta é uma tendência geral (loess). Dados simulados.</p>
+
+Note o que a figura faz que o coeficiente de correlação não faz: ela mostra **dois grupos** com inclinações diferentes dentro da mesma nuvem. Se você calculasse só a correlação entre idade e hemoglobina, obteria um número moderado e não saberia dizer que existe uma população anêmica puxando a média para baixo. O gráfico não é ilustração do número — às vezes é a única forma de ver a estrutura.
+
+Dois cuidados:
+
+- **Sobreposição**: com muitos pontos, vários caem no mesmo lugar. Use transparência (`alpha`), jitter ou hexbin para mostrar densidade.
+- **Escala**: um único paciente com valor extremo pode esmagar todos os outros num canto. Verifique antes de concluir que "não há relação".
+
+E o cuidado conceitual, que vale mais que os dois anteriores: **dispersão mostra associação, não causa**. Uma nuvem com inclinação clara pode ser causada por uma terceira variável (idade, renda, tempo de doença) que não está em nenhum dos eixos.
+
+### Mapa de calor: muitas correlações de uma vez
+
+Com oito variáveis, existem 28 correlações duas a duas. Uma tabela de 28 números é ilegível; um mapa de calor resolve — cor para o valor, posição para o par de variáveis.
+
+![](img/cap04/fig04_heatmap_correlacao.png)
+
+<p class="small">**Figura 4.9** — Correlações de Pearson entre oito variáveis clínicas em 300 pacientes simulados. Azul: correlação negativa; vermelho: positiva; branco: ausência de associação linear. A metade superior é omitida porque a matriz é simétrica. Dados simulados (estrutura de correlação declarada no código que gera a figura).</p>
+
+Boa prática: **mostre o número dentro da célula** quando são poucas variáveis (como aqui), use uma escala **divergente centrada em zero** e não deixe a escala de cor decidir a mensagem. Um detalhe importante: a diagonal é sempre 1 e não informa nada — se ela dominar visualmente (vermelho forte), o resto do mapa desaparece. Vale removê-la ou neutralizá-la.
+
+Mapa de calor também serve para dados que não são correlação: expressão gênica por amostra, resistência bacteriana por antibiótico, adesão por mês. A regra é a mesma — cor para magnitude, e **ordenação** das linhas e colunas por similaridade para que os blocos apareçam (é o que faz a Figura 4.17 adiante).
+
+### Volcano: efeito no eixo x, evidência no eixo y
+
+Quando se comparam milhares de variáveis ao mesmo tempo — genes, proteínas, metabólitos —, o resultado não cabe em tabela. O *volcano plot* resume cada variável em dois números que interessam: **o tamanho do efeito** (no eixo x) e **a força da evidência** (no eixo y, geralmente $-\log_{10}$ do valor de $p$).
+
+![](img/cap04/fig04_volcano.png)
+
+<p class="small">**Figura 4.10** — 3.000 genes simulados. Eixo x: $\log_2$ da razão de expressão; eixo y: $-\log_{10}$ do valor de $p$. As linhas tracejadas marcam $|\log_2\text{FC}| = 1$ e $p = 0{,}05$. Em vermelho, genes grandes **e** confiáveis; em laranja, $p$ baixo com efeito pequeno. Dados simulados.</p>
+
+A leitura é espacial: o canto superior esquerdo e o superior direito são os candidatos. O resto é ruído (perto do eixo x) ou efeito real pequeno demais para importar (faixa do meio). O gráfico foi desenhado justamente para que os candidatos **se destaquem sozinhos**, sem que o leitor precise ler 3.000 valores.
+
+Dois cuidados: o eixo y depende do tamanho da amostra (com $n$ grande, tudo fica "significativo"), e comparar 3.000 genes ao mesmo tempo exige correção para **múltiplas comparações** — o valor de $p$ bruto de 0,05 é esperado por azar em 150 dos 3.000 testes. Um volcano sem correção (FDR) é um gerador de falsos positivos com aparência sofisticada.
+
+### Sobrevida: o tempo até o desfecho
+
+Em muitos estudos o desfecho não é "sim ou não", é **quando**. E aí existe um problema que nenhuma média resolve: alguns pacientes não tiveram o desfecho até o fim do estudo — estão **censurados**. A curva de Kaplan-Meier usa toda a informação disponível, inclusive a de quem saiu antes.
+
+![](img/cap04/fig04_kaplan_meier.png)
+
+<p class="small">**Figura 4.11** — Curvas de sobrevida de dois braços com 120 pacientes cada (simulados). Os tiques verticais marcam pacientes censurados; as linhas pontilhadas marcam a mediana de cada braço; a tabela embaixo mostra quantos pacientes ainda estavam em risco em cada marco temporal. Dados simulados.</p>
+
+O que a figura ensina:
+
+- **A curva é em degraus**, porque a sobrevida só cai quando alguém tem o desfecho. Não é uma reta "suavizada".
+- **Os tiques importam.** Um trecho horizontal longo pode significar "ninguém teve o desfecho" ou "todo mundo saiu do estudo". A censura é informação, não lixo.
+- **A tabela de risco é obrigatória.** Depois de 48 meses restam 2 pacientes no controle: qualquer diferença ali é ruído, e a curva não avisa isso sozinha.
+- **Mediana, não média.** A mediana de sobrevida é o tempo em que 50% ainda estão sem o desfecho — 13 meses no controle e 18 na intervenção, neste exemplo.
+
+### Forest plot: a síntese da evidência
+
+Quando vários estudos respondem à mesma pergunta, o *forest plot* coloca cada estimativa com seu intervalo de confiança na mesma escala e desenha, embaixo, a estimativa combinada (a metanálise). É o gráfico padrão de revisões sistemáticas — e um dos poucos que mostra **incerteza** explicitamente.
+
+![](img/cap04/fig04_forest.png)
+
+<p class="small">**Figura 4.12** — Seis estudos fictícios (razão de chances e IC 95%) e a estimativa combinada no losango. A linha vertical em 1 é a ausência de efeito; a escala é logarítmica. Estudos fictícios, dados simulados; o tamanho do ponto representa o $n$ do estudo.</p>
+
+A leitura tem três níveis:
+
+1. **Cada estudo**: o ponto é a estimativa; a barra horizontal é o intervalo de confiança. Se a barra cruza a linha de 1, aquele estudo, sozinho, não descarta a ausência de efeito. Aqui, só dois dos seis conseguem isso.
+2. **O conjunto**: os estudos apontam na mesma direção (todos à esquerda de 1), com tamanhos diferentes.
+3. **A síntese**: o losango é a estimativa combinada (0,66; IC 0,53–0,82) — precisão maior que a de qualquer estudo isolado, porque usa todos.
+
+E o detalhe que faz o forest plot valer a pena: **a síntese pode ser conclusiva mesmo quando nenhum estudo isolado é**. É o argumento mais forte a favor de metanálise — e também o mais perigoso, porque a combinação só faz sentido se os estudos forem comparáveis (mesma população, mesmo desfecho, mesma medida). Um forest plot com estudos heterogêneos é uma média de coisas diferentes com aparência de consenso.
+### Treemap (mapa de árvore): hierarquia que cabe na tela
+
+Quando existem duas dimensões de categoria — grupo farmacológico e classe — e um valor para cada combinação, o treemap resolve: cada retângulo tem **área proporcional ao valor**, e os retângulos se aninham dentro do grupo.
+
+![](img/cap04/fig04_treemap_atc.png)
+
+<p class="small">**Figura 4.13** — Dispensações por grupo e classe ATC em uma farmácia-escola. Área = número de dispensações; a hierarquia é grupo (retângulo grande) → classe (retângulo interno). Os códigos ATC são uma classificação pública; os volumes são simulados.</p>
+
+O treemap é ótimo para **mostrar estrutura** — qual grupo domina, quais classes pesam dentro de cada grupo — e ruim para **comparar valores próximos**: áreas de retângulos finos e alongados são notoriamente difíceis de julgar. Por isso: rotule os retângulos grandes, agrupe os pequenos em "outros" e não use treemap quando a pergunta é "qual é maior que qual por 5%".
+
+### Nuvem de palavras: o texto vira figura (com ressalvas)
+
+Respostas abertas, reclamações, títulos de artigo, laudos: todo dado textual pode ser contado, e a nuvem de palavras mostra a frequência como **tamanho da fonte**.
+
+![](img/cap04/fig04_wordcloud.png)
+
+<p class="small">**Figura 4.14** — Queixas registradas em 240 prontuários simulados. Tamanho = frequência da queixa; laranja = queixas que mencionam dor (uma decisão de classificação, não do acaso). Dados simulados.</p>
+
+A nuvem tem três problemas que você precisa conhecer antes de publicá-la:
+
+1. **Área não é linear.** Uma palavra com o dobro da fonte ocupa cerca de **quatro vezes** a área — o olho lê "muito mais" do que a diferença real.
+2. **A posição é arbitrária.** O algoritmo empacota as palavras onde cabe; perto do centro não significa mais importante. Numa nuvem, o leitor procura por posição e não encontra padrão.
+3. **Não tem escala nem eixo.** Não há como ler "quantas vezes" cada palavra apareceu — e duas nuvens nunca são comparáveis entre si.
+
+Ela funciona como **convite**, não como análise: abre uma seção, sugere hipóteses, orienta a leitura. Para comunicar de verdade, acompanhe com um gráfico de barras das 10 palavras mais frequentes, ou com a árvore de palavras abaixo — que preserva a contagem e o contexto.
+
+### Árvore de palavras: a frase inteira, ramo por ramo
+
+A nuvem conta palavras soltas; a **árvore de palavras** (*word tree*) mantém a frase: cada caminho da raiz até a folha é uma resposta completa, e a espessura do ramo é quantas pessoas disseram aquilo.
+
+![](img/cap04/fig04_wordtree.png)
+
+<p class="small">**Figura 4.15** — 120 respostas abertas simuladas à pergunta "quando a sua dor piora?". Todas começam pela mesma expressão; os ramos mostram o que vinha depois. $n$ em cada nó. Dados simulados.</p>
+
+Aqui a contagem é explícita ($n = 120$ na raiz, 46 em "me movimento", 38 em "à noite") e o contexto aparece: "me movimento" se desdobra em andar, subir escada e carregar peso — três situações diferentes que uma nuvem de palavras trataria como "movimento" e perderia. É o gráfico certo quando a pergunta é **qualitativas e a resposta é uma frase**, e não uma palavra.
+
+O custo é o trabalho: alguém precisa ler, codificar e agrupar as respostas. Não existe versão automática confiável.
+
+### Redes: quem se conecta com quem
+
+Nem todo dado é uma tabela de indivíduos independentes. Contatos entre pessoas, interações entre proteínas, coautoria, prescrição concomitante: aqui a unidade é o **par** (quem com quem), e o gráfico natural é a rede — nós e arestas.
+
+![](img/cap04/fig04_rede_contatos.png)
+
+<p class="small">**Figura 4.16** — Rede de contatos simulada com 180 pessoas em cinco grupos (família, escola, trabalho, vizinhança, igreja). Tamanho do nó = número de contatos; cor = grupo; as linhas finas entre grupos são as pontes por onde a transmissão passa de um grupo a outro. Dados simulados.</p>
+
+O que a rede mostra e uma tabela não mostraria: **a topologia**. Cinco grupos densos e algumas poucas pontes entre eles — e são as pontes que determinam se um surto fica contido num grupo ou se espalha. Nenhuma coluna de planilha tem essa informação; ela está na *ausência* de linhas.
+
+Três cuidados: o **layout é arbitrário** (posições não são geografia nem hierarquia), o **grau** (número de contatos) não é risco por si só — depende da transmissibilidade e da duração do contato —, e redes com muitos nós viram "novelo" e precisam de filtro (só os 50 maiores graus, só as arestas mais fortes).
+
+### Similaridade: fármacos que se parecem
+
+A mesma ideia de rede, aplicada a **perfis**, resolve uma pergunta frequente em farmácia e em farmacovigilância: quais fármacos se parecem? Basta transformar cada fármaco em um vetor (a frequência de cada evento adverso) e medir a semelhança entre os vetores.
+
+![](img/cap04/fig04_similaridade_farmacos.png)
+
+<p class="small">**Figura 4.17** — Similaridade entre 12 fármacos a partir do perfil de 12 eventos adversos. A medida é o cosseno entre os perfis (0 = nada em comum; 1 = idênticos). As linhas e colunas foram ordenadas por agrupamento hierárquico, e é isso que faz os pares da mesma classe aparecerem juntos na diagonal. Perfis simulados; os códigos ATC são reais.</p>
+
+A figura tem duas leituras. A primeira é a **diagonal em blocos**: os pares da mesma classe terapêutica ficam lado a lado porque compartilham os mesmos eventos marcadores — o agrupamento foi descoberto nos dados, não imposto. A segunda é a **semelhança secundária** entre anti-inflamatórios (M01) e antidiabéticos (A10), que compartilham eventos gastrointestinais. Isso não quer dizer que sejam intercambiáveis: quer dizer que **produzem um perfil parecido de efeitos adversos**, o que é exatamente a informação útil quando se quer evitar associação de fármacos com toxicidade sobreposta.
+
+O cuidado essencial: **similaridade não é equivalência terapêutica**. Dois fármacos podem ter perfis de eventos quase idênticos e mecanismos completamente diferentes — e vice-versa. O mapa mostra padrão; a interpretação exige farmacologia.
 
 ### Como um gráfico engana
 
@@ -361,6 +768,44 @@ Os truques mais comuns, todos encontrados em artigos e em material de marketing:
 4. Rotule eixos com **nome da variável e unidade**.
 5. Se o gráfico for cortado, distorcido ou transformado, **avise na legenda**.
 :::
+
+## O que faz um gráfico moderno funcionar
+
+Os gráficos deste capítulo parecem sofisticados, mas nenhum deles é sofisticado por enfeite: cada um resolve um problema de comunicação que o gráfico de barras não resolve. O que os torna bons é um conjunto pequeno de decisões, e elas valem para qualquer gráfico — do mais simples ao mais elaborado.
+
+| Decisão | Como se faz | Por que importa |
+|:--|:--|:--|
+| **Título com a mensagem** | "A queda só aparece depois do 40º mês", não "Casos por mês" | o leitor entende a conclusão antes de decodificar o eixo |
+| **Rótulo direto** | valor ou nome na ponta da barra/linha, em vez de legenda com cores | elimina a ida e volta entre figura e legenda |
+| **Ordem com sentido** | crescente, cronológica, por grupo — nunca alfabética por acaso | a ordem é informação; o acaso não deve decidir |
+| **Base zero para área** | barras e áreas sempre a partir de zero | a área é a mensagem; cortar o eixo falseia a proporção |
+| **Cor com significado** | uma cor para "antes", outra para "depois"; uma para "significativo" | cor sem regra é ruído e ocupa o canal mais forte do olho |
+| **Pouca cor, bem usada** | uma cor de destaque + cinzas para o contexto | o olho vai para o que você destacou |
+| **Anotação no ponto** | seta, texto ou faixa marcando o evento importante | dispensa parágrafo explicativo e ancora a leitura |
+| **Incerteza visível** | intervalo de confiança, faixa, barras de erro legendadas | um número sem incerteza parece mais firme do que é |
+| **$n$ em toda figura** | no subtítulo, no eixo ou no rótulo | 4 e 400 pacientes não podem parecer a mesma coisa |
+| **Uma mensagem por figura** | se precisa de três parágrafos, divida em três figuras | figura que explica tudo não explica nada |
+
+### Small multiples: o padrão que resolve quase tudo
+
+Quando você tem a mesma medida em muitos grupos (hospitais, municípios, meses, espécies), em vez de um gráfico gigante com 20 cores, faça **vários pequenos gráficos com a mesma escala**, lado a lado. O olho compara padrões entre painéis com muito mais eficiência do que compara 20 linhas sobrepostas. É a técnica por trás dos painéis de indicadores que você vê em *Our World in Data*, no *Financial Times* e nos relatórios de vigilância em saúde — e ela é fácil de implementar: `facet_wrap()` no R faz isso em uma linha.
+
+### Tipos que valem conhecer (e quando cada um se paga)
+
+| Gráfico | Serve para | Cuidado |
+|:--|:--|:--|
+| **Small multiples** | mesma medida em muitos grupos | escala idêntica entre painéis; sem isso, a comparação é falsa |
+| **Slope / dumbbell** | antes e depois no mesmo indivíduo | com muitos indivíduos, destaque os extremos e deixe o resto em cinza |
+| **Beeswarm / raincloud** | distribuição com $n$ pequeno, sem esconder pontos | pode virar bagunça acima de ~200 pontos; combine com boxplot |
+| **Ridgeline** | muitas distribuições empilhadas (turnos, meses, escolas) | sobreposição dificulta leitura dos valores exatos |
+| **Hexbin / densidade 2D** | dispersão com milhares de pontos | a escala de cor precisa de legenda explícita |
+| **Alluvial / Sankey** | fluxo entre estados (diagnóstico → tratamento → desfecho) | com muitas categorias, vira espaguete; agrupe |
+| **Gráfico de pontos com IC** | comparação de médias entre grupos | é o substituto honesto das barras de média com erro |
+| **Bullet / termômetro** | meta versus realizado | não use para distribuição: é indicador, não dado bruto |
+| **Mapa coroplético** | padrão geográfico | área grande domina a percepção; normalize por população |
+| **Animação / scrollytelling** | contar uma história em etapas | nunca a única versão: quem imprime ou revisa precisa da figura estática |
+
+Duas regras fecham esta seção. A primeira: **o gráfico mais impressionante é o que o leitor entende sem ajuda** — não o que tem mais camadas. A segunda: **se você precisou explicar o gráfico no texto, o gráfico ainda não está pronto**. Uma figura boa carrega a mensagem sozinha; o texto ao lado diz o que fazer com ela.
 
 ## Tabelas que comunicam
 
@@ -487,6 +932,34 @@ boxplot(glicemia, col = "#0d9488", ylab = "Glicemia (mg/dL)")
 
 <p class="small">Troque o 800 por 130, rode de novo e compare. Depois troque por 80: a média desce mais do que a mediana? Por quê?</p>
 
+Agora a mesma conta **na unha**, para conferir que as funções do R não fazem mágica — elas apenas aplicam as fórmulas desta seção:
+
+```{webr-r}
+glicemia <- c(90, 95, 100, 105, 110, 120)
+n <- length(glicemia)
+
+media      <- sum(glicemia) / n
+desvios    <- glicemia - media
+variancia  <- sum(desvios^2) / (n - 1)
+dp         <- sqrt(variancia)
+
+c(media_na_unha = media, media_funcao = mean(glicemia))
+c(var_na_unha = variancia, var_funcao = var(glicemia))
+c(dp_na_unha = dp, dp_funcao = sd(glicemia))
+
+sum(desvios)   # zero: a soma dos desvios em torno da media e sempre zero
+```
+
+E a média geométrica, que o R não tem como função pronta (`exp(mean(log(x)))` é a definição):
+
+```{webr-r}
+titulos <- c(40, 80, 160)
+c(aritmetica = mean(titulos),
+  geometrica = exp(mean(log(titulos))))
+```
+
+A aritmética dá 93,3 — um título que não existe na série de diluições. A geométrica dá 80, o título central. É a diferença entre "somar grandezas" e "somar logaritmos".
+
 ```{webr-r}
 # os dois analgesicos do exemplo da secao anterior
 A <- c(3.0, 3.2, 3.4, 3.0, 3.4, 3.2, 3.0, 3.4)
@@ -508,8 +981,11 @@ As médias são iguais e os desvios padrão não. O boxplot mostra o que a médi
 - **Explore antes de testar.** Dado sujo gera resultado com aparência de rigor.
 - **Centro e dispersão andam juntos.** Média sem desvio padrão é meia informação — e mediana sem IIQ também.
 - **A forma decide a medida.** Simétrica: média e DP. Assimétrica ou ordinal: mediana e IIQ.
+- **A média é uma escolha, não uma conta.** Aritmética para grandezas que se somam, geométrica para as que se multiplicam (títulos, diluições), harmônica para taxas, ponderada quando as observações têm pesos diferentes.
+- **A variância venceu pelos quadrados.** Ela tem fórmula fechada, se decompõe em partes e soma para variáveis independentes — vantagens que a amplitude e o desvio médio absoluto não têm. O preço é a sensibilidade a extremos.
 - **DP descreve pacientes; EPM descreve a estimativa.** Confundir os dois é o erro mais comum das revistas.
 - **O gráfico segue o tipo da variável.** Histograma para uma contínua, boxplot para comparar grupos, dispersão para duas quantitativas, barras para categorias — sempre começando em zero.
+- **Cada gráfico tem um problema que ele resolve.** Barras ordenadas para comparar, boxplot para distribuições, linha para tempo, forest para síntese de evidência, mapa de calor para muitas correlações, rede para relações. Sofisticação sem pergunta é enfeite.
 - **A largura da classe muda o histograma.** Se a forma só aparece com uma escolha específica, suspeite.
 - **Tabela boa não faz o leitor calcular.** Unidade no cabeçalho, decimais consistentes, $n$ e legendas explícitos.
 - **Outlier é pergunta, não incômodo.** Verifique, relate a análise de sensibilidade, nunca apague em silêncio.
