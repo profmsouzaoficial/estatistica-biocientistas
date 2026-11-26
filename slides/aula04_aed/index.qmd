@@ -526,6 +526,12 @@ Nuvem · árvore de palavras
 
 <p class="small">A pergunta vem primeiro; o gráfico é a resposta visual. Nas próximas telas, o mesmo dado e a decisão que o desenho carrega.</p>
 
+## Pirâmide: duas categorias, um eixo central
+
+![](../../img/cap04/fig04_piramide.png){height=380px}
+
+<p class="figcap">Eixo central em zero, mesma escala nos dois lados — e a silhueta aparece: aqui, a mulher idosa (126 internações) é o grupo mais frequente.</p>
+
 ## Pizza × barras: a mesma informação
 
 ![](../../img/cap04/fig04_pizza_vs_barras.png){height=360px}
